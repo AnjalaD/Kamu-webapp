@@ -10,8 +10,8 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST'){
         $result = $mysqli->query("SELECT * FROM users WHERE email='$email'");
 
         if ($result->num_rows == 0){ //user dosent exist
-            $_SESSION['message'] = "User with this email dosent exist!";
-            header("location: error.php");
+            $_SESSION['login_error_message'] = "User with this email dosent exist!";
+            // header("location: error.php");
 
         }else{  //user exists
             $user = $result->fetch_assoc();
