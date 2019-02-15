@@ -1,3 +1,7 @@
+<?php
+session_start();
+require "user-management/status.php";
+?>
 <!DOCTYPE html>
 <html>
 
@@ -30,9 +34,24 @@
                     <ul class="nav navbar-nav mr-auto">
                         <li class="nav-item" role="presentation"><a class="nav-link" href="#">Restaurants</a></li>
                         <li class="nav-item" role="presentation"><a class="nav-link" href="#">Food</a></li>
-                        <li class="nav-item" role="presentation"><a class="nav-link" href="#">Saved Lists</a></li>
-                        <li class="nav-item" role="presentation"><a class="nav-link" href="#">Recent</a></li>
-                    </ul><span class="navbar-text actions"> <a href="#" class="login">Log In</a><a class="btn btn-light action-button" role="button" href="#">Sign Up</a></span></div>
+                        <?php if(loggedIn()){
+                            echo '<li class="nav-item" role="presentation"><a class="nav-link" href="#">Saved Lists</a></li>';
+                            echo '<li class="nav-item" role="presentation"><a class="nav-link" href="#">Recent</a></li>';
+                        }
+                        ?>
+                    </ul>
+                    <span class="navbar-text actions">
+                    <?php
+                    if (!loggedIn()){
+                        echo '<a href="#" class="login">Log In</a>';
+                        echo '<a class="btn btn-light action-button" role="button" href="#">Sign Up</a>';
+                    }
+                    if (loggedIn()){
+                        echo '<a class="btn btn-light action-button" role="button" href="user-management/logout.php">Sign Out</a>';
+                    }
+                    ?>
+                    </span>
+                </div>
             </div>
         </nav>
     </div>
