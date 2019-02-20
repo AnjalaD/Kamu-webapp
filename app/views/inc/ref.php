@@ -1,0 +1,14 @@
+<link rel="stylesheet" href="/mcv/public/assets/bootstrap/css/bootstrap.min.css">
+<link rel="stylesheet" href="/mcv/public/assets/fonts/font-awesome.min.css">
+<link rel="stylesheet" href="/mcv/public/assets/fonts/ionicons.min.css">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Montserrat">
+<link rel="stylesheet" href="/mcv/public/assets/css/dh-card-image-left-dark.css">
+<link rel="stylesheet" href="/mcv/public/assets/css/Footer-Clean.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/Swiper/3.3.1/css/swiper.min.css">
+<link rel="stylesheet" href="/mcv/public/assets/css/Login-Form-Clean.css">
+<link rel="stylesheet" href="/mcv/public/assets/css/Navigation-with-Button.css">
+<link rel="stylesheet" href="/mcv/public/assets/css/Pretty-Search-Form.css">
+<link rel="stylesheet" href="/mcv/public/assets/css/Simple-Slider.css">
+<link rel="stylesheet" href="/mcv/public/assets/css/Simple-Vertical-Navigation-Menu-v-10.css">
+<link rel="stylesheet" href="/mcv/public/assets/css/Social-Icons.css">
+<link rel="stylesheet" href="/mcv/public/assets/css/styles.css">
