@@ -20,3 +20,12 @@ define('REMEMBER_ME_COOKIE_NAME', 'JasdYADIAassjdakduA');  //cookie name for log
 define('REMEMBER_ME_COOKIE_EXPIRY', 2592000);  //time in seconds - 30days
 
 define('ACCESS_RESTRICTED','Restricted'); //controller name for restricted redirect
+
+// Options -MultiViews
+// RewriteEngine On
+
+// RewriteCond %{REQUEST_FILENAME} !-d
+// RewriteCond %{REQUEST_FILENAME} !-d
+// RewriteCond $1 !^(config|core|css|js|fonts)
+
+// RewriteRule ^(.+)$ index.php?url=$1 [QSA,L]
