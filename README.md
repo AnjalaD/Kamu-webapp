@@ -1,3 +1,3 @@
 # Kamu-webapp
 dbName = accounts
-table = users
+table = users, user_sessions
