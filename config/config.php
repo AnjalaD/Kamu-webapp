@@ -10,7 +10,7 @@ define('DB_HOST', 'localhost:3306');
 define('DEFAULT_CONTROLLER', 'Home'); //if no controller is set Route will use this
 define('DEFAULT_LAYOUT', 'default'); //if no layout is set controller use this
 
-define('SROOT', '/mvc/'); //set this for / for a live server
+define('SROOT', '/Kamu/'); //set this for / for a live server
 
 define('SITE_TITLE', 'MVC framwork'); //default web page title
 define('BRAND_NAME',"Kamu");
@@ -43,14 +43,14 @@ define('ACCESS_RESTRICTED','Restricted'); //controller name for restricted redir
 //     PRIMARY KEY (`id`),
 //     KEY `user_id` (`user_id`),
 //     KEY `deleted` (`deleted`)
-//    ) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=latin1  
+//    ) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=latin1;  
 // CREATE TABLE `user_sessions` (
 //     `id` int(11) NOT NULL AUTO_INCREMENT,
 //     `user_id` int(11) NOT NULL,
 //     `session` varchar(255) NOT NULL,
 //     `agent` varchar(255) NOT NULL,
 //     PRIMARY KEY (`id`)
-//    ) ENGINE=InnoDB AUTO_INCREMENT=26 DEFAULT CHARSET=latin1
+//    ) ENGINE=InnoDB AUTO_INCREMENT=26 DEFAULT CHARSET=latin1;
 // CREATE TABLE `users` (
 //     `id` int(11) NOT NULL AUTO_INCREMENT,
 //     `first_name` varchar(50) NOT NULL,
@@ -62,4 +62,4 @@ define('ACCESS_RESTRICTED','Restricted'); //controller name for restricted redir
 //     `active` tinyint(1) DEFAULT '0',
 //     `deleted` tinyint(1) DEFAULT '0',
 //     PRIMARY KEY (`id`)
-//    ) ENGINE=InnoDB AUTO_INCREMENT=17 DEFAULT CHARSET=latin1   
+//    ) ENGINE=InnoDB AUTO_INCREMENT=17 DEFAULT CHARSET=latin1;   
