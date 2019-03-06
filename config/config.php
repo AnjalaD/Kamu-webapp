@@ -29,3 +29,34 @@ define('ACCESS_RESTRICTED','Restricted'); //controller name for restricted redir
 // RewriteCond $1 !^(config|core|css|js|fonts)
 
 // RewriteRule ^(.+)$ index.php?url=$1 [QSA,L]
+
+// CREATE TABLE `contacts` (
+//     `id` int(11) NOT NULL AUTO_INCREMENT,
+//     `user_id` int(11) DEFAULT NULL,
+//     `name` varchar(255) DEFAULT NULL,
+//     `email` varchar(255) DEFAULT NULL,
+//     `address` varchar(255) DEFAULT NULL,
+//     `deleted` tinyint(4) NOT NULL DEFAULT '0',
+//     PRIMARY KEY (`id`),
+//     KEY `user_id` (`user_id`),
+//     KEY `deleted` (`deleted`)
+//    ) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=latin1  
+// CREATE TABLE `user_sessions` (
+//     `id` int(11) NOT NULL AUTO_INCREMENT,
+//     `user_id` int(11) NOT NULL,
+//     `session` varchar(255) NOT NULL,
+//     `agent` varchar(255) NOT NULL,
+//     PRIMARY KEY (`id`)
+//    ) ENGINE=InnoDB AUTO_INCREMENT=26 DEFAULT CHARSET=latin1
+// CREATE TABLE `users` (
+//     `id` int(11) NOT NULL AUTO_INCREMENT,
+//     `first_name` varchar(50) NOT NULL,
+//     `last_name` varchar(50) NOT NULL,
+//     `email` varchar(100) NOT NULL,
+//     `password` varchar(100) NOT NULL,
+//     `hash` varchar(32) NOT NULL,
+//     `acl` text,
+//     `active` tinyint(1) DEFAULT '0',
+//     `deleted` tinyint(1) DEFAULT '0',
+//     PRIMARY KEY (`id`)
+//    ) ENGINE=InnoDB AUTO_INCREMENT=17 DEFAULT CHARSET=latin1   
