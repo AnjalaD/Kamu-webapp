@@ -1,6 +1,7 @@
 <?php $this->set_title('Login'); ?>
 
 <?php $this->start('head'); ?>
+<
 <?php $this->end(); ?>
 
 <?php $this->start('body'); ?>
@@ -10,11 +11,12 @@
         <div class="form-group">
             <div>
                 <label for="email">Email</label>
-                <input type="text" name="email" id="email" class="form-control">
+                <input 
+                type="text" name="email" id="email" class="form-control">
             </div>
             <div>
                 <label for="password">Password</label>
-                <input type="text" name="password" id="password" class="form-control">
+                <input type="password" name="password" id="password" class="form-control">
             </div>
         </div>
         <div class="form-grup">
