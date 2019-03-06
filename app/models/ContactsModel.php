@@ -36,4 +36,15 @@ class ContactsModel extends Model
         return $validation;
     }
 
+    public function find_by_id_user_id($contact_id, $user_id, $params=[])
+    {
+        $conditions = [
+            'conditions' => 'id=? AND user_id=?',
+            'bind' => [$contact_id, $user_id]
+        ];
+
+        $conditions = array_merge($conditions, $params);
+        return $this->find_first($conditions);
+    }
+
 }

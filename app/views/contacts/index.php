@@ -5,7 +5,7 @@
 
 <?php $this->start('body'); ?>
 <h3 class="center">Contacts</h3>
-<table class="table table-striped table-borderd">
+<table class="table table-striped border">
     <thead>
         <th>Name</th>
         <th>Email</th>
@@ -15,7 +15,7 @@
     <tbody>
         <?php foreach($this->contacts as $conctact): ?>
             <tr>
-                <td><?=$conctact->name?> </td>
+                <td><a href="<?=SROOT . 'contacts/details/' .$conctact->id?>"><?=$conctact->name?></td>
                 <td><?=$conctact->email?></td>
                 <td><?=$conctact->address?></td>
                 <td></td>

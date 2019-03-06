@@ -36,4 +36,15 @@ class ContactsController extends Controller
         $this->view->render('contacts/add');
     }
 
+    public function details_action($id)
+    {
+        $contact = $this->contactsmodel->find_by_id_user_id($id, current_user()->id);
+        if(!$contact)
+        {
+            Router::redirect('contacts');
+        }
+        $this->view->contact = $contact;
+        $this->view->render('contacts/details');
+    }
+
 }

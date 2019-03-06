@@ -50,8 +50,11 @@ class Model
         $result = new $this->_model_name($this->_table);
         if ($results_query) {
                 $result->populate_obj_data($results_query);
-            }
-        return $result;
+                return $result;
+
+        }else{
+            return false;
+        }
     }
 
     public function find_by_id($id)

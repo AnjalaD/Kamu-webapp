@@ -21,6 +21,7 @@ define('REMEMBER_ME_COOKIE_EXPIRY', 2592000);  //time in seconds - 30days
 
 define('ACCESS_RESTRICTED','Restricted'); //controller name for restricted redirect
 
+// .htaccess
 // Options -MultiViews
 // RewriteEngine On
 
@@ -30,6 +31,8 @@ define('ACCESS_RESTRICTED','Restricted'); //controller name for restricted redir
 
 // RewriteRule ^(.+)$ index.php?url=$1 [QSA,L]
 
+
+//sql queries for create table
 // CREATE TABLE `contacts` (
 //     `id` int(11) NOT NULL AUTO_INCREMENT,
 //     `user_id` int(11) DEFAULT NULL,
