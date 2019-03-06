@@ -9,8 +9,6 @@ class HomeController extends Controller
 
     public function index_action()
     {
-        dnd($_SESSION);
-
         $this->view->render('home/index');
     }
 }
