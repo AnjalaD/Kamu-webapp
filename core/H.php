@@ -2,6 +2,13 @@
 
 class H
 {
+    public static function dnd($data)
+    {
+        echo '<pre>';
+        echo $data;
+        echo '</pre>';
+        die;
+    }
 
     public static function current_page()
     {

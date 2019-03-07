@@ -106,4 +106,9 @@ class UserModel extends Model
         if(empty($this->acl)) return [];
         return json_decode($this->acl, true);
     }
+
+    public function validator()
+    {
+        $this->run_validation(new MinValidator($this, ['field'=>'username', 'rule'=>6, 'msg'=>'Username must be at least 6 characters']));
+    }
 } 

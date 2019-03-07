@@ -7,8 +7,8 @@
 <?php $this->start('body'); ?>
 <div class="col-md-6 col-md-offset-3 well">
     <form class="form" action="<?=SROOT?>register/register" method="post">
-        <?=Fh::csrf_input()?>
-        <div><?=$this->display_errors ?></div>
+        <?=FH::csrf_input()?>
+        <?=FH::display_errors($this->display->errors)?>
         <div class="form-group">
             <div>
                 <label for="first_name">First name</label>
@@ -20,7 +20,7 @@
                 required
                 pattern="\w+" 
                 title="must not be blank and contain only letters, numbers and underscores"
-                value="<?=$this->post['first_name'] ?>">
+                value="<?=$this->new_user->first_name ?>">
             </div>
             <div>
                 <label for="last_name">Last name</label>
@@ -32,7 +32,7 @@
                 required
                 pattern="\w+" 
                 title="must not be blank and contain only letters, numbers and underscores"
-                value="<?=$this->post['last_name'] ?>">
+                value="<?=$this->new_user->last_name ?>">
             </div>
             <div>
                 <label for="email">Email</label>
@@ -44,7 +44,7 @@
                 required
                 pattern="^(([-\w\d]+)(\.[-\w\d]+)*@([-\w\d]+)(\.[-\w\d]+)*(\.([a-zA-Z]{2,5}|[\d]{1,3})){1,2})$"
                 title="must be a valid email address"
-                value="<?=$this->post['email'] ?>">
+                value="<?=$this->new_user->email ?>">
             </div>
             <div>
                 <label for="password">Password</label>
@@ -56,7 +56,7 @@
                 required
                 pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{6,}"
                 title="must contain at least 6 characters, including UPPER/lowercase and numbers"
-                value="<?=$this->post['password'] ?>">
+                value="<?=$this->new_user->password ?>">
             </div>
             <div>
                 <label for="confirm">Confirm Password</label>
@@ -68,7 +68,7 @@
                 required
                 pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{6,}"
                 title="should match with the password entered above"
-                value="<?=$this->post['confirm'] ?>">
+                value="<?=$this->new_user->confirm ?>">
             </div>
         </div>
         <div class="form-group">

@@ -58,46 +58,42 @@ class RegisterController extends Controller
 
     public function register_action()
     {
-        $validation = new Validate();
-        $posted_values = ['first_name'=>'', 'last_name'=>'', 'email'=>'', 'password'=>'', 'confirm'=>''];
+        $new_user = new UserModel();
         if($_POST)
-        {     
-            $posted_values = FH::posted_values($_POST);   
-            $validation->check($_POST,[
-                'first_name'=>[
-                    'display' => 'First Name',
-                    'required' => true
-                ],
-                'last_name'=>[
-                    'display' => 'Last Name',
-                    'required' => true
-                ],
-                'email' => [
-                    'display' => 'Email',
-                    'required' => true,
-                    'unique' => 'users',
-                    'valid_email' => true
-                ],
-                'password' => [
-                    'display' => 'Password',
-                    'required' => true
-                ],
-                'confirm' => [
-                    'display' => 'Confirm Password',
-                    'required' => true,
-                    'match' => 'password'
-                ]
-                ], true);
+        {      
+            // $validation->check($_POST,[
+            //     'first_name'=>[
+            //         'display' => 'First Name',
+            //         'required' => true
+            //     ],
+            //     'last_name'=>[
+            //         'display' => 'Last Name',
+            //         'required' => true
+            //     ],
+            //     'email' => [
+            //         'display' => 'Email',
+            //         'required' => true,
+            //         'unique' => 'users',
+            //         'valid_email' => true
+            //     ],
+            //     'password' => [
+            //         'display' => 'Password',
+            //         'required' => true
+            //     ],
+            //     'confirm' => [
+            //         'display' => 'Confirm Password',
+            //         'required' => true,
+            //         'match' => 'password'
+            //     ]
+            //     ], true);
         }
-
-        if($validation->passed())
+        $new_user->assign($_POST);
+        if(!$new_user->save())
         {
-            $new_user = new UserModel();
-            $new_user->register_new_user($_POST);
             Router::redirect('register/login');
         }
-        $this->view->post = $posted_values;
-        $this->view->display_errors = $validation->display_errors();
+        $this->view->new_user = $new_user;
+        $this->view->display_errors = $new_user->get_error_messages();
         $this->view->render('register/register');
     }
 } 

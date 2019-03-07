@@ -2,7 +2,7 @@
 
 class Model
 {
-    protected $_db, $_table, $_model_name, $_soft_del = false;
+    protected $_db, $_table, $_model_name, $_soft_del = false, $_validates=true, $_validation_errors=[];
     public $id;
 
     public function __construct($table, $model_name)
@@ -40,13 +40,22 @@ class Model
 
     public function save()
     {
-        $fields = H::get_obj_properties($this);
-        //determine where to update or insert
-        if (property_exists($this, 'id') && $this->id != '') {
-                return $this->update($this->id, $fields);
-            } else {
+        H::dnd($this->validator());
+        $this->validator();
+        
+        if($this->_validates)
+        {
+            $fields = H::get_obj_properties($this);
+            //determine where to update or insert
+            if (property_exists($this, 'id') && $this->id != '') {
+                    return $this->update($this->id, $fields);
+            } else 
+            {
             return $this->insert($fields);
+            }
         }
+        return false;
+        
     }
 
     public function insert($fields)
@@ -121,5 +130,34 @@ class Model
             }
         }
         return $params;
+    }
+
+    public function validator()
+    {}
+
+    public function run_validation($validator)
+    {
+        $key = $validator->field;
+        if(!$validator->success())
+        {
+            $this->_validates = false;
+            $this->_validation_errors[$key] = $validator->msg;
+        }
+    }
+
+    public function get_error_messages()
+    {
+        return $this->_validation_errors;
+    }
+
+    public function validation_passed()
+    {
+        return $this->_validates;
+    }
+
+    public function add_error_message($field, $msg)
+    {
+        $this->_validates = false;
+        $this->_validation_errors[$field] = $msg;
     }
 }

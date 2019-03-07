@@ -54,4 +54,16 @@ class FH{
         return $clean_ary;
     }
 
+    public static function display_errors($errors)
+    {
+        $html = '<div class="form-errors"><ul>';
+        foreach($errors as $field => $error)
+        {
+            $html .= '<li class="text-danger" >' . $error . '</li>' ;
+            $html .= '<script>jQuery("document").ready(function(){jQuery("#' . $field . '").parent().closest("div").addClass("text-danger");}); </script>';
+        }
+        $html .= '</ul></div>';
+        return $html;
+    }
+
 }
