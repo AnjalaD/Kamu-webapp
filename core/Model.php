@@ -2,26 +2,16 @@
 
 class Model
 {
-    protected $_db, $_table, $_model_name, $_soft_del = false, $_column_names = [];
+    protected $_db, $_table, $_model_name, $_soft_del = false;
     public $id;
 
     public function __construct($table, $model_name)
     {
         $this->_db = DB::get_instance();
         $this->_table = $table;
-        $this->_set_table_columns();
         $this->_model_name = $model_name;
     }
 
-    protected function _set_table_columns()
-    {
-        $columns = $this->get_columns();
-        foreach ($columns as $column) {
-            $column_name = $column->Field;
-            $this->_column_names[] = $column->Field;
-            $this->{$column_name} = null;
-        }
-    }
 
     public function get_columns()
     {
@@ -31,30 +21,16 @@ class Model
     public function find($params = [])
     {
         $params = $this->_soft_delete_params($params);
-        $results = [];
-        $results_query = $this->_db->find($this->_table, $params);
-        if(!$results_query) return false;
-        foreach ($results_query as $result) {
-            $obj = new $this->_model_name($this->_table);
-            $obj->populate_obj_data($result);
-            $results[] = $obj;
-        }
-
-        return $results;
+        $results_query = $this->_db->find($this->_table, $params, get_class($this));
+        if(!$results_query) return [];
+        return $results_query;
     }
 
     public function find_first($params = [])
     {
         $params = $this->_soft_delete_params($params);
-        $results_query = $this->_db->find_first($this->_table, $params);
-        $result = new $this->_model_name($this->_table);
-        if ($results_query) {
-                $result->populate_obj_data($results_query);
-                return $result;
-
-        }else{
-            return false;
-        }
+        $results_query = $this->_db->find_first($this->_table, $params, get_class($this));
+        return $results_query;
     }
 
     public function find_by_id($id)
@@ -64,13 +40,10 @@ class Model
 
     public function save()
     {
-        $fields = [];
-        foreach ($this->_column_names as $column) {
-                $fields[$column] = $this->$column;
-            }
+        $fields = get_obj_properties($this);
         //determine where to update or insert
         if (property_exists($this, 'id') && $this->id != '') {
-                return $this->update($this->if, $fields);
+                return $this->update($this->id, $fields);
             } else {
             return $this->insert($fields);
         }
@@ -108,8 +81,8 @@ class Model
     public function data()
     {
         $data = new stdClass();
-        foreach ($this->_column_names as $column) {
-                $data->column = $column;
+        foreach (get_obj_properties($this) as $column => $value) {
+                $data->column = $value;
             }
         return $data;
     }
@@ -117,13 +90,13 @@ class Model
     public function assign($params)
     {
         if (!empty($params)) {
-                foreach ($params as $key => $value) {
-                        if (in_array($key, $this->_column_names)) {
-                                $this->$key = sanatize($value);
-                            }
-                    }
-                return true;
+            foreach ($params as $key => $value) {
+                if (property_exists($this, $key)) {
+                    $this->$key = sanatize($value);
+                }
             }
+            return true;
+        }
         return false;
     }
 

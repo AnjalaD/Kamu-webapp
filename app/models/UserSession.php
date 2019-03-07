@@ -2,6 +2,8 @@
 
 class UserSession extends Model
 {
+    public $id, $user_id, $session, $agent;
+
     public function __construct()
     {
         $table = 'user_sessions';

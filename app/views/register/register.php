@@ -7,6 +7,7 @@
 <?php $this->start('body'); ?>
 <div class="col-md-6 col-md-offset-3 well">
     <form class="form" action="<?=SROOT?>register/register" method="post">
+        <?=Fh::csrf_input()?>
         <div><?=$this->display_errors ?></div>
         <div class="form-group">
             <div>

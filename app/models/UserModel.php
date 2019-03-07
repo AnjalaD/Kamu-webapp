@@ -4,6 +4,8 @@ class UserModel extends Model
 {
     private $_is_logged_in, $_session_name, $_cookie_name;
     public static $current_logged_user = null;
+    public $id, $first_name, $last_name, $email, $password, $hash;
+    public $acl, $active='0', $deleted='0';
 
     public function __construct($user='')
     {
@@ -16,10 +18,10 @@ class UserModel extends Model
 
         if(is_int($user))
         {
-            $u = $this->_db->find_first($table,['conditions' => 'id=?', 'bind' => [$user]]);
+            $u = $this->_db->find_first($table,['conditions' => 'id=?', 'bind' => [$user]], 'UserModel');
         }else
         {
-            $u = $this->_db->find_first($table,['conditions' => 'email=?', 'bind' => [$user]]);
+            $u = $this->_db->find_first($table,['conditions' => 'email=?', 'bind' => [$user]], 'UserModel');
         }
 
         if($u)
@@ -94,11 +96,8 @@ class UserModel extends Model
 
     public function register_new_user($params){
         $this->assign($params);
-               
         $this->password = password_hash($this->password, PASSWORD_DEFAULT);
         $this->hash = hash('md5', rand(1,100));
-        $this->deleted = 0;
-        $this->active = 0;
         $this->save();
     }
 

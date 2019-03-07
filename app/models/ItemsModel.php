@@ -2,6 +2,8 @@
 
 class ItemsModel extends Model
 {
+    public $id, $user_id, $name, $description, $price, $deleted = 0;
+
     public function __construct(){
         $table = 'items';
         $model_name = 'ItemsModel';
@@ -23,11 +25,11 @@ class ItemsModel extends Model
     public static function validation(){
         $validation = [
             'name' =>[
-                'dispaly' => 'Name',
+                'display' => 'Name',
                 'required' => 'true'
             ],
             'description' =>[
-                'dispaly' => 'Description',
+                'display' => 'Description',
                 'required' => 'true',
                 'max' => 255
             ]

@@ -25,7 +25,7 @@ class RegisterController extends Controller
                     'display' => 'Password',
                     'required' => true
                 ]
-            ]);
+                ], true);
             if($validation->passed())
             {
                 $user = $this->usermodel->find_by_email($_POST['email']);
@@ -87,7 +87,7 @@ class RegisterController extends Controller
                     'required' => true,
                     'match' => 'password'
                 ]
-            ]);
+                ], true);
         }
 
         if($validation->passed())

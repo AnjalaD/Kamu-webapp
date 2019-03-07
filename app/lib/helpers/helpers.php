@@ -36,3 +36,8 @@ function current_page()
     }
     return $current_page;
 }
+
+function get_obj_properties($obj)
+{
+    return get_object_vars($obj);
+}
