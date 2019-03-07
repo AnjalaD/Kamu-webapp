@@ -10,7 +10,7 @@ define('DB_HOST', 'localhost:3306');
 define('DEFAULT_CONTROLLER', 'Home'); //if no controller is set Route will use this
 define('DEFAULT_LAYOUT', 'default'); //if no layout is set controller use this
 
-define('SROOT', '/Kamu/'); //set this for / for a live server
+define('SROOT', '/mvc/'); //set this for / for a live server
 
 define('SITE_TITLE', 'MVC framwork'); //default web page title
 define('BRAND_NAME',"Kamu");
@@ -33,7 +33,7 @@ define('ACCESS_RESTRICTED','Restricted'); //controller name for restricted redir
 
 
 //sql queries for create table
-// CREATE TABLE `contacts` (
+// CREATE TABLE `items` (
 //     `id` int(11) NOT NULL AUTO_INCREMENT,
 //     `user_id` int(11) DEFAULT NULL,
 //     `name` varchar(255) DEFAULT NULL,

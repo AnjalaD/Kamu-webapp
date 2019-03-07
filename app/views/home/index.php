@@ -4,5 +4,5 @@
 <?php $this->end(); ?>
 
 <?php $this->start('body'); ?>
-<h1>Welcome to my web framework...</h1>
+<h1>Welcome to home</h1>
 <?php $this->end(); ?>
