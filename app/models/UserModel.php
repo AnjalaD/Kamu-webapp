@@ -40,7 +40,7 @@ class UserModel extends Model
     }
 
 
-    public static function current_logged_user()
+    public static function current_user()
     {
         if(!isset(self::$current_logged_user) && Session::exists(CURRENT_USER_SESSION_NAME))
         {

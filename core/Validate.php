@@ -14,18 +14,18 @@ class Validate
         $this->_errors = [];
         if($csrf_check)
         {
-            if(!isset($source['csrf_token']) && !FH::check_token($source['csrf_token']))
+            if(!isset($source['csrf_token']) || !FH::check_token($source['csrf_token']))
             {
                 $this->add_error(["Something went wrong", 'csfr_token']);
             }
         }
         foreach($items as $item => $rules)
         {
-            $item = Input::sanatize($item);
+            $item = FH::sanatize($item);
             $display = $rules['display'];
             foreach($rules as $rule => $rule_value)
             {
-                $value = Input::sanatize(trim($source[$item]));
+                $value = FH::sanatize(trim($source[$item]));
 
                 if($rule === 'required' && empty($value))
                 {

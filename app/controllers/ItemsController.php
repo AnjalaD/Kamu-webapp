@@ -11,7 +11,7 @@ class ItemsController extends Controller
 
     public function index_action()
     {
-        $items = $this->itemsmodel->find_all_by_user_id(current_user()->id, ['order'=>'name']);
+        $items = $this->itemsmodel->find_all_by_user_id(UserModel::current_user()->id, ['order'=>'name']);
         if(!$items){
             $items = [];
         }
@@ -24,7 +24,7 @@ class ItemsController extends Controller
         $item = new itemsModel();
         $validation = new Validate();
         if($_POST){
-            $item->user_id = current_user()->id;
+            $item->user_id = UserModel::current_user()->id;
             $item->assign($_POST);
             $validation->check($_POST, itemsModel::validation());
             if($validation->passed()){
@@ -40,7 +40,7 @@ class ItemsController extends Controller
 
     public function details_action($id)
     {
-        $item = $this->itemsmodel->find_by_id_user_id((int)$id, current_user()->id);
+        $item = $this->itemsmodel->find_by_id_user_id((int)$id, UserModel::current_user()->id);
         if(!$item)
         {
             Router::redirect('items');
@@ -51,7 +51,7 @@ class ItemsController extends Controller
 
     public function delete_action($item_id)
     {
-        $item = $this->itemsmodel->find_by_id_user_id((int)$item_id, current_user()->id);
+        $item = $this->itemsmodel->find_by_id_user_id((int)$item_id, UserModel::current_user()->id);
         if($item)
         {
             $item->delete();
@@ -61,7 +61,7 @@ class ItemsController extends Controller
 
     public function edit_action($item_id)
     {
-        $item = $this->itemsmodel->find_by_id_user_id((int)$item_id, current_user()->id);
+        $item = $this->itemsmodel->find_by_id_user_id((int)$item_id, UserModel::current_user()->id);
         if($item)
         {
             $validation = new Validate();

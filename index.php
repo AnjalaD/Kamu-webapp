@@ -3,7 +3,6 @@ define('ROOT', dirname(__FILE__));
 
 // load configuration and helper functions
 require_once(ROOT . '/config/config.php');
-require_once(ROOT . '/app/lib/helpers/functions.php');
 
 //autoload classes
 function autoload($class_name)
