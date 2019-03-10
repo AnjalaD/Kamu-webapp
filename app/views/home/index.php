@@ -5,4 +5,12 @@
 
 <?php $this->start('body'); ?>
 <h1>Welcome to my web framwork...</h1>
+
+
+
+
+
+
+
+
 <?php $this->end(); ?>

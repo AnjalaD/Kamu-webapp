@@ -1,9 +1,5 @@
 {
     "Home" : "home",
-    "Contacts" : {
-        "My Contacts" : "contacts",
-        "New Contact" : "contacts/add"
-    },
     "Login" : "register/login",
     "Logout" : "register/logout"
 }

@@ -2,7 +2,7 @@
 define('DEBUG', true);
 
 //database detailes
-define('DB_NAME', 'accounts');
+define('DB_NAME', 'kamuaccounts');
 define('DB_USER', 'root');
 define('DB_PASSWORD', '');
 define('DB_HOST', 'localhost:3306');
@@ -10,7 +10,7 @@ define('DB_HOST', 'localhost:3306');
 define('DEFAULT_CONTROLLER', 'Home'); //if no controller is set Route will use this
 define('DEFAULT_LAYOUT', 'default'); //if no layout is set controller use this
 
-define('SROOT', '/mvc/'); //set this for / for a live server
+define('SROOT', '/Kamu_1.0/exported/'); //set this for / for a live server
 
 define('SITE_TITLE', 'MVC framwork'); //default web page title
 define('BRAND_NAME',"Kamu");
@@ -41,6 +41,7 @@ define('ACCESS_RESTRICTED','Restricted'); //controller name for restricted redir
 //     KEY `user_id` (`user_id`),
 //     KEY `deleted` (`deleted`)
 //    ) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=latin1  
+
 // CREATE TABLE `user_sessions` (
 //     `id` int(11) NOT NULL AUTO_INCREMENT,
 //     `user_id` int(11) NOT NULL,
@@ -48,6 +49,7 @@ define('ACCESS_RESTRICTED','Restricted'); //controller name for restricted redir
 //     `agent` varchar(255) NOT NULL,
 //     PRIMARY KEY (`id`)
 //    ) ENGINE=InnoDB AUTO_INCREMENT=26 DEFAULT CHARSET=latin1
+
 // CREATE TABLE `users` (
 //     `id` int(11) NOT NULL AUTO_INCREMENT,
 //     `first_name` varchar(50) NOT NULL,
