@@ -1,3 +1,7 @@
+<?php
+use core\FH;
+?>
+
 <?php $this->set_title('Login'); ?>
 
 <?php $this->start('head'); ?>
@@ -7,8 +11,8 @@
 <?php $this->start('body'); ?>
 <div class="col-md-6 col-md-offset-3 well">
     <form class="form" action="<?=SROOT?>register/login" method="post">
-        <?=Fh::csrf_input()?>
-        <div><?=$this->display_errors ?></div>
+        <?=FH::csrf_input()?>
+        <?=FH::display_errors($this->display_errors)?>
         <div class="form-group">
             <div>
                 <label for="email">Email</label>

@@ -1,5 +1,5 @@
 <?php
-
+namespace core;
 class Cookie
 {
     public static function exists($name)

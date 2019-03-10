@@ -1,4 +1,6 @@
 <?php
+namespace core\validators;
+use \Exception;
 
 abstract class Validator
 {
@@ -29,7 +31,7 @@ abstract class Validator
             $this->msg = $params['msg'];
         }
 
-        if(!array_key_exists('rule', $params))
+        if(array_key_exists('rule', $params))
         {
             $this->rule = $params['rule'];
         }

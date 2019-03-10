@@ -1,4 +1,11 @@
 <?php
+namespace app\controllers;
+use core\Controller;
+use core\Router;
+use core\Session;
+use app\models\ItemsModel;
+use app\models\UserModel;
+// use core\H;
 
 class ItemsController extends Controller
 {
@@ -22,19 +29,20 @@ class ItemsController extends Controller
     public function add_action()
     {
         $item = new itemsModel();
-        $validation = new Validate();
-        if($_POST){
+        if($this->request->is_post()){
+            $this->request->csrf_check();
+            $item->assign($this->request->get());
             $item->user_id = UserModel::current_user()->id;
-            $item->assign($_POST);
-            $validation->check($_POST, itemsModel::validation());
-            if($validation->passed()){
-                $item->save();
+            
+            if($item->save()){
+                Session::add_msg('success', 'New item added successfully!');
                 Router::redirect('items');
             }
         }
         $this->view->item = $item;
+        $this->view->display_errors = $item->get_error_messages();
+
         $this->view->post_action = SROOT . 'items/add';
-        $this->view->display_errors = $validation->display_errors();
         $this->view->render('items/add');
     }
 
@@ -64,20 +72,18 @@ class ItemsController extends Controller
         $item = $this->itemsmodel->find_by_id_user_id((int)$item_id, UserModel::current_user()->id);
         if($item)
         {
-            $validation = new Validate();
-            if($_POST)
+            if($this->request->is_post())
             {
-                $item->assign($_POST);
-                $validation->check($_POST, ItemsModel::validation());
-                if($validation->passed())
+                $this->request->csrf_check();
+                $item->assign($this->request->get());
+                if($item->save())
                 {
-                    $item->save();
                     Router::redirect('items');
                 }
             }
             
             $this->view->item = $item;
-            $this->view->display_errors = $validation->display_errors();
+            $this->view->display_errors = $item->get_error_messages();
             $this->view->post_action = SROOT . 'items/edit/' . $item->id;
             $this->view->render('items/edit');
             return;

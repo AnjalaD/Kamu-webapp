@@ -1,5 +1,8 @@
 <?php
-
+namespace app\models;
+use core\Model;
+use core\Session;
+use core\Cookie;
 class UserSession extends Model
 {
     public $id, $user_id, $session, $agent;
@@ -22,7 +25,6 @@ class UserSession extends Model
                 'bind' => [Session::uagent_no_version(), Cookie::get(REMEMBER_ME_COOKIE_NAME)]
             ]);
         }
-        if(!$user_session) return false;
         return $user_session;
     }
 }

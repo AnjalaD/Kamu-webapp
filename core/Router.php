@@ -1,4 +1,8 @@
 <?php
+namespace core;
+use core\Session;
+use app\models\UserModel;
+
 class Router
 {
     public static function route($url)
@@ -24,6 +28,7 @@ class Router
             $action = 'index_action';
         }
 
+        $controller = 'app\controllers\\' . $controller;
         $dispatch = new $controller($controller_name, $action);
 
         if (method_exists($controller, $action)) {
@@ -52,16 +57,14 @@ class Router
 
     public static function has_access($controller_name, $action_name = "index_action")
     {
-        $acl_file = file_get_contents(ROOT . '/app/acl.json');
+        $acl_file = file_get_contents(ROOT.SP.'app'.SP.'acl.json');
         $acl = json_decode($acl_file, true);
         $current_user_acls = ["Guest"];
         $grant_access = false;
 
         if (Session::exists(CURRENT_USER_SESSION_NAME)) {
             $current_user_acls[] = "Logged_in";
-            foreach (UserModel::current_user()->acls() as $a) {
-                $current_user_acls[] = $a;
-            }
+            $current_user_acls = array_merge($current_user_acls, UserModel::current_user()->acls());
         }
 
         foreach ($current_user_acls as $level) {
@@ -88,7 +91,7 @@ class Router
     public static function get_menu($menu)
     {
         $menu_ary = [];
-        $menu_file = file_get_contents(ROOT . '/app/' . $menu . '.json');
+        $menu_file = file_get_contents(ROOT.SP.'app'.SP.$menu.'.json');
         $acl = json_decode($menu_file, true);
 
         foreach ($acl as $key => $value) {

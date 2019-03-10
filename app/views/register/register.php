@@ -1,14 +1,18 @@
+<?php
+use core\FH;
+?>
+
 <?php $this->set_title('Register'); ?>
 
 <?php $this->start('head'); ?>
-<script src="<?=SROOT . '/js/register_form_validate.js'?>"></script>
+<script src="<?=SROOT?>js/register_form_validate.js"></script>
 <?php $this->end(); ?>
 
 <?php $this->start('body'); ?>
 <div class="col-md-6 col-md-offset-3 well">
     <form class="form" action="<?=SROOT?>register/register" method="post">
         <?=FH::csrf_input()?>
-        <?=FH::display_errors($this->display->errors)?>
+        <?=FH::display_errors($this->display_errors)?>
         <div class="form-group">
             <div>
                 <label for="first_name">First name</label>
@@ -47,6 +51,13 @@
                 value="<?=$this->new_user->email ?>">
             </div>
             <div>
+                <label for="sel1">Select list (select one):</label>
+                <select class="form-control" name="acl" id="acl">
+                    <option value="User">User</option>
+                    <option value="Provider">Provider</option>
+                </select>
+            </div>
+            <div>
                 <label for="password">Password</label>
                 <input 
                 type="password" 
@@ -61,14 +72,14 @@
             <div>
                 <label for="confirm">Confirm Password</label>
                 <input 
-                type="password" 
+                type="tex" 
                 name="confirm" 
                 id="confirm" 
                 class="form-control" 
                 required
                 pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{6,}"
                 title="should match with the password entered above"
-                value="<?=$this->new_user->confirm ?>">
+                value="<?=$this->new_user->get_confirm() ?>">
             </div>
         </div>
         <div class="form-group">

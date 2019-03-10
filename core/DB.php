@@ -1,4 +1,7 @@
 <?php
+namespace core;
+use \PDO;
+use \PDOException;
 
 class DB
 {
@@ -18,7 +21,7 @@ class DB
     public static function get_instance()
     {
         if (!isset(self::$_instance)) {
-            self::$_instance = new DB();
+            self::$_instance = new self();
         }
         return self::$_instance;
     }

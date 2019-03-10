@@ -1,4 +1,5 @@
 <?php
+namespace core;
 
 class Model
 {
@@ -40,18 +41,23 @@ class Model
 
     public function save()
     {
-        H::dnd($this->validator());
         $this->validator();
         
         if($this->_validates)
         {
+            $this->before_save();
             $fields = H::get_obj_properties($this);
+
             //determine where to update or insert
             if (property_exists($this, 'id') && $this->id != '') {
-                    return $this->update($this->id, $fields);
+                $save = $this->update($this->id, $fields);
+                $this->after_save();
+                return $save;
             } else 
             {
-            return $this->insert($fields);
+                $save = $this->insert($fields);
+                $this->after_save();
+                return $save;
             }
         }
         return false;
@@ -138,7 +144,7 @@ class Model
     public function run_validation($validator)
     {
         $key = $validator->field;
-        if(!$validator->success())
+        if(!$validator->success)
         {
             $this->_validates = false;
             $this->_validation_errors[$key] = $validator->msg;
@@ -159,5 +165,14 @@ class Model
     {
         $this->_validates = false;
         $this->_validation_errors[$field] = $msg;
+    }
+
+    public function before_save(){}
+
+    public function after_save(){}
+    
+    public function is_new()
+    {
+        return (property_exists($this, 'id') && !empty($this->id))? false : true;
     }
 }

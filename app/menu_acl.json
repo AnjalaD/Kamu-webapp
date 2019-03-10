@@ -1,5 +1,9 @@
 {
     "Home" : "home",
+    "Search" : {
+        "Food" : "search/food",
+        "Resturant" : "search/resturant"
+    },
     "Items" : {
         "My Items" : "items",
         "New Item" : "items/add"

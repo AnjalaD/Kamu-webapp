@@ -1,4 +1,5 @@
 <?php
+namespace core;
 
 class Session
 {
@@ -34,6 +35,33 @@ class Session
         $regx = '/\/[a-zA-Z0-9.]+/';
         $uagent = preg_replace($regx, '', $uagent);
         return $uagent;
+    }
+
+    
+    public static function add_msg($type, $msg)
+    {
+        $session_name = 'alert-' . $type;
+        self::set($session_name, $msg);
+    }
+
+    public static function display_msgs()
+    {
+        $alerts = ['alert-info', 'alert-success', 'alert-warning', 'alert-danger'];
+        $html = '';
+        foreach($alerts as $alert)
+        {
+            if(self::exists($alert))
+            {
+                $html .= '<div class="alert ' . $alert . ' alert-dismissible fade show" role="alert">';
+                $html .= '<button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>';
+                $html .= self::get($alert);
+                $html .= '</div>';
+                self::delete($alert);
+            }
+
+        }
+
+        return $html;
     }
 
 }

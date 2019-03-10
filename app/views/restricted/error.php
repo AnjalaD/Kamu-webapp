@@ -4,5 +4,5 @@
 <?php $this->end(); ?>
 
 <?php $this->start('body'); ?>
-<h2 class="text-center">you dont have access to view this page</h2>
+<h2 class="text-center">Something went wrong</h2>
 <?php $this->end(); ?>

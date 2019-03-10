@@ -3,15 +3,25 @@
         "denied" : {},
         "Home" : ["*"],
         "Register" : ["login", "register"],
+        "Search" : ["*"],
         "Restricted" : ["*"]
     },
     
-    "Logged_in": {
+    "Logged_in" : {
         "denied" : {
             "Register" : ["login", "register"]
         },
         "Home" : ["*"],
-        "Items" : ["*"],
         "Register" : ["logout"]
+    },
+
+    "User" : {
+        "denied" :{}
+    },
+
+    "Provider" : {
+        "denied" :{},
+        "Items" : ["*"]
     }
+
 }

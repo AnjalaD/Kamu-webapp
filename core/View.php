@@ -1,22 +1,20 @@
 <?php
+namespace core;
 
 class View 
 {
     protected $_head, $_body, $_title = SITE_TITLE, $_output_buffer, $_layout = DEFAULT_LAYOUT;
 
-    public function __construct()
-    {
-
-    }
+    public function __construct(){}
 
     public function render($view_name)
     {
         $view_string = $view_name;
 
-        if(file_exists(ROOT . '/app/views/'. $view_string . '.php'))
+        if(file_exists(ROOT.SP.'app'.SP.'views'.SP. $view_string . '.php'))
         {
-            include(ROOT . '/app/views/'. $view_string . '.php');
-            include((ROOT . '/app/views/layouts/' . $this->_layout . '.php'));
+            include(ROOT.SP.'app'.SP.'views'.SP. $view_string.'.php');
+            include((ROOT.SP.'app'.SP.'views'.SP.'layouts'.SP.$this->_layout.'.php'));
         }else
         {
             die('This view \"' . $view_name . '\" does not exists.');
@@ -72,11 +70,11 @@ class View
 
     public function insert($path)
     {
-        include ROOT . '/app/views/' . $path . '.php';
+        include ROOT.SP.'app'.SP.'views'.SP. $path.'.php';
     }
 
     public function partial($group, $partial)
     {
-        include ROOT . '/app/views/' . $group . '/partials/' . $partial . '.php' ;
+        include ROOT.SP.'app'.SP.'views'.SP.$group.SP.'partials'.SP.$partial.'.php' ;
     }
 }
