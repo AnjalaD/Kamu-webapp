@@ -4,11 +4,12 @@ use core\Model;
 use core\validators\MaxValidator;
 use core\validators\RequiredValidator;
 use core\validators\NumericValidator;
+use core\H;
 
 
 class ItemsModel extends Model
 {
-    public $id, $user_id, $name, $description, $price, $deleted = 0;
+    public $user_id, $name, $description, $price, $image_url=DEFUALT_ITEM_IMAGE, $deleted = 0;
 
     public function __construct(){
         $table = 'items';
@@ -51,6 +52,37 @@ class ItemsModel extends Model
 
     public function auto_complete($field, $data)
     {
+        $results = [];
+        if($items = $this->search($field, $data))
+        {
+            foreach($items as $item)
+            {
+                $results[] = $item->name;
+            }
+        }
+        return array_unique($results);
+    }
+
+    public function search($field, $data)
+    {
+        $items = $this->find([
+            'conditions' => $field.' LIKE ?',
+            'bind' => [$data.'%']
+        ]);
+        return ($items)? $items : [];
+    }
+
+    public function save_image($data)
+    {
+        $image = H::decode_image($data);
+        $path = SROOT.'img/items/'.time().'.png';
+        if(file_put_contents($path, $image))
+        {
+            $this->image_url = $path;
+            return $path;
+        }
+        $this->image_url = DEFUALT_ITEM_IMAGE;
+        return false;
         
     }
 

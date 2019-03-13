@@ -71,4 +71,8 @@ class RegisterController extends Controller
         $this->view->display_errors = $new_user->get_error_messages();
         $this->view->render('register/register');
     }
+
+    public function demo_action(){
+        // H::dnd($this->request->get());
+    }
 } 

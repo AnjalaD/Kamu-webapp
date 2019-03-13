@@ -68,4 +68,10 @@ class FH{
         return $html;
     }
 
+
+    public static function image_block()
+    {
+        
+    }
+
 }

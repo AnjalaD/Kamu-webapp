@@ -28,4 +28,14 @@ class SearchController extends Controller
         $this->view->render('search/resturant');
     }
 
+    public function auto_complete_action($data=[])
+    {
+        $result =[];
+        if(!empty($data))
+        {
+            $result = $this->itemsmodel->auto_complete('name',$data);
+        }
+        $this->json_response($result);
+    }
+
 }
