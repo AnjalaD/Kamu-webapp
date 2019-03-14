@@ -9,7 +9,7 @@ use core\H;
 
 class ItemsModel extends Model
 {
-    public $user_id, $name, $description, $price, $image_url=DEFUALT_ITEM_IMAGE, $deleted = 0;
+    public $item_id, $restaurant_id, $name, $description, $price, $image_url=DEFUALT_ITEM_IMAGE, $rating='', $tags='', $deleted = 0;
 
     public function __construct(){
         $table = 'items';
@@ -18,22 +18,22 @@ class ItemsModel extends Model
         $this->_soft_del = true;
     }
 
-    public function find_all_by_user_id($user_id, $params=[])
+    public function find_all_by_restaurant_id($restaurant_id, $params=[])
     {
         $conditions = [
-            'conditions' => 'user_id=?',
-            'bind' => [$user_id]
+            'conditions' => 'restaurant_id=?',
+            'bind' => [$restaurant_id]
         ];
         $conditions = array_merge($conditions, $params);
         return $this->find($conditions);
 
     }
 
-    public function find_by_id_user_id($item_id, $user_id, $params=[])
+    public function find_by_id_restaurant_id($item_id, $restaurant_id, $params=[])
     {
         $conditions = [
-            'conditions' => 'id=? AND user_id=?',
-            'bind' => [$item_id, $user_id]
+            'conditions' => 'id=? AND restaurant_id=?',
+            'bind' => [$item_id, $restaurant_id]
         ];
 
         $conditions = array_merge($conditions, $params);

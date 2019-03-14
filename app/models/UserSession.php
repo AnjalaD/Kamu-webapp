@@ -5,7 +5,7 @@ use core\Session;
 use core\Cookie;
 class UserSession extends Model
 {
-    public $id, $user_id, $session, $agent;
+    public $id, $user_type, $user_id, $session, $user_agent;
 
     public function __construct()
     {
@@ -21,7 +21,7 @@ class UserSession extends Model
         if(Cookie::exists(REMEMBER_ME_COOKIE_NAME))
         {
             $user_session = $user_session->find_first([
-                'conditions' => "agent=? AND session=?",
+                'conditions' => "user_agent=? AND session=?",
                 'bind' => [Session::uagent_no_version(), Cookie::get(REMEMBER_ME_COOKIE_NAME)]
             ]);
         }

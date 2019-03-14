@@ -2,7 +2,7 @@
 namespace app\controllers;
 use core\Controller;
 use core\H;
-use app\models\UserModel;
+use app\models\CustomerModel;
 
 class HomeController extends Controller
 {
@@ -13,7 +13,7 @@ class HomeController extends Controller
 
     public function index_action()
     {
-        // H::dnd(UserModel::current_user()->acls());
+        // H::dnd(CustomerModel::current_user()->acls());
         $this->view->render('home/index');
     }
 

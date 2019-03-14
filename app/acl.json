@@ -2,7 +2,7 @@
     "Guest" : {
         "denied" : {},
         "Home" : ["*"],
-        "Register" : ["login", "register", "demo"],
+        "Register" : ["login", "register", "login_user", "login_owner", "register_user", "register_owner"],
         "Search" : ["*"],
         "Restricted" : ["*"]
     },
@@ -15,11 +15,11 @@
         "Register" : ["logout"]
     },
 
-    "User" : {
+    "Customer" : {
         "denied" :{}
     },
 
-    "Provider" : {
+    "Owner" : {
         "denied" :{},
         "Items" : ["*"]
     }

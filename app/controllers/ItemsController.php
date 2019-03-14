@@ -5,7 +5,7 @@ use core\Controller;
 use core\Router;
 use core\Session;
 use app\models\ItemsModel;
-use app\models\UserModel;
+use app\models\CustomerModel;
 use core\H;
 
 class ItemsController extends Controller
@@ -19,7 +19,7 @@ class ItemsController extends Controller
 
     public function index_action()
     {
-        $items = $this->itemsmodel->find_all_by_user_id(UserModel::current_user()->id, ['order' => 'name']);
+        $items = $this->itemsmodel->find_all_by_user_id(CustomerModel::current_user()->id, ['order' => 'name']);
         if (!$items) {
             $items = [];
         }
@@ -33,7 +33,7 @@ class ItemsController extends Controller
         if ($this->request->is_post()) {
             $this->request->csrf_check();
             $item->assign($this->request->get());
-            $item->user_id = UserModel::current_user()->id;
+            $item->user_id = CustomerModel::current_user()->id;
 
             if (!empty($this->request->get('image'))) {
                 $item->save_image($this->request->get('image'));
@@ -54,7 +54,7 @@ class ItemsController extends Controller
 
     public function details_action($id)
     {
-        $item = $this->itemsmodel->find_by_id_user_id((int)$id, UserModel::current_user()->id);
+        $item = $this->itemsmodel->find_by_id_user_id((int)$id, CustomerModel::current_user()->id);
         if (!$item) {
             Router::redirect('items');
         }
@@ -64,7 +64,7 @@ class ItemsController extends Controller
 
     public function delete_action($item_id)
     {
-        $item = $this->itemsmodel->find_by_id_user_id((int)$item_id, UserModel::current_user()->id);
+        $item = $this->itemsmodel->find_by_id_user_id((int)$item_id, CustomerModel::current_user()->id);
         if ($item) {
             $item->delete();
         }
@@ -73,7 +73,7 @@ class ItemsController extends Controller
 
     public function edit_action($item_id)
     {
-        $item = $this->itemsmodel->find_by_id_user_id((int)$item_id, UserModel::current_user()->id);
+        $item = $this->itemsmodel->find_by_id_user_id((int)$item_id, CustomerModel::current_user()->id);
         if ($item) {
             if ($this->request->is_post()) {
                 $this->request->csrf_check();
