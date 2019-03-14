@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Mar 14, 2019 at 08:10 AM
+-- Generation Time: Mar 14, 2019 at 10:07 AM
 -- Server version: 10.1.37-MariaDB
 -- PHP Version: 7.3.1
 
@@ -131,6 +131,7 @@ CREATE TABLE `restaurants` (
 
 CREATE TABLE `user_sessions` (
   `id` int(11) NOT NULL,
+  `user_type` varchar(20) COLLATE utf8_unicode_ci NOT NULL,
   `user_id` int(11) NOT NULL,
   `session` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
   `user_agent` varchar(255) COLLATE utf8_unicode_ci NOT NULL
@@ -214,7 +215,7 @@ ALTER TABLE `restaurants`
 -- AUTO_INCREMENT for table `user_sessions`
 --
 ALTER TABLE `user_sessions`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
