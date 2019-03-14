@@ -21,6 +21,8 @@ define('REMEMBER_ME_COOKIE_EXPIRY', 2592000);  //time in seconds - 30days
 
 define('ACCESS_RESTRICTED','Restricted'); //controller name for restricted redirect
 
+define('DEFUALT_ITEM_IMAGE', SROOT.'img/items/default.png');
+// .htaccess
 // Options -MultiViews
 // RewriteEngine On
 
@@ -30,7 +32,9 @@ define('ACCESS_RESTRICTED','Restricted'); //controller name for restricted redir
 
 // RewriteRule ^(.+)$ index.php?url=$1 [QSA,L]
 
-// CREATE TABLE `contacts` (
+
+//sql queries for create table
+// CREATE TABLE `items` (
 //     `id` int(11) NOT NULL AUTO_INCREMENT,
 //     `user_id` int(11) DEFAULT NULL,
 //     `name` varchar(255) DEFAULT NULL,
@@ -40,16 +44,14 @@ define('ACCESS_RESTRICTED','Restricted'); //controller name for restricted redir
 //     PRIMARY KEY (`id`),
 //     KEY `user_id` (`user_id`),
 //     KEY `deleted` (`deleted`)
-//    ) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=latin1  
-
+//    ) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=latin1;  
 // CREATE TABLE `user_sessions` (
 //     `id` int(11) NOT NULL AUTO_INCREMENT,
 //     `user_id` int(11) NOT NULL,
 //     `session` varchar(255) NOT NULL,
 //     `agent` varchar(255) NOT NULL,
 //     PRIMARY KEY (`id`)
-//    ) ENGINE=InnoDB AUTO_INCREMENT=26 DEFAULT CHARSET=latin1
-
+//    ) ENGINE=InnoDB AUTO_INCREMENT=26 DEFAULT CHARSET=latin1;
 // CREATE TABLE `users` (
 //     `id` int(11) NOT NULL AUTO_INCREMENT,
 //     `first_name` varchar(50) NOT NULL,
@@ -61,4 +63,4 @@ define('ACCESS_RESTRICTED','Restricted'); //controller name for restricted redir
 //     `active` tinyint(1) DEFAULT '0',
 //     `deleted` tinyint(1) DEFAULT '0',
 //     PRIMARY KEY (`id`)
-//    ) ENGINE=InnoDB AUTO_INCREMENT=17 DEFAULT CHARSET=latin1   
+//    ) ENGINE=InnoDB AUTO_INCREMENT=17 DEFAULT CHARSET=latin1;   

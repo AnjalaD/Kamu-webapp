@@ -1,6 +1,10 @@
 <?php
+use core\Router;
+use core\H;
+use app\models\UserModel;
+
 $menu = Router::get_menu('menu_acl');
-$current_page = current_page();
+$current_page = H::current_page();
 ?>
 
 <nav class="navbar navbar-light navbar-expand-md navigation-clean-button">
@@ -39,9 +43,9 @@ $current_page = current_page();
             </ul>
 
             <span class="navbar-item text-right">
-                <?php if (current_user()) : ?>
+                <?php if (UserModel::current_user()) : ?>
                 <a href="">Hello
-                    <?= current_user()->first_name ?></a>
+                    <?= UserModel::current_user()->first_name ?></a>
                 <?php endif ?>
             </span>
         </div>

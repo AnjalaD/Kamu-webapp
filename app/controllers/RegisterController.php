@@ -1,4 +1,9 @@
 <?php
+namespace app\controllers;
+use core\Controller;
+use core\Router;
+use app\models\UserModel;
+use core\H;
 
 class RegisterController extends Controller
 {
@@ -11,46 +16,38 @@ class RegisterController extends Controller
 
     public function login_action()
     {   
-        $validation = new Validate();
+        $new_user = new UserModel();
 
-        if($_POST)
+        if($this->request->is_post())
         {
-            $validation->check($_POST, [
-                'email' => [
-                    'display' => 'Email',
-                    'valid_email' => true,
-                    'required' => true
-                ],
-                'password' => [
-                    'display' => 'Password',
-                    'required' => true
-                ]
-            ]);
-            if($validation->passed())
+            $this->request->csrf_check();
+            $new_user->assign($this->request->get());
+            $new_user->login_validator();
+            if($new_user->validation_passed())
             {
-                $user = $this->usermodel->find_by_email($_POST['email']);
-                if($user && password_verify(Input::get('password'), $user->password))
+                $user = $this->usermodel->find_by_email($this->request->get('email'));
+                if($user && password_verify($this->request->get('password'), $user->password))
                 {
-                    // $this->usermodel->id = $user->id;
-                    $remember = (isset($_POST['remember_me']) && Input::get('remember_me')) ? true :false;
+                    $remember = (isset($_POST['remember_me']) && $this->request->get('remember_me')) ? true :false;
                     $user->login($remember);
                     Router::redirect('');
                 }else
                 {
-                    $validation->add_error("Your email and password dose not match");
+                $new_user->add_error_message('email', 'Email and password does not match');
                 }
             }
+            
         }
-        $this->view->display_errors = $validation->display_errors();
+        $this->view->display_errors = $new_user->get_error_messages();
         $this->view->render('register/login');
     }
 
 
     public function logout_action()
     {
-        if(current_user())
+        if(UserModel::current_user())
         {
-            current_user()->logout();
+            UserModel::current_user()->logout();
         }
         Router::redirect('register/login');
     }
@@ -58,46 +55,24 @@ class RegisterController extends Controller
 
     public function register_action()
     {
-        $validation = new Validate();
-        $posted_values = ['first_name'=>'', 'last_name'=>'', 'email'=>'', 'password'=>'', 'confirm'=>''];
-        if($_POST)
-        {     
-            $posted_values = posted_values($_POST);   
-            $validation->check($_POST,[
-                'first_name'=>[
-                    'display' => 'First Name',
-                    'required' => true
-                ],
-                'last_name'=>[
-                    'display' => 'Last Name',
-                    'required' => true
-                ],
-                'email' => [
-                    'display' => 'Email',
-                    'required' => true,
-                    'unique' => 'users',
-                    'valid_email' => true
-                ],
-                'password' => [
-                    'display' => 'Password',
-                    'required' => true
-                ],
-                'confirm' => [
-                    'display' => 'Confirm Password',
-                    'required' => true,
-                    'match' => 'password'
-                ]
-            ]);
-        }
-
-        if($validation->passed())
+        $new_user = new UserModel();
+        if($this->request->is_post())
         {
-            $new_user = new UserModel();
-            $new_user->register_new_user($_POST);
-            Router::redirect('register/login');
+            $this->request->csrf_check();    
+            $new_user->assign($this->request->get());
+            $new_user->set_confirm($this->request->get('confirm'));
+            // H::dnd($this->request->get());
+            if($new_user->save())
+            {
+                Router::redirect('register/login');
+            }
         }
-        $this->view->post = $posted_values;
-        $this->view->display_errors = $validation->display_errors();
+        $this->view->new_user = $new_user;
+        $this->view->display_errors = $new_user->get_error_messages();
         $this->view->render('register/register');
+    }
+
+    public function demo_action(){
+        // H::dnd($this->request->get());
     }
 } 

@@ -1,4 +1,7 @@
 <?php
+namespace core;
+use \PDO;
+use \PDOException;
 
 class DB
 {
@@ -18,13 +21,13 @@ class DB
     public static function get_instance()
     {
         if (!isset(self::$_instance)) {
-            self::$_instance = new DB();
+            self::$_instance = new self();
         }
         return self::$_instance;
     }
 
 
-    public function query($sql, $params = [])
+    public function query($sql, $params = [], $class=false)
     {
         $this->_error = false;
         if ($this->_query = $this->_pdo->prepare($sql)) {
@@ -37,7 +40,13 @@ class DB
             }
 
             if ($this->_query->execute()) {
-                $this->_result = $this->_query->fetchALL(PDO::FETCH_OBJ);
+                if($class)
+                {
+                    $this->_result = $this->_query->fetchALL(PDO::FETCH_CLASS, $class);
+                }else
+                {
+                    $this->_result = $this->_query->fetchALL(PDO::FETCH_OBJ);
+                }
                 $this->_count = $this->_query->rowCount();
                 $this->_last_insert_id = $this->_pdo->lastInsertID();
             } else {
@@ -49,7 +58,7 @@ class DB
     }
 
 
-    protected function _read($table, $params = [])
+    protected function _read($table, $params = [], $class)
     {
         $condition_string = '';
         $bind = [];
@@ -84,16 +93,16 @@ class DB
         }
 
         $sql = "SELECT * FROM {$table}{$condition_string}{$order}{$limit}";
-        if ($this->query($sql, $bind)) {
+        if ($this->query($sql, $bind, $class)) {
             if (!count($this->_result)) return false;
             return true;
         }
         return false;
     }
 
-    public function find($table, $params = [])
+    public function find($table, $params = [], $class=flase)
     {
-        if ($this->_read($table, $params)) {
+        if ($this->_read($table, $params, $class)) {
             return $this->results();
         }
         return false;
@@ -101,9 +110,9 @@ class DB
 
 
 
-    public function find_first($table, $params = [])
+    public function find_first($table, $params = [], $class=false)
     {
-        if ($this->_read($table, $params)) {
+        if ($this->_read($table, $params, $class)) {
             return $this->first();
         }
         return false;

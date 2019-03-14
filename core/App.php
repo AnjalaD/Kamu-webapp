@@ -1,4 +1,5 @@
 <?php
+namespace core;
 
 class App
 {
@@ -19,7 +20,7 @@ class App
             error_reporting(0);
             ini_set('display_error', 0);
             ini_set('log_errors', 1);
-            ini_set('error_log', ROOT . '/tmp/logs/errors.log');
+            ini_set('error_log', ROOT .SP.'tmp'.SP.'logs'.SP.'errors.log');
         }
     }
 

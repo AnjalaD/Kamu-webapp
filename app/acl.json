@@ -2,16 +2,26 @@
     "Guest" : {
         "denied" : {},
         "Home" : ["*"],
-        "Register" : ["login", "register"],
+        "Register" : ["login", "register", "demo"],
+        "Search" : ["*"],
         "Restricted" : ["*"]
     },
     
-    "Logged_in": {
+    "Logged_in" : {
         "denied" : {
             "Register" : ["login", "register"]
         },
         "Home" : ["*"],
-        "Contacts" : ["*"],
         "Register" : ["logout"]
+    },
+
+    "User" : {
+        "denied" :{}
+    },
+
+    "Provider" : {
+        "denied" :{},
+        "Items" : ["*"]
     }
+
 }
