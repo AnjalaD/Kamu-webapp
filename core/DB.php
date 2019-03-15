@@ -94,7 +94,7 @@ class DB
 
         $sql = "SELECT * FROM {$table}{$condition_string}{$order}{$limit}";
         if ($this->query($sql, $bind, $class)) {
-            if (!count($this->_result)) return false;
+            if (!empty($this->_result) && !count($this->_result)) return false;
             return true;
         }
         return false;

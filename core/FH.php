@@ -38,9 +38,13 @@ class FH{
         return (Session::exists('csrf_token') && Session::get('csrf_token') == $token);
     }
 
-    public static function csrf_input(){
-        return '<input type="hidden" name="csrf_token" id="csrf_token" value="'.self::generate_token().'"/>';
+    public static function csrf_input($token =''){
+        if($token==''){
+            $token = self::generate_token();
+        }
+        return '<input type="hidden" name="csrf_token" id="csrf_token" value="'.$token.'"/>';
     }
+    
 
     public static function sanatize($dirty)
     {
@@ -68,10 +72,5 @@ class FH{
         return $html;
     }
 
-
-    public static function image_block()
-    {
-        
-    }
 
 }

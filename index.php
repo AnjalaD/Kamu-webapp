@@ -2,6 +2,7 @@
 use core\Session;
 use core\Cookie;
 use core\Router;
+use core\H;
 use app\models\UserModel;
 
 define('ROOT', dirname(__FILE__));
@@ -32,7 +33,7 @@ if ($_GET['url'] == 'index.php') {
     $url = isset($_GET['url']) ? $url = explode('/', filter_var(rtrim($_GET['url'], '/'), FILTER_SANITIZE_URL)) : [];
 }
 
-if (!Session::exists(CURRENT_USER_SESSION_NAME) && Cookie::exists(REMEMBER_ME_COOKIE_NAME)) {
+if (!Session::exists(CURRENT_USER_SESSION_ID) && Cookie::exists(REMEMBER_ME_COOKIE_NAME)) {
     UserModel::login_from_cookie();
 }
 

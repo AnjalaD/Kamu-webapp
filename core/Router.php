@@ -2,6 +2,7 @@
 namespace core;
 use core\Session;
 use app\models\UserModel;
+use core\H;
 
 class Router
 {
@@ -62,9 +63,10 @@ class Router
         $current_user_acls = ["Guest"];
         $grant_access = false;
 
-        if (Session::exists(CURRENT_USER_SESSION_NAME)) {
+        if (Session::exists(CURRENT_USER_SESSION_ID) && Session::exists(CURRENT_USER_SESSION_TYPE)) {
             $current_user_acls[] = "Logged_in";
             $current_user_acls = array_merge($current_user_acls, UserModel::current_user()->acls());
+            // H::dnd($current_user_acls);
         }
 
         foreach ($current_user_acls as $level) {

@@ -25,7 +25,7 @@ class SearchController extends Controller
 
     public function resturant_action($data=[])
     {
-        $this->view->render('search/resturant');
+        $this->view->render('search/restaurant');
     }
 
     public function auto_complete_action($data=[])
