@@ -5,7 +5,7 @@ use core\Controller;
 use core\Router;
 use core\Session;
 use app\models\ItemsModel;
-use app\models\CustomerModel;
+use app\models\UserModel;
 use core\H;
 
 class ItemsController extends Controller
@@ -19,7 +19,7 @@ class ItemsController extends Controller
 
     public function index_action()
     {
-        $items = $this->itemsmodel->find_all_by_user_id(CustomerModel::current_user()->id, ['order' => 'name']);
+        $items = $this->itemsmodel->find_all_by_restaurant_id(UserModel::current_user()->id, ['order' => 'name']);
         if (!$items) {
             $items = [];
         }
@@ -33,13 +33,13 @@ class ItemsController extends Controller
         if ($this->request->is_post()) {
             $this->request->csrf_check();
             $item->assign($this->request->get());
-            $item->user_id = CustomerModel::current_user()->id;
+            $item->user_id = UserModel::current_user()->id;
 
             if (!empty($this->request->get('image'))) {
-                $item->save_image($this->request->get('image'));
+                $item->image_url = SROOT.'img/items/'.time().'.png';
             }
-            var_dump($item);
             if ($item->save()) {
+                H::save_image($this->request->get('image'), $item->image_url);
                 Session::add_msg('success', 'New item added successfully!');
                 Router::redirect('items');
             }
@@ -78,7 +78,11 @@ class ItemsController extends Controller
             if ($this->request->is_post()) {
                 $this->request->csrf_check();
                 $item->assign($this->request->get());
+                if (!empty($this->request->get('image'))) {
+                    $item->image_url = SROOT.'img/items/'.time().'.png';
+                }
                 if ($item->save()) {
+                    H::save_image($this->request->get('image'), $item->image_url);
                     Router::redirect('items');
                 }
             }

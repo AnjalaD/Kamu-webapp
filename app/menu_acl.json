@@ -8,6 +8,13 @@
         "My Items" : "items",
         "New Item" : "items/add"
     },
+    "Restaurants" : {
+        "Restaurants" : "restaurant",
+        "Add New" : "restaurant/add"
+    },
+
     "Login" : "register/login",
-    "Logout" : "register/logout"
+    "Logout" : "register/logout",
+    "Add New Admin" : "register/register_admin"
+
 }

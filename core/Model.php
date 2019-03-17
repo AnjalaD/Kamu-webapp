@@ -1,5 +1,6 @@
 <?php
 namespace core;
+use core\H;
 
 class Model
 {
@@ -55,6 +56,7 @@ class Model
                 return $save;
             } else 
             {
+                // H::dnd($fields);
                 $save = $this->insert($fields);
                 $this->after_save();
                 return $save;
@@ -118,8 +120,8 @@ class Model
     public function populate_obj_data($result)
     {
         foreach ($result as $key => $value) {
-                $this->$key = $value;
-            }
+            $this->$key = $value;
+        }
     }
 
     protected function _soft_delete_params($params)

@@ -19,7 +19,7 @@ $token = FH::generate_token();
 
     <div class="tab-content" id="nav-tabContent">
         <div class="tab-pane fade show active" id="user" role="tabpanel" aria-labelledby="nav-home-tab">
-            <form class="form" action="<?= SROOT ?>register/register_user" method="post">
+            <form class="form" action="<?= SROOT ?>register/register/customer" method="post">
                 <?= FH::csrf_input($token) ?>
                 <?= FH::display_errors($this->display_errors) ?>
                 <div class="form-group">
@@ -34,13 +34,6 @@ $token = FH::generate_token();
                     <div>
                         <label for="email">Email</label>
                         <input type="text" name="email" id="email" class="form-control" required pattern="^(([-\w\d]+)(\.[-\w\d]+)*@([-\w\d]+)(\.[-\w\d]+)*(\.([a-zA-Z]{2,5}|[\d]{1,3})){1,2})$" title="must be a valid email address" value="<?= $this->new_user->email ?>">
-                    </div>
-                    <div>
-                        <label for="sel1">Select list (select one):</label>
-                        <select class="form-control" name="acl" id="acl">
-                            <option value="User">User</option>
-                            <option value="Provider">Provider</option>
-                        </select>
                     </div>
                     <div>
                         <label for="password">Password</label>
@@ -60,7 +53,7 @@ $token = FH::generate_token();
             </form>
         </div>
         <div class="tab-pane fade" id="owner" role="tabpanel" aria-labelledby="nav-profile-tab">
-            <form class="form" action="<?= SROOT ?>register/register_owner" method="post">
+            <form class="form" action="<?= SROOT ?>register/register/owner" method="post">
                 <?= FH::csrf_input($token) ?>
                 <?= FH::display_errors($this->display_errors) ?>
                 <div class="form-group">
@@ -75,13 +68,6 @@ $token = FH::generate_token();
                     <div>
                         <label for="email">Email</label>
                         <input type="text" name="email" id="email" class="form-control" required pattern="^(([-\w\d]+)(\.[-\w\d]+)*@([-\w\d]+)(\.[-\w\d]+)*(\.([a-zA-Z]{2,5}|[\d]{1,3})){1,2})$" title="must be a valid email address" value="<?= $this->new_user->email ?>">
-                    </div>
-                    <div>
-                        <label for="sel1">Select list (select one):</label>
-                        <select class="form-control" name="acl" id="acl">
-                            <option value="User">User</option>
-                            <option value="Provider">Provider</option>
-                        </select>
                     </div>
                     <div>
                         <label for="password">Password</label>

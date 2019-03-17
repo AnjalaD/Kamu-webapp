@@ -17,21 +17,21 @@ $token = FH::generate_token();
     </ul>
 
     <div id="user" class="tabcontent">
-        <form class="form" action="<?=SROOT?>register/login_user" method="post">
+        <form class="form" action="<?=SROOT?>register/login/customer" method="post">
             <?=FH::csrf_input($token)?>
             <?=FH::display_errors($this->display_errors)?>
             <div class="form-group">
                 <div>
                     <label for="email">Email</label>
-                    <input type="text" name="email" id="email_user" class="form-control">
+                    <input type="text" name="email" id="email_customer" class="form-control">
                 </div>
                 <div>
                     <label for="password">Password</label>
-                    <input type="password" name="password" id="password_user" class="form-control">
+                    <input type="password" name="password" id="password_customer" class="form-control">
                 </div>
             </div>
             <div class="form-grup">
-                <label for="remember_me">Remember Me<input type="checkbox" name="remember_me" id="remember_me_user"
+                <label for="remember_me">Remember Me<input type="checkbox" name="remember_me" id="remember_me_customer"
                         value="true"></label>
             </div>
             <div class="form-group">
@@ -44,7 +44,7 @@ $token = FH::generate_token();
     </div>
 
     <div id="owner" class="tabcontent" style="display:none">
-        <form class="form" action="<?=SROOT?>register/login_owner" method="post">
+        <form class="form" action="<?=SROOT?>register/login/owner" method="post">
             <?=FH::csrf_input($token)?>
             <?=FH::display_errors($this->display_errors)?>
             <div class="form-group">

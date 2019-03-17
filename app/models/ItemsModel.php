@@ -9,7 +9,7 @@ use core\H;
 
 class ItemsModel extends Model
 {
-    public $item_id, $restaurant_id, $name, $description, $price, $image_url=DEFUALT_ITEM_IMAGE, $rating='', $tags='', $deleted = 0;
+    public $restaurant_id, $name, $description, $price, $image_url=DEFUALT_ITEM_IMAGE, $rating='', $tags='', $deleted = 0;
 
     public function __construct(){
         $table = 'items';
@@ -70,20 +70,6 @@ class ItemsModel extends Model
             'bind' => [$data.'%']
         ]);
         return ($items)? $items : [];
-    }
-
-    public function save_image($data)
-    {
-        $image = H::decode_image($data);
-        $path = SROOT.'img/items/'.time().'.png';
-        if(file_put_contents($path, $image))
-        {
-            $this->image_url = $path;
-            return $path;
-        }
-        $this->image_url = DEFUALT_ITEM_IMAGE;
-        return false;
-        
     }
 
 }
