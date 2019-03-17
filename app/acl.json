@@ -1,34 +1,34 @@
 {
-    "Guest" : {
-        "denied" : {},
-        "Home" : ["*"],
-        "Register" : ["login", "register", "login_admin"],
-        "Restaurant" : ["details"],
-        "Search" : ["*"],
-        "Restricted" : ["*"]
+    "Guest": {
+        "denied": {},
+        "Home": ["*"],
+        "Register": ["login", "register", "login_admin"],
+        "Restaurant": ["details"],
+        "Search": ["*"],
+        "Restricted": ["*"]
     },
-    
-    "Logged_in" : {
-        "denied" : {
-            "Register" : ["login", "register"]
+
+    "Logged_in": {
+        "denied": {
+            "Register": ["login", "register", "login_admin"]
         },
-        "Home" : ["*"],
-        "Register" : ["logout"]
+        "Home": ["*"],
+        "Register": ["logout"]
     },
 
-    "Customer" : {
-        "denied" :{}
+    "Customer": {
+        "denied": {}
     },
 
-    "Owner" : {
-        "denied" :{},
-        "Items" : ["*"]
+    "Owner": {
+        "denied": {},
+        "Items": ["*"]
     },
 
-    "Admin" :{
-        "denied" :{},
-        "Register" : ["register_admin"],
-        "Restaurant" : ["*"]
+    "Admin": {
+        "denied": {},
+        "Register": ["register_admin"],
+        "Restaurant": ["*"]
     }
 
 }
