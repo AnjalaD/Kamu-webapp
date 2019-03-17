@@ -1,0 +1,183 @@
+@media (max-width:700px) {
+    #AddItem_Main_LoginBox {
+        max-width: 400px
+    }
+}
+
+@media (min-width:700px) and (max-width:1000px) {
+    #AddItem_Main_LoginBox {
+        max-width: 550px
+    }
+}
+
+@media (min-width:1000px) {
+    #AddItem_Main_LoginBox {
+        max-width: 750px
+    }
+}
+
+#AddItem_Button_FormGroup {
+    text-align: Center
+}
+
+#AddItem_Button {
+    font-family: Aclonica;
+    background-color: #f9a825
+}
+
+#AddItem_Image_FormGroup {
+    padding-top: 20px
+}
+
+#AddItem_Main_LoginBox {
+    color: #f9a825;
+    background: rgba(50, 50, 50, .85);
+    border-bottom: 5px;
+    border-right: 12px;
+    border-top: 0;
+    border-left: 0;
+    border-style: groove;
+    border-color: #f9a825;
+    border-bottom-right-radius: 50px
+}
+
+.login-dark {
+    height: 1000px;
+    background: url(../../assets/img/php4CVHex.jpg) #475d62;
+    background-size: cover;
+    position: relative
+}
+
+.login-dark form {
+    max-width: 320px;
+    width: 90%;
+    background-color: #1e2833;
+    padding: 40px;
+    border-radius: 4px;
+    transform: translate(-50%, -50%);
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    color: #fff;
+    box-shadow: 3px 3px 4px rgba(0, 0, 0, .2)
+}
+
+.login-dark .illustration {
+    text-align: center;
+    padding: 15px 0 20px;
+    font-size: 100px;
+    color: #2980ef
+}
+
+.login-dark form .form-control {
+    background: 0 0;
+    border: none;
+    border-bottom: 1px solid #434a52;
+    border-radius: 0;
+    box-shadow: none;
+    outline: 0;
+    color: inherit
+}
+
+.login-dark form .btn-primary {
+    background: #214a80;
+    border: none;
+    border-radius: 4px;
+    padding: 11px;
+    box-shadow: none;
+    margin-top: 26px;
+    text-shadow: none;
+    outline: 0
+}
+
+.login-dark form .btn-primary:active,
+.login-dark form .btn-primary:hover {
+    background: #214a80;
+    outline: 0
+}
+
+.login-dark form .forgot {
+    display: block;
+    text-align: center;
+    font-size: 12px;
+    color: #6f7a85;
+    opacity: .9;
+    text-decoration: none
+}
+
+#Login_Email_FormGroup,
+#Login_Password_FormGroup,
+#Register_ConfirmPassword_FormGroup,
+#Register_Email_FormGroup,
+#Register_FirstName_FormGroup,
+#Register_LastName_FormGroup,
+#Register_Password_FormGroup,
+.TextInput {
+    color: #9d2525
+}
+
+.login-dark form .forgot:active,
+.login-dark form .forgot:hover {
+    opacity: 1;
+    text-decoration: none
+}
+
+.login-dark form .btn-primary:active {
+    transform: translateY(1px)
+}
+
+.form-Group {
+    width: 200px
+}
+
+#Main_LoginBox {
+    font-family: Montserrat
+}
+
+#Login_LoginDark_Background,
+#Register_LoginDark_Background {
+    background-image: url(/mvc/assets/img/Sauce-8.jpg);
+    height: 750px
+}
+
+#Login_Main_LoginBox,
+#Register_Main_LoginBox {
+    background: rgba(255, 236, 179, .85);
+    text-align: center;
+    border-bottom: 5px;
+    border-right: 12px;
+    border-top: 0;
+    border-left: 0;
+    border-style: groove;
+    border-color: #9d2525;
+    border-bottom-right-radius: 50px
+}
+
+#Login_ForgotEmail_TextLabel {
+    font-size: small;
+    color: #d32f2f
+}
+
+#Login_Button {
+    background-color: #9d2525;
+    font-family: Aclonica
+}
+
+#Login_Button_FormGroup {
+    font-family: Montserrat
+}
+
+#Logo_Illustration {
+    padding-top: 0;
+    opacity: 2;
+    margin-bottom: 10px
+}
+
+#Register_Button {
+    font-family: Aclonica;
+    background-color: #e65100
+}
+
+.form-control TextInput {
+    color: #000
+}
