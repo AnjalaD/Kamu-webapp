@@ -56,7 +56,8 @@ class Model
                 return $save;
             } else 
             {
-                // H::dnd($fields);
+                echo "in else";   //////
+                H::dnd ($fields);
                 $save = $this->insert($fields);
                 $this->after_save();
                 return $save;

@@ -1,4 +1,4 @@
-<?php $this->set_title('Add New Items'); ?>
+<?php $this->set_title('Add New Item'); ?>
 
 <?php $this->start('head'); ?>
 <link rel="stylesheet" href="<?=SROOT?>/css/croppie.css">
@@ -6,7 +6,7 @@
 <?php $this->end(); ?>
 
 <?php $this->start('body'); ?>
-<div class="col-md-8 col-md-offset-2">
+<div class="col-md-8 offset-md-2">
     <h3 class="center">Add new item</h3>
     <?php $this->partial('items', 'form'); ?>
 </div>

@@ -8,7 +8,7 @@ class H
         echo '<pre>';
         echo var_dump($data);
         echo '</pre>';
-        die;
+        //die;
     }
 
     public static function current_page()
@@ -36,14 +36,14 @@ class H
 
     public static function save_image($data, $path)
     {
+      if(!empty($data)){
         $image = H::decode_image($data);
         if($image && file_put_contents($path, $image))
         {
             return $path;
         }
-        $this->image_url = DEFUALT_ITEM_IMAGE;
-        return false;
-        
+      }
+      return DEFUALT_ITEM_IMAGE;
     }
 
     public static function buildMenuListItems($menu,$dropdownClass=""){

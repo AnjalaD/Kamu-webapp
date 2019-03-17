@@ -8,7 +8,7 @@ use core\H;
 <?php $this->end(); ?>
 
 <?php $this->start('body'); ?>
-<h3 class="center">Items</h3>
+<h3 class="center">Menu items</h3>
 <table class="table table-striped table-bordered table-hover">
     <thead>
         <th>Name</th>
@@ -21,7 +21,7 @@ use core\H;
         <?php foreach($this->items as $item): ?>
             <tr>
                 <td><a href="<?=SROOT . 'items/details/' .$item->id?>"><?=$item->name?></td>
-                <td><img src="<?=$item->image_url?>" ><td>
+                <td><img src="<?=$item->image_url?>" ></td>
                 <td><?=$item->description?></td>
                 <td><?=$item->price?></td>
                 <td class="text-right">

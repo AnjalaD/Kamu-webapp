@@ -10,7 +10,7 @@ define('DB_HOST', 'localhost:3306');
 define('DEFAULT_CONTROLLER', 'Home'); //if no controller is set Route will use this
 define('DEFAULT_LAYOUT', 'default'); //if no layout is set controller use this
 
-define('SROOT', '/mvc/'); //set this for / for a live server
+define('SROOT', '/Kamu/Kamu-webapp/'); //set this for / for a live server
 
 define('SITE_TITLE', 'MVC framwork'); //default web page title
 define('BRAND_NAME',"Kamu");

@@ -14,6 +14,12 @@ class FH{
         $html .= '</div>';
         return $html;
     }
+
+    public static function submit_tag($button_text, $input_attrs=[]){
+        $input_str = self::stringfy_attrs($input_attrs);
+        $html = '<input type="submit" value="'.$button_text.'"'.$input_str.' />'; 
+        return $html;
+    }
     
     
     public static function stringfy_attrs($attrs)

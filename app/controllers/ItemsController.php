@@ -19,7 +19,7 @@ class ItemsController extends Controller
 
     public function index_action()
     {
-        $items = $this->itemsmodel->find_all_by_restaurant_id(UserModel::current_user()->id, ['order' => 'name']);
+        $items = $this->itemsmodel->find_all_by_restaurant_id(UserModel::current_user()->restaurant_id, ['order' => 'name']);
         if (!$items) {
             $items = [];
         }
@@ -33,7 +33,7 @@ class ItemsController extends Controller
         if ($this->request->is_post()) {
             $this->request->csrf_check();
             $item->assign($this->request->get());
-            $item->user_id = UserModel::current_user()->id;
+            $item->restaurant_id = UserModel::current_user()->restaurant_id;
 
             if (!empty($this->request->get('image'))) {
                 $item->image_url = SROOT.'img/items/'.time().'.png';
