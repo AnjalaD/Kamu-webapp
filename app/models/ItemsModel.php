@@ -9,7 +9,7 @@ use core\H;
 
 class ItemsModel extends Model
 {
-    public $restaurant_id=1, $name, $description, $price, $image_url=DEFUALT_ITEM_IMAGE, $rating=0, $tags='no', $deleted = 0;
+    public $restaurant_id, $name, $description, $price, $image_url=DEFUALT_ITEM_IMAGE, $rating=0 , $tags='', $deleted = 0;
 
     public function __construct(){
         $table = 'items';

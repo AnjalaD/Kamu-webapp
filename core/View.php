@@ -1,5 +1,6 @@
 <?php
 namespace core;
+use core\FH;
 
 class View 
 {
