@@ -71,7 +71,7 @@ class UserModel extends Model
         $message_body = '
         Hello '.$user->first_name.',
         Please click this link to reset your password:'
-        .WEB_ADDRESS.'reset_password/'.$type.'/'.$to.'/'.$user->hash;
+        .WEB_ADDRESS.'register/reset_password/'.$type.'/'.$to.'/'.$user->hash;
         mail($to, $subject, $message_body);
     }
 
@@ -85,7 +85,7 @@ class UserModel extends Model
         Hello '.$user->first_name.',
         Thank you for signing up.
         Please click this link to activate your account:'
-        .WEB_ADDRESS.'verify/'.$type.'/'.$to.'/'.$user->hash;
+        .WEB_ADDRESS.'register/verify/'.$type.'/'.$to.'/'.$user->hash;
         mail($to, $subject, $message_body);
     }
 

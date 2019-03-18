@@ -2,7 +2,7 @@
     "Guest": {
         "denied": {},
         "Home": ["*"],
-        "Register": ["login", "register", "login_admin", "forgot", "reset_password"],
+        "Register": ["login", "register", "login_admin", "verify", "forgot", "reset_password"],
         "Restaurant": ["details"],
         "Search": ["*"],
         "Restricted": ["*"]

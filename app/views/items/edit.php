@@ -1,11 +1,17 @@
 <?php $this->set_title('Edit Item'); ?>
 
 <?php $this->start('head'); ?>
+<link rel="stylesheet" href="<?=SROOT?>css/croppie.css">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Aclonica">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Montserrat">
+<link rel="stylesheet" href="<?=SROOT?>css/styles.min.css">
 <?php $this->end(); ?>
 
 <?php $this->start('body'); ?>
-<div class="col-md-8 col-md-offset-2">
-    <h3 class="center">Edit <?=$this->item->name?></h3>
     <?php $this->partial('items', 'form'); ?>
-</div>
+<?php $this->end(); ?>
+
+<?php $this->start('script'); ?>
+<script src="<?= SROOT ?>js/croppie.js"></script>
+<script src="<?= SROOT ?>js/croppie-function.js"></script>
 <?php $this->end(); ?>
