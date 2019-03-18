@@ -57,7 +57,7 @@ class ItemsController extends Controller
 
     public function details_action($id)
     {
-        $item = $this->itemsmodel->find_by_id_restaurant_id((int)$id, OwerModel::current_user()->restaurant_id);
+        $item = $this->itemsmodel->find_by_id_restaurant_id((int)$id, OwnerModel::current_user()->restaurant_id);
         if (!$item) {
             Router::redirect('items');
         }
