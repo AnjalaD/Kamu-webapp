@@ -31,11 +31,14 @@ class RestaurantController extends Controller
         $restaurant = new RestaurantModel();
         if ($this->request->is_post()) {
             $this->request->csrf_check();
+
             $restaurant->assign($this->request->get());
             if (!empty($this->request->get('image'))) {
-                $restaurant->save_image($this->request->get('image'));
+                $restaurant->image_url = SROOT.'img/restaurants/'.time().'.png';
             }
+
             if ($restaurant->save()) {
+                H::save_image($this->request->get('image'), $restaurant->image_url);
                 Session::add_msg('success', 'New item added successfully!');
                 Router::redirect('restaurant');
             }

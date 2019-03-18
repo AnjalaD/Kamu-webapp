@@ -27,7 +27,7 @@ class H
 
   public static function decode_image($data)
   {
-    //data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAZAAAAC0CAIAAAA1l+0PAAAAAXNSR0IAr==
+    //data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAZAAAAC0==
     $image_array_1 = explode(";", $data);
     $image_array_2 = explode(",", $image_array_1[1]);
     $data = base64_decode($image_array_2[1]);

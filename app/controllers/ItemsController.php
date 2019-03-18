@@ -57,7 +57,7 @@ class ItemsController extends Controller
 
     public function details_action($id)
     {
-        $item = $this->itemsmodel->find_by_id_user_id((int)$id, CustomerModel::current_user()->id);
+        $item = $this->itemsmodel->find_by_id_restaurant_id((int)$id, OwerModel::current_user()->restaurant_id);
         if (!$item) {
             Router::redirect('items');
         }
@@ -67,7 +67,7 @@ class ItemsController extends Controller
 
     public function delete_action($item_id)
     {
-        $item = $this->itemsmodel->find_by_id_user_id((int)$item_id, CustomerModel::current_user()->id);
+        $item = $this->itemsmodel->find_by_id_restaurant_id((int)$item_id, OwnerModel::current_user()->restaurant_id);
         if ($item) {
             $item->delete();
         }
@@ -76,7 +76,7 @@ class ItemsController extends Controller
 
     public function edit_action($item_id)
     {
-        $item = $this->itemsmodel->find_by_id_user_id((int)$item_id, CustomerModel::current_user()->id);
+        $item = $this->itemsmodel->find_by_id_restaurant_id((int)$item_id, OwnerModel::current_user()->restaurant_id);
         if ($item) {
             if ($this->request->is_post()) {
                 $this->request->csrf_check();
