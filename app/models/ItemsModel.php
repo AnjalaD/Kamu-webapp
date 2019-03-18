@@ -26,7 +26,6 @@ class ItemsModel extends Model
         ];
         $conditions = array_merge($conditions, $params);
         return $this->find($conditions);
-
     }
 
     public function find_by_id_restaurant_id($item_id, $restaurant_id, $params=[])
