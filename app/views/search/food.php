@@ -3,7 +3,6 @@ use core\FH;
 ?>
 <?php $this->set_title('Home'); ?>
 <?php $this->start('head'); ?>
-<script src="<?= SROOT ?>js/jquery.typeahead.min.js"></script>
 <?php $this->end(); ?>
 
 <?php $this->start('body'); ?>
