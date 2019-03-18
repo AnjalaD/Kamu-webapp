@@ -3,6 +3,7 @@ use core\FH;
 ?>
 <?php $this->set_title('Home'); ?>
 <?php $this->start('head'); ?>
+<link rel="stylesheet" href="<?=SROOT?>css/foodstyles.min.css">
 <?php $this->end(); ?>
 
 <?php $this->start('body'); ?>
@@ -18,6 +19,11 @@ use core\FH;
     </form>
 </div>
 
+<?=$this->results?>
+
+<?php $this->end(); ?>
+
+<?php $this->start('script')?>
 <script>
     var search = document.getElementById('search');
     search.onkeyup = function () {

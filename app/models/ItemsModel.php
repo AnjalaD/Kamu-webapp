@@ -68,7 +68,40 @@ class ItemsModel extends Model
             'conditions' => $field.' LIKE ?',
             'bind' => [$data.'%']
         ]);
-        return ($items)? $items : [];
+        return $this->_create_list($items);
+    }
+
+    private function _create_card($item)
+    {
+        $html = '';
+        $html .= '<div class="card block span3">';
+        $html .= '<div class="product"><img src="'.$item->image_url.'"></div>';
+        $html .= '<div class="info"><h4>'.$item->name.'</h4>';
+        $html .= '<span class="description">'.$item->description.'</span>';
+        $html .= '<span class="price">LKR.'.$item->price.'</span>';
+        $html .= '<a class="btn btn-info pull-right" href="#"><i class="icon-shopping-cart"></i>Add to Order</a></div>';
+        $html .= '<div class="details"><span class="time"><i class="icon-time"></i> 12 hours ago</span>
+            <span class="rating pull-right">
+            <span class="star"></span>
+            <span class="star"></span>
+            <span class="star"></span>
+            <span class="star"></span>
+            <span class="star"></span>
+            </span></div></div>';
+        return $html;
+    }
+
+    private function _create_list($items){
+        if(empty($items)){
+            return '';
+        }
+        $html = '<div class="card-columns container">';
+        foreach($items as $item)
+        {
+            $html .= $this->_create_card($item);
+        }
+        $html .= '</div>';
+        return $html;
     }
 
 }
