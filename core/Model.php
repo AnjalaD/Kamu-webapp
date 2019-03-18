@@ -48,7 +48,6 @@ class Model
         {
             $this->before_save();
             $fields = H::get_obj_properties($this);
-
             //determine where to update or insert
             if (property_exists($this, 'id') && $this->id != '') {
                 $save = $this->update($this->id, $fields);

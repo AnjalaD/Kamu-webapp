@@ -3,7 +3,7 @@ namespace core;
 
 class View 
 {
-    protected $_head, $_body, $_title = SITE_TITLE, $_output_buffer, $_layout = DEFAULT_LAYOUT;
+    protected $_head, $_body, $_script, $_title = SITE_TITLE, $_output_buffer, $_layout = DEFAULT_LAYOUT;
 
     public function __construct(){}
 
@@ -29,6 +29,9 @@ class View
         }elseif($type == 'body')
         {
             return $this->_body;
+        }elseif($type == 'script')
+        {
+            return $this->_script;
         }
         return false;
     }
@@ -47,6 +50,9 @@ class View
         }elseif($this->_output_buffer == 'body')
         {
             $this->_body = ob_get_clean();
+        }elseif($this->_output_buffer == 'script')
+        {
+            $this->_script = ob_get_clean();
         }else
         {
             die('You must first run start()');

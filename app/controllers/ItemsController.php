@@ -7,6 +7,7 @@ use core\Session;
 use app\models\ItemsModel;
 use app\models\UserModel;
 use core\H;
+use app\models\OwnerModel;
 
 class ItemsController extends Controller
 {
@@ -32,12 +33,12 @@ class ItemsController extends Controller
         $item = new itemsModel();
         if ($this->request->is_post()) {
             $this->request->csrf_check();
+            
             $item->assign($this->request->get());
-            $item->user_id = UserModel::current_user()->id;
-
             if (!empty($this->request->get('image'))) {
                 $item->image_url = SROOT.'img/items/'.time().'.png';
             }
+            // H::dnd($item);
             if ($item->save()) {
                 H::save_image($this->request->get('image'), $item->image_url);
                 Session::add_msg('success', 'New item added successfully!');

@@ -21,7 +21,7 @@ use core\H;
         <?php foreach($this->items as $item): ?>
             <tr>
                 <td><a href="<?=SROOT . 'items/details/' .$item->id?>"><?=$item->name?></td>
-                <td><img src="<?=$item->image_url?>" ><td>
+                <td><img src="<?=$item->image_url?>" ></td>
                 <td><?=$item->description?></td>
                 <td><?=$item->price?></td>
                 <td class="text-right">

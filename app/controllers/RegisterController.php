@@ -18,6 +18,9 @@ class RegisterController extends Controller
         $this->view->set_layout('default');
     }
 
+    public function index_action(){
+        
+    }
 
     public function login_action($user_type='')
     {
