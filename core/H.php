@@ -38,7 +38,7 @@ class H
   {
     if (!empty($data)) {
       $image = H::decode_image($data);
-      if ($image && file_put_contents('../..'.$path, $image)) {
+      if ($image && file_put_contents('..'.$path, $image)) {
         return $path;
       }
     }
