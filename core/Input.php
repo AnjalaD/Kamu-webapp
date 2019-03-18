@@ -28,7 +28,7 @@ class Input
 
     public function exists($input)
     {
-        return empty($_REQUEST[$input])? false : true;
+        return isset($_REQUEST[$input])? true : false;
     }
 
 
