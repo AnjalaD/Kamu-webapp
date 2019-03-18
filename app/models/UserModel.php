@@ -10,6 +10,7 @@ use core\validators\MinValidator;
 use app\models\UserSession;
 use core\Session;
 use core\Cookie;
+use core\H;
 
 class UserModel extends Model
 {
@@ -25,22 +26,6 @@ class UserModel extends Model
         $this->_session_type = CURRENT_USER_SESSION_TYPE;
         $this->_cookie_name = REMEMBER_ME_COOKIE_NAME;
         $this->_soft_del = true;
-
-        // if(is_int($user))
-        // {
-        //     $u = $this->_db->find_first($table,['conditions' => 'id=?', 'bind' => [$user]], 'app\models\CustomerModel');
-        // }else
-        // {
-        //     $u = $this->_db->find_first($table,['conditions' => 'email=?', 'bind' => [$user]], 'app\models\CustomerModel');
-        // }
-
-        // if($u)
-        // {
-        //     foreach($u as $key => $value)
-        //     {
-        //         $this->$key = $value;
-        //     }
-        // }
     }
 
     
@@ -77,6 +62,31 @@ class UserModel extends Model
         }
         return false;
         
+    }
+
+    public static function send_password_reset_link($type, $user)
+    {
+        $to = $user->email;
+        $subject = 'Account Verification' ;
+        $message_body = '
+        Hello '.$user->first_name.',
+        Please click this link to reset your password:'
+        .WEB_ADDRESS.'reset_password/'.$type.'/'.$to.'/'.$user->hash;
+        mail($to, $subject, $message_body);
+    }
+
+    public function send_verify_email(){}
+
+    public function verify_email($user, $type)
+    {
+        $to = $user->email;
+        $subject = 'Account Verification' ;
+        $message_body = '
+        Hello '.$user->first_name.',
+        Thank you for signing up.
+        Please click this link to activate your account:'
+        .WEB_ADDRESS.'verify/'.$type.'/'.$to.'/'.$user->hash;
+        mail($to, $subject, $message_body);
     }
 
 
@@ -151,7 +161,7 @@ class UserModel extends Model
     {
         if($this->is_new()){
             $this->hash = hash('md5', rand(0,100));
-            $this->password = password_hash($this->password, PASSWORD_DEFAULT); 
+            $this->password = password_hash($this->password, PASSWORD_DEFAULT);
         }
     }
 
@@ -162,4 +172,5 @@ class UserModel extends Model
     public function get_confirm(){
         return $this->_confirm;
     }
+
 } 

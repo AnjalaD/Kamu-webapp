@@ -12,6 +12,8 @@ define('DEFAULT_LAYOUT', 'default'); //if no layout is set controller use this
 
 define('SROOT', '/Kamu_1.0/exported/'); //set this for / for a live server
 
+// define('SROOT', '/mvc/'); //set this for / for a live server
+define('WEB_ADDRESS', 'https://localhost/Kamu_1.0/exported/');
 define('SITE_TITLE', 'MVC framwork'); //default web page title
 define('BRAND_NAME',"Kamu");
 

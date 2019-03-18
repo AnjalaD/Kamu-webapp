@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Mar 14, 2019 at 10:07 AM
+-- Generation Time: Mar 18, 2019 at 11:45 AM
 -- Server version: 10.1.37-MariaDB
 -- PHP Version: 7.3.1
 
@@ -21,6 +21,32 @@ SET time_zone = "+00:00";
 --
 -- Database: `kamudb`
 --
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `admins`
+--
+
+CREATE TABLE `admins` (
+  `id` int(11) NOT NULL,
+  `first_name` varchar(50) COLLATE utf8_unicode_ci NOT NULL,
+  `last_name` varchar(50) COLLATE utf8_unicode_ci NOT NULL,
+  `email` varchar(100) COLLATE utf8_unicode_ci NOT NULL,
+  `password` varchar(100) COLLATE utf8_unicode_ci NOT NULL,
+  `hash` varchar(32) COLLATE utf8_unicode_ci NOT NULL,
+  `verified` tinyint(1) NOT NULL DEFAULT '0',
+  `deleted` tinyint(1) NOT NULL DEFAULT '0'
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+
+--
+-- Dumping data for table `admins`
+--
+
+INSERT INTO `admins` (`id`, `first_name`, `last_name`, `email`, `password`, `hash`, `verified`, `deleted`) VALUES
+(1, 'Anjala', 'Dilahara', 'ad@ad.com', '$2y$10$lO/3azXVdJ1aLxQp2Tll.eGnKe6r2iOfA311oKE.OXVenYqG4p52u', '6f4922f45568161a8cdf4ad2299f6d23', 0, 0),
+(2, 'Chamika', 'Nimal', 'ad@ad.com', '$2y$10$lO/3azXVdJ1aLxQp2Tll.eGnKe6r2iOfA311oKE.OXVenYqG4p52u', '6f4922f45568161a8cdf4ad2299f6d23', 0, 0),
+(3, 'Thumula', 'Nimal', 'thumula@gmail.com', '$2y$10$Vh86n8AbQW6hzNsiZtXQ9.TNKfWhyavHmXmq/JyaRTApNhskRIcGa', '2838023a778dfaecdc212708f721b788', 0, 0);
 
 -- --------------------------------------------------------
 
@@ -44,7 +70,8 @@ CREATE TABLE `customers` (
 --
 
 INSERT INTO `customers` (`id`, `first_name`, `last_name`, `email`, `password`, `hash`, `verified`, `deleted`) VALUES
-(1, 'Chamika', 'Nimal', 'ad@ad.com', '$2y$10$lO/3azXVdJ1aLxQp2Tll.eGnKe6r2iOfA311oKE.OXVenYqG4p52u', '6f4922f45568161a8cdf4ad2299f6d23', 0, 0);
+(1, 'Chamika', 'Nimal', 'ad@ad.com', '$2y$10$lO/3azXVdJ1aLxQp2Tll.eGnKe6r2iOfA311oKE.OXVenYqG4p52u', '6f4922f45568161a8cdf4ad2299f6d23', 0, 0),
+(3, 'Thumula', 'Na', 'thumula@gmail.com', '$2y$10$XtPm1532UgsRFehBnWLKqOh.p1RNN4ZO9Bb32MK.ogE5PgjIFBWMe', 'c0c7c76d30bd3dcaefc96f40275bdc0a', 0, 0);
 
 -- --------------------------------------------------------
 
@@ -63,6 +90,15 @@ CREATE TABLE `items` (
   `tags` varchar(200) COLLATE utf8_unicode_ci NOT NULL,
   `deleted` tinyint(1) NOT NULL DEFAULT '0'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+
+--
+-- Dumping data for table `items`
+--
+
+INSERT INTO `items` (`id`, `restaurant_id`, `name`, `description`, `price`, `image_url`, `rating`, `tags`, `deleted`) VALUES
+(1, 1, 'Kottu', 'asfewidn djsak uad s kdasddd sada ', 100, '/mvc/img/items/default.png', 0, 'no', 1),
+(26, 1, 'Soup', 'asfewidn djsak uad s kdasddd sada ', 140, '/mvc/img/items/1552849585.png', 0, 'no', 0),
+(27, 1, 'Rice', 'asfewidn djsak uad s kdasddd sada ', 100, '/mvc/img/items/1552883520.png', 0, '', 0);
 
 -- --------------------------------------------------------
 
@@ -103,7 +139,7 @@ CREATE TABLE `owners` (
 --
 
 INSERT INTO `owners` (`id`, `restaurant_id`, `first_name`, `last_name`, `email`, `password`, `hash`, `verified`, `deleted`) VALUES
-(1, 0, 'Kamal', 'Nimal', 'ad@ad.com', '$2y$10$n0qUvrVBnVt4oRtk6RX1gOmTYVNHtBWiUyRftM7mxMhJIc4XtaBjO', 'ac627ab1ccbdb62ec96e702f07f6425b', 0, 0);
+(1, 1, 'Kamal', 'Nimal', 'ad@ad.com', '$2y$10$n0qUvrVBnVt4oRtk6RX1gOmTYVNHtBWiUyRftM7mxMhJIc4XtaBjO', 'ac627ab1ccbdb62ec96e702f07f6425b', 0, 0);
 
 -- --------------------------------------------------------
 
@@ -115,13 +151,20 @@ CREATE TABLE `restaurants` (
   `id` int(11) NOT NULL,
   `name` varchar(150) COLLATE utf8_unicode_ci NOT NULL,
   `address` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
+  `image_url` varchar(200) COLLATE utf8_unicode_ci NOT NULL,
   `telephone` varchar(15) COLLATE utf8_unicode_ci NOT NULL,
   `email` varchar(150) COLLATE utf8_unicode_ci DEFAULT NULL,
-  `password` varchar(100) COLLATE utf8_unicode_ci NOT NULL,
   `lng` int(11) NOT NULL,
   `lat` int(11) NOT NULL,
   `deleted` tinyint(1) NOT NULL DEFAULT '0'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+
+--
+-- Dumping data for table `restaurants`
+--
+
+INSERT INTO `restaurants` (`id`, `name`, `address`, `image_url`, `telephone`, `email`, `lng`, `lat`, `deleted`) VALUES
+(1, 'Kama Kade', '190 tpl', '/mvc/img/restaurant/1552895082.png', '12482042', 'kkadilhara@gmail.com', 12, 34, 1);
 
 -- --------------------------------------------------------
 
@@ -140,6 +183,12 @@ CREATE TABLE `user_sessions` (
 --
 -- Indexes for dumped tables
 --
+
+--
+-- Indexes for table `admins`
+--
+ALTER TABLE `admins`
+  ADD PRIMARY KEY (`id`);
 
 --
 -- Indexes for table `customers`
@@ -182,16 +231,22 @@ ALTER TABLE `user_sessions`
 --
 
 --
+-- AUTO_INCREMENT for table `admins`
+--
+ALTER TABLE `admins`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+
+--
 -- AUTO_INCREMENT for table `customers`
 --
 ALTER TABLE `customers`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT for table `items`
 --
 ALTER TABLE `items`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=28;
 
 --
 -- AUTO_INCREMENT for table `odrers`
@@ -209,13 +264,13 @@ ALTER TABLE `owners`
 -- AUTO_INCREMENT for table `restaurants`
 --
 ALTER TABLE `restaurants`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT for table `user_sessions`
 --
 ALTER TABLE `user_sessions`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

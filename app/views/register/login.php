@@ -1,97 +1,79 @@
 <?php
 use core\FH;
+
 $token = FH::generate_token();
 ?>
 
 <?php $this->set_title('Login'); ?>
 
 <?php $this->start('head'); ?>
-
+<script src="<?= SROOT ?>js/register_form_validate.js"></script>
+<link rel="stylesheet" href="<?= SROOT ?>css/styles.min.css">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Aclonica">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Montserrat">
 <?php $this->end(); ?>
 
 <?php $this->start('body'); ?>
-<div class="col-md-6 col-md-offset-3 well">
-    <ul class="nav nav-tabs">
-        <li class="nav-link active"><a class="tablink active" onclick="open_login_view(event, 'user')">Login as User</a></li>
-        <li class="nav-link"><a class="tablink" onclick="open_login_view(event,'owner')">Login as Owner</button></li>
-    </ul>
-
-    <div id="user" class="tabcontent">
-        <form class="form" action="<?=SROOT?>register/login_user" method="post">
-            <?=FH::csrf_input($token)?>
-            <?=FH::display_errors($this->display_errors)?>
-            <div class="form-group">
-                <div>
-                    <label for="email">Email</label>
-                    <input type="text" name="email" id="email_user" class="form-control">
-                </div>
-                <div>
-                    <label for="password">Password</label>
-                    <input type="password" name="password" id="password_user" class="form-control">
-                </div>
-            </div>
-            <div class="form-grup">
-                <label for="remember_me">Remember Me<input type="checkbox" name="remember_me" id="remember_me_user"
-                        value="true"></label>
-            </div>
-            <div class="form-group">
-                <input type="submit" value="Login as User" class="btn btn-large btn-primary">
-            </div>
-            <div class="text-right">
-                <a href="<?=SROOT?>register/register" class="text-primary">Register</a>
-            </div>
-        </form>
+<div id="Register_LoginDark_Background" class="login-dark">
+    <div class="nav nav-tabs" id="nav-tab" role="tablist">
+        <a class="nav-item nav-link active" id="nav-home-tab" data-toggle="tab" href="#user" role="tab" aria-controls="nav-home" aria-selected="true">Login as User</a>
+        <a class="nav-item nav-link" id="nav-profile-tab" data-toggle="tab" href="#owner" role="tab" aria-controls="nav-profile" aria-selected="false">Login as Owner</a>
     </div>
 
-    <div id="owner" class="tabcontent" style="display:none">
-        <form class="form" action="<?=SROOT?>register/login_owner" method="post">
-            <?=FH::csrf_input($token)?>
-            <?=FH::display_errors($this->display_errors)?>
-            <div class="form-group">
-                <div>
-                    <label for="email">Email</label>
-                    <input type="text" name="email" id="email_owner" class="form-control">
-                </div>
-                <div>
-                    <label for="password">Password</label>
-                    <input type="password" name="password" id="password_owner" class="form-control">
-                </div>
-            </div>
-            <div class="form-grup">
-                <label for="remember_me">Remember Me<input type="checkbox" name="remember_me" id="remember_me_owner"
-                        value="true"></label>
-            </div>
-            <div class="form-group">
-                <input type="submit" value="Login as Owner" class="btn btn-large btn-primary">
-            </div>
-            <div class="text-right">
-                <a href="<?=SROOT?>register/register" class="text-primary">Register</a>
-            </div>
-        </form>
+    <div class="tab-content" id="nav-tabContent">
+        <div class="tab-pane fade show active" id="user" role="tabpanel" aria-labelledby="nav-home-tab">
+
+        <form method="post" id="Login_Main_LoginBox" class="LoginBox" action="<?=SROOT?>register/login/user">
+        <h2 class="sr-only">User-Login Form</h2>
+        <?= FH::csrf_input($token) ?>
+        <?= FH::display_errors($this->display_errors) ?>
+        <div id="Logo_Illustration" class="illustration">
+            <img src="<?=SROOT?>assets/img/150monoLogoOnlyKamu.png">
+        </div>
+        <div class="form-group" id="Login_Email_FormGroup">
+            <input class="form-control TextInput" type="email" name="email" placeholder="Email" id="Login_Email_TextInput">
+        </div>
+        <div class="form-group" id="Login_Password_FormGroup">
+            <input class="form-control TextInput" type="password" name="password" placeholder="Password" id="Login_Password_TextInput">
+        </div>
+        <!-- <div>
+            <label for="remember_me">Remember Me</label>
+            <input type="checkbox" name="remember_me" id="remember_me" value="true">
+        </diV> -->
+        <div class="form-group" id="Login_Button_FormGroup">
+            <button class="btn btn-primary btn-block Button" type="submit" id="Login_Button">Log In as User</button>
+        </div>
+        <a href="<?=SROOT?>register/forgot/customer" id="Login_ForgotEmail_TextLabel" class="TextLabel">Forgot your email or password?</a>
+    </form>
+
+        </div>
+        <div class="tab-pane fade" id="owner" role="tabpanel" aria-labelledby="nav-profile-tab">
+
+        <form method="post" id="Login_Main_LoginBox" class="LoginBox" action="<?=SROOT?>register/login/owner">
+        <h2 class="sr-only">Owner-Login Form</h2>
+        <?= FH::csrf_input($token) ?>
+        <?= FH::display_errors($this->display_errors) ?>
+        <div id="Logo_Illustration" class="illustration">
+            <img src="<?=SROOT?>assets/img/150monoLogoOnlyKamu.png">
+        </div>
+        <div class="form-group" id="Login_Email_FormGroup">
+            <input class="form-control TextInput" type="email" name="email" placeholder="Email" id="Login_Email_TextInput">
+        </div>
+        <div class="form-group" id="Login_Password_FormGroup">
+            <input class="form-control TextInput" type="password" name="password" placeholder="Password" id="Login_Password_TextInput">
+        </div>
+        <div>
+            <label for="remember_me">Remember Me</label>
+            <input type="checkbox" name="remember_me" id="remember_me" value="true">
+        </diV>
+        <div class="form-group" id="Login_Button_FormGroup">
+            <button class="btn btn-primary btn-block Button" type="submit" id="Login_Button">Log In as Owner</button>
+        </div>
+        <a href="<?=SROOT?>register/forgot/owner" id="Login_ForgotEmail_TextLabel" class="TextLabel">Forgot your email or password?</a>
+    </form>
+
+        </div>
     </div>
 </div>
-</div>
 
-
-
-
-<script>
-    function open_login_view(evt, view) {
-        var i, tabcontent, tablinks;
-
-        tabcontent = document.getElementsByClassName("tabcontent");
-        for (i = 0; i < tabcontent.length; i++) {
-            tabcontent[i].style.display = "none";
-        }
-
-        tablinks = document.getElementsByClassName("tablink");
-        for (i = 0; i < tablinks.length; i++) {
-            console.log("12");
-            tablinks[i].className = tablinks[i].className.replace(" active", "");
-        }
-
-        document.getElementById(view).style.display = "block";
-        evt.currentTarget.className += " active";
-    }
-</script>
-<?php $this->end(); ?>
+<?php $this->end(); ?> 

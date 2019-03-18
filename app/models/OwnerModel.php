@@ -9,8 +9,7 @@ class OwnerModel extends UserModel
         $table = 'owners';
         $user_model = 'OwnerModel';
         parent::__construct($table, $user_model);
-        $this->_session_name = CURRENT_USER_SESSION_ID;
-        $this->_cookie_name = REMEMBER_ME_COOKIE_NAME;
+
         $this->_soft_del = true;
 
         if(is_int($user))
@@ -33,5 +32,10 @@ class OwnerModel extends UserModel
     public function acls()
     {
         return ['Owner'];
+    }
+
+    public function send_verify_email()
+    {
+        $this->verify_email($this, 'owner');
     }
 } 

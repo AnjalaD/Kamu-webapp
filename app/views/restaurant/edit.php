@@ -1,13 +1,13 @@
-<?php $this->set_title('Add New Item'); ?>
+<?php $this->set_title('Add New Items'); ?>
 
 <?php $this->start('head'); ?>
 <link rel="stylesheet" href="<?=SROOT?>/css/croppie.css">
 <?php $this->end(); ?>
 
 <?php $this->start('body'); ?>
-<div class="col-md-8 offset-md-2">
-    <h3 class="center">Add new item</h3>
-    <?php $this->partial('items', 'form'); ?>
+<div class="col-md-8 col-md-offset-2">
+    <h3 class="center">Add New Restaurant</h3>
+    <?php $this->partial('restaurant', 'form'); ?>
 </div>
 <div id="uploaded_image"></div>
 
@@ -47,13 +47,13 @@
         $image_crop = $('#image_demo').croppie({
         enableExif: true,
         viewport: {
-          width:200,
-          height:200,
+          width:400,
+          height:400,
           type:'square' //circle
         },
         boundary:{
-          width:300,
-          height:300
+          width:450,
+          height:450
         }
       });
     

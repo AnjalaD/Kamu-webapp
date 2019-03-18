@@ -1,13 +1,21 @@
 {
-    "Home" : "home",
-    "Search" : {
-        "Food" : "search/food",
-        "Resturant" : "search/resturant"
+    "Home": "home",
+    "Search": {
+        "Food": "search/food",
+        "Resturant": "search/resturant"
     },
-    "Items" : {
-        "My Items" : "items",
-        "New Item" : "items/add"
+    "Items": {
+        "My Items": "items",
+        "New Item": "items/add"
     },
-    "Login" : "register/login",
-    "Logout" : "register/logout"
+    "Restaurants": {
+        "Restaurants": "restaurant",
+        "Add New": "restaurant/add"
+    },
+
+    "Login": "register/login",
+    "Register": "register/register",
+    "Logout": "register/logout",
+    "Add New Admin": "register/register_admin"
+
 }

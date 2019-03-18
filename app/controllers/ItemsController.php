@@ -5,8 +5,9 @@ use core\Controller;
 use core\Router;
 use core\Session;
 use app\models\ItemsModel;
-use app\models\CustomerModel;
+use app\models\UserModel;
 use core\H;
+use app\models\OwnerModel;
 
 class ItemsController extends Controller
 {
@@ -19,7 +20,7 @@ class ItemsController extends Controller
 
     public function index_action()
     {
-        $items = $this->itemsmodel->find_all_by_user_id(CustomerModel::current_user()->id, ['order' => 'name']);
+        $items = $this->itemsmodel->find_all_by_restaurant_id(UserModel::current_user()->restaurant_id, ['order' => 'name']);
         if (!$items) {
             $items = [];
         }
@@ -29,17 +30,19 @@ class ItemsController extends Controller
 
     public function add_action()
     {
-        $item = new itemsModel();
+        $item = new ItemsModel();
         if ($this->request->is_post()) {
             $this->request->csrf_check();
+            
             $item->assign($this->request->get());
-            $item->user_id = CustomerModel::current_user()->id;
+            $item->restaurant_id = UserModel::current_user()->restaurant_id;
 
             if (!empty($this->request->get('image'))) {
-                $item->save_image($this->request->get('image'));
+                $item->image_url = SROOT.'img/items/'.time().'.png';
             }
-            var_dump($item);
+            // H::dnd($item);
             if ($item->save()) {
+                H::save_image($this->request->get('image'), $item->image_url);
                 Session::add_msg('success', 'New item added successfully!');
                 Router::redirect('items');
             }
@@ -54,7 +57,7 @@ class ItemsController extends Controller
 
     public function details_action($id)
     {
-        $item = $this->itemsmodel->find_by_id_user_id((int)$id, CustomerModel::current_user()->id);
+        $item = $this->itemsmodel->find_by_id_restaurant_id((int)$id, OwerModel::current_user()->restaurant_id);
         if (!$item) {
             Router::redirect('items');
         }
@@ -64,7 +67,7 @@ class ItemsController extends Controller
 
     public function delete_action($item_id)
     {
-        $item = $this->itemsmodel->find_by_id_user_id((int)$item_id, CustomerModel::current_user()->id);
+        $item = $this->itemsmodel->find_by_id_restaurant_id((int)$item_id, OwnerModel::current_user()->restaurant_id);
         if ($item) {
             $item->delete();
         }
@@ -73,12 +76,16 @@ class ItemsController extends Controller
 
     public function edit_action($item_id)
     {
-        $item = $this->itemsmodel->find_by_id_user_id((int)$item_id, CustomerModel::current_user()->id);
+        $item = $this->itemsmodel->find_by_id_restaurant_id((int)$item_id, OwnerModel::current_user()->restaurant_id);
         if ($item) {
             if ($this->request->is_post()) {
                 $this->request->csrf_check();
                 $item->assign($this->request->get());
+                if (!empty($this->request->get('image'))) {
+                    $item->image_url = SROOT.'img/items/'.time().'.png';
+                }
                 if ($item->save()) {
+                    H::save_image($this->request->get('image'), $item->image_url);
                     Router::redirect('items');
                 }
             }
