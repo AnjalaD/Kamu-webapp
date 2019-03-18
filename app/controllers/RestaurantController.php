@@ -18,7 +18,7 @@ class RestaurantController extends Controller
 
     public function index_action()
     {
-        $restaurants = $this->restaurantmodel->find_all();
+        $restaurants = $this->restaurantmodel->find();
         if (!$restaurants) {
             $restaurants = [];
         }
@@ -34,9 +34,9 @@ class RestaurantController extends Controller
 
             $restaurant->assign($this->request->get());
             if (!empty($this->request->get('image'))) {
-                $restaurant->image_url = SROOT.'img/restaurants/'.time().'.png';
+                $restaurant->image_url = SROOT.'img/restaurant/'.time().'.png';
             }
-
+            // H::dnd($restaurant);
             if ($restaurant->save()) {
                 H::save_image($this->request->get('image'), $restaurant->image_url);
                 Session::add_msg('success', 'New item added successfully!');
@@ -53,40 +53,43 @@ class RestaurantController extends Controller
 
     public function details_action($id)
     {
-        $item = $this->itemsmodel->find_by_id_user_id((int)$id, UserModel::current_user()->id);
-        if (!$item) {
-            Router::redirect('items');
+        $restaurant = $this->restaurantmodel->find_by_id((int)$id);
+        if (!$restaurant) {
+            Router::redirect('restaurant');
         }
-        $this->view->item = $item;
+        $this->view->item = $restaurant;
         $this->view->render('restaurant/details');
     }
 
-    public function delete_action($item_id)
+    public function delete_action($restaurant_id)
     {
-        $item = $this->itemsmodel->find_by_id_user_id((int)$item_id, UserModel::current_user()->id);
-        if ($item) {
-            $item->delete();
+        $restaurant = $this->restaurantmodel->find_by_id((int)$restaurant_id);
+        if ($restaurant) {
+            $restaurant->delete();
         }
         Router::redirect('restaurant');
     }
 
-    public function edit_action($item_id)
+    public function edit_action($restaurant_id)
     {
-        $item = $this->itemsmodel->find_by_id_user_id((int)$item_id, UserModel::current_user()->id);
-        if ($item) {
+        $restaurant = $this->restaurantmodel->find_by_id((int)$restaurant_id);
+        if ($restaurant) {
             if ($this->request->is_post()) {
                 $this->request->csrf_check();
-                $item->assign($this->request->get());
+                $restaurant->assign($this->request->get());
+                
                 if (!empty($this->request->get('image'))) {
-                    $item->save_image($this->request->get('image'));
+                    $restaurant->image_url = SROOT.'img/restaurant/'.time().'.png';
                 }
-                if ($item->save()) {
-                    Router::redirect('items');
+
+                if ($restaurant->save()) {
+                    H::save_image($this->request->get('image'), $restaurant->image_url);
+                    Router::redirect('restaurant');
                 }
             }
-            $this->view->item = $item;
-            $this->view->display_errors = $item->get_error_messages();
-            $this->view->post_action = SROOT . 'restaurant/edit/' . $item->id;
+            $this->view->restaurant = $restaurant;
+            $this->view->display_errors = $restaurant->get_error_messages();
+            $this->view->post_action = SROOT . 'restaurant/edit/' . $restaurant->id;
             $this->view->render('restaurant/edit');
             return;
         }

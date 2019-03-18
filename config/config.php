@@ -11,7 +11,7 @@ define('DEFAULT_CONTROLLER', 'Home'); //if no controller is set Route will use t
 define('DEFAULT_LAYOUT', 'default'); //if no layout is set controller use this
 
 define('SROOT', '/mvc/'); //set this for / for a live server
-
+define('WEB_ADDRESS', 'https://localhost/mvc/');
 define('SITE_TITLE', 'MVC framwork'); //default web page title
 define('BRAND_NAME',"Kamu");
 

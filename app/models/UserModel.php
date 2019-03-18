@@ -64,6 +64,31 @@ class UserModel extends Model
         
     }
 
+    public static function send_password_reset_link($type, $user)
+    {
+        $to = $user->email;
+        $subject = 'Account Verification' ;
+        $message_body = '
+        Hello '.$user->first_name.',
+        Please click this link to reset your password:'
+        .WEB_ADDRESS.'reset_password/'.$type.'/'.$to.'/'.$user->hash;
+        mail($to, $subject, $message_body);
+    }
+
+    public function send_verify_email(){}
+
+    public function verify_email($user, $type)
+    {
+        $to = $user->email;
+        $subject = 'Account Verification' ;
+        $message_body = '
+        Hello '.$user->first_name.',
+        Thank you for signing up.
+        Please click this link to activate your account:'
+        .WEB_ADDRESS.'verify/'.$type.'/'.$to.'/'.$user->hash;
+        mail($to, $subject, $message_body);
+    }
+
 
     public function login($remember_me = false)
     {
@@ -147,4 +172,5 @@ class UserModel extends Model
     public function get_confirm(){
         return $this->_confirm;
     }
+
 } 

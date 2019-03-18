@@ -33,4 +33,9 @@ class CustomerModel extends UserModel
     {
         return ['Customer'];
     }
+
+    public function send_verify_email()
+    {
+        $this->verify_email($this, 'customer');
+    }
 } 

@@ -25,8 +25,8 @@ use core\H;
                 <td><?=$restaurant->address?></td>
                 <td><?=$restaurant->email?></td>
                 <td class="text-right">
-                    <a href="<?=SROOT?>items/edit/<?=$restaurant->id?>" class="btn btn-primary" onclick= "if(!confirm('Are you sure?')){return false;}">Edit</a>
-                    <a href="<?=SROOT?>items/delete/<?=$restaurant->id?>" class="btn btn-danger" onclick= "if(!confirm('Are you sure?')){return false;}">Delete</a>
+                    <a href="<?=SROOT?>restaurant/edit/<?=$restaurant->id?>" class="btn btn-primary" onclick= "if(!confirm('Are you sure?')){return false;}">Edit</a>
+                    <a href="<?=SROOT?>restaurant/delete/<?=$restaurant->id?>" class="btn btn-danger" onclick= "if(!confirm('Are you sure?')){return false;}">Delete</a>
                 </td>
             </tr>
         <?php endforeach ?>

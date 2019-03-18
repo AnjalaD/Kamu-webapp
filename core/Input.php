@@ -26,6 +26,11 @@ class Input
         return strtoupper($_SERVER['REQUEST_METHOD']);
     }
 
+    public function exists($input)
+    {
+        return empty($_REQUEST[$input])? false : true;
+    }
+
 
     public function get($input=false)
     {

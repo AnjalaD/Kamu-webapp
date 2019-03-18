@@ -2,7 +2,6 @@
 
 <?php $this->start('head'); ?>
 <link rel="stylesheet" href="<?=SROOT?>/css/croppie.css">
-<script src="<?= SROOT ?>js/croppie.js"></script>
 <?php $this->end(); ?>
 
 <?php $this->start('body'); ?>
@@ -38,7 +37,10 @@
     	</div>
     </div>
 </div>
+<?php $this->end();?>
 
+<?php $this->start('script');?>
+<script src="<?= SROOT ?>js/croppie.js"></script>
 <script>  
     $(document).ready(function(){
     
@@ -75,7 +77,6 @@
         }).then(function(response){
           $('#image').attr('value', response);
           $('#uploadimageModal').modal('hide');
-          $('#uploaded_image').html(data);
         })
       });
     

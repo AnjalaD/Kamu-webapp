@@ -34,7 +34,7 @@ $token = FH::generate_token();
                     <input class="form-control TextInput" type="email" name="email" placeholder="Email" id="Register_Email_TextInput">
                 </div>
                 <div class="form-group" id="Register_FirstName_FormGroup">
-                    <!-- Start: #FirstName_TextInput --><input type="string" name="first_Name" placeholder="First Name" class="form-control TextInput" id="Register_Firstname_TextInput" />
+                    <!-- Start: #FirstName_TextInput --><input type="string" name="first_name" placeholder="First Name" class="form-control TextInput" id="Register_Firstname_TextInput" />
                     <!-- End: #FirstName_TextInput -->
                 </div>
                 <div class="form-group" id="Register_LastName_FormGroup">
@@ -68,7 +68,7 @@ $token = FH::generate_token();
                     <input class="form-control TextInput" type="email" name="email" placeholder="Email" id="Register_Email_TextInput">
                 </div>
                 <div class="form-group" id="Register_FirstName_FormGroup">
-                    <!-- Start: #FirstName_TextInput --><input type="string" name="first_Name" placeholder="First Name" class="form-control TextInput" id="Register_Firstname_TextInput" />
+                    <!-- Start: #FirstName_TextInput --><input type="string" name="first_name" placeholder="First Name" class="form-control TextInput" id="Register_Firstname_TextInput" />
                     <!-- End: #FirstName_TextInput -->
                 </div>
                 <div class="form-group" id="Register_LastName_FormGroup">

@@ -26,10 +26,14 @@ use core\FH;
         <div class="form-group" id="Login_Password_FormGroup">
             <input class="form-control TextInput" type="password" name="password" placeholder="Password" id="Login_Password_TextInput">
         </div>
+        <div>
+            <label for="remember_me">Remember Me</label>
+            <input type="checkbox" name="remember_me" id="remember_me" value="true">
+        </diV>
         <div class="form-group" id="Login_Button_FormGroup">
             <button class="btn btn-primary btn-block Button" type="submit" id="Login_Button">Log In as Admin</button>
         </div>
-        <a href="#" id="Login_ForgotEmail_TextLabel" class="TextLabel">Forgot your email or password?</a>
+        <a href="<?=SROOT?>register/forgot/admin" id="Login_ForgotEmail_TextLabel" class="TextLabel">Forgot your email or password?</a>
     </form>
 </div>
 

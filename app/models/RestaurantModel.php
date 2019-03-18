@@ -9,7 +9,7 @@ use core\H;
 
 class RestaurantModel extends Model
 {
-    public $name, $address, $telephone, $email, $password, $lng, $lat, $image_url, $deleted = 0;
+    public $name, $address, $telephone, $email, $lng, $lat, $image_url, $deleted = 0;
 
     public function __construct(){
         $table = 'restaurants';
@@ -21,23 +21,23 @@ class RestaurantModel extends Model
     public function find_all($params=[])
     {
         $conditions = [
-            'conditions' => ''
+            'conditions' => '1'
         ];
         $conditions = array_merge($conditions, $params);
         return $this->find($conditions);
 
     }
 
-    // public function find_by_id_restaurant_id($item_id, $restaurant_id, $params=[])
-    // {
-    //     $conditions = [
-    //         'conditions' => 'id=? AND restaurant_id=?',
-    //         'bind' => [$item_id, $restaurant_id]
-    //     ];
+    public function find_by_id($restaurant_id, $params=[])
+    {
+        $conditions = [
+            'conditions' => 'id=?',
+            'bind' => [$restaurant_id]
+        ];
 
-    //     $conditions = array_merge($conditions, $params);
-    //     return $this->find_first($conditions);
-    // }
+        $conditions = array_merge($conditions, $params);
+        return $this->find_first($conditions);
+    }
 
     public function save_image($data)
     {

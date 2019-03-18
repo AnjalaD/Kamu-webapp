@@ -8,7 +8,7 @@ use core\FH;
     <?= FH::input_block('text', 'Name', 'name', $this->restaurant->name, ['class' => 'form-control col-md-6'], ['class' => 'form-group']); ?>
     <?= FH::input_block('text', 'Address', 'address', $this->restaurant->address, ['class' => 'form-control col-md-6'], ['class' => 'form-group']); ?>
     <?= FH::input_block('text', 'Telephone', 'telephone', $this->restaurant->telephone, ['class' => 'form-control col-md-6'], ['class' => 'form-group']); ?>
-    <?= FH::input_block('text', 'Email', 'email', $this->restaurant->telephone, ['class' => 'form-control col-md-6'], ['class' => 'form-group']); ?>
+    <?= FH::input_block('text', 'Email', 'email', $this->restaurant->email, ['class' => 'form-control col-md-6'], ['class' => 'form-group']); ?>
     <?= FH::input_block('text', 'Location-lng', 'lng', $this->restaurant->lng, ['class' => 'form-control col-md-6'], ['class' => 'form-group']); ?>
     <?= FH::input_block('text', 'Location-lat', 'lat', $this->restaurant->lat, ['class' => 'form-control col-md-6'], ['class' => 'form-group']); ?>
     <input type="file" name="upload_image" id="upload_image">

@@ -33,4 +33,9 @@ class OwnerModel extends UserModel
     {
         return ['Owner'];
     }
+
+    public function send_verify_email()
+    {
+        $this->verify_email($this, 'owner');
+    }
 } 
