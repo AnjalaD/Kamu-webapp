@@ -45,7 +45,7 @@ class RegisterController extends Controller
 
     public function login($new_user, $modelname, $page='register/login')
     {
-        if($this->request->is_post())
+        if($this->request->is_post() && $this->request->exists('submit'))
         {
             $this->request->csrf_check();
             $new_user->assign($this->request->get());
@@ -102,7 +102,7 @@ class RegisterController extends Controller
     public function register($model, $page='register/register', $redirect='register/login')
     {
         $new_user = $model;
-        if($this->request->is_post()) {
+        if($this->request->is_post() && $this->request->exists('submit')) {
             $this->request->csrf_check();
             $new_user->assign($this->request->get());
             $new_user->set_confirm($this->request->get('confirm'));
