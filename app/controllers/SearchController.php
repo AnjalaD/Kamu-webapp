@@ -21,22 +21,24 @@ class SearchController extends Controller
         {
             if($this->request->exists('food'))
             {
-                $this->food_action($this->request->get('search_string'));
+                $this->food($this->request->get('search_string'));
             }elseif($this->request->exists('restaurant'))
             {
-                $this->restaurant_action($this->request->get('search_string'));
+                $this->restaurant($this->request->get('search_string'));
             }
         }
+
     }
 
-    public function food_action($data='')
+    public function food($data='')
     {
         $results = $this->itemsmodel->search('name', $data);
-        $this->view->results = $results;
+        $this->view->results = $this->itemsmodel->create_list($results);
+        $this->view->post_data = $data;
         $this->view->render('search/food');
     }
 
-    public function resturant_action($data='')
+    public function resturant($data='')
     {
 
         $this->view->render('search/restaurant');
