@@ -36,10 +36,10 @@ $token = FH::generate_token();
         <div class="form-group" id="Login_Password_FormGroup">
             <input class="form-control TextInput" type="password" name="password" placeholder="Password" id="Login_Password_TextInput">
         </div>
-        <!-- <div>
+        <div>
             <label for="remember_me">Remember Me</label>
             <input type="checkbox" name="remember_me" id="remember_me" value="true">
-        </diV> -->
+        </diV>
         <div class="form-group" id="Login_Button_FormGroup">
             <button class="btn btn-primary btn-block Button" type="submit" id="Login_Button">Log In as User</button>
         </div>
@@ -67,7 +67,7 @@ $token = FH::generate_token();
             <input type="checkbox" name="remember_me" id="remember_me" value="true">
         </diV>
         <div class="form-group" id="Login_Button_FormGroup">
-            <button class="btn btn-primary btn-block Button" type="submit" id="Login_Button">Log In as Owner</button>
+            <button class="btn btn-primary btn-block Button" type="submit" name="submit" id="Login_Button">Log In as Owner</button>
         </div>
         <a href="<?=SROOT?>register/forgot/owner" id="Login_ForgotEmail_TextLabel" class="TextLabel">Forgot your email or password?</a>
     </form>

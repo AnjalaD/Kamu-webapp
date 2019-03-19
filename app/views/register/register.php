@@ -49,7 +49,7 @@ $token = FH::generate_token();
                     <!-- End: #ConfirmPassword_TexInput -->
                 </div>
                 <div class="form-group" id="Button_FormGroup">
-                    <!-- Start: #RegisterButton --><button class="btn btn-primary btn-block Button" type="submit" id="Register_Button">Register as User</button>
+                    <!-- Start: #RegisterButton --><button class="btn btn-primary btn-block Button" type="submit" name="submit" id="Register_Button">Register as User</button>
                     <!-- End: #RegisterButton -->
                 </div>
             </form>
