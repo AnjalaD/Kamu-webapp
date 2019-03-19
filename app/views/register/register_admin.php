@@ -40,7 +40,7 @@ use core\FH;
                 <!-- End: #ConfirmPassword_TexInput -->
             </div>
             <div class="form-group" id="Button_FormGroup">
-                <!-- Start: #RegisterButton --><button class="btn btn-primary btn-block Button" type="submit" id="Register_Button">Register</button>
+                <!-- Start: #RegisterButton --><button class="btn btn-primary btn-block Button" type="submit" name="submit" id="Register_Button">Register</button>
                 <!-- End: #RegisterButton -->
             </div>
         </form>
