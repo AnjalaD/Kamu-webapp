@@ -68,7 +68,7 @@ class ItemsModel extends Model
             'conditions' => $field.' LIKE ?',
             'bind' => [$data.'%']
         ]);
-        return $this->_create_list($items);
+        return ($items)? $items : [];
     }
 
     private function _create_card($item)
@@ -91,7 +91,7 @@ class ItemsModel extends Model
         return $html;
     }
 
-    private function _create_list($items){
+    public function create_list($items){
         if(empty($items)){
             return '';
         }

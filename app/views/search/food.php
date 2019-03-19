@@ -8,11 +8,11 @@ use core\FH;
 
 <?php $this->start('body'); ?>
 <div class="container-fluid">
-    <form method="POST">
+    <form method="POST" action="<?=SROOT?>search">
         <div class="input-group">
-                <input type="text" autocomplete="off" class="form-control" list="food" name="search" id="search" placeholder="Enter what you want">
+                <input type="text" autocomplete="off" class="form-control" list="food" name="search_string" id="search" value="<?=$this->post_data?>" placeholder="Enter what you want">
                 <div class="input-group-append">
-                    <input type="submit" class="btn btn-outline-secondary" value="Search" name="search" id="search">
+                    <input type="submit" class="btn btn-outline-secondary" value="Search" name="food" id="search">
                 </div>
             <datalist id="food"></datalist>
         </div>
