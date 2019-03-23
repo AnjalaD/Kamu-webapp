@@ -12,31 +12,18 @@ class HomeController extends Controller
         parent::__construct($controller, $acttion);
     }
 
+    //home page
     public function index_action()
     {
         // H::dnd(CustomerModel::current_user()->acls());
         $this->view->render('home/index');
     }
 
+
+    //test
     public function test_ajax_action()
     {
         $resp = ['succes'=>true, 'data'=>['id'=>2,'name'=>'aw', 'hash'=>'sdq2ew2asda']];
         $this->json_response($resp);
     }
 }
-
-
-// $fields = [
-//     'first_name' => 'aj',
-//     'last_name' => 'di',
-//     'email' => 'ad@g.com',
-//     'password' => 'sfqw',
-//     'hash' => 'hash12312'
-// ];
-
-// find('users', [
-//     'conditions' => "first_name = ?",
-//     'bind' => ['Anjala'],
-//     'order' => "last_name, first_name",
-//     'limit' => 2
-// ]);

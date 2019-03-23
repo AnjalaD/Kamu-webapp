@@ -7,7 +7,7 @@
 <form id="search-form-SearchBar" class="search-form" method="post" action="<?=SROOT?>search">
         <div class="input-group">
             <div class="input-group-prepend"><span class="input-group-text" id="inputGTSearch"><i class="fa fa-search" id="searchIcon"></i></span></div>
-            <input class="form-control Home_SearchBar" type="text" placeholder="I am looking for.." name="search_string" id="Home_SearchBar">
+            <input class="form-control Home_SearchBar" autocomplete="off" type="text" placeholder="I am looking for.." name="search_string" id="Home_SearchBar">
             <div class="input-group-append">
                 <button class="btn btn-light" type="submit" name="restaurant" value="1" id="buttonRestaurent" style="font-weight:bold;">Restaurant</button>
                 <button class="btn btn-light" type="submit" name="food" value="1" id="buttonFood" style="font-weight:bold;">Food</button>

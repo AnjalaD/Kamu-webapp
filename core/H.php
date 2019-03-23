@@ -38,41 +38,88 @@ class H
   {
     if (!empty($data)) {
       $image = H::decode_image($data);
-      if ($image && file_put_contents('..'.$path, $image)) {
+      if ($image && file_put_contents('..' . $path, $image)) {
         return $path;
       }
     }
     return DEFUALT_ITEM_IMAGE;
   }
 
-  public static function buildMenuListItems($menu, $dropdownClass = "")
+  public static function build_menu($menu, $drop_down_class = "")
   {
     ob_start();
-    $currentPage = self::currentPage();
-    foreach ($menu as $key => $val) :
-      $active = '';
-      if ($key == '%USERNAME%') {
-        $key = (Users::currentUser()) ? "Hello " . Users::currentUser()->fname : $key;
-      }
-      if (is_array($val)) : ?>
-<li class="nav-item dropdown">
-    <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><?= $key ?></a>
-    <div class="dropdown-menu <?= $dropdownClass ?>">
-        <?php foreach ($val as $k => $v) :
-          $active = ($v == $currentPage) ? 'active' : ''; ?>
-        <?php if (substr($k, 0, 9) == 'separator') : ?>
-        <div role="separator" class="dropdown-divider"></div>
-        <?php else : ?>
-        <a class="dropdown-item <?= $active ?>" href="<?= $v ?>"><?= $k ?></a>
-        <?php endif; ?>
-        <?php endforeach; ?>
+    $current_page = self::current_page();
+    foreach ($menu as $key => $value) : $active = ''; ?>
+    <?php if (is_array($value)) : ?>
+    <li class="nav-item dropdown">
+    <li class="nav-item dropdown">
+        <a class="dropdown-toggle nav-link" data-toggle="dropdown" aria-expanded="false" href="#">
+            <?= $key ?>
+        </a>
+        <div class="dropdown-menu <?= $drop_down_class ?>" role="menu">
+            <?php foreach ($value as $k => $v) :
+              $active = ($v == $current_page) ? 'active' : '' ?>
+            <?php if ($k == 'separator') : ?>
+            <div class="dropdown-divider"></div>
+            <?php else : ?>
+            <a class="dropdown-item <?= $active ?>" role="presentation" href="<?= $v ?>">
+                <?= $k ?>
+            </a>
+            <?php endif ?>
+            <?php endforeach ?>
+        </div>
+    </li>
+    <?php else :
+      $active = ($value == $current_page) ? 'active' : '' ?>
+    <li class="nav-item NavBar_Item" role="presentation" id="Home_NavBarItem_Food">
+        <a class="nav-link NavBar_Link <?= $active ?>" href="<?= $value ?>" id="Home_NavBar_Food" style="font-family:Aclonica, sans-serif;">
+            <?= $key ?>
+        </a>
+    </li>
+    <?php endif ?>
+    <?php endforeach;
+    return ob_get_clean();
+  }
+
+  public static function create_card_list($items)
+  {
+    if (empty($items)) {
+      return '';
+    }
+    $html = '<div class="card-columns container">';
+    foreach ($items as $item) {
+      $html .= self::create_card($item);
+    }
+    $html .= '</div>';
+    return $html;
+  }
+
+  private static function create_card($item)
+  {
+    ob_start() ?>
+    <div class="card block span3">
+      <div class="product">
+        <img src=<?= $item->image_url ?> >
+      </div>
+      <div class="info">
+        <h4><?= $item->name ?></h4>
+        <span class="description"><?= $item->description ?></span>
+        <span class="price">LKR.<?= $item->price ?></span>
+        <a class="btn btn-info pull-right" href="#"><i class="icon-shopping-cart"></i>Add to Order</a>
+      </div>
+      <div class="details">
+        <span class="time"><i class="icon-time"></i> 12 hours ago</span>
+        <span class="rating pull-right">
+          <span class="star"></span>
+          <span class="star"></span>
+          <span class="star"></span>
+          <span class="star"></span>
+          <span class="star"></span>
+        </span>
+      </div>
     </div>
-</li>
-<?php else :
-  $active = ($val == $currentPage) ? 'active' : ''; ?>
-<li class="nav-item"><a class="nav-link <?= $active ?>" href="<?= $val ?>"><?= $key ?></a></li>
-<?php endif; ?>
-<?php endforeach;
-return ob_get_clean();
-}
+    <?php
+    return ob_get_clean();
+  }
+
 }

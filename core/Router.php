@@ -29,13 +29,13 @@ class Router
             $action = 'index_action';
         }
 
-        $controller = 'app\controllers\\' . $controller;
+        $controller = 'app'.SP.'controllers'.SP. $controller;
         $dispatch = new $controller($controller_name, $action);
 
         if (method_exists($controller, $action)) {
             call_user_func_array([$dispatch, $action], $params);
         } else {
-            die('method does not exist in controller \"' . $controller_name . '\"');
+            die('method does not exist in controller "' . $controller_name . '"');
         }
     }
 

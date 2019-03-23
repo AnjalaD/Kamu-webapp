@@ -24,4 +24,5 @@ define('REMEMBER_ME_COOKIE_EXPIRY', 2592000);  //time in seconds - 30days
 
 define('ACCESS_RESTRICTED','Restricted'); //controller name for restricted redirect
 
-define('DEFUALT_ITEM_IMAGE', SROOT.'img/items/default.png'); //default image for add item
+define('DEFUALT_ITEM_IMAGE', SROOT.'img/items/default.png'); //default image_url for item
+define('DEFUALT_RESTAURANT_IMAGE', SROOT.'restaurant/items/default.png'); //default image_url for restaurant 

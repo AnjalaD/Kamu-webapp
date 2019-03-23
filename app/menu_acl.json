@@ -2,7 +2,7 @@
     "Home": "home",
     "Search": {
         "Food": "search/food",
-        "Resturant": "search/resturant"
+        "Resturant": "search/restaurant"
     },
     "Items": {
         "My Items": "items",
