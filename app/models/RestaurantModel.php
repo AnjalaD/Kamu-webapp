@@ -52,4 +52,25 @@ class RestaurantModel extends Model
         return false;
     }
 
+    public function auto_complete($field, $data)
+    {
+        $results = [];
+        if($items = $this->search($field, $data))
+        {
+            foreach($items as $item)
+            {
+                $results[] = $item->name;
+            }
+        }
+        return array_unique($results);
+    }
+
+    public function search($field, $data)
+    {
+        $items = $this->find([
+            'conditions' => $field.' LIKE ?',
+            'bind' => ['%'.$data.'%']
+        ]);
+        return ($items)? $items : [];
+    }
 }

@@ -21,26 +21,27 @@ class SearchController extends Controller
         {
             if($this->request->exists('food'))
             {
-                $this->food($this->request->get('search_string'));
+                $this->food_action();
             }elseif($this->request->exists('restaurant'))
             {
-                $this->restaurant($this->request->get('search_string'));
+                $this->restaurant_action();
             }
         }
 
     }
 
-    public function food($data='')
-    {
+    public function food_action()
+    {   
+        $data = $this->request->exists('search_string')? $this->request->get('search_string') : '';
         $results = $this->itemsmodel->search('name', $data);
-        $this->view->results = $this->itemsmodel->create_list($results);
+        $this->view->results = H::create_card_list($results);
         $this->view->post_data = $data;
         $this->view->render('search/food');
     }
+    
 
-    public function resturant($data='')
+    public function restaurant_action()
     {
-
         $this->view->render('search/restaurant');
     }
 
@@ -49,7 +50,17 @@ class SearchController extends Controller
         $result =[];
         if(!empty($data))
         {
-            $result = $this->itemsmodel->auto_complete('name',$data);
+            $type = $this->request->get('type');
+            if(!$type)
+            {
+                $result = array_merge($this->itemsmodel->auto_complete('name',$data), $this->restaurantmodel->auto_complete('name',$data));
+            }elseif($type == 'food')
+            {
+                $result = $this->itemsmodel->auto_complete('name',$data);
+            }elseif($type == 'restaurant')
+            {
+                $result = $this->restaurantmodel->auto_complete('name',$data);
+            }
         }
         $this->json_response($result);
     }

@@ -12,7 +12,7 @@ use core\Session;
 use core\Cookie;
 use core\H;
 
-class UserModel extends Model
+abstract class UserModel extends Model
 {
     protected $_is_logged_in, $_session_id, $_session_type, $_cookie_name, $_confirm;
     public static $current_logged_user = null;

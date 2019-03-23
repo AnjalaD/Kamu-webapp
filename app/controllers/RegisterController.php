@@ -20,9 +20,10 @@ class RegisterController extends Controller
     }
 
     public function index_action(){
-        
+        Router::redirect('');
     }
 
+    //login for customer and owner
     public function login_action($user_type='')
     {
         if($user_type == 'owner')
@@ -37,12 +38,14 @@ class RegisterController extends Controller
         $this->login($new_user, $modelname);
     }
 
+    //login for admin
     public function login_admin_action()
     {
         $this->login(new AdminModel(), 'adminmodel', 'register/login_admin');
     }
 
 
+    //base login function
     public function login($new_user, $modelname, $page='register/login')
     {
         if($this->request->is_post() && $this->request->exists('submit'))
@@ -71,6 +74,7 @@ class RegisterController extends Controller
     }
 
 
+    //logout
     public function logout_action()
     {
         if(UserModel::current_user())
@@ -81,6 +85,7 @@ class RegisterController extends Controller
     }
 
 
+    //register for customer and owner
     public function register_action($user_type = '')
     {
         if($user_type == 'owner')
@@ -93,12 +98,15 @@ class RegisterController extends Controller
         $this->register($new_user);
     }
 
+
+    //register for admin
     public function register_admin_action()
     {
         $this->register(new AdminModel(), 'register/register_admin', 'home');
     }
 
 
+    //base register function
     public function register($model, $page='register/register', $redirect='register/login')
     {
         $new_user = $model;
@@ -118,6 +126,7 @@ class RegisterController extends Controller
     }
 
 
+    //verification for newly created accounts 
     public function verify_action($type, $email, $hash)
     {
         $user = $this->{$type.'model'}->find_by_email($email);
@@ -135,6 +144,7 @@ class RegisterController extends Controller
     }
 
 
+    //fogot password ->to enter email form
     public function forgot_action($user_type)
     {
         if($this->request->is_post() && $this->request->exists('email')){
@@ -145,12 +155,14 @@ class RegisterController extends Controller
                 UserModel::send_password_reset_link($user_type, $user);
                 Session::add_msg('info', 'Please check your email to reset password!');
                 Router::redirect('');
-
             }
+            Session::add_msg('danger', 'Failed! Please re-check the email address and try again.');
         }
         $this->view->render('register/send_reset_link');
     }
 
+
+    //change password through url
     public function reset_password_action($type, $email, $hash)
     {
         $user = $this->{$type.'model'}->find_by_email($email);
@@ -172,6 +184,8 @@ class RegisterController extends Controller
         Router::redirect('');
     }
 
+
+    //demo
     public function demo_action(){
         // H::dnd($this->request->get());
     }
