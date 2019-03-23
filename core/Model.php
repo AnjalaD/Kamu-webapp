@@ -20,17 +20,17 @@ class Model
         return $this->_db->get_columns($this->_table);
     }
 
-    public function find($params = [])
+    public function find($params = [], $get_deleted=false)
     {
-        $params = $this->_soft_delete_params($params);
+        $params = $get_deleted? $params : $this->_soft_delete_params($params);
         $results_query = $this->_db->find($this->_table, $params, get_class($this));
         if(!$results_query) return [];
         return $results_query;
     }
 
-    public function find_first($params = [])
+    public function find_first($params = [], $get_deleted=false)
     {
-        $params = $this->_soft_delete_params($params);
+        $params = $get_deleted? $params : $this->_soft_delete_params($params);
         $results_query = $this->_db->find_first($this->_table, $params, get_class($this));
         return $results_query;
     }
