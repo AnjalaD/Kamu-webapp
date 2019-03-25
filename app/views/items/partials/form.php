@@ -13,7 +13,7 @@ use core\FH;
             <input class="form-control TextInput" name="name" type="text" name="ItemName" placeholder="Item Name" id="AddItem_EmailInput" value="<?= $this->item->name ?>">
         </div>
         <div class="form-group" id="AddItem_Description_FormGroup">
-            <input class="form-control" type="text" name="description" id="Additem_DescriptionInput" placeholder="Breif Description" value="<?= $this->item->description ?>">
+            <input class="form-control" type="text" name="description" id="Additem_DescriptionInput" placeholder="Brief Description" value="<?= $this->item->description ?>">
         </div>
         <div class="form-group" id="AddItem_Price_FormGroup">
             <input class="form-control Number Input" type="number" name="price" id="AddItem_PriceInput" placeholder="Price (Rs.)" step="0.01" min="1.00" value="<?= $this->item->price ?>">
