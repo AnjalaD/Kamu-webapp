@@ -28,17 +28,6 @@ class RestaurantModel extends Model
 
     }
 
-    public function find_by_id($restaurant_id, $params=[])
-    {
-        $conditions = [
-            'conditions' => 'id=?',
-            'bind' => [$restaurant_id]
-        ];
-
-        $conditions = array_merge($conditions, $params);
-        return $this->find_first($conditions);
-    }
-
     public function save_image($data)
     {
         $image = H::decode_image($data);
