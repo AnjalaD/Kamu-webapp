@@ -17,12 +17,22 @@ use core\FH;
             <div class="input-group-append">
                 <input type="submit" class="btn btn-outline-secondary" value="Search" name="food" id="search">
             </div>
-            <datalist id="food"></datalist>
         </div>
+        <datalist id="food"></datalist>
     </form>
+
+    <div class="row p-2">
+        <div class="col-md-2 card bg-light m-1">
+            <?php $this->partial('search', 'filters'); ?>
+        </div>
+        <div class="col-md-8 card m-1">
+            <?= $this->results ?>
+        </div>
+        <div class="col-md-2 card bg-light m-1">
+        </div>
+    </div>
 </div>
 
-<?= $this->results ?>
 <?php $this->end(); ?>
 
 <?php $this->start('script') ?>

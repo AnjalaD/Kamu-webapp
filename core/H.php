@@ -86,7 +86,7 @@ class H
     if (empty($items)) {
       return '';
     }
-    $html = '<div class="card-columns container">';
+    $html = '<div class="card-columns">';
     foreach ($items as $item) {
       $html .= self::create_card($item);
     }

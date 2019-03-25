@@ -8,7 +8,7 @@ function autoComplete(searchInput, searchType = false) {
         success: function(resp) {
             temp = '';
             for (i = 0; i < resp.length; i++) {
-                temp += '<option class="list-group-item" value="' + resp[i] + '">' + resp[i] + '</option>';
+                temp += '<option value="' + resp[i] + '">' + resp[i] + '</option>';
             }
             document.getElementById('food').innerHTML = (temp);
         }
