@@ -1,5 +1,5 @@
 <?php $this->set_title('Home'); ?>
-
+<link rel="shortcut icon" href="<?=SROOT?>assets/img/kamu_icon.ico" />
 <?php $this->start('head'); ?>
 <?php $this->end(); ?>
 
