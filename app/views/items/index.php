@@ -27,7 +27,7 @@ use core\H;
                 <td class="text-right">
                     <a href="<?=SROOT?>items/edit/<?=$item->id?>" class="btn btn-primary" onclick= "if(!confirm('Are you sure?')){return false;}">Edit</a>
                     <?php if ($item->deleted) : ?>
-                    <a href="<?=SROOT?>items/unhide/<?=$item->id?>" class="btn btn-secondary" onclick= "if(!confirm('Are you sure?')){return false;}">Unide</a>
+                    <a href="<?=SROOT?>items/unhide/<?=$item->id?>" class="btn btn-secondary" onclick= "if(!confirm('Are you sure?')){return false;}">Unhide</a>
                     <?php else :?>
                     <a href="<?=SROOT?>items/hide/<?=$item->id?>" class="btn btn-secondary" onclick= "if(!confirm('Are you sure?')){return false;}">Hide</a>
                     <?php endif ?>
