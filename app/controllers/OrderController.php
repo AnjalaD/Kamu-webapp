@@ -19,50 +19,55 @@ class OrderController extends Controller
 
     public function order_action()
     {
+        $order = [];
         if(Session::exists('items')){
-            $order_items = json_decode(Session::get('items'));
-            $items = [];
-            foreach($order_items as $item)
-            {
-                $items[] = $this->itemsmodel->find_by_id((int)$item);
-            }
-            $this->view->items = $items;
+            $order = json_decode(Session::get('items'), true)['items'];
         }
+        $this->view->items = $this->itemsmodel->get_order_items($order);
         $this->view->render('order/index');
     }
 
-    public function add_to_order_action($restaurant_id, $id){
+    public function add_to_order_action($restaurant_id, $id, $quantity=1){
         if(Session::exists('items'))
         {
-            if(Session::get('rid') != $restaurant_id){
+            $items = json_decode(Session::get('items'), true);
+            if($items['rid'] != $restaurant_id){
                 // Session::add_msg('info', 'You should select items from one restaurant');
                 return;
-            }
-            $items = json_decode(Session::get('items'));
-            
+            }  
         }else
         {
-            Session::set('rid', $restaurant_id);
+            $items['rid'] = (int)$restaurant_id;
         }
-        $items[] = $id;
-        Session::set('items', json_encode(array_unique($items)));
+        $items['items'][$id] = $quantity;
+        Session::set('items', json_encode($items));
         echo true;
         return;
         
     }
 
-    public function remove_from_order($id){
-        $items = Session::get('items');
-        unset($items[$id]);
-        Session::set('items', $items);
-        $this->json_response($items);
+    public function remove_from_order_action($id)
+    {
+        $items = json_decode(Session::get('items'), true);
+        unset($items['items'][$id]);
+        Session::set('items', json_encode($items));
+        $this->view->items = $this->itemsmodel->get_order_items($items['items']);
+        if(empty($items['items']))
+        {
+            Session::delete('items');
+        }
+        $this->view->render('order/index');
     }
 
     public function cancel_order_action()
     {
         Session::delete('items');
-        Session::delete('rid');
         Session::add_msg('info', 'Your order canceled successfully!');
         $this->view->render('order/index');
+    }
+
+    public function submit_order_action()
+    {
+        
     }
 }

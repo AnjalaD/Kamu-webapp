@@ -113,7 +113,6 @@ abstract class UserModel extends Model
         Session::delete(CURRENT_USER_SESSION_ID);
         Session::delete(CURRENT_USER_SESSION_TYPE);
         Session::delete('items');
-        Session::delete('rid');
         if(Cookie::exists(REMEMBER_ME_COOKIE_NAME))
         {
             Cookie::delete(REMEMBER_ME_COOKIE_NAME);

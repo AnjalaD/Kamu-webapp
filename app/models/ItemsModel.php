@@ -79,5 +79,15 @@ class ItemsModel extends Model
         return $result;
     }
 
+    public function get_order_items($order)
+    {
+        $items = [];
+        foreach($order as $key => $val) {
+            $item = $this->find_by_id((int)$key);
+            $item->quantity = $val;
+            $items[] = $item;
+        }
+        return $items;
+    }
     
 }
