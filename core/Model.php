@@ -37,7 +37,10 @@ class Model
 
     public function find_by_id($id)
     {
-        return $this->find_first(['conditions' => "id = ?", 'bind' => $id]);
+        return $this->find_first([
+            'conditions' => "id = ?",
+            'bind' => [$id]
+            ]);
     }
 
     public function save()

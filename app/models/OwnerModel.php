@@ -1,6 +1,7 @@
 <?php
 namespace app\models;
 use app\models\UserModel;
+use core\H;
 
 class OwnerModel extends UserModel
 {
@@ -12,6 +13,7 @@ class OwnerModel extends UserModel
 
         $this->_soft_del = true;
 
+        
         if(is_int($user))
         {
             $u = $this->_db->find_first($table,['conditions' => 'id=?', 'bind' => [$user]], 'app\models\OwnerModel');
@@ -19,7 +21,7 @@ class OwnerModel extends UserModel
         {
             $u = $this->_db->find_first($table,['conditions' => 'email=?', 'bind' => [$user]], 'app\models\OwnerModel');
         }
-
+        
         if($u)
         {
             foreach($u as $key => $value)

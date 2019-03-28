@@ -9,6 +9,7 @@ use core\Session;
     <!-- Required meta tags -->
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link rel="shortcut icon" href="<?=SROOT?>assets/img/kamu_icon.ico" />
     <title><?= $this->get_title() ?> </title>
     <!-- Bootstrap CSS -->
 

@@ -16,7 +16,7 @@ abstract class UserModel extends Model
 {
     protected $_is_logged_in, $_session_id, $_session_type, $_cookie_name, $_confirm;
     public static $current_logged_user = null;
-    public $id, $first_name, $last_name, $email, $password, $hash;
+    public $first_name, $last_name, $email, $password, $hash;
     public $verified='0', $deleted='0';
 
     public function __construct($table,$user_model)
@@ -112,6 +112,8 @@ abstract class UserModel extends Model
         $user_session->delete();
         Session::delete(CURRENT_USER_SESSION_ID);
         Session::delete(CURRENT_USER_SESSION_TYPE);
+        Session::delete('items');
+        Session::delete('rid');
         if(Cookie::exists(REMEMBER_ME_COOKIE_NAME))
         {
             Cookie::delete(REMEMBER_ME_COOKIE_NAME);
@@ -147,9 +149,9 @@ abstract class UserModel extends Model
             $this->run_validation(new MatchValidator($this, ['field'=>'password', 'rule'=>$this->_confirm, 'msg'=>'Password and Confirm Password should match!']));
 
         }
-    
     }
 
+    
     public function login_validator()
     {
         $this->run_validation(new EmailValidator($this, ['field'=>'email', 'rule'=>true, 'msg'=>'Please enter a valid email!']));

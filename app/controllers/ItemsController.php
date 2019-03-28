@@ -131,6 +131,7 @@ class ItemsController extends Controller
             $this->view->display_errors = $item->get_error_messages();
             $this->view->post_action = SROOT . 'items/edit/' . $item->id;
             $this->view->render('items/edit');
+            return;
         }
         Session::add_msg('danger', 'Something went wrong!');
         Router::redirect('items');

@@ -1,9 +1,7 @@
 <?php
 namespace app\controllers;
 use core\Controller;
-use core\FH;
 use core\H;
-use app\models\CustomerModel;
 
 class HomeController extends Controller
 {

@@ -9,7 +9,7 @@ use core\H;
 
 class RestaurantModel extends Model
 {
-    public $name, $address, $telephone, $email, $lng, $lat, $image_url, $deleted = 0;
+    public $name, $address, $telephone, $email, $lng, $lat, $image_url=DEFUALT_RESTAURANT_IMAGE, $deleted = 0;
 
     public function __construct(){
         $table = 'restaurants';

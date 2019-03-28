@@ -5,7 +5,7 @@ use core\Session;
 use core\Cookie;
 class UserSession extends Model
 {
-    public $id, $user_type, $user_id, $session, $user_agent;
+    public $user_type, $user_id, $session, $user_agent;
 
     public function __construct()
     {

@@ -71,7 +71,7 @@ class ItemsModel extends Model
         return ($items) ? $items : [];
     }
 
-    public function permenent_delete($id)
+    public function permenent_delete()
     {
         $this->_soft_del = false;
         $result = $this->delete();
