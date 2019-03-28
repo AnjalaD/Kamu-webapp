@@ -17,7 +17,8 @@
     },
 
     "Customer": {
-        "denied": {}
+        "denied": {},
+        "Order": ["*"]
     },
 
     "Owner": {

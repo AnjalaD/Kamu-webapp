@@ -1,6 +1,11 @@
 <?php
 namespace core;
 
+use core\Session;
+use app\models\UserModel;
+use app\models\CustomerModel;
+
+
 class H
 {
   public static function dnd($data)
@@ -105,10 +110,11 @@ class H
         <h4><?= $item->name ?></h4>
         <span class="description"><?= $item->description ?></span>
         <span class="price">LKR.<?= $item->price ?></span>
-        <a class="btn btn-info pull-right" href="#"><i class="icon-shopping-cart"></i>Add to Order</a>
+        <?php if(Session::exists(CURRENT_USER_SESSION_TYPE) && Session::get(CURRENT_USER_SESSION_TYPE)==('CustomerModel') ) :?>
+        <a class="btn btn-info pull-right" onClick="addToOrder(<?=$item->restaurant_id?>, <?=$item->id?>)" ><i class="icon-shopping-cart"></i>Add to Order</a>
+        <?php endif ?>
       </div>
       <div class="details">
-        <span class="time"><i class="icon-time"></i> 12 hours ago</span>
         <span class="rating pull-right">
           <span class="star"></span>
           <span class="star"></span>

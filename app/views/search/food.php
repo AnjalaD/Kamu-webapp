@@ -22,13 +22,13 @@ use core\FH;
     </form>
 
     <div class="row p-2">
-        <div class="col-md-2 card bg-light m-1">
+        <div class="col-md-2 card bg-light m-1 p-1">
             <?php $this->partial('search', 'filters'); ?>
         </div>
-        <div class="col-md-8 card m-1">
+        <div class="col-md-8 card m-1 p-1">
             <?= $this->results ?>
         </div>
-        <div class="col-md-2 card bg-light m-1">
+        <div class="col-md-2 card bg-light m-1 p-1">
         </div>
     </div>
 </div>
@@ -36,7 +36,8 @@ use core\FH;
 <?php $this->end(); ?>
 
 <?php $this->start('script') ?>
-<script src="<?= SROOT ?>js/functions.js"></script>
+<script src="<?= SROOT ?>js/autocomplete.js"></script>
+<script src="<?=SROOT?>js/addtoorder.js"></script>
 <script>
     var search = document.getElementById('search');
     search.onkeyup = function() {

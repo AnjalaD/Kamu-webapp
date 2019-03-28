@@ -6,8 +6,9 @@ function autoComplete(searchInput, searchType = false) {
             type: searchType
         },
         success: function(resp) {
+            // console.log(resp);
             temp = '';
-            for (i = 0; i < resp.length; i++) {
+            for (i = 0; i <= resp.length; i++) {
                 temp += '<option value="' + resp[i] + '">' + resp[i] + '</option>';
             }
             document.getElementById('food').innerHTML = (temp);
