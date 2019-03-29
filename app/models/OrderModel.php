@@ -1,9 +1,7 @@
 <?php
 namespace app\models;
-
 use core\Model;
 use core\H;
-
 
 class OrderModel extends Model
 {

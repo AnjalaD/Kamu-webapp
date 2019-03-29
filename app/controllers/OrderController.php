@@ -27,6 +27,7 @@ class OrderController extends Controller
         $this->view->render('order/index');
     }
 
+    //$_SESSION['items']={'rid': restaurant_id, 'items' :[item_id : quantity,..., e:r]}
     public function add_to_order_action($restaurant_id, $id, $quantity=1){
         if(Session::exists('items'))
         {
@@ -48,13 +49,18 @@ class OrderController extends Controller
 
     public function remove_from_order_action($id)
     {
-        $items = json_decode(Session::get('items'), true);
-        unset($items['items'][$id]);
-        Session::set('items', json_encode($items));
-        $this->view->items = $this->itemsmodel->get_order_items($items['items']);
-        if(empty($items['items']))
+        if(Session::exists('items'))
         {
-            Session::delete('items');
+            $items = json_decode(Session::get('items'), true);
+            unset($items['items'][$id]);
+            Session::set('items', json_encode($items));
+
+            $this->view->items = $this->itemsmodel->get_order_items($items['items']);
+
+            if(empty($items['items']))
+            {
+                Session::delete('items');
+            }
         }
         $this->view->render('order/index');
     }
@@ -68,6 +74,17 @@ class OrderController extends Controller
 
     public function submit_order_action()
     {
-        
+        $new_order = new OrderModel();
+        if($this->request->is_post())
+        {
+            $new_order->assign($this->request->get());
+            if($new_order->save())
+            {
+                Router::redirect('');
+            }
+            $this->view->post_data = $new_order;
+        }
+        $this->view->post_data = $this;
+        $this->view->render('order/submit_order');
     }
 }
