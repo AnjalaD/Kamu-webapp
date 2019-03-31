@@ -18,12 +18,13 @@
 
     "Customer": {
         "denied": {},
-        "Order": ["*"]
+        "Order": ["order", "add_to_order", "remove_from_order", "submit_order"]
     },
 
     "Owner": {
         "denied": {},
-        "Items": ["*"]
+        "Items": ["*"],
+        "Order": ["view_orders"]
     },
 
     "Admin": {
