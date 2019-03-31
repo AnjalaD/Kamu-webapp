@@ -12,7 +12,8 @@ define('DB_HOST', 'localhost:3306');
 define('DEFAULT_CONTROLLER', 'Home'); //if no controller is set Route will use this
 define('DEFAULT_LAYOUT', 'default'); //if no layout is set controller use this
 
-define('SITE_TITLE', 'Kamu'); //default web page title
+
+define('SITE_TITLE', 'MVC framwork'); //default web page title
 define('BRAND_NAME','Kamu');
 
 define('CURRENT_USER_SESSION_ID', 'kwDa23kka3sad7kfa9sS'); //session name for logged user
