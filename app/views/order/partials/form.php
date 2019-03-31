@@ -30,5 +30,5 @@ use core\FH;
         <label class="form-check-label" for="take_away">Take Away</label>
     </div>
     <br>
-    <button type="submit" class="btn btn-primary" name="">Submit</button>
+    <input type="submit" class="btn btn-primary" name="" value="Submit">
 </form> 
