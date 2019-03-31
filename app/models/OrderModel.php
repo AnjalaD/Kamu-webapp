@@ -5,8 +5,7 @@ use core\H;
 
 class OrderModel extends Model
 {
-    private static $_instance=null;
-    public $customer_id, $items = null, $restaurant_id, $submit_time, $order_code, $delivered,	$time_stamp;
+    public $customer_id, $items = null, $restaurant_id, $submit_time, $order_code, $submitted=0, $delivered=0,	$time_stamp;
 
     public function __construct()
     {
@@ -34,6 +33,11 @@ class OrderModel extends Model
         ];
         $conditions = array_merge($conditions, $params);
         return $this->find_first($conditions);
+    }
+
+    public function validator()
+    {
+        $this->run_validation(new NumericValidator($this, ['field' => 'price', 'rule' => true, 'msg' => 'Price should be numeric!']));
     }
     
 }

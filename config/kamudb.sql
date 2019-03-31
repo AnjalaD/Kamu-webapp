@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Mar 18, 2019 at 11:45 AM
+-- Generation Time: Mar 31, 2019 at 12:42 PM
 -- Server version: 10.1.37-MariaDB
 -- PHP Version: 7.3.1
 
@@ -71,7 +71,9 @@ CREATE TABLE `customers` (
 
 INSERT INTO `customers` (`id`, `first_name`, `last_name`, `email`, `password`, `hash`, `verified`, `deleted`) VALUES
 (1, 'Chamika', 'Nimal', 'ad@ad.com', '$2y$10$lO/3azXVdJ1aLxQp2Tll.eGnKe6r2iOfA311oKE.OXVenYqG4p52u', '6f4922f45568161a8cdf4ad2299f6d23', 0, 0),
-(3, 'Thumula', 'Na', 'thumula@gmail.com', '$2y$10$XtPm1532UgsRFehBnWLKqOh.p1RNN4ZO9Bb32MK.ogE5PgjIFBWMe', 'c0c7c76d30bd3dcaefc96f40275bdc0a', 0, 0);
+(3, 'Thumula', 'Na', 'thumula@gmail.com', '$2y$10$XtPm1532UgsRFehBnWLKqOh.p1RNN4ZO9Bb32MK.ogE5PgjIFBWMe', 'c0c7c76d30bd3dcaefc96f40275bdc0a', 0, 0),
+(4, 'anjala', 'dilhara', 'anjaladilhara@gmail.com', '$2y$10$CNaMpSNn6kDummFGp43edu5qZO0rMu6ogDtFjfZUNguASvwilpDmW', 'd2ddea18f00665ce8623e36bd4e3c7c5', 1, 0),
+(5, 'hg', 'qwe', 'c9599@qwe.com', '$2y$10$5be5bBxUYSAn7ilQsbwZEexoz.Smb.qUcq4RVGS2V53M.i/qrSVme', '3c59dc048e8850243be8079a5c74d079', 0, 0);
 
 -- --------------------------------------------------------
 
@@ -96,25 +98,38 @@ CREATE TABLE `items` (
 --
 
 INSERT INTO `items` (`id`, `restaurant_id`, `name`, `description`, `price`, `image_url`, `rating`, `tags`, `deleted`) VALUES
-(1, 1, 'Kottu', 'asfewidn djsak uad s kdasddd sada ', 100, '/mvc/img/items/default.png', 0, 'no', 1),
-(26, 1, 'Soup', 'asfewidn djsak uad s kdasddd sada ', 140, '/mvc/img/items/1552849585.png', 0, 'no', 0),
-(27, 1, 'Rice', 'asfewidn djsak uad s kdasddd sada ', 100, '/mvc/img/items/1552883520.png', 0, '', 0);
+(1, 1, 'Kottu', 'Perfect combination of cut up roti and chickenzzz', 250, '/mvc/img/items/1553572046.png', 0, 'no', 0),
+(26, 1, 'Soup', 'Tantalize your taste buds with our signature recipe chicken soup', 140, '/mvc/img/items/1552849585.png', 0, 'no', 0),
+(30, 0, 'Kottu', 'Enjoy the goodness of little bits of heaven', 300, '/mvc/img/items/1552914320.png', 0, '', 0),
+(31, 0, 'Fried Rice', 'Enjoy the taste of china ', 250, '/mvc/img/items/1552914407.png', 0, '', 0),
+(32, 0, 'Soup', 'Description of soup', 100, '/mvc/img/items/1552931132.png', 0, '', 0),
+(34, 1, 'Noodles', 'description of noodles', 140, '/mvc/img/items/1553572181.png', 0, '', 0);
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `odrers`
+-- Table structure for table `orders`
 --
 
-CREATE TABLE `odrers` (
+CREATE TABLE `orders` (
   `id` int(11) NOT NULL,
-  `user_id` int(11) NOT NULL,
+  `customer_id` int(11) NOT NULL,
   `items` varchar(1000) COLLATE utf8_unicode_ci NOT NULL,
   `restaurant_id` int(11) NOT NULL,
-  `submit_time` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
-  `order_code` int(11) NOT NULL,
-  `delivered` int(11) NOT NULL DEFAULT '0'
+  `submit_time` timestamp NULL DEFAULT NULL,
+  `order_code` int(11) DEFAULT NULL,
+  `submitted` tinyint(1) NOT NULL DEFAULT '0',
+  `delivered` tinyint(1) NOT NULL DEFAULT '0',
+  `time_stamp` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+
+--
+-- Dumping data for table `orders`
+--
+
+INSERT INTO `orders` (`id`, `customer_id`, `items`, `restaurant_id`, `submit_time`, `order_code`, `submitted`, `delivered`, `time_stamp`) VALUES
+(1, 1, '{\"1\":4 ,\"34\":2}', 1, NULL, NULL, 0, 0, '2019-03-29 14:27:53'),
+(3, 1, '{\"1\":4,\"26\":2}', 1, NULL, NULL, 0, 0, '2019-03-29 14:27:53');
 
 -- --------------------------------------------------------
 
@@ -139,7 +154,8 @@ CREATE TABLE `owners` (
 --
 
 INSERT INTO `owners` (`id`, `restaurant_id`, `first_name`, `last_name`, `email`, `password`, `hash`, `verified`, `deleted`) VALUES
-(1, 1, 'Kamal', 'Nimal', 'ad@ad.com', '$2y$10$n0qUvrVBnVt4oRtk6RX1gOmTYVNHtBWiUyRftM7mxMhJIc4XtaBjO', 'ac627ab1ccbdb62ec96e702f07f6425b', 0, 0);
+(1, 1, 'Kamal', 'Nimal', 'ad@ad.com', '$2y$10$n0qUvrVBnVt4oRtk6RX1gOmTYVNHtBWiUyRftM7mxMhJIc4XtaBjO', 'ac627ab1ccbdb62ec96e702f07f6425b', 0, 0),
+(2, 0, 'Thumula', 'Perera', 'thumula@gmail.com', '$2y$10$dhEnRK0VJnAMe7x7Dw52BeyVozeRa7ejhBc2/uhvbc/cykh0o4PlS', '92cc227532d17e56e07902b254dfad10', 0, 0);
 
 -- --------------------------------------------------------
 
@@ -203,9 +219,9 @@ ALTER TABLE `items`
   ADD PRIMARY KEY (`id`);
 
 --
--- Indexes for table `odrers`
+-- Indexes for table `orders`
 --
-ALTER TABLE `odrers`
+ALTER TABLE `orders`
   ADD PRIMARY KEY (`id`);
 
 --
@@ -240,25 +256,25 @@ ALTER TABLE `admins`
 -- AUTO_INCREMENT for table `customers`
 --
 ALTER TABLE `customers`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- AUTO_INCREMENT for table `items`
 --
 ALTER TABLE `items`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=28;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=35;
 
 --
--- AUTO_INCREMENT for table `odrers`
+-- AUTO_INCREMENT for table `orders`
 --
-ALTER TABLE `odrers`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+ALTER TABLE `orders`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT for table `owners`
 --
 ALTER TABLE `owners`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT for table `restaurants`
@@ -270,7 +286,7 @@ ALTER TABLE `restaurants`
 -- AUTO_INCREMENT for table `user_sessions`
 --
 ALTER TABLE `user_sessions`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

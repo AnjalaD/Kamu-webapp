@@ -17,5 +17,6 @@
     "Register": "register/register",
     "Logout": "register/logout",
     "Add New Admin": "register/register_admin",
-    "Order": "order/order"
+    "Order": "order/order",
+    "View Orders": "order/view_orders"
 }
