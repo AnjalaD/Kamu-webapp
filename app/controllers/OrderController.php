@@ -6,6 +6,9 @@ use core\H;
 use app\models\OrderModel;
 use core\Session;
 use core\Router;
+use app\models\UserSession;
+use app\models\UserModel;
+use app\models\CustomerModel;
 
 class OrderController extends Controller
 {
@@ -30,11 +33,16 @@ class OrderController extends Controller
 
     //$_SESSION['items']={'rid': restaurant_id, 'items' :[item_id : quantity,..., e:r]}
     public function add_to_order_action($restaurant_id, $id, $quantity=1){
+        if(!(UserModel::current_user() instanceof CustomerModel))
+        {
+            echo '-1';
+            return;
+        }
         if(Session::exists('items'))
         {
             $items = json_decode(Session::get('items'), true);
             if($items['rid'] != $restaurant_id){
-                // Session::add_msg('info', 'You should select items from one restaurant');
+                echo '0';
                 return;
             }  
         }else
@@ -43,7 +51,7 @@ class OrderController extends Controller
         }
         $items['items'][$id] = $quantity;
         Session::set('items', json_encode($items));
-        echo true;
+        echo '1';
         return;
         
     }
@@ -76,7 +84,7 @@ class OrderController extends Controller
         Session::add_msg('info', 'Your order canceled successfully!');
         $this->view->render('order/index');
     }
-    
+
 
     //submit order -by customer
     public function submit_order_action()
@@ -93,6 +101,19 @@ class OrderController extends Controller
         }
         $this->view->post_data = $this;
         $this->view->render('order/submit_order');
+    }
+
+    //save order as draft -by customer
+    public function save_draft()
+    {
+
+    }
+
+
+    //view all orders -by restaurant
+    public function view_all_orders()
+    {
+
     }
 
 }

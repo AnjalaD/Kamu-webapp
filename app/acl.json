@@ -5,7 +5,8 @@
         "Register": ["login", "register", "login_admin", "verify", "forgot", "reset_password"],
         "Restaurant": ["details"],
         "Search": ["*"],
-        "Restricted": ["*"]
+        "Restricted": ["*"],
+        "Order": ["add_to_order"]
     },
 
     "Logged_in": {
@@ -18,7 +19,7 @@
 
     "Customer": {
         "denied": {},
-        "Order": ["order", "add_to_order", "remove_from_order", "submit_order", "cancel_order"]
+        "Order": ["order", "remove_from_order", "submit_order", "cancel_order"]
     },
 
     "Owner": {
