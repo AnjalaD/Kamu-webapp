@@ -3,23 +3,23 @@ namespace app\models;
 use core\Model;
 use core\H;
 
-class OrderModel extends Model
+class SubmittedOrderModel extends Model
 {
-    public $customer_id, $items=null, $restaurant_id, $submit_time, $order_code, $submitted=0, $time_stamp;
+    public $customer_id, $items=null, $restaurant_id, $submit_time, $order_code, $accepted=0, $rejected=0, $completed=0, $time_stamp;
 
     public function __construct()
     {
-        $table = 'orders';
-        $model_name = 'OrdersModel';
+        $table = 'submitted_orders';
+        $model_name = 'SubmittedOrdersModel';
         parent::__construct($table, $model_name);
         $this->_soft_del = false;
     }
 
-    public function find_by_customer_id($customer_id, $params = [])
+    public function find_by_restaurant_id($restaurant_id, $params = [])
     {
         $conditions = [
-            'conditions' => 'customer_id=?',
-            'bind' => [$customer_id]
+            'conditions' => 'restaurant_id=?',
+            'bind' => [$restaurant_id]
         ];
         $conditions = array_merge($conditions, $params);
         return $this->find($conditions);
@@ -37,7 +37,7 @@ class OrderModel extends Model
 
     public function validator()
     {
-        $this->run_validation(new NumericValidator($this, ['field' => 'price', 'rule' => true, 'msg' => 'Price should be numeric!']));
+
     }
     
 }
