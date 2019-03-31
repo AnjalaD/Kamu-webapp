@@ -16,7 +16,7 @@ class OrderController extends Controller
         $this->load_model('OrderModel');
     }
 
-
+    //view current-order -by customer
     public function order_action()
     {
         $order = [];
@@ -26,6 +26,7 @@ class OrderController extends Controller
         $this->view->items = $this->itemsmodel->get_order_items($order);
         $this->view->render('order/index');
     }
+
 
     //$_SESSION['items']={'rid': restaurant_id, 'items' :[item_id : quantity,..., e:r]}
     public function add_to_order_action($restaurant_id, $id, $quantity=1){
@@ -47,6 +48,8 @@ class OrderController extends Controller
         
     }
 
+
+    //remove item from order -by customer
     public function remove_from_order_action($id)
     {
         if(Session::exists('items'))
@@ -65,13 +68,17 @@ class OrderController extends Controller
         $this->view->render('order/index');
     }
 
+
+    //cancel order -by customer
     public function cancel_order_action()
     {
         Session::delete('items');
         Session::add_msg('info', 'Your order canceled successfully!');
         $this->view->render('order/index');
     }
+    
 
+    //submit order -by customer
     public function submit_order_action()
     {
         $new_order = new OrderModel();
@@ -87,4 +94,5 @@ class OrderController extends Controller
         $this->view->post_data = $this;
         $this->view->render('order/submit_order');
     }
+
 }
