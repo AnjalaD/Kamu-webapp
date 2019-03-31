@@ -22,11 +22,11 @@ use core\FH;
     </div>
 
     <div class="form-check form-check-inline">
-        <input class="form-check-input" type="radio" name="dine_in" id="dine_in" value="1">
+        <input class="form-check-input" type="radio" name="type" id="dine_in" value="1">
         <label class="form-check-label" for="dinein">Dine In</label>
     </div>
     <div class="form-check form-check-inline">
-        <input class="form-check-input" type="radio" name="take_away" id="take_away" value="2">
+        <input class="form-check-input" type="radio" name="type" id="take_away" value="2">
         <label class="form-check-label" for="take_away">Take Away</label>
     </div>
     <br>
