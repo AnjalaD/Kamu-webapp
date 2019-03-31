@@ -110,7 +110,9 @@ class H
         <h4><?= $item->name ?></h4>
         <span class="description"><?= $item->description ?></span>
         <span class="price">LKR.<?= $item->price ?></span>
-        <a class="btn btn-info pull-right" onClick="addToOrder(<?=$item->restaurant_id?>, <?=$item->id?>)" ><i class="icon-shopping-cart"></i>Add to Order</a>
+        <br>
+        <i class="icon-shopping-cart icon-2x"></i>
+        <a class="btn btn-info pull-right" onClick="addToOrder(<?=$item->restaurant_id?>, <?=$item->id?>,this)" >Add to Order</a>
       </div>
       <div class="details">
         <span class="rating pull-right">
