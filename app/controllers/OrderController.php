@@ -31,7 +31,12 @@ class OrderController extends Controller
     }
 
 
-    //$_SESSION['items']={'rid': restaurant_id, 'items' :[item_id : quantity,..., e:r]}
+    //$_SESSION['items']={'rid': restaurant_id, 'items' :[item_id : quantity,..., i:q]}
+    /**
+     * echo->   -1 = prompt login as customer
+     *          0 = prompt cancel, new order( 1.save existing in as draft   2.dismiss existing )
+     *          1 = change 'add to cart' -> 'remove item' 
+     */
     public function add_to_order_action($restaurant_id, $id, $quantity=1){
         if(!(UserModel::current_user() instanceof CustomerModel))
         {
@@ -104,14 +109,27 @@ class OrderController extends Controller
     }
 
     //save order as draft -by customer
-    public function save_draft()
+    public function save_draft_action()
     {
+        $draft = new OrderModel();
+        if(Session::exists('items'))
+        {
+            $items = json_decode(Session::get('items'), true);
+            $draft->restaurant_id = $items['rid'];
+            $draft->items = $items['itmes'];
+            $draft->draft = 1;
+            if(!$draft->save())
+            {
+                Session::add_msg('danger', 'Error in "save as draft"!');
+            }
+        }
+        Router::redirect('order/order');
 
     }
 
 
     //view all orders -by restaurant
-    public function view_all_orders()
+    public function view_all_orders_action()
     {
 
     }

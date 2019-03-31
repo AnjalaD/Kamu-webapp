@@ -1,7 +1,7 @@
 function addToOrder(rid, id) {
     $.ajax({
         type: 'POST',
-        url: '/kamu_1.0/exported/order/add_to_order/' + rid + '/' + id ,
+        url: '/mvc/order/add_to_order/' + rid + '/' + id ,
         data: {
         },
         success: function(resp) {
