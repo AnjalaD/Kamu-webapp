@@ -12,11 +12,10 @@
         "Restaurants": "restaurant",
         "Add New": "restaurant/add"
     },
-
-    "Login": "register/login",
-    "Register": "register/register",
-    "Logout": "register/logout",
     "Add New Admin": "register/register_admin",
     "Order": "order/order",
-    "View Orders": "order/view_orders"
+    "View Orders": "order/view_orders",
+    "Login": "register/login",
+    "Register": "register/register",
+    "Logout": "register/logout"
 }

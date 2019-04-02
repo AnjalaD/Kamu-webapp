@@ -20,7 +20,7 @@ use core\H;
     <tbody>
         <?php foreach($this->restaurants as $restaurant): ?>
             <tr>
-                <td><a href="<?=SROOT . 'restaurant/details/' .$restaurant->id?>"><?=$restaurant->name?></td>
+                <td><a href="<?=SROOT . 'restaurant/details/' .$restaurant->id?>"><?=$restaurant->restaurant_name?></td>
                 <td><img src="<?=$restaurant->image_url?>" ><td>
                 <td><?=$restaurant->address?></td>
                 <td><?=$restaurant->email?></td>

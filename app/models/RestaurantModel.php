@@ -9,7 +9,7 @@ use core\H;
 
 class RestaurantModel extends Model
 {
-    public $name, $address, $telephone, $email, $lng, $lat, $image_url=DEFUALT_RESTAURANT_IMAGE, $deleted = 0;
+    public $resturant_name, $address, $telephone, $email, $lng, $lat, $image_url=DEFUALT_RESTAURANT_IMAGE, $deleted = 0;
 
     public function __construct(){
         $table = 'restaurants';
@@ -48,7 +48,7 @@ class RestaurantModel extends Model
         {
             foreach($items as $item)
             {
-                $results[] = $item->name;
+                $results[] = $item->restaurant_name;
             }
         }
         return array_unique($results);

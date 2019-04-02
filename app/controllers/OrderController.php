@@ -17,7 +17,9 @@ class OrderController extends Controller
         parent::__construct($controller, $acttion);
         $this->load_model('ItemsModel');
         $this->load_model('OrderModel');
+        $this->load_model('SubmittedOrderModel');
     }
+
 
     //view current-order -by customer
     public function order_action()
@@ -27,7 +29,8 @@ class OrderController extends Controller
             $order = json_decode(Session::get('items'), true)['items'];
         }
         $this->view->items = $this->itemsmodel->get_order_items($order);
-        $this->view->render('order/index');
+        $this->view->post_action = SROOT.'order/submit_order';
+        $this->view->render('order/order');
     }
 
 
@@ -78,7 +81,7 @@ class OrderController extends Controller
                 Session::delete('items');
             }
         }
-        $this->view->render('order/index');
+        $this->view->render('order/order');
     }
 
 
@@ -87,7 +90,7 @@ class OrderController extends Controller
     {
         Session::delete('items');
         Session::add_msg('info', 'Your order canceled successfully!');
-        $this->view->render('order/index');
+        $this->view->render('order/order');
     }
 
 
@@ -108,6 +111,7 @@ class OrderController extends Controller
         $this->view->render('order/submit_order');
     }
 
+
     //save order as draft -by customer
     public function save_draft_action()
     {
@@ -115,13 +119,16 @@ class OrderController extends Controller
         if(Session::exists('items'))
         {
             $items = json_decode(Session::get('items'), true);
+            $draft->customer_id = UserModel::current_user()->id;
             $draft->restaurant_id = $items['rid'];
-            $draft->items = $items['itmes'];
-            $draft->draft = 1;
+            $draft->items = json_encode($items['items']);
+            // H::dnd($draft);
             if(!$draft->save())
             {
                 Session::add_msg('danger', 'Error in "save as draft"!');
             }
+            Session::add_msg('success', 'Your order succesfully saved as a draft!');
+            Session::delete('items');
         }
         Router::redirect('order/order');
 
@@ -129,9 +136,10 @@ class OrderController extends Controller
 
 
     //view all orders -by restaurant
-    public function view_all_orders_action()
+    public function view_orders_action()
     {
-
+        $orders = $this->submittedordermodel->find_by_restaurant_id(UserModel::current_user()->restaurant_id);
+        H::dnd($orders);
     }
 
 }

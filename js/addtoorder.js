@@ -1,4 +1,4 @@
-function addToOrder(rid, id,element) {
+function addToOrder(rid, id, element) {
     $.ajax({
         type: 'POST',
         url: '/mvc/order/add_to_order/' + rid + '/' + id ,

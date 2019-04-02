@@ -2,7 +2,7 @@
 use core\FH;
 ?>
 
-<form>
+<form method="post" action=<?=$this->post_action?> >
     <div class="form-group">
         <div class="input-group date" id="datepicker" data-target-input="nearest">
             <input type="text" class="form-control datetimepicker-input" data-target="#datepicker" />

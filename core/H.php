@@ -107,7 +107,8 @@ class H
         <img src=<?= $item->image_url ?> >
       </div>
       <div class="info">
-        <h4><?= $item->name ?></h4>
+        <h4><?= $item->item_name ?></h4>
+        <span class="restaurant_name"><?= $item->restaurant_name ?></span>
         <span class="description"><?= $item->description ?></span>
         <span class="price">LKR.<?= $item->price ?></span>
         <br>

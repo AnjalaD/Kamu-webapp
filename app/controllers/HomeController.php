@@ -19,9 +19,7 @@ class HomeController extends Controller
 
 
     //test
-    public function test_ajax_action()
+    public function test_action()
     {
-        $resp = ['succes'=>true, 'data'=>['id'=>2,'name'=>'aw', 'hash'=>'sdq2ew2asda']];
-        $this->json_response($resp);
     }
 }

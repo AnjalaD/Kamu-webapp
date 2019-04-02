@@ -131,9 +131,9 @@ class Model
         if($this->_soft_del){
             if(array_key_exists('conditions', $params)){
                 if(is_array($params['conditions'])){
-                    $params['conditions'][] = "deleted!=1";
+                    $params['conditions'][] = $this->_table.".deleted!=1";
                 }else{
-                    $params['conditions'] .= "AND deleted!=1";
+                    $params['conditions'] .= "AND ".$this->_table.".deleted!=1";
                 }
             }else{
                 $params['conditions'] = "deleted !=1";

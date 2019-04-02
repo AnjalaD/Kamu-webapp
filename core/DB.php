@@ -28,7 +28,7 @@ class DB
 
 
     public function query($sql, $params = [], $class=false)
-    { 
+    {
         $this->_error = false;
         if ($this->_query = $this->_pdo->prepare($sql)) {
             $x = 1;
@@ -61,6 +61,7 @@ class DB
     protected function _read($table, $params = [], $class)
     {
         $condition_string = '';
+        $special = '';
         $bind = [];
         $order = '';
         $limit = '';
@@ -80,6 +81,10 @@ class DB
             }
         }
 
+        if (array_key_exists('special', $params)) {
+            $special = ' '.$params['special'];
+        }
+
         if (array_key_exists('bind', $params)) {
             $bind = $params['bind'];
         }
@@ -92,7 +97,7 @@ class DB
             $limit = ' LIMIT ' . $params['limit'];
         }
 
-        $sql = "SELECT * FROM {$table}{$condition_string}{$order}{$limit}";
+        $sql = "SELECT * FROM {$table}{$special}{$condition_string}{$order}{$limit}";
         if ($this->query($sql, $bind, $class)) {
             if (!empty($this->_result) && !count($this->_result)) return false;
             return true;

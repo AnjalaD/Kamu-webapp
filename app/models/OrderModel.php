@@ -5,6 +5,7 @@ use core\H;
 
 class OrderModel extends Model
 {
+    //$tyoe -> 0=takeaway, 1=dinning
     public $customer_id, $items=null, $restaurant_id, $type, $submit_time, $order_code, $submitted=0, $time_stamp;
 
     public function __construct()
@@ -37,7 +38,6 @@ class OrderModel extends Model
 
     public function validator()
     {
-        $this->run_validation(new NumericValidator($this, ['field' => 'price', 'rule' => true, 'msg' => 'Price should be numeric!']));
     }
     
 }
