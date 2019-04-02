@@ -62,6 +62,7 @@ class DB
     {
         $condition_string = '';
         $special = '';
+        $columns = '*';
         $bind = [];
         $order = '';
         $limit = '';
@@ -85,6 +86,10 @@ class DB
             $special = ' '.$params['special'];
         }
 
+        if (array_key_exists('columns', $params)) {
+            $special = ' '.$params['columns'];
+        }
+
         if (array_key_exists('bind', $params)) {
             $bind = $params['bind'];
         }
@@ -97,7 +102,7 @@ class DB
             $limit = ' LIMIT ' . $params['limit'];
         }
 
-        $sql = "SELECT * FROM {$table}{$special}{$condition_string}{$order}{$limit}";
+        $sql = "SELECT {$columns} FROM {$table}{$special}{$condition_string}{$order}{$limit}";
         if ($this->query($sql, $bind, $class)) {
             if (!empty($this->_result) && !count($this->_result)) return false;
             return true;
