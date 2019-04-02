@@ -33,6 +33,7 @@ class FoodItemModel extends Model
     {
         $conditions = [
             'conditions' => 'id=? AND restaurant_id=?',
+            
             'bind' => [$item_id, $restaurant_id]
         ];
 
@@ -44,7 +45,11 @@ class FoodItemModel extends Model
     {
         $conditions = [
             'special' => 'INNER JOIN restaurants ON items.restaurant_id = restaurants.id',
-            'conditions' => $field.' LIKE ? ',
+            'conditions' => $field.' LIKE ?',
+            'columns' => [
+                'items' => ['id', 'item_name', 'restaurant_id', 'description', 'price', 'image_url', 'rating', 'tags'],
+                'restaurants' => ['restaurant_name']
+            ],
             'bind' => ['%'.$data.'%']
         ];
         $items = $this->find($conditions);

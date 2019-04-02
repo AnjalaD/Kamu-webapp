@@ -29,6 +29,7 @@ class DB
 
     public function query($sql, $params = [], $class=false)
     {
+        // H::dnd($sql);
         $this->_error = false;
         if ($this->_query = $this->_pdo->prepare($sql)) {
             $x = 1;
@@ -73,7 +74,7 @@ class DB
                     $condition_string .= ' ' . $condition . ' AND';
                 }
                 $condition_string = trim($condition_string);
-                $condition_string = rtrim($condition_string, ' AND');
+                $condition_string = rtrim($condition_string, 'AND');
             } else {
                 $condition_string = $params['conditions'];
             }
@@ -87,7 +88,15 @@ class DB
         }
 
         if (array_key_exists('columns', $params)) {
-            $special = ' '.$params['columns'];
+            $columns = '';
+            foreach($params['columns'] as $t => $c)
+            {
+                foreach($c as $column)
+                {
+                    $columns .= $t.'.'.$column.', ';
+                }
+            }
+            $columns = rtrim($columns, ', ');
         }
 
         if (array_key_exists('bind', $params)) {

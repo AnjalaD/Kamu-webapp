@@ -133,7 +133,7 @@ class Model
                 if(is_array($params['conditions'])){
                     $params['conditions'][] = $this->_table.".deleted!=1";
                 }else{
-                    $params['conditions'] .= "AND ".$this->_table.".deleted!=1";
+                    $params['conditions'] .= " AND ".$this->_table.".deleted!=1";
                 }
             }else{
                 $params['conditions'] = "deleted !=1";
