@@ -39,5 +39,15 @@ class OrderModel extends Model
     public function validator()
     {
     }
+
+    public function get_drafts()
+    {
+        $params = [
+            'conditions' => 'customer_id = ?',
+            'bind' => [UserModel::current_user()->id]
+        ];
+        $drafts = $this->ordermodel->find($params);
+        return $drafts ? $drafts : [];
+    }
     
 }

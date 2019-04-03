@@ -109,7 +109,7 @@ class H
       <div class="info">
         <h4><?= $item->item_name ?></h4>
         <span class="restaurant_name">
-          <a href="<?=SROOT?>restaurant/restaurant/<?=$item->restaurant_id?>" ><?= $item->restaurant_name ?></a>
+          <a class="link" href="<?=SROOT?>restaurant/details/<?=$item->restaurant_id?>" ><?= $item->restaurant_name ?></a>
         </span>
         <span class="description"><?= $item->description ?></span>
         <span class="price">LKR.<?= $item->price ?></span>

@@ -44,8 +44,8 @@ class ItemsModel extends Model
     public function validator()
     {
         $this->run_validation(new RequiredValidator($this, ['field' => 'item_name', 'rule' => true, 'msg' => 'Name is required!']));
-        $this->run_validation(new RequiredValidator($this, ['field' => 'description', 'rule' => true, 'msg' => 'Name is required!']));
-        $this->run_validation(new RequiredValidator($this, ['field' => 'price', 'rule' => true, 'msg' => 'Name is required!']));
+        $this->run_validation(new RequiredValidator($this, ['field' => 'description', 'rule' => true, 'msg' => 'Descripton is required!']));
+        $this->run_validation(new RequiredValidator($this, ['field' => 'price', 'rule' => true, 'msg' => 'Price is required!']));
 
         $this->run_validation(new MaxValidator($this, ['field' => 'description', 'rule' => 255, 'msg' => 'Description should be maximum of 255 characters!']));
         $this->run_validation(new NumericValidator($this, ['field' => 'price', 'rule' => true, 'msg' => 'Price should be numeric!']));

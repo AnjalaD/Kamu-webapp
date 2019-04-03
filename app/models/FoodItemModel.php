@@ -7,7 +7,8 @@ use core\H;
 
 class FoodItemModel extends Model
 {
-    public $restaurant_id, $item_name, $description, $price, $image_url = DEFUALT_ITEM_IMAGE, $rating = 0, $tags = '', $restaurant_name;
+    public $restaurant_id, $item_name, $description, $price, $image_url = DEFUALT_ITEM_IMAGE, $rating = 0, $tags = '', $deleted = 0;
+    public $restaurant_name;
 
     public function __construct()
     {
@@ -47,7 +48,7 @@ class FoodItemModel extends Model
             'special' => 'INNER JOIN restaurants ON items.restaurant_id = restaurants.id',
             'conditions' => $field.' LIKE ?',
             'columns' => [
-                'items' => ['id', 'item_name', 'restaurant_id', 'description', 'price', 'image_url', 'rating', 'tags'],
+                'items' => ['*'],
                 'restaurants' => ['restaurant_name']
             ],
             'bind' => ['%'.$data.'%']

@@ -28,7 +28,6 @@ class SearchController extends Controller
                 $this->restaurant_action();
             }
         }
-
     }
 
     public function food_action()
@@ -44,6 +43,10 @@ class SearchController extends Controller
 
     public function restaurant_action()
     {
+        $data = $this->request->exists('search_string')? $this->request->get('search_string') : '';
+        $results = $this->restaurantmodel->search('restaurant_name', $data);
+
+        $this->view->restaurants = $results;
         $this->view->render('search/restaurant');
     }
 

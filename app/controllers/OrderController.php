@@ -29,6 +29,8 @@ class OrderController extends Controller
             $order = json_decode(Session::get('items'), true)['items'];
         }
         $this->view->items = $this->itemsmodel->get_order_items($order);
+
+        $this->view->drafts = $this->ordermodel->get_drafts();
         $this->view->post_action = SROOT.'order/submit_order';
         $this->view->render('order/order');
     }
