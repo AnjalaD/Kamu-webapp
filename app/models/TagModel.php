@@ -18,7 +18,7 @@ class TagModel extends Model
         $table = 'tags';
         $model_name = 'TagModel';
         parent::__construct($table, $model_name);
-        $this->_soft_del = true;
+        $this->_soft_del = false;
     }
 
     public function validator()
@@ -28,23 +28,18 @@ class TagModel extends Model
 
     public function save_tags($tags)
     {
-        $data = json_decode($tags);
+        // $data =json_decode('\''.trim($tags,'"').'\'');
+        $data =explode('#',$tags);
         foreach($data as $tag)
         {
             $new_tag = new TagModel($tag);
             $new_tag->save();
         }
 
-        $tag_names = '';
-        foreach($tags as $tag)
-        {
-            $tag_names .= '('.$tag.'), ';
-        }
-        $tag_names = rtrim($tag_names, ', ');
+        $tag_names = '("'.implode('","', $data).'")';
 
         $params = [
-            'conditions' => 'item_name IN ?',
-            'bind' => [$tag_names]
+            'conditions' => 'tag_name IN '.$tag_names,
         ];
 
         return $this->find($params);

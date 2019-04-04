@@ -20,10 +20,10 @@ class ItemTagModel extends Model
             $this->item_id = $item_id;
         }
         
-        $table = 'tags';
+        $table = 'item_tags';
         $model_name = 'TagModel';
         parent::__construct($table, $model_name);
-        $this->_soft_del = true;
+        $this->_soft_del = false;
     }
 
 
@@ -33,7 +33,7 @@ class ItemTagModel extends Model
     }
     
 
-    public function save_items_tags($item_id, $tags)
+    public function save_item_tags($item_id, $tags)
     {
         foreach($tags as $tag)
         {

@@ -54,7 +54,7 @@ class DB
                 $this->_error = true;
             }
 
-            return $this->results();
+            return $this;;
         }
     }
 

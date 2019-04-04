@@ -10,7 +10,7 @@ use core\FH;
             <img src="<?= SROOT ?>assets/img/150YelloLogoOnlyKamu.png" id="AddItem_Logo">
         </div>
         <div class="form-group" id="AddItem_ItemName_FormGroup">
-            <input class="form-control TextInput" name="item_name" type="text" name="ItemName" placeholder="Item Name" id="AddItem_EmailInput" value="<?= $this->item->name ?>">
+            <input class="form-control TextInput" name="item_name" type="text" placeholder="Item Name" id="AddItem_EmailInput" value="<?= $this->item->item_name ?>">
         </div>
         <div class="form-group" id="AddItem_Description_FormGroup">
             <input class="form-control" type="text" name="description" id="Additem_DescriptionInput" placeholder="Brief Description" value="<?= $this->item->description ?>">

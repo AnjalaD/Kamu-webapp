@@ -16,6 +16,8 @@ class ItemsController extends Controller
         parent::__construct($controller, $action);
         $this->view->set_layout('default');
         $this->load_model('ItemsModel');
+        $this->load_model('TagModel');
+        $this->load_model('ItemTagModel');
     }
 
 
@@ -37,16 +39,23 @@ class ItemsController extends Controller
         $item = new ItemsModel();
         if ($this->request->is_post()) {
             $this->request->csrf_check();
-            
+
+            $tags = $this->request->get('tag_array');
+            unset($_POST['tag_arry']);         
+
             $item->assign($this->request->get());
             $item->restaurant_id = UserModel::current_user()->restaurant_id;
 
             if (!empty($this->request->get('image'))) {
                 $item->image_url = SROOT.'img/items/'.time().'.png';
             }
-            // H::dnd($item);
+            
             if ($item->save()) {
                 H::save_image($this->request->get('image'), $item->image_url);
+
+                // H::dnd($this->tagmodel->save_tags($tags));   
+                $this->itemtagmodel->save_item_tags($item->last_inserted_id(), $this->tagmodel->save_tags($tags));
+
                 Session::add_msg('success', 'New item added successfully!');
                 Router::redirect('items');
             }
