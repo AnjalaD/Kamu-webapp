@@ -5,7 +5,7 @@ use core\FH;
 <form class="form-group" method="post" action=<?=$this->post_action?> >
     <?=FH::display_errors($this->display_errors)?>
     <?=FH::csrf_input()?>
-    <?= FH::input_block('text', 'Name', 'restaurant_name', $this->restaurant->restaurant_name, ['class' => 'form-control col-md-6'], ['class' => 'form-group']); ?>
+    <?= FH::input_block('text', 'Name', 'restaurant_name', $this->restaurant->restuarant_name, ['class' => 'form-control col-md-6'], ['class' => 'form-group']); ?>
     <?= FH::input_block('text', 'Address', 'address', $this->restaurant->address, ['class' => 'form-control col-md-6'], ['class' => 'form-group']); ?>
     <?= FH::input_block('text', 'Telephone', 'telephone', $this->restaurant->telephone, ['class' => 'form-control col-md-6'], ['class' => 'form-group']); ?>
     <?= FH::input_block('text', 'Email', 'email', $this->restaurant->email, ['class' => 'form-control col-md-6'], ['class' => 'form-group']); ?>

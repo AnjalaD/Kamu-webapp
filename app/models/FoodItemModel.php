@@ -17,17 +17,6 @@ class FoodItemModel extends Model
         parent::__construct($table, $model_name);
         $this->_soft_del = true;
     }
-    
-
-    // public function find_all_by_restaurant_id($restaurant_id)
-    // {
-    //     $conditions = [
-    //         'special' => 'INNER JOIN restaurants ON items.restaurant_id = restaurants.id',
-    //         'conditions' => 'restaurant_id = ?',
-    //         'bind' => [$restaurant_id]
-    //     ];
-    //     return H::dnd($this->find($conditions));
-    // }
 
 
     public function find_by_id_restaurant_id($item_id, $restaurant_id, $params = [])
@@ -44,16 +33,26 @@ class FoodItemModel extends Model
 
     public function search($field, $data)
     {
-        $conditions = [
-            'special' => 'INNER JOIN restaurants ON items.restaurant_id = restaurants.id',
-            'conditions' => $field.' LIKE ?',
-            'columns' => [
-                'items' => ['*'],
-                'restaurants' => ['restaurant_name']
-            ],
-            'bind' => ['%'.$data.'%']
-        ];
-        $items = $this->find($conditions);
+
+        $sql = '
+            SELECT I.*, R.restaurant_name,  GROUP_CONCAT(T.tag_name) as tags
+            FROM items as I
+            INNER JOIN restaurants R ON I.restaurant_id=R.id
+            LEFT JOIN item_tags IT ON I.id=IT.item_id
+            LEFT JOIN tags T ON IT.tag_id=T.id
+            WHERE '.$field.' LIKE ?
+            GROUP by I.id';
+
+        $items = $this->query($sql,['%'.$data.'%'], get_class($this));
+
+        if($items)
+        {
+            foreach($items as $item)
+            {
+                $item->tags = ($item->tags)? explode(',', $item->tags) : false ;
+            }
+        }
+        // H::dnd($items);
         return ($items) ? $items : [];
     }
     

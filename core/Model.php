@@ -73,7 +73,7 @@ class Model
         if (empty($fields)) return false;
         return $this->_db->insert($this->_table, $fields);
     }
-
+    
     public function update($id, $fields)
     {
         if (empty($fields) || $id == '') return false;
@@ -92,9 +92,9 @@ class Model
     }
 
 
-    public function query($sql, $bind = [])
+    public function query($sql, $bind = [], $class=false)
     {
-        return $this->_db->query($sql, $bind);
+        return $this->_db->query($sql, $bind, $class);
     }
 
     public function data()

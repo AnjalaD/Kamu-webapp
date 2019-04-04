@@ -112,6 +112,13 @@ class H
           <a class="link" href="<?=SROOT?>restaurant/details/<?=$item->restaurant_id?>" ><?= $item->restaurant_name ?></a>
         </span>
         <span class="description"><?= $item->description ?></span>
+        <p>
+        <?php if($item->tags) :?>
+          <?php foreach($item->tags as $tag) :?>
+            <a href="<?=SROOT?>search/search_by_tag/<?=$tag?>"> <?=$tag?> </a>
+          <?php endforeach ?>
+        <?php endif ?>
+        </p>
         <span class="price">LKR.<?= $item->price ?></span>
         <br>
         <i class="icon-shopping-cart icon-2x"></i>
