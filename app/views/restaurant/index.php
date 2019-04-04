@@ -12,6 +12,7 @@ use core\H;
 <table class="table table-striped table-bordered table-hover">
     <thead>
         <th>Name</th>
+        <th>Image</th>
         <th>Telephone</th>
         <th>Address</th>
         <th>Email</th>
@@ -20,8 +21,9 @@ use core\H;
     <tbody>
         <?php foreach($this->restaurants as $restaurant): ?>
             <tr>
-                <td><a href="<?=SROOT . 'restaurant/details/' .$restaurant->id?>"><?=$restaurant->name?></td>
-                <td><img src="<?=$restaurant->image_url?>" ><td>
+                <td><a href="<?=SROOT.'restaurant/details/'.$restaurant->id?>"><?=$restaurant->restaurant_name?></td>
+                <td><img src="<?=$restaurant->image_url?>" ></td>
+                <td><?=$restaurant->telephone?></td>
                 <td><?=$restaurant->address?></td>
                 <td><?=$restaurant->email?></td>
                 <td class="text-right">

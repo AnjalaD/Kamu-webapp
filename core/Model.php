@@ -73,7 +73,7 @@ class Model
         if (empty($fields)) return false;
         return $this->_db->insert($this->_table, $fields);
     }
-
+    
     public function update($id, $fields)
     {
         if (empty($fields) || $id == '') return false;
@@ -92,9 +92,9 @@ class Model
     }
 
 
-    public function query($sql, $bind = [])
+    public function query($sql, $bind = [], $class=false)
     {
-        return $this->_db->query($sql, $bind);
+        return $this->_db->query($sql, $bind, $class);
     }
 
     public function data()
@@ -131,9 +131,9 @@ class Model
         if($this->_soft_del){
             if(array_key_exists('conditions', $params)){
                 if(is_array($params['conditions'])){
-                    $params['conditions'][] = "deleted!=1";
+                    $params['conditions'][] = $this->_table.".deleted!=1";
                 }else{
-                    $params['conditions'] .= "AND deleted!=1";
+                    $params['conditions'] .= " AND ".$this->_table.".deleted!=1";
                 }
             }else{
                 $params['conditions'] = "deleted !=1";

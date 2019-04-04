@@ -22,7 +22,7 @@ class ItemsController extends Controller
     //show food items belongs to logged in owner
     public function index_action()
     {
-        $items = $this->itemsmodel->find_all_by_restaurant_id(UserModel::current_user()->restaurant_id, ['order' => 'name']);
+        $items = $this->itemsmodel->find_all_by_restaurant_id(UserModel::current_user()->restaurant_id, ['order' => 'item_name']);
         if (!$items) {
             $items = [];
         }

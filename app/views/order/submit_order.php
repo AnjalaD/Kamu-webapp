@@ -9,7 +9,5 @@ use core\H;
 <?php $this->end(); ?>
 
 <?php $this->start('body'); ?>
-<form method="post" action=<?=$this->post_action?> >
-</form>
     
 <?php $this->end(); ?>

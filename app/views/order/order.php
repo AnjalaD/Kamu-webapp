@@ -23,7 +23,7 @@ use core\H;
         <tbody>
             <?php foreach ($this->items as $item) : ?>
             <tr>
-                <td><?= $item->name ?></td>
+                <td><?= $item->item_name ?></td>
                 <td><?= $item->quantity ?></td>
                 <td><?= $item->price ?></td>
                 <td><a class="btn btn-danger" href="<?= SROOT . 'order/remove_from_order/' . $item->id ?>">Remove Item</a></td>
@@ -31,8 +31,9 @@ use core\H;
             <?php endforeach ?>
         </tbody>
     </table>
-    <button type="button" class="btn btn-primary"  data-toggle="modal" data-target="#order_submit_form">Submit Order</button>
-
+    <a type="button" class="btn btn-primary"  data-toggle="modal" data-target="#order_submit_form">Submit Order</a>
+    <a type="button" class="btn btn-secondray" href="<?= SROOT ?>order/save_draft">Save and Cancel</a>
+    <a type="button" class="btn btn-danger" href="<?= SROOT ?>order/cancel_order">Cancel Order</a>
 
     <div id="order_submit_form" class="modal fade" role="dialog">
         <div class="modal-dialog">
@@ -57,12 +58,7 @@ use core\H;
 
         </div>
     </div>
-
-
-
-
-
-    <a class="btn btn-danger" href="<?= SROOT ?>order/cancel_order">Cancel Order</a>
+    
     <?php else : ?>
     <h5>No items selected</h>
         <?php endif ?>

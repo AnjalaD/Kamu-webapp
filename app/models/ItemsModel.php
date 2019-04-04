@@ -10,7 +10,7 @@ use core\H;
 
 class ItemsModel extends Model
 {
-    public $restaurant_id, $name, $description, $price, $image_url = DEFUALT_ITEM_IMAGE, $rating = 0, $tags = '', $deleted = 0;
+    public $restaurant_id, $item_name, $description, $price, $image_url = DEFUALT_ITEM_IMAGE, $rating = 0, $tags = '', $deleted = 0;
 
     public function __construct()
     {
@@ -43,9 +43,9 @@ class ItemsModel extends Model
 
     public function validator()
     {
-        $this->run_validation(new RequiredValidator($this, ['field' => 'name', 'rule' => true, 'msg' => 'Name is required!']));
-        $this->run_validation(new RequiredValidator($this, ['field' => 'description', 'rule' => true, 'msg' => 'Name is required!']));
-        $this->run_validation(new RequiredValidator($this, ['field' => 'price', 'rule' => true, 'msg' => 'Name is required!']));
+        $this->run_validation(new RequiredValidator($this, ['field' => 'item_name', 'rule' => true, 'msg' => 'Name is required!']));
+        $this->run_validation(new RequiredValidator($this, ['field' => 'description', 'rule' => true, 'msg' => 'Descripton is required!']));
+        $this->run_validation(new RequiredValidator($this, ['field' => 'price', 'rule' => true, 'msg' => 'Price is required!']));
 
         $this->run_validation(new MaxValidator($this, ['field' => 'description', 'rule' => 255, 'msg' => 'Description should be maximum of 255 characters!']));
         $this->run_validation(new NumericValidator($this, ['field' => 'price', 'rule' => true, 'msg' => 'Price should be numeric!']));
@@ -56,7 +56,7 @@ class ItemsModel extends Model
         $results = [];
         if ($items = $this->search($field, $data)) {
             foreach ($items as $item) {
-                $results[] = $item->name;
+                $results[] = $item->item_name;
             }
         }
         return array_unique($results);
@@ -65,7 +65,7 @@ class ItemsModel extends Model
     public function search($field, $data)
     {
         $items = $this->find([
-            'conditions' => $field . ' LIKE ?',
+            'conditions' => $field . ' LIKE ? ',
             'bind' => ['%' . $data . '%']
         ]);
         return ($items) ? $items : [];
