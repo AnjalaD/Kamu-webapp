@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Apr 03, 2019 at 08:16 AM
+-- Generation Time: Apr 05, 2019 at 02:54 PM
 -- Server version: 10.1.37-MariaDB
 -- PHP Version: 7.3.1
 
@@ -102,7 +102,8 @@ INSERT INTO `items` (`id`, `restaurant_id`, `item_name`, `description`, `price`,
 (30, 2, 'Kottu', 'Enjoy the goodness of little bits of heaven', 300, '/mvc/img/items/1552914320.png', 0, 0),
 (31, 2, 'Fried Rice', 'Enjoy the taste of china ', 250, '/mvc/img/items/1552914407.png', 0, 0),
 (32, 2, 'Soup', 'Description of soup', 100, '/mvc/img/items/1552931132.png', 0, 0),
-(34, 1, 'Noodles', 'description of noodles', 140, '/mvc/img/items/1553572181.png', 0, 0);
+(34, 1, 'Noodles', 'description of noodles', 140, '/mvc/img/items/1553572181.png', 0, 0),
+(68, 1, 'Hoppers', 'asfewidn djsak uad s kdasddd sada ', 20, '/mvc/img/items/1554398279.png', 0, 0);
 
 -- --------------------------------------------------------
 
@@ -113,8 +114,19 @@ INSERT INTO `items` (`id`, `restaurant_id`, `item_name`, `description`, `price`,
 CREATE TABLE `item_tags` (
   `id` int(11) NOT NULL,
   `item_id` int(11) NOT NULL,
-  `tag_id` int(11) NOT NULL
+  `tag_id` int(11) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+
+--
+-- Dumping data for table `item_tags`
+--
+
+INSERT INTO `item_tags` (`id`, `item_id`, `tag_id`) VALUES
+(1, 30, 1),
+(2, 30, 5),
+(3, 68, 9),
+(4, 68, 5),
+(5, 68, 1);
 
 -- --------------------------------------------------------
 
@@ -229,6 +241,18 @@ CREATE TABLE `tags` (
   `tag_name` varchar(25) COLLATE utf8_unicode_ci NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
+--
+-- Dumping data for table `tags`
+--
+
+INSERT INTO `tags` (`id`, `tag_name`) VALUES
+(9, 'hoppers'),
+(2, 'kottu'),
+(5, 'new'),
+(6, 'sdkfs'),
+(1, 'spicy'),
+(8, 'tasty');
+
 -- --------------------------------------------------------
 
 --
@@ -322,7 +346,13 @@ ALTER TABLE `customers`
 -- AUTO_INCREMENT for table `items`
 --
 ALTER TABLE `items`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=35;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=69;
+
+--
+-- AUTO_INCREMENT for table `item_tags`
+--
+ALTER TABLE `item_tags`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- AUTO_INCREMENT for table `orders`
@@ -341,6 +371,12 @@ ALTER TABLE `owners`
 --
 ALTER TABLE `restaurants`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+
+--
+-- AUTO_INCREMENT for table `tags`
+--
+ALTER TABLE `tags`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=79;
 
 --
 -- AUTO_INCREMENT for table `user_sessions`
