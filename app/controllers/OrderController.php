@@ -124,7 +124,7 @@ class OrderController extends Controller
             $draft->customer_id = UserModel::current_user()->id;
             $draft->restaurant_id = $items['rid'];
             $draft->items = json_encode($items['items']);
-            // H::dnd($draft);
+            
             if(!$draft->save())
             {
                 Session::add_msg('danger', 'Error in "save as draft"!');

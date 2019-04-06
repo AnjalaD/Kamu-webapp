@@ -26,16 +26,19 @@ class RegisterController extends Controller
     //login for customer and owner
     public function login_action($user_type='')
     {
+        $redirect = '';
+        $page='register/login';
         if($user_type == 'owner')
         {
             $new_user = new OwnerModel();
             $modelname = 'ownermodel';
+            $redirect = 'restaurant/my_restaurant';
         }else
         {
             $new_user = new CustomerModel();
             $modelname = 'customermodel';
         }
-        $this->login($new_user, $modelname);
+        $this->login($new_user, $modelname, $page, $redirect);
     }
 
     //login for admin
@@ -46,7 +49,7 @@ class RegisterController extends Controller
 
 
     //base login function
-    public function login($new_user, $modelname, $page='register/login')
+    public function login($new_user, $modelname, $page='register/login', $redirect='')
     {
         if($this->request->is_post() && $this->request->exists('submit'))
         {
@@ -61,7 +64,7 @@ class RegisterController extends Controller
                 {
                     $remember = (isset($_POST['remember_me']) && $this->request->get('remember_me')) ? true :false;
                     $user->login($remember);
-                    Router::redirect('');
+                    Router::redirect($redirect);
                 }else
                 {
                     $new_user->add_error_message('email', 'Email and password does not match');
@@ -186,7 +189,8 @@ class RegisterController extends Controller
 
 
     //demo
-    public function demo_action(){
-        // H::dnd($this->request->get());
+    public function demo_action()
+    {
+
     }
 } 

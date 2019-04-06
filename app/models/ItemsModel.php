@@ -59,7 +59,7 @@ class ItemsModel extends Model
                 $results[] = $item->item_name;
             }
         }
-        return array_unique($results);
+        return ($results);
     }
 
     public function search($field, $data)

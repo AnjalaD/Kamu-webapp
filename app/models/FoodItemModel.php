@@ -19,16 +19,19 @@ class FoodItemModel extends Model
     }
 
 
-    public function find_by_id_restaurant_id($item_id, $restaurant_id, $params = [])
+    public function find_by_item_id_restaurant_id($item_id, $restaurant_id)
     {
-        $conditions = [
-            'conditions' => 'id=? AND restaurant_id=?',
-            
-            'bind' => [$item_id, $restaurant_id]
-        ];
+        $sql = '
+            SELECT I.*, GROUP_CONCAT(T.tag_name) as tags
+            FROM items as I
+            LEFT JOIN item_tags IT ON I.id=IT.item_id
+            LEFT JOIN tags T ON IT.tag_id=T.id
+            WHERE I.id = ? AND I.restaurant_id = ?
+            GROUP by I.id ;';
 
-        $conditions = array_merge($conditions, $params);
-        return $this->find_first($conditions, true);
+        $items = $this->query($sql, [$item_id, $restaurant_id], get_class($this));
+        return $items[0];
+        
     }
 
     public function search($field, $data)
@@ -41,9 +44,9 @@ class FoodItemModel extends Model
             LEFT JOIN item_tags IT ON I.id=IT.item_id
             LEFT JOIN tags T ON IT.tag_id=T.id
             WHERE '.$field.' LIKE ?
-            GROUP by I.id';
+            GROUP by I.id ;';
 
-        $items = $this->query($sql,['%'.$data.'%'], get_class($this));
+        $items = $this->query($sql, ['%'.$data.'%'], get_class($this));
 
         if($items)
         {

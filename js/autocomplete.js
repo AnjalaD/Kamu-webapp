@@ -1,17 +1,16 @@
 function autoComplete(searchInput, searchType = false) {
-    $.ajax({
-        type: 'POST',
-        url: '/mvc/search/auto_complete/' + searchInput.value,
-        data: {
+    $.post(
+        '/mvc/search/auto_complete/' + searchInput.value,
+        {
             type: searchType
         },
-        success: function(resp) {
-            // console.log(resp);
+        function(resp) {
+            console.log(resp);
             temp = '';
             for (i = 0; i <= resp.length; i++) {
                 temp += '<option value="' + resp[i] + '">' + resp[i] + '</option>';
             }
             document.getElementById('food').innerHTML = (temp);
         }
-    });
+    );
 }

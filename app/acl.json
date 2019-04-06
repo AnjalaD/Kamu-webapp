@@ -25,6 +25,7 @@
     "Owner": {
         "denied": {},
         "Items": ["*"],
+        "Restaurant" : ["my_restaurant"],
         "Order": ["view_orders"]
     },
 

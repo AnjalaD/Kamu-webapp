@@ -55,7 +55,7 @@ function deleteTag(btn){
 
 function updateInput(){
     var hidden_input = document.getElementById("added_tags_array");
-    hidden_input.value = added_tags.join('#');
+    hidden_input.value = added_tags.join(',');
 
     console.log(hidden_input.value);
 }

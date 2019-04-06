@@ -1,10 +1,8 @@
 function addToOrder(rid, id, element) {
-    $.ajax({
-        type: 'POST',
-        url: '/mvc/order/add_to_order/' + rid + '/' + id ,
-        data: {
-        },
-        success: function(resp) {
+    $.post(
+        '/mvc/order/add_to_order/' + rid + '/' + id,
+        {},
+        function(resp) {
             console.log(resp);
             if(resp=='1'){
                 element.innerHTML = 'Remove Item';
@@ -17,5 +15,5 @@ function addToOrder(rid, id, element) {
             }
             if(!resp) window.alert('Please select food from one restaurant');
         }
-    });
+    );
 }

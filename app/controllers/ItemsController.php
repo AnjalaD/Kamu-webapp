@@ -16,6 +16,7 @@ class ItemsController extends Controller
         parent::__construct($controller, $action);
         $this->view->set_layout('default');
         $this->load_model('ItemsModel');
+        $this->load_model('FoodItemModel');
         $this->load_model('TagModel');
         $this->load_model('ItemTagModel');
     }
@@ -40,20 +41,19 @@ class ItemsController extends Controller
         if ($this->request->is_post()) {
             $this->request->csrf_check();
 
-            $tags = $this->request->get('tag_array');
-            unset($_POST['tag_arry']);         
+            $tags = explode(',', $this->request->get('tag_array'));
+            unset($_POST['tag_arry']);
 
             $item->assign($this->request->get());
             $item->restaurant_id = UserModel::current_user()->restaurant_id;
 
             if (!empty($this->request->get('image'))) {
-                $item->image_url = SROOT.'img/items/'.time().'.png';
+                $item->image_url = SROOT . 'img/items/' . time() . '.png';
             }
-            
+
             if ($item->save()) {
                 H::save_image($this->request->get('image'), $item->image_url);
 
-                // H::dnd($this->tagmodel->save_tags($tags));   
                 $this->itemtagmodel->save_item_tags($item->last_inserted_id(), $this->tagmodel->save_tags($tags));
 
                 Session::add_msg('success', 'New item added successfully!');
@@ -66,7 +66,52 @@ class ItemsController extends Controller
         $this->view->post_action = SROOT . 'items/add';
         $this->view->render('items/add');
     }
-    
+
+
+    //edit existing food item
+    public function edit_action($item_id)
+    {
+        $item = $this->fooditemmodel->find_by_item_id_restaurant_id((int)$item_id, OwnerModel::current_user()->restaurant_id);
+        $item->tags = explode(',', $item->tags);
+        if ($item) {
+            if ($this->request->is_post()) {
+                $this->request->csrf_check();
+                $item->assign($this->request->get());
+
+                $tags = explode(',', $this->request->get('tag_array'));
+                unset($_POST['tag_arry']);
+
+                $new_item = new ItemsModel();
+                $new_item->assign($this->request->get());
+                $new_item->id = $item->id;
+                $new_item->restaurant_id = $item->restaurant_id;
+                $new_item->image_url = $item->image_url;
+
+                if (!empty($this->request->get('image'))) {
+                    $new_item->image_url = SROOT . 'img/items/' . time() . '.png';
+                }
+
+                if ($new_item->save()) {
+                    H::save_image($this->request->get('image'), $new_item->image_url);
+
+                    $this->itemtagmodel->save_item_tags($item->last_inserted_id(), $this->tagmodel->save_tags($tags));
+
+                    Session::add_msg('success', 'Changes saved successfully!');
+                    Router::redirect('items');
+                }
+            }
+
+            $this->view->item = $item;
+            $this->view->display_errors = $item->get_error_messages();
+            $this->view->post_action = SROOT . 'items/edit/' . $item->id;
+            $this->view->render('items/edit');
+            return;
+        }
+        Session::add_msg('danger', 'Something went wrong!');
+        Router::redirect('items');
+    }
+
+
     //show details of a selected food item
     public function details_action($id)
     {
@@ -95,8 +140,7 @@ class ItemsController extends Controller
         $item = $this->itemsmodel->find_by_id_restaurant_id((int)$item_id, OwnerModel::current_user()->restaurant_id);
         if ($item) {
             $item->deleted = 0;
-            if(!$item->save())
-            {
+            if (!$item->save()) {
                 Session::add_msg('danger', 'Something went wrong!');
             }
         }
@@ -114,36 +158,4 @@ class ItemsController extends Controller
         Session::add_msg('success', 'Item deleted successfully!');
         Router::redirect('items');
     }
-
-
-    //edit existing food item
-    public function edit_action($item_id)
-    {
-        $item = $this->itemsmodel->find_by_id_restaurant_id((int)$item_id, OwnerModel::current_user()->restaurant_id);
-        if ($item) {
-            if ($this->request->is_post()) {
-                $this->request->csrf_check();
-
-                $item->assign($this->request->get());
-
-                if (!empty($this->request->get('image'))) {
-                    $item->image_url = SROOT.'img/items/'.time().'.png';
-                }
-                if ($item->save()) {
-                    H::save_image($this->request->get('image'), $item->image_url);
-                    Session::add_msg('success', 'Changes saved successfully!');
-                    Router::redirect('items');
-                }
-            }
-
-            $this->view->item = $item;
-            $this->view->display_errors = $item->get_error_messages();
-            $this->view->post_action = SROOT . 'items/edit/' . $item->id;
-            $this->view->render('items/edit');
-            return;
-        }
-        Session::add_msg('danger', 'Something went wrong!');
-        Router::redirect('items');
-    }
-
 }

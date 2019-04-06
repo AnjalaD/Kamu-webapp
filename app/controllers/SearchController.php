@@ -67,6 +67,7 @@ class SearchController extends Controller
                 $result = $this->restaurantmodel->auto_complete('restaurant_name',$data);
             }
         }
+        // H::dnd($result);
         $this->json_response($result);
     }
 

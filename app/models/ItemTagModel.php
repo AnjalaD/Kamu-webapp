@@ -26,10 +26,21 @@ class ItemTagModel extends Model
         $this->_soft_del = false;
     }
 
+    public function delete_tags($item_id)
+    {
+        $sql = "DELETE FROM {$this->_table} WHERE item_id = ? ;";
+        $result = $this->query($sql, [$item_id], get_class($this));
+        return $result;
+    }
+
+    public function get_tags_by_item_id($item_id)
+    {
+
+    }
 
     public function validator()
     {   
-
+        
     }
     
 

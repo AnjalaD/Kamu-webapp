@@ -110,5 +110,9 @@ class RestaurantController extends Controller
         Router::redirect('restaurant');
     }
 
-    
+    //view owner's restaurant - editable page
+    public function my_restaurant_action()
+    {
+
+    }
 }

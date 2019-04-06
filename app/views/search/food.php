@@ -25,7 +25,7 @@ use core\FH;
         <div class="col-md-2 card bg-light m-1 p-1">
             <?php $this->partial('search', 'filters'); ?>
         </div>
-        <div class="col-md-8 card m-1 p-1">
+        <div class="col-md-8 card m-1 p-1" id="items">
             <?= $this->results ?>
         </div>
         <div class="col-md-2 card bg-light m-1 p-1">
@@ -38,10 +38,22 @@ use core\FH;
 <?php $this->start('script') ?>
 <script src="<?= SROOT ?>js/autocomplete.js"></script>
 <script src="<?=SROOT?>js/addtoorder.js"></script>
+<script src="<?=SROOT?>js/sortandfilter.js"></script>
 <script>
+    $('#filters').submit(function(e) {
+        e.preventDefault();
+        inputs = $('#filters :input');
+        data = {};
+
+        inputs.each(function() {
+        data[this.name] = $(this).val();
+        });
+        console.log(data);
+        getItemCards(data, 'items');
+    });
+
     var search = document.getElementById('search');
-    search.onkeyup = function() {
-        autoComplete(search, 'food');
-    };
+    search.onkeyup = function(){autoComplete(search, 'food')};
+    
 </script>
 <?php $this->end(); ?> 

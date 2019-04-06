@@ -28,15 +28,13 @@ class TagModel extends Model
 
     public function save_tags($tags)
     {
-        // $data =json_decode('\''.trim($tags,'"').'\'');
-        $data =explode('#',$tags);
-        foreach($data as $tag)
+        foreach($tags as $tag)
         {
             $new_tag = new TagModel($tag);
             $new_tag->save();
         }
 
-        $tag_names = '("'.implode('","', $data).'")';
+        $tag_names = '("'.implode('","', $tags).'")';
 
         $params = [
             'conditions' => 'tag_name IN '.$tag_names,
