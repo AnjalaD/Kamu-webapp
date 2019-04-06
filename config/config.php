@@ -11,7 +11,7 @@ define('DEFAULT_CONTROLLER', 'Home'); //if no controller is set Route will use t
 define('DEFAULT_LAYOUT', 'default'); //if no layout is set controller use this
 
 // define('SROOT', '/Kamu_1.0/exported/'); //set this for / for a live server
-define('SROOT', '/mvc/');
+define('SROOT', '/KamuWebApp/');
 // define('SROOT', '/mvc/'); //set this for / for a live server
 // define('WEB_ADDRESS', 'https://localhost/Kamu_1.0/exported/');
 define('WEB_ADDRESS', 'https://localhost/mvc/');
