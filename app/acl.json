@@ -11,7 +11,7 @@
 
     "Logged_in": {
         "denied": {
-            "Register": ["login", "register", "login_admin", "forgot", "reset_password"]
+            "Register": ["login", "register", "forgot", "reset_password"]
         },
         "Home": ["*"],
         "Register": ["logout"]

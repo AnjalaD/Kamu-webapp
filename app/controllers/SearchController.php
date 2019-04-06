@@ -70,4 +70,9 @@ class SearchController extends Controller
         $this->json_response($result);
     }
 
+    public function search_by_tag_action($tag)
+    {
+
+    }
+
 }

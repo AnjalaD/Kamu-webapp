@@ -73,7 +73,7 @@ class Model
         if (empty($fields)) return false;
         return $this->_db->insert($this->_table, $fields);
     }
-
+    
     public function update($id, $fields)
     {
         if (empty($fields) || $id == '') return false;
@@ -92,9 +92,10 @@ class Model
     }
 
 
-    public function query($sql, $bind = [])
+    public function query($sql, $bind = [], $class=false)
     {
-        return $this->_db->query($sql, $bind);
+        $this->_db->query($sql, $bind, $class);
+        return $this->_db->error()? false : $this->_db->results();
     }
 
     public function data()
@@ -178,5 +179,10 @@ class Model
     public function is_new()
     {
         return (property_exists($this, 'id') && !empty($this->id))? false : true;
+    }
+
+    public function last_inserted_id()
+    {
+        return $this->_db->last_id();
     }
 }
