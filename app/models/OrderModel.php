@@ -46,7 +46,7 @@ class OrderModel extends Model
             'conditions' => 'customer_id = ?',
             'bind' => [UserModel::current_user()->id]
         ];
-        $drafts = $this->ordermodel->find($params);
+        $drafts = $this->find($params);
         return $drafts ? $drafts : [];
     }
     

@@ -83,7 +83,8 @@ class OrderController extends Controller
                 Session::delete('items');
             }
         }
-        $this->view->render('order/order');
+        Router::redirect('order/order');
+        // $this->view->render('order/order');
     }
 
 
