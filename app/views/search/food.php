@@ -13,7 +13,7 @@ use core\FH;
 <div class="container-fluid">
     <form method="POST" id="search">
         <div class="input-group">
-            <input type="text" autocomplete="off" class="form-control" list="food" name="search_string" id="search" value="<?= $this->post_data ?>" placeholder="Enter what you want">
+            <input type="text" autocomplete="off" class="form-control" list="food" name="search_string" id="search_string" value="<?= $this->post_data ?>" placeholder="Enter what you want">
             <div class="input-group-append">
                 <input type="submit" class="btn btn-outline-secondary" value="Search" name="food" id="search">
             </div>
@@ -57,8 +57,8 @@ use core\FH;
         getItemCards(data, 'items');
     }
 
-    var search = document.getElementById('search');
-    search.onkeyup = function(){autoComplete(search, 'food')};
+    var search = document.getElementById('search_string');
+    search.onkeyup = function(){autoComplete(search.value, 'food')};
     
 </script>
 <?php $this->end(); ?> 

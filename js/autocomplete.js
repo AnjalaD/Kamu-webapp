@@ -1,6 +1,6 @@
-function autoComplete(searchInput, searchType = false) {
+function autoComplete(searchInputValue, searchType = false) {
     $.post(
-        `${SROOT}search/auto_complete/` + searchInput.value,
+        `${SROOT}search/auto_complete/` + searchInputValue,
         {
             type: searchType
         },
