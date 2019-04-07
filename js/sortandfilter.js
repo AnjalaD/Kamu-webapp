@@ -1,9 +1,8 @@
 function getItemCards(data, divId){
     $.post(
-        'mvc/search/fiters/food', 
+        '/mvc/search/filter/1', 
         data,
         function (resp) {
-            console.log(resp);
             if(!resp){
                 $('#'+divId).html("<p>No items found</p>");
             }else{

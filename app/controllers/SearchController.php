@@ -76,4 +76,22 @@ class SearchController extends Controller
 
     }
 
+    public function filter_action($type)
+    {
+        $response = '';
+        $filters = $this->request->get();
+        // H::dnd($filters);
+        if($type==1)
+        {
+            $items = $this->fooditemmodel->filter($filters);
+            $response = H::create_card_list($items);
+            // H::dnd($response);
+        }
+        elseif($type==2)
+        {
+            $restaurants = $this->restaurantmodel->filter($filters);
+        }
+        echo ($response);
+    }
+
 }

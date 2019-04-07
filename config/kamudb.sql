@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Apr 05, 2019 at 02:54 PM
+-- Generation Time: Apr 07, 2019 at 08:50 AM
 -- Server version: 10.1.37-MariaDB
 -- PHP Version: 7.3.1
 
@@ -83,7 +83,7 @@ INSERT INTO `customers` (`id`, `first_name`, `last_name`, `email`, `password`, `
 
 CREATE TABLE `items` (
   `id` int(11) NOT NULL,
-  `restaurant_id` int(11) DEFAULT NULL,
+  `restaurant_id` int(11) NOT NULL,
   `item_name` varchar(100) COLLATE utf8_unicode_ci NOT NULL,
   `description` varchar(500) COLLATE utf8_unicode_ci NOT NULL,
   `price` double NOT NULL,
@@ -103,7 +103,8 @@ INSERT INTO `items` (`id`, `restaurant_id`, `item_name`, `description`, `price`,
 (31, 2, 'Fried Rice', 'Enjoy the taste of china ', 250, '/mvc/img/items/1552914407.png', 0, 0),
 (32, 2, 'Soup', 'Description of soup', 100, '/mvc/img/items/1552931132.png', 0, 0),
 (34, 1, 'Noodles', 'description of noodles', 140, '/mvc/img/items/1553572181.png', 0, 0),
-(68, 1, 'Hoppers', 'asfewidn djsak uad s kdasddd sada ', 20, '/mvc/img/items/1554398279.png', 0, 0);
+(147, 2, 'Hoppers', 'asd ewo o o for kok gpd fdr gfd.', 20, '/mvc/img/items/1554563173.png', 0, 0),
+(151, 2, 'Rice', 'asfewidn djsak uad s kdasddd sada ', 150, '/mvc/img/items/1554564091.png', 0, 0);
 
 -- --------------------------------------------------------
 
@@ -124,9 +125,14 @@ CREATE TABLE `item_tags` (
 INSERT INTO `item_tags` (`id`, `item_id`, `tag_id`) VALUES
 (1, 30, 1),
 (2, 30, 5),
-(3, 68, 9),
-(4, 68, 5),
-(5, 68, 1);
+(18, 147, 9),
+(19, 147, 5),
+(20, 147, 8),
+(21, 150, 83),
+(22, 150, 82),
+(23, 151, 83),
+(24, 151, 5),
+(25, 151, 82);
 
 -- --------------------------------------------------------
 
@@ -182,7 +188,7 @@ CREATE TABLE `owners` (
 
 INSERT INTO `owners` (`id`, `restaurant_id`, `first_name`, `last_name`, `email`, `password`, `hash`, `verified`, `deleted`) VALUES
 (1, 1, 'Kamal', 'Nimal', 'ad@ad.com', '$2y$10$n0qUvrVBnVt4oRtk6RX1gOmTYVNHtBWiUyRftM7mxMhJIc4XtaBjO', 'ac627ab1ccbdb62ec96e702f07f6425b', 0, 0),
-(2, 0, 'Thumula', 'Perera', 'thumula@gmail.com', '$2y$10$dhEnRK0VJnAMe7x7Dw52BeyVozeRa7ejhBc2/uhvbc/cykh0o4PlS', '92cc227532d17e56e07902b254dfad10', 0, 0);
+(2, 2, 'Thumula', 'Perera', 'thumula@gmail.com', '$2y$10$dhEnRK0VJnAMe7x7Dw52BeyVozeRa7ejhBc2/uhvbc/cykh0o4PlS', '92cc227532d17e56e07902b254dfad10', 0, 0);
 
 -- --------------------------------------------------------
 
@@ -247,8 +253,10 @@ CREATE TABLE `tags` (
 
 INSERT INTO `tags` (`id`, `tag_name`) VALUES
 (9, 'hoppers'),
+(83, 'hot'),
 (2, 'kottu'),
 (5, 'new'),
+(82, 'rice'),
 (6, 'sdkfs'),
 (1, 'spicy'),
 (8, 'tasty');
@@ -346,13 +354,13 @@ ALTER TABLE `customers`
 -- AUTO_INCREMENT for table `items`
 --
 ALTER TABLE `items`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=69;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=152;
 
 --
 -- AUTO_INCREMENT for table `item_tags`
 --
 ALTER TABLE `item_tags`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=26;
 
 --
 -- AUTO_INCREMENT for table `orders`
@@ -376,7 +384,7 @@ ALTER TABLE `restaurants`
 -- AUTO_INCREMENT for table `tags`
 --
 ALTER TABLE `tags`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=79;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=84;
 
 --
 -- AUTO_INCREMENT for table `user_sessions`

@@ -11,7 +11,7 @@ use core\FH;
 <?php $this->start('body'); ?>
 
 <div class="container-fluid">
-    <form method="POST" action="<?= SROOT ?>search">
+    <form method="POST" id="search">
         <div class="input-group">
             <input type="text" autocomplete="off" class="form-control" list="food" name="search_string" id="search" value="<?= $this->post_data ?>" placeholder="Enter what you want">
             <div class="input-group-append">
@@ -40,17 +40,22 @@ use core\FH;
 <script src="<?=SROOT?>js/addtoorder.js"></script>
 <script src="<?=SROOT?>js/sortandfilter.js"></script>
 <script>
-    $('#filters').submit(function(e) {
-        e.preventDefault();
-        inputs = $('#filters :input');
-        data = {};
 
-        inputs.each(function() {
-        data[this.name] = $(this).val();
-        });
+    $('form').submit(function(e) {
+        sendFilters();
+        return false;
+    });
+
+    function sendFilters(){
+        
+        data = {
+            'search' : $('input[name=search_string]').val(),
+            'sort_by' : $('input[name=sort_by]:checked').val(),
+            'price_filter' : $('input[name=price_filter]').val()
+        };
         console.log(data);
         getItemCards(data, 'items');
-    });
+    }
 
     var search = document.getElementById('search');
     search.onkeyup = function(){autoComplete(search, 'food')};
