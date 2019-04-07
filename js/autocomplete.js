@@ -1,6 +1,6 @@
 function autoComplete(searchInput, searchType = false) {
     $.post(
-        '/mvc/search/auto_complete/' + searchInput.value,
+        `${SROOT}search/auto_complete/` + searchInput.value,
         {
             type: searchType
         },

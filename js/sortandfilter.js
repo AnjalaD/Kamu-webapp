@@ -1,6 +1,6 @@
 function getItemCards(data, divId){
     $.post(
-        '/mvc/search/filter/1', 
+        `${SROOT}search/filter/1`, 
         data,
         function (resp) {
             if(!resp){

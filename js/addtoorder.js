@@ -1,6 +1,6 @@
 function addToOrder(rid, id, element) {
     $.post(
-        '/mvc/order/add_to_order/' + rid + '/' + id,
+        `${SROOT}order/add_to_order/` + rid + '/' + id,
         {},
         function(resp) {
             console.log(resp);

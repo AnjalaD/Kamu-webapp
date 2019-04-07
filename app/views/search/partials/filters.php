@@ -36,8 +36,8 @@
         <label for="price_filter">Price</label>
         <div>
             <span class="font-weight">0</span>
-            <input type="range" min="0" max="5000" step="100"  value="1000" id="price_filter" name="price_filter">
-            <span class="font-weight">5000</span>
+            <input type="range" min="0" max="1000" step="100"  value="300" id="price_filter" name="price_filter">
+            <span class="font-weight">1000</span>
         </div>
     </div>
 </div>
