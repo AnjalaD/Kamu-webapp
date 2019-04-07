@@ -49,10 +49,11 @@ class HMap {
     addMarkerToGroup(group, latitude, longitude, label = 'default marker',icon="") {
         console.log(icon);
         if(icon==""){
-            icon = "user_location_icon.png";
+            var marker = new H.map.Marker({ lat: latitude, lng: longitude });
+        }else{
+            var icon = new H.map.Icon(icon);
+            var marker = new H.map.Marker({ lat: latitude, lng: longitude },{icon:icon});
         }
-        var icon = new H.map.Icon(icon);
-        var marker = new H.map.Marker({ lat: latitude, lng: longitude },{icon:icon});
         var html = `<div><a href = "www.google.lk">${label}</a></div>`
         marker.setData(html);
         group.addObject(marker);
