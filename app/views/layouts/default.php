@@ -29,7 +29,7 @@ use core\Session;
     <?= $this->content('head') ?>
 </head>
 
-<body style="display:none">
+<body style="opacity:0;">
     <?php include 'navbar.php' ?>
     <?= Session::display_msgs() ?>
     <?= $this->content('body') ?>
@@ -49,9 +49,10 @@ use core\Session;
         // page loading
         $(document).ready(function() {
             // to fade in on page load
-            $("body").css("display", "none");
-            $("body").fadeIn(800);
-            $("body").css("display", "");           
+            // $("body").css("display", "");
+            // $("body").fadeIn(800);
+            // $("body").css("display", "");
+            $("body").animate({opacity:1},500);        
             
         })
         // page exiting

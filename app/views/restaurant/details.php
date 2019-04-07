@@ -29,7 +29,7 @@
                     <h2 class="h4"><i class="fa fa-location-arrow"></i> Locate Us</h2>
                     <div class="form-row">
                         <div class="col-12">
-                            <div class="static-map" id="restaurant_map_container" style="height:20rem;">
+                            <div class="static-map" id="restaurant_map_container" style="height:20rem; ">
 
                             </div>
                         </div>
