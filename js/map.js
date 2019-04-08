@@ -9,6 +9,16 @@ ex:
     <div style="width: auto; height: 400px" id="mapContainer2"></div>
     <div style="width: auto; height: 400px" id="mapContainer3"></div>
 
+
+    <link rel="stylesheet" type="text/css" href="https://js.api.here.com/v3/3.0/mapsjs-ui.css?dp-version=1542186754" />
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css" integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf" crossorigin="anonymous">
+    <script src="https://js.api.here.com/v3/3.0/mapsjs-core.js" type="text/javascript" charset="utf-8"></script>
+    <script src="https://js.api.here.com/v3/3.0/mapsjs-service.js" type="text/javascript" charset="utf-8"></script>
+    <script type="text/javascript" src="https://js.api.here.com/v3/3.0/mapsjs-ui.js"></script>
+    <script type="text/javascript" src="https://js.api.here.com/v3/3.0/mapsjs-mapevents.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+
+
     <script src="map.js" type="text/javascript"></script>
     <script>
         mymap = HMap.getInstance();
@@ -205,7 +215,7 @@ class HMap {
            }
     }
 
-    configureMapToDragMarker(map,behavior){
+    configureMapToDragMarker(map,behavior,latId,lngId){
         // disable the default draggability of the underlying map
         // when starting to drag a marker object:
         map.addEventListener('dragstart', function (ev) {
@@ -223,6 +233,10 @@ class HMap {
             if (target instanceof mapsjs.map.Marker) {
                 behavior.enable();
                 console.log(target.getPosition().lat,target.getPosition().lng);
+
+                //setting lat lng values to form
+                $(`#${latId}`).val(target.getPosition().lat);
+                $(`#${lngId}`).val(target.getPosition().lng);
 
             }
         }, false);
@@ -295,7 +309,7 @@ class HMap {
         this.calculateRouteFromAtoB(positionA,positionB,map,ui);            
     }
 
-    showDraggablePoint(position,mapContainerId,label='',icon=''){
+    showDraggablePoint(position,mapContainerId,latId,lngId,label='',icon=''){
 
         //initialize a map  - not specificing a location will give a whole world view.
         var map = new H.Map(document.getElementById(mapContainerId), this.defaultLayers.normal.map, { pixelRatio: this.pixelRatio });
@@ -321,7 +335,7 @@ class HMap {
         map.setCenter({ lat: position.latitude, lng: position.longitude });
         map.setZoom(17);
 
-        this.configureMapToDragMarker(map,behavior);
+        this.configureMapToDragMarker(map,behavior,latId,lngId);
 
     }
 }
