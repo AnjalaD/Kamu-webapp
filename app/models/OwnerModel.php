@@ -12,7 +12,6 @@ class OwnerModel extends UserModel
         parent::__construct($table, $user_model);
 
         $this->_soft_del = true;
-
         
         if(is_int($user))
         {

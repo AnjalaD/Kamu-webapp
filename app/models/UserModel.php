@@ -41,7 +41,9 @@ abstract class UserModel extends Model
         {
             $model = 'app\models\\' . Session::get(CURRENT_USER_SESSION_TYPE);
             $u = new $model((int)Session::get(CURRENT_USER_SESSION_ID));
+            
             self::$current_logged_user = $u;
+            // H::dnd(self::$current_logged_user);
         }
         return self::$current_logged_user;
     }

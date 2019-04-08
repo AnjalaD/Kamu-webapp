@@ -33,7 +33,7 @@ class FoodItemModel extends Model
         return $items[0];
     }
 
-    public function search($field, $data, $extra = '')
+    public function search($field, $data, $limit=0)
     {
 
         $sql = '
@@ -42,8 +42,8 @@ class FoodItemModel extends Model
             INNER JOIN restaurants R ON I.restaurant_id=R.id
             LEFT JOIN item_tags IT ON I.id=IT.item_id
             LEFT JOIN tags T ON IT.tag_id=T.id
-            WHERE ' . $field . ' LIKE ? ' . $extra . '
-            GROUP by I.id ORDER by item_name;';
+            WHERE ' . $field . ' LIKE ?
+            GROUP by I.id ORDER by item_name LIMIT '.($limit*20).', 20;';
 
         $items = $this->query($sql, ['%' . $data . '%'], get_class($this));
 
@@ -56,7 +56,7 @@ class FoodItemModel extends Model
         return ($items) ? $items : [];
     }
 
-    public function filter($filters)
+    public function filter($filters, $limit=0)
     {
         if (strpos($filters['sort_by'], 'name') !== false) {
             $filters['sort_by'] = 'item_' . $filters['sort_by'];
@@ -68,7 +68,7 @@ class FoodItemModel extends Model
             LEFT JOIN item_tags IT ON I.id=IT.item_id
             LEFT JOIN tags T ON IT.tag_id=T.id
             WHERE item_name LIKE "%' . $filters['search'] . '%" AND I.price <= ' . $filters['price_filter'] . '
-            GROUP by I.id  ORDER BY ' . $filters['sort_by'] . ';';
+            GROUP by I.id  ORDER BY ' . $filters['sort_by'] .' LIMIT '.($limit*20).', 20;';
 
 
         $items = $this->query(

@@ -31,15 +31,15 @@
                         </div>
                         <div class="col-sm-6 col-md-12 col-lg-6">
                             <h2 class="h4"><i class="fa fa-user"></i> Our Info</h2>
-                            <div><span><strong><?= $this->restaurant->restaurant_name ?></strong></span></div>
-                            <div><span><?= $this->restaurant->email ?></span></div>
-                            <div><span>www.awebsite.com</span></div>
+                            <div><span id="restaurant_name"><strong><?= $this->restaurant->restaurant_name ?></strong></span></div>
+                            <div><span id="email"><?= $this->restaurant->email ?></span></div>
+                            <div><span id="url">www.awebsite.com</span></div>
                             <hr class="d-sm-none d-md-block d-lg-none">
                         </div>
                         <div class="col-sm-6 col-md-12 col-lg-6">
                             <h2 class="h4"><i class="fa fa-location-arrow"></i> Our Address</h2>
-                            <div><?= $this->restaurant->address ?></div>
-                            <div><i class="fa fa-phone"></i> <?= $this->restaurant->telephone ?></div>
+                            <div><span id="address"><?= $this->restaurant->address ?></span></div>
+                            <div><i class="fa fa-phone"></i><span id="telephone"><?= $this->restaurant->telephone ?></span></div>
                             <hr class="d-sm-none">
                         </div>
                     </div>

@@ -1,8 +1,6 @@
 <?php
 namespace app\controllers;
 use core\Controller;
-use core\Router;
-use app\models\ItemModel;
 use core\H;
 
 class SearchController extends Controller

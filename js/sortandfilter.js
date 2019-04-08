@@ -4,9 +4,9 @@ function getItemCards(data, divId){
         data,
         function (resp) {
             if(!resp){
-                $('#'+divId).html("<p>No items found</p>");
+                $('#' + divId).html("<p>No items found</p>");
             }else{
-                $('#'+divId).html(resp);
+                $('#' + divId).html(resp);
             }
         }
     );

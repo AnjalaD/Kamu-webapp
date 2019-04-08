@@ -12,12 +12,6 @@ use core\Session;
     <link rel="shortcut icon" href="<?= SROOT ?>assets/img/kamu_icon.ico" />
     <title><?= $this->get_title() ?> </title>
     <!-- Bootstrap CSS -->
-
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-
-    
-
-
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
     <link rel="stylesheet" href="<?= SROOT ?>assets/fonts/font-awesome.min.css">
     <link href="//netdna.bootstrapcdn.com/font-awesome/3.2.1/css/font-awesome.css" rel="stylesheet">
@@ -48,12 +42,7 @@ use core\Session;
     <script>
         // page loading
         $(document).ready(function() {
-            // to fade in on page load
-            // $("body").css("display", "");
-            // $("body").fadeIn(800);
-            // $("body").css("display", "");
             $("body").animate({opacity:1},500);        
-            
         })
         // page exiting
         $(window).bind('beforeunload',function(){
