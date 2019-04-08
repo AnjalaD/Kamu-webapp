@@ -160,10 +160,8 @@ abstract class UserModel extends Model
 
     public function before_save()
     {
-        if($this->is_new()){
-            $this->hash = hash('md5', rand(0,100));
-            $this->password = password_hash($this->password, PASSWORD_DEFAULT);
-        }
+        $this->hash = hash('md5', rand(0,100));
+        $this->password = password_hash($this->password, PASSWORD_DEFAULT);
     }
 
     public function set_confirm($value){
