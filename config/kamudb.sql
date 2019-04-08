@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 4.8.4
+-- version 4.8.2
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Apr 07, 2019 at 08:50 AM
--- Server version: 10.1.37-MariaDB
--- PHP Version: 7.3.1
+-- Generation Time: Apr 08, 2019 at 11:42 AM
+-- Server version: 10.1.34-MariaDB
+-- PHP Version: 7.2.7
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET AUTOCOMMIT = 0;
@@ -128,8 +128,6 @@ INSERT INTO `item_tags` (`id`, `item_id`, `tag_id`) VALUES
 (18, 147, 9),
 (19, 147, 5),
 (20, 147, 8),
-(21, 150, 83),
-(22, 150, 82),
 (23, 151, 83),
 (24, 151, 5),
 (25, 151, 82);
@@ -159,10 +157,7 @@ CREATE TABLE `orders` (
 INSERT INTO `orders` (`id`, `customer_id`, `items`, `restaurant_id`, `type`, `submit_time`, `order_code`, `submitted`, `time_stamp`) VALUES
 (1, 1, '{\"1\":4 ,\"34\":2}', 1, 0, NULL, NULL, 0, '2019-03-29 14:27:53'),
 (3, 1, '{\"1\":4,\"26\":2}', 1, 0, NULL, NULL, 0, '2019-03-29 14:27:53'),
-(6, 1, '{\"1\":1,\"34\":1,\"26\":1}', 1, NULL, NULL, NULL, 0, '2019-04-01 15:32:47'),
-(7, 1, '{\"30\":1,\"32\":1}', 0, NULL, NULL, NULL, 0, '2019-04-01 15:34:18'),
-(8, 1, '{\"30\":1,\"32\":1}', 0, NULL, NULL, NULL, 0, '2019-04-01 15:35:01'),
-(9, 1, '{\"30\":1,\"32\":1,\"31\":1}', 0, NULL, NULL, NULL, 0, '2019-04-01 17:34:50');
+(6, 1, '{\"1\":1,\"34\":1,\"26\":1}', 1, NULL, NULL, NULL, 0, '2019-04-01 15:32:47');
 
 -- --------------------------------------------------------
 
@@ -213,8 +208,8 @@ CREATE TABLE `restaurants` (
 --
 
 INSERT INTO `restaurants` (`id`, `restaurant_name`, `address`, `image_url`, `telephone`, `email`, `lng`, `lat`, `deleted`) VALUES
-(1, 'Kama Kade', '190 tpl', '/mvc/img/restaurant/1552895082.png', '12482042', 'kkadilhara@gmail.com', 12, 34, 0),
-(2, 'Shop', '3421 rd', '/mvc/img/restaurant/1552895082.png', '12482123', 'sda@gmail.com', 11, 13, 0);
+(1, 'Kama Kade', '190 tpl', '/mvc/img/restaurant/1552895082.png', '12482042', 'kkadilhara@gmail.com', 80, 7, 0),
+(2, 'Shop', '3421 rd', '/mvc/img/restaurant/1552895082.png', '12482123', 'sda@gmail.com', 81, 8, 0);
 
 -- --------------------------------------------------------
 
@@ -295,31 +290,44 @@ ALTER TABLE `customers`
 -- Indexes for table `items`
 --
 ALTER TABLE `items`
-  ADD PRIMARY KEY (`id`);
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `restaurant_id` (`restaurant_id`);
 
 --
 -- Indexes for table `item_tags`
 --
 ALTER TABLE `item_tags`
-  ADD PRIMARY KEY (`id`);
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `item_id` (`item_id`);
 
 --
 -- Indexes for table `orders`
 --
 ALTER TABLE `orders`
-  ADD PRIMARY KEY (`id`);
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `customer_id` (`customer_id`),
+  ADD KEY `restaurant_id` (`restaurant_id`);
 
 --
 -- Indexes for table `owners`
 --
 ALTER TABLE `owners`
-  ADD PRIMARY KEY (`id`);
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `restaurant_id` (`restaurant_id`);
 
 --
 -- Indexes for table `restaurants`
 --
 ALTER TABLE `restaurants`
   ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `submitted_orders`
+--
+ALTER TABLE `submitted_orders`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `customer_id` (`customer_id`),
+  ADD KEY `restaurant_id` (`restaurant_id`);
 
 --
 -- Indexes for table `tags`
@@ -332,7 +340,8 @@ ALTER TABLE `tags`
 -- Indexes for table `user_sessions`
 --
 ALTER TABLE `user_sessions`
-  ADD PRIMARY KEY (`id`);
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `user_id` (`user_id`);
 
 --
 -- AUTO_INCREMENT for dumped tables
@@ -391,6 +400,42 @@ ALTER TABLE `tags`
 --
 ALTER TABLE `user_sessions`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+
+--
+-- Constraints for dumped tables
+--
+
+--
+-- Constraints for table `items`
+--
+ALTER TABLE `items`
+  ADD CONSTRAINT `items_ibfk_1` FOREIGN KEY (`restaurant_id`) REFERENCES `restaurants` (`id`);
+
+--
+-- Constraints for table `item_tags`
+--
+ALTER TABLE `item_tags`
+  ADD CONSTRAINT `item_tags_ibfk_1` FOREIGN KEY (`item_id`) REFERENCES `items` (`id`);
+
+--
+-- Constraints for table `orders`
+--
+ALTER TABLE `orders`
+  ADD CONSTRAINT `orders_ibfk_1` FOREIGN KEY (`customer_id`) REFERENCES `customers` (`id`),
+  ADD CONSTRAINT `orders_ibfk_2` FOREIGN KEY (`restaurant_id`) REFERENCES `restaurants` (`id`);
+
+--
+-- Constraints for table `owners`
+--
+ALTER TABLE `owners`
+  ADD CONSTRAINT `owners_ibfk_1` FOREIGN KEY (`restaurant_id`) REFERENCES `restaurants` (`id`);
+
+--
+-- Constraints for table `submitted_orders`
+--
+ALTER TABLE `submitted_orders`
+  ADD CONSTRAINT `submitted_orders_ibfk_1` FOREIGN KEY (`customer_id`) REFERENCES `customers` (`id`),
+  ADD CONSTRAINT `submitted_orders_ibfk_2` FOREIGN KEY (`restaurant_id`) REFERENCES `restaurants` (`id`);
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
