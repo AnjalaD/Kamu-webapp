@@ -161,6 +161,7 @@ class RegisterController extends Controller
             }
             Session::add_msg('danger', 'Failed! Please re-check the email address and try again.');
         }
+        $this->view->post_action = SROOT . 'register/forgot/' . $user_type;
         $this->view->render('register/send_reset_link');
     }
 
@@ -181,7 +182,9 @@ class RegisterController extends Controller
                     Router::redirect('');
                 }
             }
+            $this->view->post_action = SROOT . 'register/forgot/' . $type . '/' . $email . '/' . $hash;
             $this->view->render('register/reset_password');
+            return;
         }
         Session::add_msg('danger', 'invalid url');
         Router::redirect('');
