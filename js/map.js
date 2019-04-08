@@ -47,16 +47,17 @@ class HMap {
 
     //private
     addMarkerToGroup(group, latitude, longitude, label = 'default marker',icon="") {
-        console.log(icon);
+        // console.log(icon);
         if(icon==""){
             var marker = new H.map.Marker({ lat: latitude, lng: longitude });
         }else{
             var icon = new H.map.Icon(icon);
             var marker = new H.map.Marker({ lat: latitude, lng: longitude },{icon:icon});
         }
-        var html = `<div><a href = "www.google.lk">${label}</a></div>`
+        var html = `<div>${label}</div>`
         marker.setData(html);
         group.addObject(marker);
+        return marker;
     }
 
     //private
@@ -80,7 +81,7 @@ class HMap {
 
     calculateRouteFromAtoB(positionA, positionB,map,ui) {
         self = this;
-        console.log(map);
+        // console.log(map);
         var router = this.platform.getRoutingService(),
             routeRequestParams = {
                 mode: 'fastest;car',
@@ -90,7 +91,7 @@ class HMap {
                 waypoint0: "" + positionA.latitude +"," + positionA.longitude, // positionA
                 waypoint1: "" + positionB.latitude + "," + positionB.longitude  // positionB
             };
-        console.log(router);
+        // console.log(router);
 
         router.calculateRoute(
             routeRequestParams,
@@ -119,11 +120,7 @@ class HMap {
         }
 
         
-    }
-
-
-     
-     
+    }     
 
     //private function
     //adds route as a polyline
@@ -169,7 +166,7 @@ class HMap {
                 
                 // Get the next maneuver.
                 var maneuver = route.leg[i].maneuver[j];
-                console.log(maneuver.instruction);
+                // console.log(maneuver.instruction);
                 // Add a marker to the maneuvers group
                 var marker = new H.map.Marker({
                     lat: maneuver.position.latitude,
@@ -206,6 +203,39 @@ class HMap {
                bubble.open();
              }
            }
+    }
+
+    configureMapToDragMarker(map,behavior){
+        // disable the default draggability of the underlying map
+        // when starting to drag a marker object:
+        map.addEventListener('dragstart', function (ev) {
+            var target = ev.target;
+            if (target instanceof H.map.Marker) {
+                behavior.disable();
+            }
+        }, false);
+
+
+        // re-enable the default draggability of the underlying map
+        // when dragging has completed
+        map.addEventListener('dragend', function (ev) {
+            var target = ev.target;
+            if (target instanceof mapsjs.map.Marker) {
+                behavior.enable();
+                console.log(target.getPosition().lat,target.getPosition().lng);
+
+            }
+        }, false);
+
+        // Listen to the drag event and move the position of the marker
+        // as necessary
+        map.addEventListener('drag', function (ev) {
+            var target = ev.target,
+                pointer = ev.currentPointer;
+            if (target instanceof mapsjs.map.Marker) {
+                target.setPosition(map.screenToGeo(pointer.viewportX, pointer.viewportY));
+            }
+        }, false);
     }
 
 
@@ -262,11 +292,37 @@ class HMap {
         map.addObject(group);
         this.addMarkerToGroup(group,positionA.latitude,positionA.longitude,);
         this.addMarkerToGroup(group,positionB.latitude,positionB.longitude,"","dinner.png");
-        this.calculateRouteFromAtoB(positionA,positionB,map,ui);
+        this.calculateRouteFromAtoB(positionA,positionB,map,ui);            
+    }
 
-                
+    showDraggablePoint(position,mapContainerId,label='',icon=''){
+
+        //initialize a map  - not specificing a location will give a whole world view.
+        var map = new H.Map(document.getElementById(mapContainerId), this.defaultLayers.normal.map, { pixelRatio: this.pixelRatio });
+
+        // MapEvents enables the event system
+        // Behavior implements default interactions for pan/zoom (also on mobile touch environments)
+        var behavior = new H.mapevents.Behavior(new H.mapevents.MapEvents(map));
+
+        // Create the default UI components
+        var ui = H.ui.UI.createDefault(map, this.defaultLayers);
+
+        //create a group
+        var group = new H.map.Group();
+        map.addObject(group);
+
+        //add marker to group
+        var marker = this.addMarkerToGroup(group, position.latitude, position.longitude, label,icon);
+        marker.draggable = true;
         
-        
+
+
+        //center to the marker
+        map.setCenter({ lat: position.latitude, lng: position.longitude });
+        map.setZoom(17);
+
+        this.configureMapToDragMarker(map,behavior);
+
     }
 }
 
