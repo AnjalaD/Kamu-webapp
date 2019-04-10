@@ -1,6 +1,11 @@
 <?php
 namespace core;
 
+use core\Session;
+use app\models\UserModel;
+use app\models\CustomerModel;
+
+
 class H
 {
   public static function dnd($data)
@@ -86,7 +91,7 @@ class H
     if (empty($items)) {
       return '';
     }
-    $html = '<div class="card-columns container">';
+    $html = '<div class="card-columns">';
     foreach ($items as $item) {
       $html .= self::create_card($item);
     }
@@ -102,13 +107,24 @@ class H
         <img src=<?= $item->image_url ?> >
       </div>
       <div class="info">
-        <h4><?= $item->name ?></h4>
+        <h4><?= $item->item_name ?></h4>
+        <span class="restaurant_name">
+          <a class="link" href="<?=SROOT?>restaurant/details/<?=$item->restaurant_id?>" ><?= $item->restaurant_name ?></a>
+        </span>
         <span class="description"><?= $item->description ?></span>
+        <p>
+        <?php if($item->tags) :?>
+          <?php foreach($item->tags as $tag) :?>
+            <a href="<?=SROOT?>search/search_by_tag/<?=$tag?>"> <?=$tag?> </a>
+          <?php endforeach ?>
+        <?php endif ?>
+        </p>
         <span class="price">LKR.<?= $item->price ?></span>
-        <a class="btn btn-info pull-right" href="#"><i class="icon-shopping-cart"></i>Add to Order</a>
+        <br>
+        <i class="icon-shopping-cart icon-2x"></i>
+        <a class="btn btn-info pull-right" onClick="addToOrder(<?=$item->restaurant_id?>, <?=$item->id?>,this)" >Add to Order</a>
       </div>
       <div class="details">
-        <span class="time"><i class="icon-time"></i> 12 hours ago</span>
         <span class="rating pull-right">
           <span class="star"></span>
           <span class="star"></span>

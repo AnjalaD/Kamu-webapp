@@ -20,14 +20,14 @@ use core\H;
     <tbody>
         <?php foreach($this->items as $item): ?>
             <tr>
-                <td><a href="<?=SROOT . 'items/details/' .$item->id?>"><?=$item->name?></td>
+                <td><a href="<?=SROOT . 'items/details/' .$item->id?>"><?=$item->item_name?></td>
                 <td><img src="<?=$item->image_url?>" ></td>
                 <td><?=$item->description?></td>
                 <td><?=$item->price?></td>
                 <td class="text-right">
                     <a href="<?=SROOT?>items/edit/<?=$item->id?>" class="btn btn-primary" onclick= "if(!confirm('Are you sure?')){return false;}">Edit</a>
                     <?php if ($item->deleted) : ?>
-                    <a href="<?=SROOT?>items/unhide/<?=$item->id?>" class="btn btn-secondary" onclick= "if(!confirm('Are you sure?')){return false;}">Unide</a>
+                    <a href="<?=SROOT?>items/unhide/<?=$item->id?>" class="btn btn-secondary" onclick= "if(!confirm('Are you sure?')){return false;}">Unhide</a>
                     <?php else :?>
                     <a href="<?=SROOT?>items/hide/<?=$item->id?>" class="btn btn-secondary" onclick= "if(!confirm('Are you sure?')){return false;}">Hide</a>
                     <?php endif ?>

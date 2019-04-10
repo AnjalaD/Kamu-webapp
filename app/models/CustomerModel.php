@@ -1,6 +1,7 @@
 <?php
 namespace app\models;
 use app\models\UserModel;
+use core\H;
 
 class CustomerModel extends UserModel
 {
@@ -19,7 +20,6 @@ class CustomerModel extends UserModel
         {
             $u = $this->_db->find_first($table,['conditions' => 'email=?', 'bind' => [$user]], 'app\models\CustomerModel');
         }
-
         if($u)
         {
             foreach($u as $key => $value)

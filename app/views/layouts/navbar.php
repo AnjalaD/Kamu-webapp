@@ -21,7 +21,7 @@ $menu = Router::get_menu('menu_acl');
 
             <span class="navbar-item text-right">
                 <?php if (UserModel::current_user()) : ?>
-                <a href="">Hello
+                <a href="<?=SROOT?>profile/index">Hello
                     <?= UserModel::current_user()->first_name ?></a>
                 <?php endif ?>
             </span>

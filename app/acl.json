@@ -3,26 +3,31 @@
         "denied": {},
         "Home": ["*"],
         "Register": ["login", "register", "login_admin", "verify", "forgot", "reset_password"],
-        "Restaurant": ["details"],
+        "Restaurant": ["details", "restaurant"],
         "Search": ["*"],
-        "Restricted": ["*"]
+        "Restricted": ["*"],
+        "Order": ["add_to_order"]
     },
 
     "Logged_in": {
         "denied": {
-            "Register": ["login", "register", "login_admin", "forgot", "reset_password"]
+            "Register": ["login", "register", "forgot", "reset_password"]
         },
         "Home": ["*"],
-        "Register": ["logout"]
+        "Register": ["logout"],
+        "Profile": ["*"]
     },
 
     "Customer": {
-        "denied": {}
+        "denied": {},
+        "Order": ["order", "remove_from_order", "submit_order", "cancel_order", "save_draft"]
     },
 
     "Owner": {
         "denied": {},
-        "Items": ["*"]
+        "Items": ["*"],
+        "Restaurant" : ["my_restaurant"],
+        "Order": ["view_orders"]
     },
 
     "Admin": {

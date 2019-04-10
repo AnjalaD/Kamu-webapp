@@ -14,4 +14,5 @@
 <?php $this->start('script'); ?>
 <script src="<?= SROOT ?>js/croppie.js"></script>
 <script src="<?= SROOT ?>js/croppie-function.js"></script>
+<script src="<?= SROOT ?>js/addtag.js"></script>
 <?php $this->end(); ?>

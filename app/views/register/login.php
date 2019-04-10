@@ -7,7 +7,6 @@ $token = FH::generate_token();
 <?php $this->set_title('Login'); ?>
 
 <?php $this->start('head'); ?>
-<script src="<?= SROOT ?>js/register_form_validate.js"></script>
 <link rel="stylesheet" href="<?= SROOT ?>css/styles.min.css">
 <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Aclonica">
 <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Montserrat">
@@ -41,7 +40,7 @@ $token = FH::generate_token();
             <input type="checkbox" name="remember_me" id="remember_me" value="true">
         </diV>
         <div class="form-group" id="Login_Button_FormGroup">
-            <button class="btn btn-primary btn-block Button" type="submit" id="Login_Button">Log In as User</button>
+            <button class="btn btn-primary btn-block Button" type="submit" name="submit" id="Login_Button">Log In as User</button>
         </div>
         <a href="<?=SROOT?>register/forgot/customer" id="Login_ForgotEmail_TextLabel" class="TextLabel">Forgot your email or password?</a>
     </form>

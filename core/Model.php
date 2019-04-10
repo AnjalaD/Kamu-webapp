@@ -37,7 +37,10 @@ class Model
 
     public function find_by_id($id)
     {
-        return $this->find_first(['conditions' => "id = ?", 'bind' => $id]);
+        return $this->find_first([
+            'conditions' => "id = ?",
+            'bind' => [$id]
+            ]);
     }
 
     public function save()
@@ -70,7 +73,7 @@ class Model
         if (empty($fields)) return false;
         return $this->_db->insert($this->_table, $fields);
     }
-
+    
     public function update($id, $fields)
     {
         if (empty($fields) || $id == '') return false;
@@ -89,9 +92,10 @@ class Model
     }
 
 
-    public function query($sql, $bind = [])
+    public function query($sql, $bind = [], $class=false)
     {
-        return $this->_db->query($sql, $bind);
+        $this->_db->query($sql, $bind, $class);
+        return $this->_db->error()? false : $this->_db->results();
     }
 
     public function data()
@@ -128,9 +132,9 @@ class Model
         if($this->_soft_del){
             if(array_key_exists('conditions', $params)){
                 if(is_array($params['conditions'])){
-                    $params['conditions'][] = "deleted!=1";
+                    $params['conditions'][] = $this->_table.".deleted!=1";
                 }else{
-                    $params['conditions'] .= "AND deleted!=1";
+                    $params['conditions'] .= " AND ".$this->_table.".deleted!=1";
                 }
             }else{
                 $params['conditions'] = "deleted !=1";
@@ -175,5 +179,10 @@ class Model
     public function is_new()
     {
         return (property_exists($this, 'id') && !empty($this->id))? false : true;
+    }
+
+    public function last_inserted_id()
+    {
+        return $this->_db->last_id();
     }
 }

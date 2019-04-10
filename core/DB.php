@@ -28,7 +28,8 @@ class DB
 
 
     public function query($sql, $params = [], $class=false)
-    { 
+    {
+        // print_r($sql);
         $this->_error = false;
         if ($this->_query = $this->_pdo->prepare($sql)) {
             $x = 1;
@@ -53,7 +54,7 @@ class DB
                 $this->_error = true;
             }
 
-            return $this;
+            return $this;;
         }
     }
 
@@ -61,6 +62,8 @@ class DB
     protected function _read($table, $params = [], $class)
     {
         $condition_string = '';
+        $special = '';
+        $columns = '*';
         $bind = [];
         $order = '';
         $limit = '';
@@ -71,13 +74,29 @@ class DB
                     $condition_string .= ' ' . $condition . ' AND';
                 }
                 $condition_string = trim($condition_string);
-                $condition_string = rtrim($condition_string, ' AND');
+                $condition_string = rtrim($condition_string, 'AND');
             } else {
                 $condition_string = $params['conditions'];
             }
             if (!empty($condition_string)) {
                 $condition_string = ' WHERE ' . $condition_string;
             }
+        }
+
+        if (array_key_exists('special', $params)) {
+            $special = ' '.$params['special'];
+        }
+
+        if (array_key_exists('columns', $params)) {
+            $columns = '';
+            foreach($params['columns'] as $t => $c)
+            {
+                foreach($c as $column)
+                {
+                    $columns .= $t.'.'.$column.', ';
+                }
+            }
+            $columns = rtrim($columns, ', ');
         }
 
         if (array_key_exists('bind', $params)) {
@@ -92,7 +111,7 @@ class DB
             $limit = ' LIMIT ' . $params['limit'];
         }
 
-        $sql = "SELECT * FROM {$table}{$condition_string}{$order}{$limit}";
+        $sql = "SELECT {$columns} FROM {$table}{$special}{$condition_string}{$order}{$limit}";
         if ($this->query($sql, $bind, $class)) {
             if (!empty($this->_result) && !count($this->_result)) return false;
             return true;

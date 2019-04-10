@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 4.8.4
+-- version 4.8.2
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Mar 18, 2019 at 11:45 AM
--- Server version: 10.1.37-MariaDB
--- PHP Version: 7.3.1
+-- Generation Time: Apr 08, 2019 at 11:42 AM
+-- Server version: 10.1.34-MariaDB
+-- PHP Version: 7.2.7
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET AUTOCOMMIT = 0;
@@ -71,7 +71,9 @@ CREATE TABLE `customers` (
 
 INSERT INTO `customers` (`id`, `first_name`, `last_name`, `email`, `password`, `hash`, `verified`, `deleted`) VALUES
 (1, 'Chamika', 'Nimal', 'ad@ad.com', '$2y$10$lO/3azXVdJ1aLxQp2Tll.eGnKe6r2iOfA311oKE.OXVenYqG4p52u', '6f4922f45568161a8cdf4ad2299f6d23', 0, 0),
-(3, 'Thumula', 'Na', 'thumula@gmail.com', '$2y$10$XtPm1532UgsRFehBnWLKqOh.p1RNN4ZO9Bb32MK.ogE5PgjIFBWMe', 'c0c7c76d30bd3dcaefc96f40275bdc0a', 0, 0);
+(3, 'Thumula', 'Na', 'thumula@gmail.com', '$2y$10$XtPm1532UgsRFehBnWLKqOh.p1RNN4ZO9Bb32MK.ogE5PgjIFBWMe', 'c0c7c76d30bd3dcaefc96f40275bdc0a', 0, 0),
+(4, 'anjala', 'dilhara', 'anjaladilhara@gmail.com', '$2y$10$CNaMpSNn6kDummFGp43edu5qZO0rMu6ogDtFjfZUNguASvwilpDmW', 'd2ddea18f00665ce8623e36bd4e3c7c5', 1, 0),
+(5, 'hg', 'qwe', 'c9599@qwe.com', '$2y$10$5be5bBxUYSAn7ilQsbwZEexoz.Smb.qUcq4RVGS2V53M.i/qrSVme', '3c59dc048e8850243be8079a5c74d079', 0, 0);
 
 -- --------------------------------------------------------
 
@@ -81,13 +83,12 @@ INSERT INTO `customers` (`id`, `first_name`, `last_name`, `email`, `password`, `
 
 CREATE TABLE `items` (
   `id` int(11) NOT NULL,
-  `restaurant_id` int(11) DEFAULT NULL,
-  `name` varchar(100) COLLATE utf8_unicode_ci NOT NULL,
+  `restaurant_id` int(11) NOT NULL,
+  `item_name` varchar(100) COLLATE utf8_unicode_ci NOT NULL,
   `description` varchar(500) COLLATE utf8_unicode_ci NOT NULL,
   `price` double NOT NULL,
   `image_url` varchar(200) COLLATE utf8_unicode_ci NOT NULL,
   `rating` double NOT NULL,
-  `tags` varchar(200) COLLATE utf8_unicode_ci NOT NULL,
   `deleted` tinyint(1) NOT NULL DEFAULT '0'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
@@ -95,26 +96,68 @@ CREATE TABLE `items` (
 -- Dumping data for table `items`
 --
 
-INSERT INTO `items` (`id`, `restaurant_id`, `name`, `description`, `price`, `image_url`, `rating`, `tags`, `deleted`) VALUES
-(1, 1, 'Kottu', 'asfewidn djsak uad s kdasddd sada ', 100, '/mvc/img/items/default.png', 0, 'no', 1),
-(26, 1, 'Soup', 'asfewidn djsak uad s kdasddd sada ', 140, '/mvc/img/items/1552849585.png', 0, 'no', 0),
-(27, 1, 'Rice', 'asfewidn djsak uad s kdasddd sada ', 100, '/mvc/img/items/1552883520.png', 0, '', 0);
+INSERT INTO `items` (`id`, `restaurant_id`, `item_name`, `description`, `price`, `image_url`, `rating`, `deleted`) VALUES
+(1, 1, 'Kottu', 'Perfect combination of cut up roti and chickenzzz', 250, '/mvc/img/items/1553572046.png', 0, 0),
+(26, 1, 'Soup', 'Tantalize your taste buds with our signature recipe chicken soup', 140, '/mvc/img/items/1552849585.png', 0, 0),
+(30, 2, 'Kottu', 'Enjoy the goodness of little bits of heaven', 300, '/mvc/img/items/1552914320.png', 0, 0),
+(31, 2, 'Fried Rice', 'Enjoy the taste of china ', 250, '/mvc/img/items/1552914407.png', 0, 0),
+(32, 2, 'Soup', 'Description of soup', 100, '/mvc/img/items/1552931132.png', 0, 0),
+(34, 1, 'Noodles', 'description of noodles', 140, '/mvc/img/items/1553572181.png', 0, 0),
+(147, 2, 'Hoppers', 'asd ewo o o for kok gpd fdr gfd.', 20, '/mvc/img/items/1554563173.png', 0, 0),
+(151, 2, 'Rice', 'asfewidn djsak uad s kdasddd sada ', 150, '/mvc/img/items/1554564091.png', 0, 0);
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `odrers`
+-- Table structure for table `item_tags`
 --
 
-CREATE TABLE `odrers` (
+CREATE TABLE `item_tags` (
   `id` int(11) NOT NULL,
-  `user_id` int(11) NOT NULL,
-  `items` varchar(1000) COLLATE utf8_unicode_ci NOT NULL,
-  `restaurant_id` int(11) NOT NULL,
-  `submit_time` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
-  `order_code` int(11) NOT NULL,
-  `delivered` int(11) NOT NULL DEFAULT '0'
+  `item_id` int(11) NOT NULL,
+  `tag_id` int(11) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+
+--
+-- Dumping data for table `item_tags`
+--
+
+INSERT INTO `item_tags` (`id`, `item_id`, `tag_id`) VALUES
+(1, 30, 1),
+(2, 30, 5),
+(18, 147, 9),
+(19, 147, 5),
+(20, 147, 8),
+(23, 151, 83),
+(24, 151, 5),
+(25, 151, 82);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `orders`
+--
+
+CREATE TABLE `orders` (
+  `id` int(11) NOT NULL,
+  `customer_id` int(11) NOT NULL,
+  `items` varchar(1000) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `restaurant_id` int(11) NOT NULL,
+  `type` tinyint(1) DEFAULT NULL,
+  `submit_time` timestamp NULL DEFAULT NULL,
+  `order_code` int(11) DEFAULT NULL,
+  `submitted` tinyint(1) NOT NULL DEFAULT '0',
+  `time_stamp` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+
+--
+-- Dumping data for table `orders`
+--
+
+INSERT INTO `orders` (`id`, `customer_id`, `items`, `restaurant_id`, `type`, `submit_time`, `order_code`, `submitted`, `time_stamp`) VALUES
+(1, 1, '{\"1\":4 ,\"34\":2}', 1, 0, NULL, NULL, 0, '2019-03-29 14:27:53'),
+(3, 1, '{\"1\":4,\"26\":2}', 1, 0, NULL, NULL, 0, '2019-03-29 14:27:53'),
+(6, 1, '{\"1\":1,\"34\":1,\"26\":1}', 1, NULL, NULL, NULL, 0, '2019-04-01 15:32:47');
 
 -- --------------------------------------------------------
 
@@ -139,7 +182,8 @@ CREATE TABLE `owners` (
 --
 
 INSERT INTO `owners` (`id`, `restaurant_id`, `first_name`, `last_name`, `email`, `password`, `hash`, `verified`, `deleted`) VALUES
-(1, 1, 'Kamal', 'Nimal', 'ad@ad.com', '$2y$10$n0qUvrVBnVt4oRtk6RX1gOmTYVNHtBWiUyRftM7mxMhJIc4XtaBjO', 'ac627ab1ccbdb62ec96e702f07f6425b', 0, 0);
+(1, 1, 'Kamal', 'Nimal', 'ad@ad.com', '$2y$10$n0qUvrVBnVt4oRtk6RX1gOmTYVNHtBWiUyRftM7mxMhJIc4XtaBjO', 'ac627ab1ccbdb62ec96e702f07f6425b', 0, 0),
+(2, 2, 'Thumula', 'Perera', 'thumula@gmail.com', '$2y$10$dhEnRK0VJnAMe7x7Dw52BeyVozeRa7ejhBc2/uhvbc/cykh0o4PlS', '92cc227532d17e56e07902b254dfad10', 0, 0);
 
 -- --------------------------------------------------------
 
@@ -149,7 +193,7 @@ INSERT INTO `owners` (`id`, `restaurant_id`, `first_name`, `last_name`, `email`,
 
 CREATE TABLE `restaurants` (
   `id` int(11) NOT NULL,
-  `name` varchar(150) COLLATE utf8_unicode_ci NOT NULL,
+  `restaurant_name` varchar(150) COLLATE utf8_unicode_ci NOT NULL,
   `address` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
   `image_url` varchar(200) COLLATE utf8_unicode_ci NOT NULL,
   `telephone` varchar(15) COLLATE utf8_unicode_ci NOT NULL,
@@ -163,8 +207,54 @@ CREATE TABLE `restaurants` (
 -- Dumping data for table `restaurants`
 --
 
-INSERT INTO `restaurants` (`id`, `name`, `address`, `image_url`, `telephone`, `email`, `lng`, `lat`, `deleted`) VALUES
-(1, 'Kama Kade', '190 tpl', '/mvc/img/restaurant/1552895082.png', '12482042', 'kkadilhara@gmail.com', 12, 34, 1);
+INSERT INTO `restaurants` (`id`, `restaurant_name`, `address`, `image_url`, `telephone`, `email`, `lng`, `lat`, `deleted`) VALUES
+(1, 'Kama Kade', '190 tpl', '/mvc/img/restaurant/1552895082.png', '12482042', 'kkadilhara@gmail.com', 80, 7, 0),
+(2, 'Shop', '3421 rd', '/mvc/img/restaurant/1552895082.png', '12482123', 'sda@gmail.com', 81, 8, 0);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `submitted_orders`
+--
+
+CREATE TABLE `submitted_orders` (
+  `id` int(11) NOT NULL,
+  `customer_id` int(11) NOT NULL,
+  `items` varchar(1000) COLLATE utf8_unicode_ci NOT NULL,
+  `restaurant_id` int(11) NOT NULL,
+  `type` tinyint(1) NOT NULL,
+  `submit_time` timestamp NULL DEFAULT NULL,
+  `order_code` int(11) DEFAULT NULL,
+  `accepted` tinyint(1) NOT NULL DEFAULT '0',
+  `rejected` tinyint(1) NOT NULL DEFAULT '0',
+  `completed` tinyint(1) NOT NULL DEFAULT '0',
+  `time_stamp` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `tags`
+--
+
+CREATE TABLE `tags` (
+  `id` int(11) NOT NULL,
+  `tag_name` varchar(25) COLLATE utf8_unicode_ci NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+
+--
+-- Dumping data for table `tags`
+--
+
+INSERT INTO `tags` (`id`, `tag_name`) VALUES
+(9, 'hoppers'),
+(83, 'hot'),
+(2, 'kottu'),
+(5, 'new'),
+(82, 'rice'),
+(6, 'sdkfs'),
+(1, 'spicy'),
+(8, 'tasty');
 
 -- --------------------------------------------------------
 
@@ -200,19 +290,30 @@ ALTER TABLE `customers`
 -- Indexes for table `items`
 --
 ALTER TABLE `items`
-  ADD PRIMARY KEY (`id`);
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `restaurant_id` (`restaurant_id`);
 
 --
--- Indexes for table `odrers`
+-- Indexes for table `item_tags`
 --
-ALTER TABLE `odrers`
-  ADD PRIMARY KEY (`id`);
+ALTER TABLE `item_tags`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `item_id` (`item_id`);
+
+--
+-- Indexes for table `orders`
+--
+ALTER TABLE `orders`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `customer_id` (`customer_id`),
+  ADD KEY `restaurant_id` (`restaurant_id`);
 
 --
 -- Indexes for table `owners`
 --
 ALTER TABLE `owners`
-  ADD PRIMARY KEY (`id`);
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `restaurant_id` (`restaurant_id`);
 
 --
 -- Indexes for table `restaurants`
@@ -221,10 +322,26 @@ ALTER TABLE `restaurants`
   ADD PRIMARY KEY (`id`);
 
 --
+-- Indexes for table `submitted_orders`
+--
+ALTER TABLE `submitted_orders`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `customer_id` (`customer_id`),
+  ADD KEY `restaurant_id` (`restaurant_id`);
+
+--
+-- Indexes for table `tags`
+--
+ALTER TABLE `tags`
+  ADD PRIMARY KEY (`id`),
+  ADD UNIQUE KEY `tag_name` (`tag_name`);
+
+--
 -- Indexes for table `user_sessions`
 --
 ALTER TABLE `user_sessions`
-  ADD PRIMARY KEY (`id`);
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `user_id` (`user_id`);
 
 --
 -- AUTO_INCREMENT for dumped tables
@@ -240,37 +357,85 @@ ALTER TABLE `admins`
 -- AUTO_INCREMENT for table `customers`
 --
 ALTER TABLE `customers`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- AUTO_INCREMENT for table `items`
 --
 ALTER TABLE `items`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=28;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=152;
 
 --
--- AUTO_INCREMENT for table `odrers`
+-- AUTO_INCREMENT for table `item_tags`
 --
-ALTER TABLE `odrers`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+ALTER TABLE `item_tags`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=26;
+
+--
+-- AUTO_INCREMENT for table `orders`
+--
+ALTER TABLE `orders`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
 
 --
 -- AUTO_INCREMENT for table `owners`
 --
 ALTER TABLE `owners`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT for table `restaurants`
 --
 ALTER TABLE `restaurants`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+
+--
+-- AUTO_INCREMENT for table `tags`
+--
+ALTER TABLE `tags`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=84;
 
 --
 -- AUTO_INCREMENT for table `user_sessions`
 --
 ALTER TABLE `user_sessions`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+
+--
+-- Constraints for dumped tables
+--
+
+--
+-- Constraints for table `items`
+--
+ALTER TABLE `items`
+  ADD CONSTRAINT `items_ibfk_1` FOREIGN KEY (`restaurant_id`) REFERENCES `restaurants` (`id`);
+
+--
+-- Constraints for table `item_tags`
+--
+ALTER TABLE `item_tags`
+  ADD CONSTRAINT `item_tags_ibfk_1` FOREIGN KEY (`item_id`) REFERENCES `items` (`id`);
+
+--
+-- Constraints for table `orders`
+--
+ALTER TABLE `orders`
+  ADD CONSTRAINT `orders_ibfk_1` FOREIGN KEY (`customer_id`) REFERENCES `customers` (`id`),
+  ADD CONSTRAINT `orders_ibfk_2` FOREIGN KEY (`restaurant_id`) REFERENCES `restaurants` (`id`);
+
+--
+-- Constraints for table `owners`
+--
+ALTER TABLE `owners`
+  ADD CONSTRAINT `owners_ibfk_1` FOREIGN KEY (`restaurant_id`) REFERENCES `restaurants` (`id`);
+
+--
+-- Constraints for table `submitted_orders`
+--
+ALTER TABLE `submitted_orders`
+  ADD CONSTRAINT `submitted_orders_ibfk_1` FOREIGN KEY (`customer_id`) REFERENCES `customers` (`id`),
+  ADD CONSTRAINT `submitted_orders_ibfk_2` FOREIGN KEY (`restaurant_id`) REFERENCES `restaurants` (`id`);
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
