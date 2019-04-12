@@ -1,0 +1,96 @@
+#Login_LoginDark_Background {
+  background-image: url(../../assets/img/Sauce-8.jpg);
+  height: 750px;
+  /*background-attachment: fixed;*/
+}
+
+#Register_LoginDark_Background {
+  background-image: url(../../assets/img/Sauce-8.jpg);
+  height: 750px;
+  /*background-attachment: fixed;*/
+}
+
+#Login_Main_LoginBox {
+  /*background-color: #ffecb3;*/
+  /*opacity: 0.8;*/
+  background: rgba(255, 236, 179, 0.85);
+  text-align: center;
+  border-bottom: 5px;
+  border-right: 12px;
+  border-top: 0;
+  border-left: 0;
+  border-style: groove;
+  border-color: #9d2525;
+  border-bottom-right-radius: 50px;
+}
+
+#Register_Main_LoginBox {
+  /*background-color: #ffecb3;*/
+  background: rgba(255, 236, 179, 0.85);
+  text-align: center;
+  border-bottom: 5px;
+  border-right: 12px;
+  border-top: 0;
+  border-left: 0;
+  border-style: groove;
+  border-color: #9d2525;
+  border-bottom-right-radius: 50px;
+}
+
+#Login_ForgotEmail_TextLabel {
+  font-size: small;
+  color: #d32f2f;
+}
+
+.TextInput {
+  color: #9d2525;
+}
+
+#Login_Button {
+  background-color: #9d2525;
+  font-family: 'Aclonica';
+}
+
+#Login_Button_FormGroup {
+  font-family: 'Montserrat';
+}
+
+.Register_FormGroup {
+  color: #9d2525;
+}
+
+.Register_FormGroup {
+  color: #9d2525;
+}
+
+.Login_FormGroup {
+  color: #9d2525;
+}
+
+#Register_Email_FormGroup {
+  /*color: #9d2525;*/
+}
+
+#Register_FirstName_FormGroup {
+  /*color: #9d2525;*/
+}
+
+#Register_LastName_FormGroup {
+  /*color: #9d2525;*/
+}
+
+#Logo_Illustration {
+  padding-top: 0px;
+  opacity: 2;
+  margin-bottom: 10px;
+}
+
+#Register_Button {
+  font-family: 'Aclonica';
+  background-color: #e65100;
+}
+
+.form-control TextInput {
+  color: #000000;
+}
+

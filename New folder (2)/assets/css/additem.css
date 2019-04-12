@@ -1,0 +1,57 @@
+@media (max-width: 700px) {
+  #AddItem_Main_LoginBox {
+    max-width: 400px;
+  }
+}
+
+@media (min-width: 700px) and (max-width: 1000px) {
+  #AddItem_Main_LoginBox {
+    max-width: 550px;
+  }
+}
+
+@media (min-width: 1000px) {
+  #AddItem_Main_LoginBox {
+    max-width: 750px;
+  }
+}
+
+#AddItem_Button_FormGroup {
+  text-align: Center;
+}
+
+#AddItem_Button {
+  font-family: 'Aclonica';
+  background-color: #f9a825;
+}
+
+#AddItem_Image_FormGroup {
+  padding-top: 20px;
+}
+
+#AddItem_Main_LoginBox {
+  color: #f9a825;
+  /*background-color: #323232;*/
+  /*opacity: 0.9;*/
+  background: rgba(50, 50, 50, 0.85);
+  border-bottom: 5px;
+  border-right: 12px;
+  border-top: 0;
+  border-left: 0;
+  border-style: groove;
+  border-color: #f9a825;
+  border-bottom-right-radius: 50px;
+}
+
+.login-dark {
+  height: 1000px;
+  background: #475d62 url(../../assets/img/php4CVHex.jpg);
+  background-size: cover;
+  position: relative;
+}
+
+.avatar {
+  padding: 20px;
+  padding-bottom: 40px;
+}
+

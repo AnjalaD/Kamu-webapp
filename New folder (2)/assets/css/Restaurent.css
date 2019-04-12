@@ -1,0 +1,82 @@
+body {
+  background-attachment: fixed;
+}
+
+h1 {
+  font-family: 'Aclonica';
+  background-color: #ffffff;
+  opacity: 0.75;
+}
+
+.col-md-6 {
+  background-color: #ffffff;
+  max-width: 45%;
+  margin-right: 10px;
+  margin-leftt: 10px;
+  opacity: 0.75;
+  border-color: #ff0000;
+  border-bottom: 10px;
+  border-style: inset;
+  margin-bottom: 50px;
+}
+
+#Restaurent_ColumnPara {
+  border-radius: 50px 0px 0px 0px;
+  padding: 50px 20px 20px 10px;
+  text-align: center;
+}
+
+#Restaurent_ColumnMap {
+  border-radius: 0px 0px 50px 0px;
+}
+
+#Restaurent_row {
+  margin-left: auto;
+  margin-right: auto;
+  margin-top: 70px;
+}
+
+@media (min-width: 900px) {
+  #Image_Restaurent {
+    /*height: 200px;*/
+    max-width: 350px;
+    margin-left: auto;
+    margin-right: auto;
+    /*padding: 50px 20px 20px 10px;*/
+    opacity: 10;
+  }
+}
+
+@media (max-width: 900px) {
+  #Image_Restaurent {
+    /*height: 200px;*/
+    max-width: 250px;
+    margin-left: auto;
+    margin-right: auto;
+    /*padding: 50px 20px 20px 10px;*/
+    opacity: 10;
+  }
+}
+
+@media (max-width: 500px) {
+  #Image_Restaurent {
+    /*height: 200px;*/
+    max-width: 100px;
+    margin-left: auto;
+    margin-right: auto;
+    /*padding: 50px 20px 20px 10px;*/
+    opacity: 10;
+  }
+}
+
+#Restaurent_Paragraph {
+  margin-top: 15px;
+}
+
+#Restaurent_heading {
+  padding-left: 30px;
+  margin-left: 20px;
+  margin-right: 20px;
+  margin-top: 40px;
+}
+

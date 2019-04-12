@@ -1,0 +1,16 @@
+.btn.btn-light.action-button {
+  background-color: #ef3030;
+  color: #ffffff;
+  font-family: 'Aclonica';
+  margin: 15px;
+  border-radius: 20px;
+  padding: 10px;
+}
+
+.login {
+  color: #465765;
+  font-family: 'Aclonica';
+  margin: 15px 1px 15px 15px;
+  padding: 5px;
+}
+
