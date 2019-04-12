@@ -5,6 +5,7 @@ use core\Controller;
 use core\Router;
 use core\Session;
 use app\models\RestaurantModel;
+use app\models\UserModel;
 use core\H;
 
 class RestaurantController extends Controller
@@ -113,6 +114,15 @@ class RestaurantController extends Controller
     //view owner's restaurant - editable page
     public function my_restaurant_action()
     {
+        $owner = UserModel::current_user();
+        $restaurant = $this->restaurantmodel->find_by_id((int)$owner->restaurant_id);
+        if (!$restaurant) {
+            Router::redirect('error');
+        }
+        // $items = $this->itemsmodel->find_all_by_restaurant_id((int)$id);
 
+        // $this->view->items = $items;
+        $this->view->restaurant = $restaurant;
+        $this->view->render('restaurant/my_restaurant');
     }
 }
