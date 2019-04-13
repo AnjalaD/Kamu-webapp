@@ -6,6 +6,7 @@ use core\Router;
 use core\Session;
 use app\models\RestaurantModel;
 use app\models\UserModel;
+use app\models\SubmittedOrderModel;
 use core\H;
 
 class RestaurantController extends Controller
@@ -16,6 +17,7 @@ class RestaurantController extends Controller
         $this->view->set_layout('default');
         $this->load_model('RestaurantModel');
         $this->load_model('ItemsModel');
+        $this->load_model('SubmittedOrderModel');
     }
 
 
@@ -122,7 +124,11 @@ class RestaurantController extends Controller
         // $items = $this->itemsmodel->find_all_by_restaurant_id((int)$id);
 
         // $this->view->items = $items;
+        $submittedordermodel = new SubmittedOrderModel();
+        $nooforders = sizeof($submittedordermodel->find_unaccepted_by_restaurant_id((int)$owner->restaurant_id));
+        // H::dnd($submittedordermodel->find_unaccepted_by_restaurant_id((int)$owner->restaurant_id));
         $this->view->restaurant = $restaurant;
+        $this->view->nooforders = $nooforders;
         $this->view->render('restaurant/my_restaurant');
     }
 }
