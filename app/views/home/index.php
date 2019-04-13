@@ -45,7 +45,7 @@
                     <p id="paragaraphTextTopic2" class="paragraphTextTopic">Save what you prefer...<br></p>
                     <p id="paragaraphText2" class="paragraphText">You can Save yor preferences and re use whenever you want&nbsp;<br></p>
                 </div>
-                <div class="col-md-4" id="column3"><img src="<?=SROOT?>assets/img/no-waiting%20(1).png" id="tinyImage3" class="tinyImage">
+                <div class="col-md-4" id="column3"><img src="<?=SROOT?>assets/img/no-waiting.png" id="tinyImage3" class="tinyImage">
                     <p id="paragraphTextTopic3" class="paragraphTextTopic">No waiting...<br></p>
                     <p id="paragraphText3" class="paragraphText">You don't have to wait in the queue anymore. Just send your menu..<br></p>
                 </div>
