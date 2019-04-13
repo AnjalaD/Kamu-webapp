@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Apr 08, 2019 at 11:42 AM
+-- Generation Time: Apr 12, 2019 at 03:46 PM
 -- Server version: 10.1.34-MariaDB
 -- PHP Version: 7.2.7
 
@@ -157,7 +157,14 @@ CREATE TABLE `orders` (
 INSERT INTO `orders` (`id`, `customer_id`, `items`, `restaurant_id`, `type`, `submit_time`, `order_code`, `submitted`, `time_stamp`) VALUES
 (1, 1, '{\"1\":4 ,\"34\":2}', 1, 0, NULL, NULL, 0, '2019-03-29 14:27:53'),
 (3, 1, '{\"1\":4,\"26\":2}', 1, 0, NULL, NULL, 0, '2019-03-29 14:27:53'),
-(6, 1, '{\"1\":1,\"34\":1,\"26\":1}', 1, NULL, NULL, NULL, 0, '2019-04-01 15:32:47');
+(6, 1, '{\"1\":1,\"34\":1,\"26\":1}', 1, NULL, NULL, NULL, 0, '2019-04-01 15:32:47'),
+(8, 1, '{\"34\":1,\"26\":1}', 1, 1, NULL, NULL, 0, '2019-04-12 12:56:07'),
+(9, 1, '{\"26\":1}', 1, 2, NULL, NULL, 0, '2019-04-12 12:57:27'),
+(10, 1, '{\"34\":1}', 1, 2, NULL, NULL, 0, '2019-04-12 13:08:31'),
+(11, 1, '{\"26\":1,\"1\":1}', 1, 2, NULL, NULL, 0, '2019-04-12 13:09:28'),
+(12, 1, '{\"1\":1}', 1, 2, NULL, NULL, 0, '2019-04-12 13:11:57'),
+(18, 1, '{\"34\":1,\"26\":1,\"1\":1}', 1, 1, NULL, NULL, 0, '2019-04-12 13:38:36'),
+(19, 1, '{\"34\":1,\"26\":1}', 1, 1, NULL, NULL, 0, '2019-04-12 13:40:44');
 
 -- --------------------------------------------------------
 
@@ -182,7 +189,7 @@ CREATE TABLE `owners` (
 --
 
 INSERT INTO `owners` (`id`, `restaurant_id`, `first_name`, `last_name`, `email`, `password`, `hash`, `verified`, `deleted`) VALUES
-(1, 1, 'Kamal', 'Nimal', 'ad@ad.com', '$2y$10$n0qUvrVBnVt4oRtk6RX1gOmTYVNHtBWiUyRftM7mxMhJIc4XtaBjO', 'ac627ab1ccbdb62ec96e702f07f6425b', 0, 0),
+(1, 1, 'Kamal', 'Nimal', 'ad@ad.com', '$2y$10$n0qUvrVBnVt4oRtk6RX1gOmTYVNHtBWiUyRftM7mxMhJIc4XtaBjO', 'ac627ab1ccbdb62ec96e702f07f6425b', 1, 0),
 (2, 2, 'Thumula', 'Perera', 'thumula@gmail.com', '$2y$10$dhEnRK0VJnAMe7x7Dw52BeyVozeRa7ejhBc2/uhvbc/cykh0o4PlS', '92cc227532d17e56e07902b254dfad10', 0, 0);
 
 -- --------------------------------------------------------
@@ -230,6 +237,14 @@ CREATE TABLE `submitted_orders` (
   `completed` tinyint(1) NOT NULL DEFAULT '0',
   `time_stamp` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+
+--
+-- Dumping data for table `submitted_orders`
+--
+
+INSERT INTO `submitted_orders` (`id`, `customer_id`, `items`, `restaurant_id`, `type`, `submit_time`, `order_code`, `accepted`, `rejected`, `completed`, `time_stamp`) VALUES
+(2, 1, '{\"34\":1,\"26\":1,\"1\":1}', 1, 1, NULL, NULL, 0, 0, 0, '2019-04-12 13:38:36'),
+(3, 1, '{\"34\":1,\"26\":1}', 1, 1, NULL, NULL, 0, 0, 0, '2019-04-12 13:40:44');
 
 -- --------------------------------------------------------
 
@@ -375,7 +390,7 @@ ALTER TABLE `item_tags`
 -- AUTO_INCREMENT for table `orders`
 --
 ALTER TABLE `orders`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=20;
 
 --
 -- AUTO_INCREMENT for table `owners`
@@ -388,6 +403,12 @@ ALTER TABLE `owners`
 --
 ALTER TABLE `restaurants`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+
+--
+-- AUTO_INCREMENT for table `submitted_orders`
+--
+ALTER TABLE `submitted_orders`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT for table `tags`

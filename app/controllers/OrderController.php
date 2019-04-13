@@ -7,6 +7,7 @@ use core\Session;
 use core\Router;
 use app\models\UserModel;
 use app\models\CustomerModel;
+use app\models\SubmittedOrderModel;
 
 class OrderController extends Controller
 {
@@ -56,6 +57,7 @@ class OrderController extends Controller
         }else
         {
             $items['rid'] = (int)$restaurant_id;
+            $items['cid'] = (int)UserModel::current_user()->id;
         }
         $items['items'][$id] = $quantity;
         Session::set('items', json_encode($items));
@@ -99,10 +101,26 @@ class OrderController extends Controller
     public function submit_order_action()
     {
         $new_order = new OrderModel();
+        $new_submitted_order = new SubmittedOrderModel();
         if($this->request->is_post())
         {
-            $new_order->assign($this->request->get());
-            if($new_order->save())
+            $items = json_decode(Session::get('items'), true);
+
+            $new_order->assign($this->request->get());            
+            $new_order->customer_id = $items['cid'];
+            $new_order->restaurant_id = $items['rid'];
+            $new_order->items =  json_encode($items['items'], JSON_FORCE_OBJECT);  
+            
+            $new_submitted_order->assign($this->request->get());
+            $new_submitted_order->customer_id = $new_order->customer_id;
+            $new_submitted_order->restaurant_id = $new_order->restaurant_id;
+            $new_submitted_order->items =  $new_order->items;
+            // H::dnd($new_submitted_order);
+            Session::delete('items');
+
+
+              
+            if($new_order->save() && $new_submitted_order->save())
             {
                 Router::redirect('');
             }
