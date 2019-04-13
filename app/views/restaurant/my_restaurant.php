@@ -17,7 +17,7 @@
 <div class="text-right">
     <a href="<?=SROOT.'order/view_orders' ?>">
     <button type="button" class="btn btn-primary ">
-        Orders <span class="badge badge-light"><?= $this->nooforders ?></span>
+        Orders <span class="badge badge-light" id="nooforders"><?= $this->nooforders ?></span>
     </button>
     </a>
 </div>
@@ -77,6 +77,9 @@
 <script src="https://js.api.here.com/v3/3.0/mapsjs-service.js" type="text/javascript" charset="utf-8"></script>
 <script type="text/javascript" src="https://js.api.here.com/v3/3.0/mapsjs-ui.js"></script>
 <script type="text/javascript" src="https://js.api.here.com/v3/3.0/mapsjs-mapevents.js"></script>
+
+<!-- order notification -->
+<script src="<?= SROOT ?>js/ordernotification.js"></script>
 
 <!-- adding map -->
 <script src="<?= SROOT ?>js/map.js"></script>

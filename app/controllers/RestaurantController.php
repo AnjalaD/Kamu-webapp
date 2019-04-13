@@ -131,4 +131,11 @@ class RestaurantController extends Controller
         $this->view->nooforders = $nooforders;
         $this->view->render('restaurant/my_restaurant');
     }
+
+    public function no_of_orders_action(){
+        $owner = UserModel::current_user();
+        $submittedordermodel = new SubmittedOrderModel();
+        $nooforders = sizeof($submittedordermodel->find_unaccepted_by_restaurant_id((int)$owner->restaurant_id));
+        echo (strval($nooforders));
+    }
 }
