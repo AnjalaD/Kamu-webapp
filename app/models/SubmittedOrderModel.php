@@ -25,6 +25,18 @@ class SubmittedOrderModel extends Model
         return $this->find($conditions);
     }
 
+
+    public function find_unaccepted_by_restaurant_id($restaurant_id, $params = [])
+    {
+        $conditions = [
+            'conditions' => 'restaurant_id=? AND accepted=?',
+            'bind' => [$restaurant_id,0]
+        ];
+        $conditions = array_merge($conditions, $params);
+        return $this->find($conditions);
+    }
+
+
     public function find_by_id_customer_id($order_id, $customer_id, $params = [])
     {
         $conditions = [

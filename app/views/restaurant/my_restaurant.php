@@ -5,7 +5,7 @@
 <!-- styles for map -->
 <link rel="stylesheet" type="text/css" href="https://js.api.here.com/v3/3.0/mapsjs-ui.css?dp-version=1542186754" />
 <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css" integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf" crossorigin="anonymous">
-    
+
 
 <link rel="stylesheet" href="<?= SROOT ?>temp/restaurant_details_assets/css/Contact-Form-v2-Modal--Full-with-Google-Map.css">
 <link rel="stylesheet" href="<?= SROOT ?>temp/restaurant_details_assets/css/dh-row-text-image-right-responsive.css">
@@ -14,12 +14,18 @@
 <?php $this->end(); ?>
 
 <?php $this->start('body'); ?>
-
+<div class="text-right">
+    <a href="<?=SROOT.'order/view_orders' ?>">
+    <button type="button" class="btn btn-primary ">
+        Orders <span class="badge badge-light" id="nooforders"><?= $this->nooforders ?></span>
+    </button>
+    </a>
+</div>
 
 <div>
     <div class="container-fluid">
         <hr>
-        <div  id="contactForm">
+        <div id="contactForm">
             <div class="form-row">
                 <div class="col-12 col-md-6">
                     <h2 class="h4"><i class="fa fa-location-arrow"></i> Locate Us</h2>
@@ -45,6 +51,7 @@
                     </div>
                 </div>
                 <div class="col">
+
                     <section>
                         <div class="jumbotron" style="margin:0px;padding:0px;">
                             <p class="text-center" style="margin:0px;font-size:39px;font-family:Quicksand, sans-serif;color:rgb(228,21,21);">Call now: <strong><?= $this->restaurant->telephone ?></strong> or <a href="#">leave a reply</a></p>
@@ -71,11 +78,17 @@
 <script type="text/javascript" src="https://js.api.here.com/v3/3.0/mapsjs-ui.js"></script>
 <script type="text/javascript" src="https://js.api.here.com/v3/3.0/mapsjs-mapevents.js"></script>
 
+<!-- order notification -->
+<script src="<?= SROOT ?>js/ordernotification.js"></script>
+
 <!-- adding map -->
-<script src="<?=SROOT ?>js/map.js"></script>
+<script src="<?= SROOT ?>js/map.js"></script>
 <script>
     mymap = HMap.getInstance();
-    mymap.showPointAndCenter({latitude:JSON.parse(<?php echo json_encode($this->restaurant->lat) ?>),longitude:JSON.parse(<?php echo json_encode($this->restaurant->lng) ?>)},'restaurant_map_container',JSON.stringify(<?php echo json_encode($this->restaurant->restaurant_name) ?>));
+    mymap.showPointAndCenter({
+        latitude: JSON.parse(<?php echo json_encode($this->restaurant->lat) ?>),
+        longitude: JSON.parse(<?php echo json_encode($this->restaurant->lng) ?>)
+    }, 'restaurant_map_container', JSON.stringify(<?php echo json_encode($this->restaurant->restaurant_name) ?>));
 </script>
 
 
