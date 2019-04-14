@@ -62,7 +62,7 @@ $this->set_title($this->user->first_name); ?>
                     <input id="save" type="submit" value="Save your changes" hidden>
                 </div>
                 <?php if (UserModel::current_user()->verified == 0) : ?>
-                    <a href="">Send Account Verification Email</a>
+                    <a href="register/send_verify_email">Send Account Verification Email</a>
                 <?php endif ?>
             </form>
         </div>

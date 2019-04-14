@@ -14,13 +14,16 @@ class ProfileController extends Controller
         $this->view->set_layout('default');
     }
 
+    //view profile page
     public function index_action()
     {
         $user = UserModel::current_user();
         $this->view->user = $user;
         $this->view->render('profile/index');
     }
+    
 
+    //handle edit profile ajax request
     public function edit_action()
     {
         $user = UserModel::current_user();

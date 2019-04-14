@@ -84,4 +84,27 @@ class FoodItemModel extends Model
         // H::dnd($items);
         return ($items) ? $items : [];
     }
+
+
+    public function search_by_tag($tag, $limit=0)
+    {
+        $sql = '
+            SELECT I.*, R.restaurant_name,  GROUP_CONCAT(T.tag_name) as tags
+            FROM items as I
+            INNER JOIN restaurants R ON I.restaurant_id=R.id
+            LEFT JOIN item_tags IT ON I.id=IT.item_id
+            LEFT JOIN tags T ON IT.tag_id=T.id
+            WHERE I.id IN (SELECT item_tags.item_id FROM item_tags INNER JOIN tags ON tags.id=item_tags.tag_id WHERE tags.tag_name =  ?)
+            GROUP by I.id ORDER by item_name LIMIT '.($limit*20).', 20;';
+
+        $items = $this->query($sql, [$tag], get_class($this));
+
+        if ($items) {
+            foreach ($items as $item) {
+                $item->tags = ($item->tags) ? explode(',', $item->tags) : false;
+            }
+        }
+        // H::dnd($items);
+        return ($items) ? $items : [];
+    }
 }

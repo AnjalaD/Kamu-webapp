@@ -186,14 +186,21 @@ class RegisterController extends Controller
             $this->view->render('register/reset_password');
             return;
         }
-        Session::add_msg('danger', 'invalid url');
+        Session::add_msg('danger', 'Invalid URL or Link expaired!');
         Router::redirect('');
     }
 
 
-    //demo
-    public function demo_action()
+    //send verification email - in profile page
+    public function send_verify_email_action()
     {
-
+        $user = UserModel::current_user();
+        if($user->verified == 1){
+            Session::add_msg('info', 'Your account has already verified!');
+            Router::redirect('');
+        }
+        $user->send_verify_email();
+        Session::add_msg('info', 'Please follow the link send to your email!');
+        Router::redirect('');
     }
 } 

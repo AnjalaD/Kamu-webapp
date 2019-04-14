@@ -47,6 +47,7 @@ class OrderController extends Controller
             echo '-1';
             return;
         }
+
         if(Session::exists('items'))
         {
             $items = json_decode(Session::get('items'), true);
@@ -59,6 +60,7 @@ class OrderController extends Controller
             $items['rid'] = (int)$restaurant_id;
             $items['cid'] = (int)UserModel::current_user()->id;
         }
+        
         $items['items'][$id] = $quantity;
         Session::set('items', json_encode($items));
         echo '1';
@@ -119,7 +121,6 @@ class OrderController extends Controller
             Session::delete('items');
 
 
-              
             if($new_order->save() && $new_submitted_order->save())
             {
                 Router::redirect('');
@@ -138,6 +139,7 @@ class OrderController extends Controller
         if(Session::exists('items'))
         {
             $items = json_decode(Session::get('items'), true);
+
             $draft->customer_id = UserModel::current_user()->id;
             $draft->restaurant_id = $items['rid'];
             $draft->items = json_encode($items['items']);

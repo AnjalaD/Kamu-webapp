@@ -48,6 +48,8 @@ class SearchController extends Controller
         $this->view->render('search/restaurant');
     }
 
+
+    //handle auto complete ajax request - in search
     public function auto_complete_action($data=[])
     {
         $result =[];
@@ -66,14 +68,22 @@ class SearchController extends Controller
             }
         }
         // H::dnd($result);
-        $this->json_response($result);
+        return $this->json_response($result);
     }
 
+
+    //search food by tags
     public function search_by_tag_action($tag)
     {
-
+        $results = $this->fooditemmodel->search_by_tag($tag);
+        // H::dnd($results);
+        $this->view->results = H::create_card_list($results);
+        $this->view->post_data = $tag;
+        $this->view->render('search/food');
     }
 
+
+    //handle filter and sort ajax requests - in search
     public function filter_action($type)
     {
         $response = '';
@@ -90,6 +100,7 @@ class SearchController extends Controller
             $restaurants = $this->restaurantmodel->filter($filters);
         }
         echo ($response);
+        return;
     }
 
 }
