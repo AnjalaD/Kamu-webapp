@@ -37,12 +37,12 @@ use core\FH;
 
 <?php $this->start('script') ?>
 <script src="<?= SROOT ?>js/autocomplete.js"></script>
-<script src="<?=SROOT?>js/addtoorder.js"></script>
-<script src="<?=SROOT?>js/search.js"></script>
+<script src="<?= SROOT ?>js/addtoorder.js"></script>
+<script src="<?= SROOT ?>js/search.js"></script>
 <script>
-    $(document).ready(function(){
+    $(document).ready(function() {
         sendFilters();
-        
+
     });
 
     $('form').submit(function(e) {
@@ -50,24 +50,26 @@ use core\FH;
         return false;
     });
 
-    $('.tags').on('click',function(e){
+    
+
+    $("body").on("click", ".tags", function(e) {
         console.log('aa');
 
     });
 
-    function sendFilters(){
+    function sendFilters() {
         data = {
-            'search' : $('input[name=search_string]').val(),
-            'sort_by' : $('input[name=sort_by]:checked').val(),
-            'price_filter' : $('input[name=price_filter]').val()
+            'search': $('input[name=search_string]').val(),
+            'sort_by': $('input[name=sort_by]:checked').val(),
+            'price_filter': $('input[name=price_filter]').val()
         };
         console.log(data);
         getItemCards(data, 'items');
+
     }
 
-    $('#search_string').keyup(function(){
+    $('#search_string').keyup(function() {
         autoComplete($(this).val(), 'food')
     });
-    
 </script>
-<?php $this->end(); ?> 
+<?php $this->end(); ?>
