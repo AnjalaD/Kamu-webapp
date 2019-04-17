@@ -41,29 +41,32 @@ class OrderController extends Controller
      *          0 = prompt cancel, new order( 1.save existing in as draft   2.dismiss existing )
      *          1 = change 'add to cart' -> 'remove item' 
      */
-    public function add_to_order_action($restaurant_id, $id, $quantity=1){
-        if(!(UserModel::current_user() instanceof CustomerModel))
-        {
-            echo '-1';
-            return;
-        }
-        if(Session::exists('items'))
-        {
-            $items = json_decode(Session::get('items'), true);
-            if($items['rid'] != $restaurant_id){
-                echo '0';
+    public function add_to_order_action($restaurant_id, $id, $quantity = 1)
+    {
+        if (!(UserModel::current_user() instanceof CustomerModel)) {
+                echo '-1';
                 return;
-            }  
-        }else
-        {
-            $items['rid'] = (int)$restaurant_id;
-            $items['cid'] = (int)UserModel::current_user()->id;
+            }
+        if (Session::exists('items')) {
+                $items = json_decode(Session::get('items'), true);
+                if ($items['rid'] != $restaurant_id) {
+                    echo '0';
+                    return;
+                }
+            } else {
+                $items=[];
+                $items['rid'] = (int)$restaurant_id;
+                $items['cid'] = (int)UserModel::current_user()->id;
+                $items['items']=[];
+            }
+        if (array_key_exists($id, $items['items'])) {
+            $items['items'][$id] += 1;
+        } else {
+            $items['items'][$id] = $quantity;
         }
-        $items['items'][$id] = $quantity;
         Session::set('items', json_encode($items));
         echo '1';
         return;
-        
     }
 
 
