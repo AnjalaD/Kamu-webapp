@@ -25,11 +25,10 @@ use core\FH;
         <div class="col-md-2 card bg-light m-1 p-1">
             <?php $this->partial('search', 'filters'); ?>
         </div>
-        <div class="col-md-8 card m-1 p-1" id="items">
-            <?= $this->results ?>
-        </div>
-        <div class="col-md-2 card bg-light m-1 p-1">
-        </div>
+
+        <div class="col-md-8 card m-1 p-1" id="items"></div>
+
+        <div class="col-md-2 card bg-light m-1 p-1"></div>
     </div>
 </div>
 
@@ -37,10 +36,10 @@ use core\FH;
 
 <?php $this->start('script') ?>
 <script src="<?= SROOT ?>js/autocomplete.js"></script>
-<script src="<?=SROOT?>js/addtoorder.js"></script>
-<script src="<?=SROOT?>js/search.js"></script>
+<script src="<?= SROOT ?>js/addtoorder.js"></script>
+<script src="<?= SROOT ?>js/search.js"></script>
 <script>
-    $(document).ready(function(){
+    $(document).ready(function() {
         sendFilters();
     });
 
@@ -49,23 +48,19 @@ use core\FH;
         return false;
     });
 
-    $('.tags').click(function(){
-        console.log('aa');
-    });
 
-    function sendFilters(){
+    function sendFilters() {
         data = {
-            'search' : $('input[name=search_string]').val(),
-            'sort_by' : $('input[name=sort_by]:checked').val(),
-            'price_filter' : $('input[name=price_filter]').val()
+            'search': $('input[name=search_string]').val(),
+            'sort_by': $('input[name=sort_by]:checked').val(),
+            'price_filter': $('input[name=price_filter]').val()
         };
         console.log(data);
         getItemCards(data, 'items');
     }
 
-    $('#search_string').keyup(function(){
+    $('#search_string').keyup(function() {
         autoComplete($(this).val(), 'food')
     });
-    
 </script>
-<?php $this->end(); ?> 
+<?php $this->end(); ?>
