@@ -48,17 +48,19 @@ use core\FH;
         sendFilters();
         return false;
     });
-
     
-
     $("body").on("click", ".tags", function(e) {
-        console.log('aa');
-
+        sendFilters($(this).attr('id'));
     });
 
-    function sendFilters() {
+    function sendFilters(search='') {
+        if(search==''){
+            search = $('input[name=search_string]').val();
+        }else{
+            $('input[name=search_string]').val(search);
+        }
         data = {
-            'search': $('input[name=search_string]').val(),
+            'search': search,
             'sort_by': $('input[name=sort_by]:checked').val(),
             'price_filter': $('input[name=price_filter]').val()
         };
