@@ -5,7 +5,8 @@ function addToOrder(rid, id, element) {
         function(resp) {
             console.log(resp);
             if(resp=='1'){
-                element.innerHTML = 'Remove Item';
+                element.innerHTML = 'Item Added';
+                element.setAttribute("onclick","");
             }
             else if(resp=='0'){
                 window.alert('Please select food from one restaurant');

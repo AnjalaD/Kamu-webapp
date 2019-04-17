@@ -56,48 +56,48 @@ class H
     $current_page = self::current_page();
     foreach ($menu as $key => $value) : $active = ''; ?>
     <?php if (is_array($value)) : ?>
-    <li class="nav-item dropdown">
-    <li class="nav-item dropdown">
+      <li class="nav-item dropdown">
+      <li class="nav-item dropdown">
         <a class="dropdown-toggle nav-link" data-toggle="dropdown" aria-expanded="false" href="#">
-            <?= $key ?>
+          <?= $key ?>
         </a>
         <div class="dropdown-menu <?= $drop_down_class ?>" role="menu">
-            <?php foreach ($value as $k => $v) :
-              $active = ($v == $current_page) ? 'active' : '' ?>
+          <?php foreach ($value as $k => $v) :
+            $active = ($v == $current_page) ? 'active' : '' ?>
             <?php if ($k == 'separator') : ?>
-            <div class="dropdown-divider"></div>
+              <div class="dropdown-divider"></div>
             <?php else : ?>
-            <a class="dropdown-item <?= $active ?>" role="presentation" href="<?= $v ?>">
+              <a class="dropdown-item <?= $active ?>" role="presentation" href="<?= $v ?>">
                 <?= $k ?>
-            </a>
+              </a>
             <?php endif ?>
-            <?php endforeach ?>
+          <?php endforeach ?>
         </div>
-    </li>
+      </li>
     <?php else :
-      $active = ($value == $current_page) ? 'active' : '' ?>
-    <li class="nav-item NavBar_Item" role="presentation" id="Home_NavBarItem_Food">
+    $active = ($value == $current_page) ? 'active' : '' ?>
+      <li class="nav-item NavBar_Item" role="presentation" id="Home_NavBarItem_Food">
         <a class="nav-link NavBar_Link <?= $active ?>" href="<?= $value ?>" id="Home_NavBar_Food" style="font-family:Aclonica, sans-serif;">
-            <?= $key ?>
+          <?= $key ?>
         </a>
-    </li>
+      </li>
     <?php endif ?>
-    <?php endforeach;
-    return ob_get_clean();
-  }
+  <?php endforeach;
+return ob_get_clean();
+}
 
-  public static function create_card_list($items)
-  {
-    if (empty($items)) {
-      return '';
-    }
-    $html = '<div class="card-columns">';
-    foreach ($items as $item) {
-      $html .= self::create_card($item);
-    }
-    $html .= '</div>';
-    return $html;
+public static function create_card_list($items)
+{
+  if (empty($items)) {
+    return '';
   }
+  $html = '<div class="card-columns">';
+  foreach ($items as $item) {
+    $html .= self::create_card($item);
+  }
+  $html .= '</div>';
+  return $html;
+}
 
   public static function create_card($item)
   {
@@ -118,24 +118,32 @@ class H
             <button class="tags" id="<?=$tag?>"> <?=$tag?> </button>
           <?php endforeach ?>
         <?php endif ?>
-        </p>
-        <span class="price">LKR.<?= $item->price ?></span>
-        <br>
-        <i class="icon-shopping-cart icon-2x"></i>
-        <a class="btn btn-info pull-right" onClick="addToOrder(<?=$item->restaurant_id?>, <?=$item->id?>,this)" >Add to Order</a>
-      </div>
-      <div class="details">
-        <span class="rating pull-right">
-          <span class="star"></span>
-          <span class="star"></span>
-          <span class="star"></span>
-          <span class="star"></span>
-          <span class="star"></span>
-        </span>
-      </div>
-    </div>
-    <?php
-    return ob_get_clean();
-  }
+      </p>
+      <span class="price">LKR.<?= $item->price ?></span>
+      <br>
+      <i class="icon-shopping-cart icon-2x"></i>
+      <?php if (Session::exists('items')) : ?>
+        <?php if (array_key_exists($item->id, json_decode(Session::get('items'), true)['items'])) : ?>
+          <a class="btn btn-info pull-right" onClick="">Item Added</a>
+        <?php else : ?>
+          <a class="btn btn-info pull-right" onClick="addToOrder(<?= $item->restaurant_id ?>, <?= $item->id ?>,this)">Add to Order</a>
 
+        <?php endif ?>
+      <?php else : ?>
+        <a class="btn btn-info pull-right" onClick="addToOrder(<?= $item->restaurant_id ?>, <?= $item->id ?>,this)">Add to Order</a>
+      <?php endif ?>
+    </div>
+    <div class="details">
+      <span class="rating pull-right">
+        <span class="star"></span>
+        <span class="star"></span>
+        <span class="star"></span>
+        <span class="star"></span>
+        <span class="star"></span>
+      </span>
+    </div>
+  </div>
+  <?php
+  return ob_get_clean();
+}
 }

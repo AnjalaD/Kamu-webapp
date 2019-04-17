@@ -41,6 +41,7 @@ use core\FH;
 <script>
     $(document).ready(function() {
         sendFilters();
+
     });
 
     $('form').submit(function(e) {
@@ -48,6 +49,12 @@ use core\FH;
         return false;
     });
 
+    
+
+    $("body").on("click", ".tags", function(e) {
+        console.log('aa');
+
+    });
 
     function sendFilters() {
         data = {
@@ -57,6 +64,7 @@ use core\FH;
         };
         console.log(data);
         getItemCards(data, 'items');
+
     }
 
     $('#search_string').keyup(function() {
