@@ -18,6 +18,7 @@ use core\H;
             <th>Time</th>
             <th>Price</th>
             <th></th>
+            <th></th>
         </thead>
         <tbody>
             <?php foreach($this->orders as $order ) :?>
@@ -25,8 +26,8 @@ use core\H;
                 <td><?= $order->id ?></td>
                 <td><?= $order->order_code ?></td>
                 <td><?= $order->submit_time ?></td>
-                <td><a class="btn btn-primary" href="<?=SROOT. 'order/accep_order/'. $item->id?>">Accept Order</a></td>
-                <td><a class="btn btn-danger" href="<?=SROOT. 'order/remove_order/'. $item->id?>">Reject Order</a></td>
+                <td><a class="btn btn-primary" href="<?=SROOT. 'order/accept_order/'. $item->id?>">Accept Order</a></td>
+                <td><a class="btn btn-danger" href="<?=SROOT. 'order/reject_order/'. $item->id?>">Reject Order</a></td>
             </tr>
             <?php endforeach ?> 
         </tbody>

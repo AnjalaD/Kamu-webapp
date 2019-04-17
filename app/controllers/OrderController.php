@@ -159,8 +159,10 @@ class OrderController extends Controller
     //view all orders -by restaurant
     public function view_orders_action()
     {
-        $this->view->orders = $this->submittedordermodel->find_by_restaurant_id(UserModel::current_user()->restaurant_id);
+        $orders = $this->submittedordermodel->find_by_restaurant_id(UserModel::current_user()->restaurant_id);
+        $this->view->orders = $orders;
         $this->view->render('order/view_orders');
+        // H::dnd($orders);
     }
 
 }
