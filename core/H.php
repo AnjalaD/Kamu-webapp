@@ -99,7 +99,7 @@ class H
     return $html;
   }
 
-  private static function create_card($item)
+  public static function create_card($item)
   {
     ob_start() ?>
     <div class="card block span3">
@@ -115,7 +115,7 @@ class H
         <p>
         <?php if($item->tags) :?>
           <?php foreach($item->tags as $tag) :?>
-            <a href="<?=SROOT?>search/search_by_tag/<?=$tag?>"> <?=$tag?> </a>
+            <button class="tags" id="<?=$tag?>"> <?=$tag?> </button>
           <?php endforeach ?>
         <?php endif ?>
         </p>

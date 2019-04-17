@@ -38,16 +38,22 @@ use core\FH;
 <?php $this->start('script') ?>
 <script src="<?= SROOT ?>js/autocomplete.js"></script>
 <script src="<?=SROOT?>js/addtoorder.js"></script>
-<script src="<?=SROOT?>js/sortandfilter.js"></script>
+<script src="<?=SROOT?>js/search.js"></script>
 <script>
+    $(document).ready(function(){
+        sendFilters();
+    });
 
     $('form').submit(function(e) {
         sendFilters();
         return false;
     });
 
+    $('.tags').click(function(){
+        console.log('aa');
+    });
+
     function sendFilters(){
-        
         data = {
             'search' : $('input[name=search_string]').val(),
             'sort_by' : $('input[name=sort_by]:checked').val(),
@@ -57,8 +63,9 @@ use core\FH;
         getItemCards(data, 'items');
     }
 
-    var search = document.getElementById('search_string');
-    search.onkeyup = function(){autoComplete(search.value, 'food')};
+    $('#search_string').keyup(function(){
+        autoComplete($(this).val(), 'food')
+    });
     
 </script>
 <?php $this->end(); ?> 
