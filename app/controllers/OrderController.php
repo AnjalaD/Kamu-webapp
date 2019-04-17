@@ -122,7 +122,6 @@ class OrderController extends Controller
             Session::delete('items');
 
 
-              
             if($new_order->save() && $new_submitted_order->save())
             {
                 Router::redirect('');
@@ -141,6 +140,7 @@ class OrderController extends Controller
         if(Session::exists('items'))
         {
             $items = json_decode(Session::get('items'), true);
+
             $draft->customer_id = UserModel::current_user()->id;
             $draft->restaurant_id = $items['rid'];
             $draft->items = json_encode($items['items']);

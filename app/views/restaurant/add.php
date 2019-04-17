@@ -1,7 +1,7 @@
 <?php $this->set_title('Add New Items'); ?>
 
 <?php $this->start('head'); ?>
-<link rel="stylesheet" href="<?=SROOT?>/css/croppie.css">
+<link rel="stylesheet" href="<?=SROOT?>css/croppie.css">
 <?php $this->end(); ?>
 
 <?php $this->start('body'); ?>

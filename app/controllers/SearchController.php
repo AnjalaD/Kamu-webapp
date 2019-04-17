@@ -31,9 +31,7 @@ class SearchController extends Controller
     public function food_action()
     {   
         $data = $this->request->exists('search_string')? $this->request->get('search_string') : '';
-        $results = $this->fooditemmodel->search('item_name', $data);
         // H::dnd($results);
-        $this->view->results = H::create_card_list($results);
         $this->view->post_data = $data;
         $this->view->render('search/food');
     }
@@ -42,12 +40,12 @@ class SearchController extends Controller
     public function restaurant_action()
     {
         $data = $this->request->exists('search_string')? $this->request->get('search_string') : '';
-        $results = $this->restaurantmodel->search('restaurant_name', $data);
-
-        $this->view->restaurants = $results;
+        $this->view->post_data = $data;
         $this->view->render('search/restaurant');
     }
 
+
+    //handle auto complete ajax request - in search
     public function auto_complete_action($data=[])
     {
         $result =[];
@@ -66,30 +64,38 @@ class SearchController extends Controller
             }
         }
         // H::dnd($result);
-        $this->json_response($result);
+        return $this->json_response($result);
     }
 
+
+    //search food by tags
     public function search_by_tag_action($tag)
     {
-
+        $results = $this->fooditemmodel->search_by_tag($tag);
+        // H::dnd($results);
+        $this->view->results = H::create_card_list($results);
+        $this->view->post_data = $tag;
+        $this->view->render('search/food');
     }
 
-    public function filter_action($type)
+
+    //handle filter and sort ajax requests - in search
+    public function search_action($type)
     {
         $response = '';
         $filters = $this->request->get();
-        // H::dnd($filters);
+
         if($type==1)
         {
             $items = $this->fooditemmodel->filter($filters);
             $response = H::create_card_list($items);
-            // H::dnd($response);
         }
         elseif($type==2)
         {
             $restaurants = $this->restaurantmodel->filter($filters);
         }
-        echo ($response);
+        
+        return $this->json_response($response);
     }
 
 }

@@ -99,23 +99,23 @@ public static function create_card_list($items)
   return $html;
 }
 
-private static function create_card($item)
-{
-  ob_start() ?>
-  <div class="card block span3">
-    <div class="product">
-      <img src=<?= $item->image_url ?>>
-    </div>
-    <div class="info">
-      <h4><?= $item->item_name ?></h4>
-      <span class="restaurant_name">
-        <a class="link" href="<?= SROOT ?>restaurant/details/<?= $item->restaurant_id ?>"><?= $item->restaurant_name ?></a>
-      </span>
-      <span class="description"><?= $item->description ?></span>
-      <p>
-        <?php if ($item->tags) : ?>
-          <?php foreach ($item->tags as $tag) : ?>
-            <a href="<?= SROOT ?>search/search_by_tag/<?= $tag ?>"> <?= $tag ?> </a>
+  public static function create_card($item)
+  {
+    ob_start() ?>
+    <div class="card block span3">
+      <div class="product">
+        <img src=<?= $item->image_url ?> >
+      </div>
+      <div class="info">
+        <h4><?= $item->item_name ?></h4>
+        <span class="restaurant_name">
+          <a class="link" href="<?=SROOT?>restaurant/details/<?=$item->restaurant_id?>" ><?= $item->restaurant_name ?></a>
+        </span>
+        <span class="description"><?= $item->description ?></span>
+        <p>
+        <?php if($item->tags) :?>
+          <?php foreach($item->tags as $tag) :?>
+            <button class="tags" id="<?=$tag?>"> <?=$tag?> </button>
           <?php endforeach ?>
         <?php endif ?>
       </p>

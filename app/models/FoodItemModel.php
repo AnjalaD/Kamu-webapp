@@ -30,52 +30,80 @@ class FoodItemModel extends Model
             GROUP by I.id ;';
 
         $items = $this->query($sql, [$item_id, $restaurant_id], get_class($this));
+        if ($items[0]) {
+            $items[0]->tags = ($items[0]->tags) ? explode(',', $items[0]->tags) : false;
+        }
         return $items[0];
     }
 
-    public function search($field, $data, $limit=0)
+    // public function search($field, $data, $limit=0)
+    // {
+
+    //     $sql = '
+    //         SELECT I.*, R.restaurant_name,  GROUP_CONCAT(T.tag_name) as tags
+    //         FROM items as I
+    //         INNER JOIN restaurants R ON I.restaurant_id=R.id
+    //         LEFT JOIN item_tags IT ON I.id=IT.item_id
+    //         LEFT JOIN tags T ON IT.tag_id=T.id
+    //         WHERE ' . $field . ' LIKE ?
+    //         GROUP by I.id ORDER by item_name LIMIT '.($limit*20).', 20;';
+
+    //     $items = $this->query($sql, ['%' . $data . '%'], get_class($this));
+
+    //     if ($items) {
+    //         foreach ($items as $item) {
+    //             $item->tags = ($item->tags) ? explode(',', $item->tags) : false;
+    //         }
+    //     }
+    //     // H::dnd($items);
+    //     return ($items) ? $items : [];
+    // }
+
+    public function filter($filters, $limit=0)
     {
+        $sort_by = ['item_name ASC', 'item_name DESC', 'price ASC', 'price DESC'];
 
         $sql = '
-            SELECT I.*, R.restaurant_name,  GROUP_CONCAT(T.tag_name) as tags
+            SELECT I.*, R.restaurant_name, GROUP_CONCAT(T.tag_name) as tags
             FROM items as I
             INNER JOIN restaurants R ON I.restaurant_id=R.id
             LEFT JOIN item_tags IT ON I.id=IT.item_id
             LEFT JOIN tags T ON IT.tag_id=T.id
-            WHERE ' . $field . ' LIKE ?
-            GROUP by I.id ORDER by item_name LIMIT '.($limit*20).', 20;';
+            WHERE 
+                I.id IN (SELECT item_tags.item_id FROM item_tags INNER JOIN tags ON tags.id=item_tags.tag_id WHERE tags.tag_name LIKE ?) 
+                AND I.price <= ?
+            GROUP by I.id ORDER BY ' . $sort_by[$filters['sort_by']] .' LIMIT '.($limit*20).', 20;';
 
-        $items = $this->query($sql, ['%' . $data . '%'], get_class($this));
+
+        $items = $this->query(
+            $sql,
+            ['%' . $filters['search'] . '%', $filters['price_filter'] ],
+            get_class($this)
+        );
 
         if ($items) {
             foreach ($items as $item) {
                 $item->tags = ($item->tags) ? explode(',', $item->tags) : false;
             }
         }
-        // H::dnd($items);
+
         return ($items) ? $items : [];
     }
 
-    public function filter($filters, $limit=0)
+
+    public function search_by_tag($tag, $limit=0)
     {
-        if (strpos($filters['sort_by'], 'name') !== false) {
-            $filters['sort_by'] = 'item_' . $filters['sort_by'];
-        }
         $sql = '
-            SELECT I.*, R.restaurant_name,  GROUP_CONCAT(T.tag_name) as tags
+            SELECT I.*, R.restaurant_name, GROUP_CONCAT(T.tag_name) as tags
             FROM items as I
             INNER JOIN restaurants R ON I.restaurant_id=R.id
             LEFT JOIN item_tags IT ON I.id=IT.item_id
             LEFT JOIN tags T ON IT.tag_id=T.id
-            WHERE item_name LIKE "%' . $filters['search'] . '%" AND I.price <= ' . $filters['price_filter'] . '
-            GROUP by I.id  ORDER BY ' . $filters['sort_by'] .' LIMIT '.($limit*20).', 20;';
+            WHERE I.id IN (SELECT item_tags.item_id FROM item_tags INNER JOIN tags ON tags.id=item_tags.tag_id WHERE tags.tag_name =  ?)
+            GROUP by I.id ORDER by item_name LIMIT '.($limit*20).', 20;';
 
+        $items = $this->query($sql, [$tag], get_class($this));
 
-        $items = $this->query(
-            $sql,
-            ['%' . $filters['search'] . '%', $filters['price_filter'], $filters['sort_by']],
-            get_class($this)
-        );
         if ($items) {
             foreach ($items as $item) {
                 $item->tags = ($item->tags) ? explode(',', $item->tags) : false;

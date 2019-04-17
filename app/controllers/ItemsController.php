@@ -112,16 +112,17 @@ class ItemsController extends Controller
     }
 
 
-    //show details of a selected food item
-    public function details_action($id)
+    //show previwe of a selected food item
+    public function details_action($item_id)
     {
-        $item = $this->itemsmodel->find_by_id_restaurant_id((int)$id, OwnerModel::current_user()->restaurant_id);
+        $item = $this->fooditemmodel->find_by_item_id_restaurant_id((int)$item_id, OwnerModel::current_user()->restaurant_id);
+        // H::dnd($item);
         if (!$item) {
-            Session::add_msg('danger', 'Something went wrong!');
-            Router::redirect('items');
+            $response = false;
+        }else{
+            $response = H::create_card($item);
         }
-        $this->view->item = $item;
-        $this->view->render('items/details');
+        return $this->json_response($response);
     }
 
     //hide food item

@@ -7,7 +7,7 @@ $token = FH::generate_token();
 <?php $this->set_title('Register'); ?>
 
 <?php $this->start('head'); ?>
-<script src="<?= SROOT ?>js/register_form_validate.js"></script>
+<!-- <script src="<?= SROOT ?>js/register_form_validate.js"></script> -->
 <link rel="stylesheet" href="<?= SROOT ?>css/styles.min.css">
 <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Aclonica">
 <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Montserrat">

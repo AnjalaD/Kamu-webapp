@@ -41,7 +41,6 @@ class TagModel extends Model
         ];
 
         return $this->find($params);
-        
     }
 
 }
