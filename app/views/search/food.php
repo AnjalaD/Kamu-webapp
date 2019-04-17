@@ -42,6 +42,7 @@ use core\FH;
 <script>
     $(document).ready(function(){
         sendFilters();
+        
     });
 
     $('form').submit(function(e) {
@@ -49,8 +50,9 @@ use core\FH;
         return false;
     });
 
-    $('.tags').click(function(){
+    $('.tags').on('click',function(e){
         console.log('aa');
+
     });
 
     function sendFilters(){
