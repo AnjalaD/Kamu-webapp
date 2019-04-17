@@ -26,7 +26,7 @@ use core\H;
                 <td><?= $order->order_code ?></td>
                 <td><?= $order->submit_time ?></td>
                 <td><a class="btn btn-primary" href="<?=SROOT. 'order/accep_order/'. $item->id?>">Accept Order</a></td>
-                <td><a class="btn btn-danger" href="<?=SROOT. 'order/remove_order/'. $item->id?>">Remove Order</a></td>
+                <td><a class="btn btn-danger" href="<?=SROOT. 'order/remove_order/'. $item->id?>">Reject Order</a></td>
             </tr>
             <?php endforeach ?> 
         </tbody>

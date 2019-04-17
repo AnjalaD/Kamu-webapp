@@ -1,5 +1,7 @@
 <?php
 use core\FH;
+
+$token = FH::generate_token();
 ?>
 
 <?php $this->set_title('Login'); ?>
@@ -15,7 +17,7 @@ use core\FH;
 <div id="Login_LoginDark_Background" class="login-dark">
     <form method="post" id="Login_Main_LoginBox" class="LoginBox" action="<?=SROOT?>register/login_admin">
         <h2 class="sr-only">Login Form</h2>
-        <?= FH::csrf_input() ?>
+        <?= FH::csrf_input($token) ?>
         <?= FH::display_errors($this->display_errors) ?>
         <div id="Logo_Illustration" class="illustration">
             <img src="<?=SROOT?>assets/img/150monoLogoOnlyKamu.png">
