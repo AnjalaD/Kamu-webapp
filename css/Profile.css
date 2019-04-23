@@ -1,0 +1,82 @@
+.form-group {
+  /*display: flex;*/
+  /*flex-wrap: wrap;*/
+  /*float: right;*/
+  max-width: 98%;
+}
+
+.Profile_Label {
+  font-family: 'Aclonica';
+}
+
+#Profile_Heading {
+  color: #9d2525;
+  font-family: 'Aclonica';
+}
+
+.Profile_hr{
+	height: 6px;
+	size: 10px;
+	color: #9d2525;
+}
+
+.Profile_body {
+}
+
+.form-row > .col, .form-row > [class*=col-] {
+  background-color: rgb(255,255,255);
+  opacity: 0.8;
+}
+
+#Profile_coloumndp {
+  padding-top: 40px;
+}
+
+#Profile_coloumninfo {
+  padding-top: 40px;
+  padding-bottom: 40px;
+  padding-right: 20px;
+  padding-left: 20px;
+}
+
+#Profile_fileInput {
+  max-width: 90%;
+  margin-left: 25px;
+}
+
+#Profile_colFirstName {
+  border-radius: 0px 0px 30px 0px;
+}
+
+#Profile_colLastName {
+  border-radius: 0px 0px 30px 0px;
+}
+
+#Profile_colPassword {
+  border-radius: 0px 0px 30px 0px;
+}
+
+#Profile_colCnfmPassword {
+  border-radius: 0px 0px 30px 0px;
+}
+
+#Profile_coloumninfo {
+  border-radius: 0px 0px 70px 0px;
+  border: groove;
+  border-bottom: 10px;
+  border: 5px;
+  border-color: #9d2525;
+}
+
+#Profile_row {
+  border-radius: 0px 0px 70px 0px;
+  border: groove;
+  border-bottom: 10px;
+  border: 5px;
+  border-color: #9d2525;
+}
+
+#Profile_buttonCancel, #Profile_buttonSave {
+  font-family: 'Aclonica';
+}
+
