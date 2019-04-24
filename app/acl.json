@@ -20,7 +20,7 @@
 
     "Customer": {
         "denied": {},
-        "Order": ["order", "remove_from_order", "submit_order", "cancel_order", "save_draft"]
+        "Order": ["order", "remove_from_order", "submit_order", "cancel_order", "save_draft", "get_draft_items"]
     },
 
     "Owner": {

@@ -6,7 +6,6 @@ use core\H;
 <?php $this->set_title('items'); ?>
 
 <?php $this->start('head'); ?>
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/tempusdominus-bootstrap-4/5.0.1/css/tempusdominus-bootstrap-4.min.css" />
 <link rel="stylesheet" href="<?= SROOT ?>css/order.css" />
 <?php $this->end(); ?>
 
@@ -34,11 +33,6 @@ use core\H;
         <a type="button" class="btn btn-primary" data-toggle="modal" data-target="#order_submit_form">Submit Order</a>
         <a type="button" class="btn btn-secondray" href="<?= SROOT ?>order/save_draft">Save and Cancel</a>
         <a type="button" class="btn btn-danger" href="<?= SROOT ?>order/cancel_order">Cancel Order</a> -->
-
-
-
-
-
 
 
 
@@ -89,13 +83,6 @@ use core\H;
             <a  class="btn btn-danger" href="<?= SROOT ?>order/cancel_order">Cancel Order</a>
         </div>
 
-
-
-
-
-
-
-
         <div id="order_submit_form" class="modal fade" role="dialog">
             <div class="modal-dialog">
 
@@ -122,7 +109,26 @@ use core\H;
 
     <?php else : ?>
         <h5>No items selected</h>
-        <?php endif ?>
+    <?php endif ?>
+
+    <div>
+        <div>
+            <h1>Drafts</h1>
+            <?php if( isset($this->drafts) && !empty($this->drafts) ) :?>
+                <?php foreach($this->drafts as $draft) :?>
+                    <li class="nav-item dropdown">
+                        <a class="dropdown-toggle nav-link draft" id="<?=$draft->id?>" data-toggle="dropdown" aria-expanded="false" href="#"><?=$draft->time_stamp?></a>
+                        <div class="dropdown-menu" role="menu">
+                            <img src="" alt="loading...">
+                        </div>
+                    </li>
+                <?php endforeach ?>
+            <?php else :?>
+                <p> No saved drafts </p>
+            <?php endif ?>
+        </div>
+    </div>
+
 </div>
 <?php $this->end(); ?>
 
@@ -130,4 +136,18 @@ use core\H;
 <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.22.2/moment.min.js"></script>
 <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/tempusdominus-bootstrap-4/5.0.1/js/tempusdominus-bootstrap-4.min.js"></script>
 <script src="<?= SROOT ?>js/submitorder.js"></script>
+<script>
+    $('.draft').click(function(){
+        var draftId = $(this).attr('id');
+        var $head = $(this);
+        console.log(draftId);
+        $.post(
+            `${SROOT}order/get_draft_items/${draftId}`,
+            {},
+            function(resp){
+                $head.next('.dropdown-menu').html(resp);
+            }
+        );
+    });
+</script>
 <?php $this->end(); ?>

@@ -96,7 +96,7 @@ class OrderController extends Controller
     {
         Session::delete('items');
         Session::add_msg('info', 'Your order canceled successfully!');
-        $this->view->render('order/order');
+        Router::redirect('order/order');
     }
 
 
@@ -164,6 +164,18 @@ class OrderController extends Controller
         $this->view->orders = $orders;
         $this->view->render('order/view_orders');
         // H::dnd($orders);
+    }
+
+    public function get_draft_items_action($draft_id)
+    {
+        $draft = $this->ordermodel->find_by_id($draft_id);
+        if($draft) {
+            $items = $this->itemsmodel->get_order_items(json_decode($draft->items));
+            $resposnse = H::create_draft_dropdown($items);
+        } else {
+            $resposnse = '<li>Error occured</li>';
+        }
+        return $this->json_response($resposnse);
     }
 
 }

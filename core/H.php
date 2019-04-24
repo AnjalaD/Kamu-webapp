@@ -55,96 +55,106 @@ class H
     ob_start();
     $current_page = self::current_page();
     foreach ($menu as $key => $value) : $active = ''; ?>
-    <?php if (is_array($value)) : ?>
-      <li class="nav-item dropdown">
-        <a class="dropdown-toggle nav-link" data-toggle="dropdown" aria-expanded="false" href="#">
-          <?= $key ?>
-        </a>
-        <div class="dropdown-menu <?= $drop_down_class ?>" role="menu">
-          <?php foreach ($value as $k => $v) :
-            $active = ($v == $current_page) ? 'active' : '' ?>
-            <?php if ($k == 'separator') : ?>
-              <div class="dropdown-divider"></div>
-            <?php else : ?>
-              <a class="dropdown-item <?= $active ?>" role="presentation" href="<?= $v ?>">
-                <?= $k ?>
-              </a>
-            <?php endif ?>
-          <?php endforeach ?>
-        </div>
-      </li>
-    <?php else :
-    $active = ($value == $current_page) ? 'active' : '' ?>
-      <li class="nav-item NavBar_Item" role="presentation" id="Home_NavBarItem_Food">
-        <a class="nav-link NavBar_Link <?= $active ?>" href="<?= $value ?>" id="Home_NavBar_Food" style="font-family:Aclonica, sans-serif;">
-          <?= $key ?>
-        </a>
-      </li>
-    <?php endif ?>
-  <?php endforeach;
-return ob_get_clean();
-}
+      <?php if (is_array($value)) : ?>
+        <li class="nav-item dropdown">
+          <a class="dropdown-toggle nav-link" data-toggle="dropdown" aria-expanded="false" href="#">
+            <?= $key ?>
+          </a>
+          <div class="dropdown-menu <?= $drop_down_class ?>" role="menu">
+            <?php foreach ($value as $k => $v) :
+              $active = ($v == $current_page) ? 'active' : '' ?>
+              <?php if ($k == 'separator') : ?>
+                <div class="dropdown-divider"></div>
+              <?php else : ?>
+                <a class="dropdown-item <?= $active ?>" role="presentation" href="<?= $v ?>">
+                  <?= $k ?>
+                </a>
+              <?php endif ?>
+            <?php endforeach ?>
+          </div>
+        </li>
+      <?php else :
+      $active = ($value == $current_page) ? 'active' : '' ?>
+        <li class="nav-item NavBar_Item" role="presentation" id="Home_NavBarItem_Food">
+          <a class="nav-link NavBar_Link <?= $active ?>" href="<?= $value ?>" id="Home_NavBar_Food" style="font-family:Aclonica, sans-serif;">
+            <?= $key ?>
+          </a>
+        </li>
+      <?php endif ?>
+    <?php endforeach;
+    return ob_get_clean();
+  }
 
-public static function create_card_list($items)
-{
-  if (empty($items)) {
-    return '';
+  public static function create_card_list($items)
+  {
+    if (empty($items)) {
+      return '';
+    }
+    $html = '<div class="card-columns">';
+    foreach ($items as $item) {
+      $html .= self::create_card($item);
+    }
+    $html .= '</div>';
+    return $html;
   }
-  $html = '<div class="card-columns">';
-  foreach ($items as $item) {
-    $html .= self::create_card($item);
-  }
-  $html .= '</div>';
-  return $html;
-}
 
   public static function create_card($item)
   {
     ob_start() ?>
     <div class="card block span3">
       <div class="product">
-        <img src=<?= $item->image_url ?> >
+        <img src=<?= $item->image_url ?>>
       </div>
       <div class="info">
         <h4><?= $item->item_name ?></h4>
         <span class="restaurant_name">
-          <a class="link" href="<?=SROOT?>restaurant/details/<?=$item->restaurant_id?>" ><?= $item->restaurant_name ?></a>
+          <a class="link" href="<?= SROOT ?>restaurant/details/<?= $item->restaurant_id ?>"><?= $item->restaurant_name ?></a>
         </span>
         <span class="description"><?= $item->description ?></span>
         <p>
-        <?php if($item->tags) :?>
-          <?php foreach($item->tags as $tag) :?>
-            <button class="tags" id="<?=$tag?>"> <?=$tag?> </button>
-          <?php endforeach ?>
-        <?php endif ?>
-      </p>
-      <span class="price">LKR.<?= $item->price ?></span>
-      <br>
-      <i class="icon-shopping-cart icon-2x"></i>
-      <?php if (Session::exists('items')) : ?>
-        <?php if (array_key_exists($item->id, json_decode(Session::get('items'), true)['items'])) : ?>
-          <a class="btn btn-info pull-right" onClick="">Item Added</a>
+          <?php if ($item->tags) : ?>
+            <?php foreach ($item->tags as $tag) : ?>
+              <button class="tags" id="<?= $tag ?>"> <?= $tag ?> </button>
+            <?php endforeach ?>
+          <?php endif ?>
+        </p>
+        <span class="price">LKR.<?= $item->price ?></span>
+        <br>
+        <i class="icon-shopping-cart icon-2x"></i>
+        <?php if (Session::exists('items')) : ?>
+          <?php if (array_key_exists($item->id, json_decode(Session::get('items'), true)['items'])) : ?>
+            <a class="btn btn-info pull-right" onClick="">Item Added</a>
+          <?php else : ?>
+            <a class="btn btn-info pull-right" onClick="addToOrder(<?= $item->restaurant_id ?>, <?= $item->id ?>,this)">Add to Order</a>
+
+          <?php endif ?>
         <?php else : ?>
           <a class="btn btn-info pull-right" onClick="addToOrder(<?= $item->restaurant_id ?>, <?= $item->id ?>,this)">Add to Order</a>
-
         <?php endif ?>
-      <?php else : ?>
-        <a class="btn btn-info pull-right" onClick="addToOrder(<?= $item->restaurant_id ?>, <?= $item->id ?>,this)">Add to Order</a>
-      <?php endif ?>
+      </div>
+      <div class="details">
+        <span>Rating : </span>
+        <span id="rating"><?= $item->rating ?></span>
+        <span class="rating">
+          <span class="star" value="5"></span>
+          <span class="star" value="4"></span>
+          <span class="star" value="3"></span>
+          <span class="star" value="2"></span>
+          <span class="star" value="1"></span>
+        </span>
+      </div>
     </div>
-    <div class="details">
-      <span>Rating : </span>
-      <span id="rating"><?=$item->rating?></span>
-      <span class="rating">
-        <span class="star" value="5"></span>
-        <span class="star" value="4"></span>
-        <span class="star" value="3"></span>
-        <span class="star" value="2"></span>
-        <span class="star" value="1"></span>
-      </span>
-    </div>
-  </div>
-  <?php
-  return ob_get_clean();
-}
+    <?php
+    return ob_get_clean();
+  }
+
+  public static function create_draft_dropdown($item_list){
+    $html = '';
+    foreach($item_list as $item)
+    {
+      $html .= '<li>'.$item->item_name.'</li>';
+    }
+    $html .= '<li><button>Use</button><button>Remove</button></li>';
+    return $html;
+  }
 }
