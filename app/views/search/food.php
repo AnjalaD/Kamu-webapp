@@ -38,6 +38,7 @@ use core\FH;
 <script src="<?= SROOT ?>js/autocomplete.js"></script>
 <script src="<?= SROOT ?>js/addtoorder.js"></script>
 <script src="<?= SROOT ?>js/search.js"></script>
+<script src="<?= SROOT ?>js/rating.js"></script>
 <script>
     $(document).ready(function() {
         sendFilters();
@@ -71,6 +72,11 @@ use core\FH;
 
     $('#search_string').keyup(function() {
         autoComplete($(this).val(), 'food')
+    });
+
+    // not completed
+    $('.star').click(function(){
+        
     });
 </script>
 <?php $this->end(); ?>

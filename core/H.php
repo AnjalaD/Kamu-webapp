@@ -57,7 +57,6 @@ class H
     foreach ($menu as $key => $value) : $active = ''; ?>
     <?php if (is_array($value)) : ?>
       <li class="nav-item dropdown">
-      <li class="nav-item dropdown">
         <a class="dropdown-toggle nav-link" data-toggle="dropdown" aria-expanded="false" href="#">
           <?= $key ?>
         </a>
@@ -134,12 +133,14 @@ public static function create_card_list($items)
       <?php endif ?>
     </div>
     <div class="details">
-      <span class="rating pull-right">
-        <span class="star"></span>
-        <span class="star"></span>
-        <span class="star"></span>
-        <span class="star"></span>
-        <span class="star"></span>
+      <span>Rating : </span>
+      <span id="rating"><?=$item->rating?></span>
+      <span class="rating">
+        <span class="star" value="5"></span>
+        <span class="star" value="4"></span>
+        <span class="star" value="3"></span>
+        <span class="star" value="2"></span>
+        <span class="star" value="1"></span>
       </span>
     </div>
   </div>

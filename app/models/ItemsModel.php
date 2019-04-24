@@ -89,5 +89,15 @@ class ItemsModel extends Model
         }
         return $items;
     }
+
+
+    /** not completed */
+    public function update_rating($item_id, $value)
+    {
+        $item = $this->itemsmodel->find_by_id($item_id);
+        if($item) {
+            $item->rating;
+        }
+    }
     
 }
