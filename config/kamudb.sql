@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 4.8.2
+-- version 4.8.4
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Apr 12, 2019 at 03:46 PM
--- Server version: 10.1.34-MariaDB
--- PHP Version: 7.2.7
+-- Generation Time: May 01, 2019 at 05:32 PM
+-- Server version: 10.1.37-MariaDB
+-- PHP Version: 7.3.1
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET AUTOCOMMIT = 0;
@@ -70,7 +70,7 @@ CREATE TABLE `customers` (
 --
 
 INSERT INTO `customers` (`id`, `first_name`, `last_name`, `email`, `password`, `hash`, `verified`, `deleted`) VALUES
-(1, 'Chamika', 'Nimal', 'ad@ad.com', '$2y$10$lO/3azXVdJ1aLxQp2Tll.eGnKe6r2iOfA311oKE.OXVenYqG4p52u', '6f4922f45568161a8cdf4ad2299f6d23', 0, 0),
+(1, 'Chamik', 'Nimal', 'ad@ad.com', '$2y$10$/.inTtfMvoTSCCoH4RBt5.vG5Grg1BrDU9kmyqVEIkicQuQxJrA6O', '54229abfcfa5649e7003b83dd4755294', 0, 0),
 (3, 'Thumula', 'Na', 'thumula@gmail.com', '$2y$10$XtPm1532UgsRFehBnWLKqOh.p1RNN4ZO9Bb32MK.ogE5PgjIFBWMe', 'c0c7c76d30bd3dcaefc96f40275bdc0a', 0, 0),
 (4, 'anjala', 'dilhara', 'anjaladilhara@gmail.com', '$2y$10$CNaMpSNn6kDummFGp43edu5qZO0rMu6ogDtFjfZUNguASvwilpDmW', 'd2ddea18f00665ce8623e36bd4e3c7c5', 1, 0),
 (5, 'hg', 'qwe', 'c9599@qwe.com', '$2y$10$5be5bBxUYSAn7ilQsbwZEexoz.Smb.qUcq4RVGS2V53M.i/qrSVme', '3c59dc048e8850243be8079a5c74d079', 0, 0);
@@ -104,7 +104,8 @@ INSERT INTO `items` (`id`, `restaurant_id`, `item_name`, `description`, `price`,
 (32, 2, 'Soup', 'Description of soup', 100, '/mvc/img/items/1552931132.png', 0, 0),
 (34, 1, 'Noodles', 'description of noodles', 140, '/mvc/img/items/1553572181.png', 0, 0),
 (147, 2, 'Hoppers', 'asd ewo o o for kok gpd fdr gfd.', 20, '/mvc/img/items/1554563173.png', 0, 0),
-(151, 2, 'Rice', 'asfewidn djsak uad s kdasddd sada ', 150, '/mvc/img/items/1554564091.png', 0, 0);
+(151, 2, 'Rice', 'asfewidn djsak uad s kdasddd sada ', 150, '/mvc/img/items/1554564091.png', 0, 0),
+(152, 1, 'Rice', 'description of noodles', 149.98, '/mvc/img/items/default.png', 0, 0);
 
 -- --------------------------------------------------------
 
@@ -130,7 +131,8 @@ INSERT INTO `item_tags` (`id`, `item_id`, `tag_id`) VALUES
 (20, 147, 8),
 (23, 151, 83),
 (24, 151, 5),
-(25, 151, 82);
+(25, 151, 82),
+(26, 152, 82);
 
 -- --------------------------------------------------------
 
@@ -140,6 +142,7 @@ INSERT INTO `item_tags` (`id`, `item_id`, `tag_id`) VALUES
 
 CREATE TABLE `orders` (
   `id` int(11) NOT NULL,
+  `order_name` varchar(100) COLLATE utf8_unicode_ci NOT NULL,
   `customer_id` int(11) NOT NULL,
   `items` varchar(1000) COLLATE utf8_unicode_ci DEFAULT NULL,
   `restaurant_id` int(11) NOT NULL,
@@ -154,17 +157,19 @@ CREATE TABLE `orders` (
 -- Dumping data for table `orders`
 --
 
-INSERT INTO `orders` (`id`, `customer_id`, `items`, `restaurant_id`, `type`, `submit_time`, `order_code`, `submitted`, `time_stamp`) VALUES
-(1, 1, '{\"1\":4 ,\"34\":2}', 1, 0, NULL, NULL, 0, '2019-03-29 14:27:53'),
-(3, 1, '{\"1\":4,\"26\":2}', 1, 0, NULL, NULL, 0, '2019-03-29 14:27:53'),
-(6, 1, '{\"1\":1,\"34\":1,\"26\":1}', 1, NULL, NULL, NULL, 0, '2019-04-01 15:32:47'),
-(8, 1, '{\"34\":1,\"26\":1}', 1, 1, NULL, NULL, 0, '2019-04-12 12:56:07'),
-(9, 1, '{\"26\":1}', 1, 2, NULL, NULL, 0, '2019-04-12 12:57:27'),
-(10, 1, '{\"34\":1}', 1, 2, NULL, NULL, 0, '2019-04-12 13:08:31'),
-(11, 1, '{\"26\":1,\"1\":1}', 1, 2, NULL, NULL, 0, '2019-04-12 13:09:28'),
-(12, 1, '{\"1\":1}', 1, 2, NULL, NULL, 0, '2019-04-12 13:11:57'),
-(18, 1, '{\"34\":1,\"26\":1,\"1\":1}', 1, 1, NULL, NULL, 0, '2019-04-12 13:38:36'),
-(19, 1, '{\"34\":1,\"26\":1}', 1, 1, NULL, NULL, 0, '2019-04-12 13:40:44');
+INSERT INTO `orders` (`id`, `order_name`, `customer_id`, `items`, `restaurant_id`, `type`, `submit_time`, `order_code`, `submitted`, `time_stamp`) VALUES
+(1, 'Saved Order', 1, '{\"1\":4 ,\"34\":2}', 1, 2, NULL, NULL, 0, '2019-03-29 14:27:53'),
+(3, 'Saved Order', 1, '{\"1\":4,\"26\":2}', 1, 2, NULL, NULL, 0, '2019-03-29 14:27:53'),
+(6, 'Saved Order', 1, '{\"1\":1,\"34\":1,\"26\":1}', 1, 1, NULL, NULL, 0, '2019-04-01 15:32:47'),
+(8, 'Saved Order', 1, '{\"34\":1,\"26\":1}', 1, 1, NULL, NULL, 0, '2019-04-12 12:56:07'),
+(11, 'Saved Order', 1, '{\"26\":1,\"1\":1}', 1, 2, NULL, NULL, 1, '2019-04-12 13:09:28'),
+(12, 'Saved Order', 1, '{\"1\":1}', 1, 2, NULL, NULL, 0, '2019-04-12 13:11:57'),
+(18, 'Saved Order', 1, '{\"34\":1,\"26\":1,\"1\":1}', 1, 1, NULL, NULL, 0, '2019-04-12 13:38:36'),
+(19, 'Saved Order', 1, '{\"34\":1,\"26\":1}', 1, 1, NULL, NULL, 1, '2019-04-12 13:40:44'),
+(20, 'Saved Order', 4, '{\"34\":1,\"1\":1}', 1, 1, NULL, NULL, 0, '2019-04-17 18:14:58'),
+(21, 'Saved Order', 4, '{\"34\":1,\"26\":1}', 1, 2, NULL, NULL, 0, '2019-04-17 18:17:14'),
+(22, 'Saved Order', 4, '{\"147\":1,\"30\":1}', 2, 2, NULL, NULL, 0, '2019-04-23 05:23:07'),
+(27, 'New', 1, '{\"147\":1}', 2, NULL, NULL, NULL, 0, '2019-05-01 13:27:23');
 
 -- --------------------------------------------------------
 
@@ -189,7 +194,7 @@ CREATE TABLE `owners` (
 --
 
 INSERT INTO `owners` (`id`, `restaurant_id`, `first_name`, `last_name`, `email`, `password`, `hash`, `verified`, `deleted`) VALUES
-(1, 1, 'Kamal', 'Nimal', 'ad@ad.com', '$2y$10$n0qUvrVBnVt4oRtk6RX1gOmTYVNHtBWiUyRftM7mxMhJIc4XtaBjO', 'ac627ab1ccbdb62ec96e702f07f6425b', 1, 0),
+(1, 1, 'Kamal', 'Nimal', 'ad@ad.com', '$2y$10$qq9.h2y.o5olleUHZOR8e.c3HjhLLq0PJEj9yKmC7UHonJrZ3eVRS', 'fe9fc289c3ff0af142b6d3bead98a923', 1, 0),
 (2, 2, 'Thumula', 'Perera', 'thumula@gmail.com', '$2y$10$dhEnRK0VJnAMe7x7Dw52BeyVozeRa7ejhBc2/uhvbc/cykh0o4PlS', '92cc227532d17e56e07902b254dfad10', 0, 0);
 
 -- --------------------------------------------------------
@@ -244,7 +249,9 @@ CREATE TABLE `submitted_orders` (
 
 INSERT INTO `submitted_orders` (`id`, `customer_id`, `items`, `restaurant_id`, `type`, `submit_time`, `order_code`, `accepted`, `rejected`, `completed`, `time_stamp`) VALUES
 (2, 1, '{\"34\":1,\"26\":1,\"1\":1}', 1, 1, NULL, NULL, 0, 0, 0, '2019-04-12 13:38:36'),
-(3, 1, '{\"34\":1,\"26\":1}', 1, 1, NULL, NULL, 0, 0, 0, '2019-04-12 13:40:44');
+(3, 1, '{\"34\":1,\"26\":1}', 1, 1, NULL, NULL, 0, 0, 0, '2019-04-12 13:40:44'),
+(4, 4, '{\"34\":1,\"1\":1}', 1, 1, NULL, NULL, 0, 0, 0, '2019-04-17 18:14:58'),
+(5, 4, '{\"34\":1,\"26\":1}', 1, 2, NULL, NULL, 0, 0, 0, '2019-04-17 18:17:14');
 
 -- --------------------------------------------------------
 
@@ -378,19 +385,19 @@ ALTER TABLE `customers`
 -- AUTO_INCREMENT for table `items`
 --
 ALTER TABLE `items`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=152;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=153;
 
 --
 -- AUTO_INCREMENT for table `item_tags`
 --
 ALTER TABLE `item_tags`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=26;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=27;
 
 --
 -- AUTO_INCREMENT for table `orders`
 --
 ALTER TABLE `orders`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=20;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=28;
 
 --
 -- AUTO_INCREMENT for table `owners`
@@ -408,7 +415,7 @@ ALTER TABLE `restaurants`
 -- AUTO_INCREMENT for table `submitted_orders`
 --
 ALTER TABLE `submitted_orders`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- AUTO_INCREMENT for table `tags`
