@@ -112,11 +112,7 @@ class H
         </span>
         <span class="description"><?= $item->description ?></span>
         <p>
-          <?php if ($item->tags) : ?>
-            <?php foreach ($item->tags as $tag) : ?>
-              <button class="tags" id="<?= $tag ?>"> <?= $tag ?> </button>
-            <?php endforeach ?>
-          <?php endif ?>
+          
         </p>
         <span class="price">LKR.<?= $item->price ?></span>
         <br>
@@ -148,13 +144,16 @@ class H
     return ob_get_clean();
   }
 
-  public static function create_draft_dropdown($item_list){
-    $html = '';
-    foreach($item_list as $item)
-    {
-      $html .= '<li>'.$item->item_name.'</li>';
-    }
-    $html .= '<li><button>Use</button><button>Remove</button></li>';
-    return $html;
+  public static function create_order_dropdown($item_list, $order_id){
+    ob_start();
+    foreach($item_list as $item) : ?>
+      <li><?=$item->item_name?></li>
+    <?php endforeach ?>
+    <li>
+      <a class="btn btn-primary" href="<?=SROOT?>order/use_saved_order/<?=$order_id?>">Use</a>
+      <a class="btn btn-danger" href="<?=SROOT?>order/remove_saved_order/<?=$order_id?>">Remove</a>
+    </li>
+    <?php
+    return ob_get_clean();
   }
 }

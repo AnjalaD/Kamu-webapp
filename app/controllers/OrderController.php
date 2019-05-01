@@ -25,12 +25,15 @@ class OrderController extends Controller
     {
         $order = [];
         if(Session::exists('items')){
+            // H::dnd(Session::get('items'));
             $order = json_decode(Session::get('items'), true)['items'];
         }
         $this->view->items = $this->itemsmodel->get_order_items($order);
 
-        $this->view->drafts = $this->ordermodel->get_drafts();
-        $this->view->post_action = SROOT.'order/submit_order';
+        $this->view->drafts = $this->ordermodel->get_drafts(UserModel::current_user()->id);
+        $this->view->submitted = $this->ordermodel->get_submitted(UserModel::current_user()->id);
+        $this->view->post_action_form = SROOT.'order/submit_order';
+        $this->view->post_action_save = SROOT.'order/save_draft';
         $this->view->render('order/order');
     }
 
@@ -56,7 +59,6 @@ class OrderController extends Controller
             } else {
                 $items=[];
                 $items['rid'] = (int)$restaurant_id;
-                $items['cid'] = (int)UserModel::current_user()->id;
                 $items['items']=[];
             }
         if (array_key_exists($id, $items['items'])) {
@@ -110,7 +112,7 @@ class OrderController extends Controller
             $items = json_decode(Session::get('items'), true);
 
             $new_order->assign($this->request->get());            
-            $new_order->customer_id = $items['cid'];
+            $new_order->customer_id = UserModel::current_user()->id;
             $new_order->restaurant_id = $items['rid'];
             $new_order->items =  json_encode($items['items'], JSON_FORCE_OBJECT);  
             
@@ -139,21 +141,66 @@ class OrderController extends Controller
         $draft = new OrderModel();
         if(Session::exists('items'))
         {
-            $items = json_decode(Session::get('items'), true);
-
-            $draft->customer_id = UserModel::current_user()->id;
-            $draft->restaurant_id = $items['rid'];
-            $draft->items = json_encode($items['items']);
-            
-            if(!$draft->save())
+            if($this->request->is_post())
             {
-                Session::add_msg('danger', 'Error in "save as draft"!');
+                $items = json_decode(Session::get('items'), true);
+
+                $draft->order_name = !empty($this->request->get('order_name'))? $this->request->get('order_name') : 'Saved Order';
+                $draft->customer_id = UserModel::current_user()->id;
+                $draft->restaurant_id = $items['rid'];
+                $draft->items = json_encode($items['items']);
+                
+                if(!$draft->save())
+                {
+                    Session::add_msg('danger', 'Error in "save as draft"!');
+                }
+                Session::add_msg('success', 'Your order succesfully saved');
             }
-            Session::add_msg('success', 'Your order succesfully saved as a draft!');
-            Session::delete('items');
         }
         Router::redirect('order/order');
 
+    }
+
+
+    //get items of an saves or submitted order - by customer
+    public function get_order_items_action($draft_id)
+    {
+        $draft = $this->ordermodel->find_by_id_customer_id($draft_id, UserModel::current_user()->id);
+        if($draft) {
+            $items = $this->itemsmodel->get_order_items(json_decode($draft->items));
+            $resposnse = H::create_order_dropdown($items, $draft->id);
+        } else {
+            $resposnse = '<li>Error occured</li>';
+        }
+        return $this->json_response($resposnse);
+    }
+
+
+    //use saved order as current order - by customer
+    public function use_saved_order_action($order_id)
+    {
+        $order = $this->ordermodel->find_by_id_customer_id($order_id, UserModel::current_user()->id);
+        if($order)
+        {
+            if(Session::exists('items'))
+            {
+                Session::delete('items');
+            }
+            $items['rid'] = (int)$order->restaurant_id;
+            $items['items'] = json_decode($order->items, true);
+            Session::set('items', str_replace('\\', '', json_encode($items)));
+            // H::dnd(Session::get('items'));
+        }
+        Router::redirect('order/order');
+    }
+
+
+    //remove saved or submitted order - by customer
+    public function remove_saved_order_action($order_id)
+    {
+        $order = $this->ordermodel->find_by_id_customer_id($order_id, UserModel::current_user()->id);
+        $order->delete();
+        Router::redirect('order/order');
     }
 
 
@@ -164,18 +211,6 @@ class OrderController extends Controller
         $this->view->orders = $orders;
         $this->view->render('order/view_orders');
         // H::dnd($orders);
-    }
-
-    public function get_draft_items_action($draft_id)
-    {
-        $draft = $this->ordermodel->find_by_id($draft_id);
-        if($draft) {
-            $items = $this->itemsmodel->get_order_items(json_decode($draft->items));
-            $resposnse = H::create_draft_dropdown($items);
-        } else {
-            $resposnse = '<li>Error occured</li>';
-        }
-        return $this->json_response($resposnse);
     }
 
 }
