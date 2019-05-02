@@ -31,7 +31,7 @@ $this->set_title($this->user->first_name); ?>
                         <div class="col-sm-12 col-md-6 Profile" id="Profile_colFirstName">
                             <div class="form-group">
                                 <label class="Profile_Label">Firstname </label>
-                                <div class="input-group">
+                                <div class="input-group m-0">
                                     <input class="form-control" type="text" name="firstname" value="<?= $this->user->first_name ?>" disabled>
                                     <div class="input-group-append">
                                         <span class="input-group-text edit">
@@ -44,7 +44,7 @@ $this->set_title($this->user->first_name); ?>
                         <div class="col-sm-12 col-md-6 Profile" id="Profile_colLastName">
                             <div class="form-group">
                                 <label class="Profile_Label">Lastname </label>
-                                <div class="input-group">
+                                <div class="input-group m-0">
                                     <input class="form-control" type="text" name="lastname" value="<?= $this->user->last_name ?>" disabled>
                                     <div class="input-group-append">
                                         <span class="input-group-text edit">
@@ -64,21 +64,21 @@ $this->set_title($this->user->first_name); ?>
                         <a class="btn btn-primary form-btn" id="changePass">Change Password</a>
                     </div>
                     <div class="form-row" id="reset_pass" hidden>
+                        <div class="col-sm-12 col-md-12 Profile" id="Profile_colCurntPassword">
+                            <div class="form-group">
+                                <label class="Profile_Label">Current Password</label>
+                                <input class="form-control" type="password" name="current_password" autocomplete="off" required>
+                            </div>
+                        </div>
                         <div class="col-sm-12 col-md-6 Profile" id="Profile_colPassword">
                             <div class="form-group">
-                                <label class="Profile_Label">Password </label>
+                                <label class="Profile_Label">New Password </label>
                                 <input class="form-control" type="password" name="password" autocomplete="off" required>
                             </div>
                         </div>
                         <div class="col-sm-12 col-md-6 Profile" id="Profile_colCnfmPassword">
                             <div class="form-group"><label class="Profile_Label">Confirm Password</label>
-                                <input class="form-control" type="password" name="confirmpass" autocomplete="off" required></div>
-                        </div>
-                        <div class="col-sm-12 col-md-6 Profile" id="Profile_colCnfmPassword">
-                            <div class="form-group">
-                                <label class="Profile_Label">Confirm Password</label>
-                                <input class="form-control" type="password" name="confirmpass" autocomplete="off" required>
-                            </div>
+                                <input class="form-control" type="password" name="confirm" autocomplete="off" required></div>
                         </div>
                     </div>
                     <hr class="Profile_hr">
