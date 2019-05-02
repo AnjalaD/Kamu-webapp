@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: May 01, 2019 at 05:32 PM
+-- Generation Time: May 02, 2019 at 04:58 PM
 -- Server version: 10.1.37-MariaDB
 -- PHP Version: 7.3.1
 
@@ -71,9 +71,9 @@ CREATE TABLE `customers` (
 
 INSERT INTO `customers` (`id`, `first_name`, `last_name`, `email`, `password`, `hash`, `verified`, `deleted`) VALUES
 (1, 'Chamik', 'Nimal', 'ad@ad.com', '$2y$10$/.inTtfMvoTSCCoH4RBt5.vG5Grg1BrDU9kmyqVEIkicQuQxJrA6O', '54229abfcfa5649e7003b83dd4755294', 0, 0),
-(3, 'Thumula', 'Na', 'thumula@gmail.com', '$2y$10$XtPm1532UgsRFehBnWLKqOh.p1RNN4ZO9Bb32MK.ogE5PgjIFBWMe', 'c0c7c76d30bd3dcaefc96f40275bdc0a', 0, 0),
+(3, 'Thumula', 'Na', 'thumula@gmail.com', '$2y$10$/.inTtfMvoTSCCoH4RBt5.vG5Grg1BrDU9kmyqVEIkicQuQxJrA6O', 'c0c7c76d30bd3dcaefc96f40275bdc0a', 0, 0),
 (4, 'anjala', 'dilhara', 'anjaladilhara@gmail.com', '$2y$10$CNaMpSNn6kDummFGp43edu5qZO0rMu6ogDtFjfZUNguASvwilpDmW', 'd2ddea18f00665ce8623e36bd4e3c7c5', 1, 0),
-(5, 'hg', 'qwe', 'c9599@qwe.com', '$2y$10$5be5bBxUYSAn7ilQsbwZEexoz.Smb.qUcq4RVGS2V53M.i/qrSVme', '3c59dc048e8850243be8079a5c74d079', 0, 0);
+(5, 'hg', 'qwe', 'c9@qwe.com', '$2y$10$/.inTtfMvoTSCCoH4RBt5.vG5Grg1BrDU9kmyqVEIkicQuQxJrA6O', '3c59dc048e8850243be8079a5c74d079', 0, 0);
 
 -- --------------------------------------------------------
 
@@ -89,6 +89,7 @@ CREATE TABLE `items` (
   `price` double NOT NULL,
   `image_url` varchar(200) COLLATE utf8_unicode_ci NOT NULL,
   `rating` double NOT NULL,
+  `rating_num` int(11) NOT NULL DEFAULT '0',
   `deleted` tinyint(1) NOT NULL DEFAULT '0'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
@@ -96,16 +97,16 @@ CREATE TABLE `items` (
 -- Dumping data for table `items`
 --
 
-INSERT INTO `items` (`id`, `restaurant_id`, `item_name`, `description`, `price`, `image_url`, `rating`, `deleted`) VALUES
-(1, 1, 'Kottu', 'Perfect combination of cut up roti and chickenzzz', 250, '/mvc/img/items/1553572046.png', 0, 0),
-(26, 1, 'Soup', 'Tantalize your taste buds with our signature recipe chicken soup', 140, '/mvc/img/items/1552849585.png', 0, 0),
-(30, 2, 'Kottu', 'Enjoy the goodness of little bits of heaven', 300, '/mvc/img/items/1552914320.png', 0, 0),
-(31, 2, 'Fried Rice', 'Enjoy the taste of china ', 250, '/mvc/img/items/1552914407.png', 0, 0),
-(32, 2, 'Soup', 'Description of soup', 100, '/mvc/img/items/1552931132.png', 0, 0),
-(34, 1, 'Noodles', 'description of noodles', 140, '/mvc/img/items/1553572181.png', 0, 0),
-(147, 2, 'Hoppers', 'asd ewo o o for kok gpd fdr gfd.', 20, '/mvc/img/items/1554563173.png', 0, 0),
-(151, 2, 'Rice', 'asfewidn djsak uad s kdasddd sada ', 150, '/mvc/img/items/1554564091.png', 0, 0),
-(152, 1, 'Rice', 'description of noodles', 149.98, '/mvc/img/items/default.png', 0, 0);
+INSERT INTO `items` (`id`, `restaurant_id`, `item_name`, `description`, `price`, `image_url`, `rating`, `rating_num`, `deleted`) VALUES
+(1, 1, 'Kottu', 'Perfect combination of cut up roti and chickenzzz', 250, '/mvc/img/items/1553572046.png', 0, 0, 0),
+(26, 1, 'Soup', 'Tantalize your taste buds with our signature recipe chicken soup', 140, '/mvc/img/items/1552849585.png', 0, 0, 0),
+(30, 2, 'Kottu', 'Enjoy the goodness of little bits of heaven', 300, '/mvc/img/items/1552914320.png', 3.5, 4, 0),
+(31, 2, 'Fried Rice', 'Enjoy the taste of china ', 250, '/mvc/img/items/1552914407.png', 0, 0, 0),
+(32, 2, 'Soup', 'Description of soup', 100, '/mvc/img/items/1552931132.png', 0, 0, 0),
+(34, 1, 'Noodles', 'description of noodles', 140, '/mvc/img/items/1553572181.png', 0, 0, 0),
+(147, 2, 'Hoppers', 'asd ewo o o for kok gpd fdr gfd.', 20, '/mvc/img/items/1554563173.png', 4, 4, 0),
+(151, 2, 'Rice', 'asfewidn djsak uad s kdasddd sada ', 150, '/mvc/img/items/1554564091.png', 3.5, 4, 0),
+(152, 1, 'Rice', 'description of noodles', 149.98, '/mvc/img/items/default.png', 3.25, 4, 0);
 
 -- --------------------------------------------------------
 
@@ -158,12 +159,10 @@ CREATE TABLE `orders` (
 --
 
 INSERT INTO `orders` (`id`, `order_name`, `customer_id`, `items`, `restaurant_id`, `type`, `submit_time`, `order_code`, `submitted`, `time_stamp`) VALUES
-(1, 'Saved Order', 1, '{\"1\":4 ,\"34\":2}', 1, 2, NULL, NULL, 0, '2019-03-29 14:27:53'),
 (3, 'Saved Order', 1, '{\"1\":4,\"26\":2}', 1, 2, NULL, NULL, 0, '2019-03-29 14:27:53'),
 (6, 'Saved Order', 1, '{\"1\":1,\"34\":1,\"26\":1}', 1, 1, NULL, NULL, 0, '2019-04-01 15:32:47'),
 (8, 'Saved Order', 1, '{\"34\":1,\"26\":1}', 1, 1, NULL, NULL, 0, '2019-04-12 12:56:07'),
 (11, 'Saved Order', 1, '{\"26\":1,\"1\":1}', 1, 2, NULL, NULL, 1, '2019-04-12 13:09:28'),
-(12, 'Saved Order', 1, '{\"1\":1}', 1, 2, NULL, NULL, 0, '2019-04-12 13:11:57'),
 (18, 'Saved Order', 1, '{\"34\":1,\"26\":1,\"1\":1}', 1, 1, NULL, NULL, 0, '2019-04-12 13:38:36'),
 (19, 'Saved Order', 1, '{\"34\":1,\"26\":1}', 1, 1, NULL, NULL, 1, '2019-04-12 13:40:44'),
 (20, 'Saved Order', 4, '{\"34\":1,\"1\":1}', 1, 1, NULL, NULL, 0, '2019-04-17 18:14:58'),
@@ -196,6 +195,40 @@ CREATE TABLE `owners` (
 INSERT INTO `owners` (`id`, `restaurant_id`, `first_name`, `last_name`, `email`, `password`, `hash`, `verified`, `deleted`) VALUES
 (1, 1, 'Kamal', 'Nimal', 'ad@ad.com', '$2y$10$qq9.h2y.o5olleUHZOR8e.c3HjhLLq0PJEj9yKmC7UHonJrZ3eVRS', 'fe9fc289c3ff0af142b6d3bead98a923', 1, 0),
 (2, 2, 'Thumula', 'Perera', 'thumula@gmail.com', '$2y$10$dhEnRK0VJnAMe7x7Dw52BeyVozeRa7ejhBc2/uhvbc/cykh0o4PlS', '92cc227532d17e56e07902b254dfad10', 0, 0);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `ratings`
+--
+
+CREATE TABLE `ratings` (
+  `id` int(11) NOT NULL,
+  `item_id` int(11) NOT NULL,
+  `customer_id` int(11) NOT NULL,
+  `rating` int(1) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `ratings`
+--
+
+INSERT INTO `ratings` (`id`, `item_id`, `customer_id`, `rating`) VALUES
+(2, 147, 1, 2),
+(3, 147, 4, 5),
+(4, 151, 4, 3),
+(5, 30, 4, 4),
+(6, 152, 4, 2),
+(7, 151, 1, 4),
+(8, 152, 1, 4),
+(9, 30, 1, 3),
+(10, 147, 3, 4),
+(11, 30, 3, 3),
+(12, 152, 3, 4),
+(13, 151, 3, 2),
+(14, 147, 5, 5),
+(15, 30, 5, 4),
+(16, 152, 5, 3);
 
 -- --------------------------------------------------------
 
@@ -338,6 +371,12 @@ ALTER TABLE `owners`
   ADD KEY `restaurant_id` (`restaurant_id`);
 
 --
+-- Indexes for table `ratings`
+--
+ALTER TABLE `ratings`
+  ADD PRIMARY KEY (`id`);
+
+--
 -- Indexes for table `restaurants`
 --
 ALTER TABLE `restaurants`
@@ -404,6 +443,12 @@ ALTER TABLE `orders`
 --
 ALTER TABLE `owners`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+
+--
+-- AUTO_INCREMENT for table `ratings`
+--
+ALTER TABLE `ratings`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=18;
 
 --
 -- AUTO_INCREMENT for table `restaurants`
