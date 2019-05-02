@@ -30,8 +30,8 @@ class FoodItemModel extends Model
             GROUP by I.id ;';
 
         $items = $this->query($sql, [$item_id, $restaurant_id], get_class($this));
-        if ($items[0]) {
-            $items[0]->tags = ($items[0]->tags) ? explode(',', $items[0]->tags) : false;
+        if (!empty($items[0])) {
+            $items[0]->tags = ($items[0]->tags) ? explode(',', $items[0]->tags) : [];
         }
         return $items[0];
     }
