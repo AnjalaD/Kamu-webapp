@@ -60,9 +60,12 @@ $this->set_title($this->user->first_name); ?>
                         <input class="form-control" type="email" autocomplete="off" required name="email" value="<?= $this->user->email ?>" disabled>
                     </div>
 
+                    <hr class="Profile_hr">
+
                     <div>
-                        <a class="btn btn-primary form-btn" id="changePass">Change Password</a>
+                        <button class="btn btn-primary form-btn m-0" id="changePass">Change Password</button>
                     </div>
+                    
                     <div class="form-row" id="reset_pass" hidden>
                         <div class="col-sm-12 col-md-12 Profile" id="Profile_colCurntPassword">
                             <div class="form-group">
@@ -110,7 +113,8 @@ $this->set_title($this->user->first_name); ?>
         $('#buttons').prop('hidden', false);
     });
 
-    $('#changePass').click(function() {
+    $('#changePass').click(function(e) {
+        e.preventDefault();
         $('#buttons').prop('hidden', false);
         $(this).prop('hidden', true);
         $('#reset_pass').prop('hidden', false);
