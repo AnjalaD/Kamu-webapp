@@ -96,7 +96,7 @@ class ItemsController extends Controller
                 if ($new_item->save()) {
                     H::save_image($this->request->get('image'), $new_item->image_url);
 
-                    $this->itemtagmodel->save_item_tags($item->last_inserted_id(), $this->tagmodel->save_tags($tags));
+                    $this->itemtagmodel->save_item_tags($item->id, $this->tagmodel->save_tags($tags));
 
                     Session::add_msg('success', 'Changes saved successfully!');
                     Router::redirect('items');
