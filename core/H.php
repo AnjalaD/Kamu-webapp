@@ -134,13 +134,14 @@ class H
       </div>
       <div class="details">
         <span>Rating : </span>
-        <span id="rating"><?= $item->rating ?></span>
-        <span class="rating">
-          <span class="star" value="5"></span>
-          <span class="star" value="4"></span>
-          <span class="star" value="3"></span>
-          <span class="star" value="2"></span>
-          <span class="star" value="1"></span>
+        <span id="rating"><?= $item->rating.'('.$item->rating_num.')'?></span>
+        <br>
+        <span class="rating" id="<?= $item->id?>" >
+          <span class="star" id="5"></span>
+          <span class="star" id="4"></span>
+          <span class="star" id="3"></span>
+          <span class="star" id="2"></span>
+          <span class="star" id="1"></span>
         </span>
       </div>
     </div>

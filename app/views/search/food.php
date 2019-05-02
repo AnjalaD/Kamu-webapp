@@ -50,7 +50,7 @@ use core\FH;
         return false;
     });
     
-    $("body").on("click", ".tags", function(e) {
+    $("body").on("click", ".tag", function(e) {
         sendFilters($(this).attr('id'));
     });
 
@@ -75,8 +75,10 @@ use core\FH;
     });
 
     // not completed
-    $('.star').click(function(){
-        
+    $("body").on("click", ".star", function(){
+        var value = $(this).attr('id');
+        var itemId = $(this).parent().attr('id');
+        addRating(itemId, value);
     });
 </script>
 <?php $this->end(); ?>

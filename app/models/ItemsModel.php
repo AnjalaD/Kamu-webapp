@@ -10,7 +10,7 @@ use core\H;
 
 class ItemsModel extends Model
 {
-    public $restaurant_id, $item_name, $description, $price, $image_url = DEFUALT_ITEM_IMAGE, $rating = 0, $deleted = 0;
+    public $restaurant_id, $item_name, $description, $price, $image_url = DEFUALT_ITEM_IMAGE, $rating = 0, $rating_num = 0, $deleted = 0;
 
     public function __construct()
     {
@@ -88,16 +88,6 @@ class ItemsModel extends Model
             $items[] = $item;
         }
         return $items;
-    }
-
-
-    /** not completed */
-    public function update_rating($item_id, $value)
-    {
-        $item = $this->itemsmodel->find_by_id($item_id);
-        if($item) {
-            $item->rating;
-        }
     }
     
 }

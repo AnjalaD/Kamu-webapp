@@ -20,6 +20,7 @@
 
     "Customer": {
         "denied": {},
+        "Items" : ["update_rating"],
         "Order": ["order", "remove_from_order", "submit_order", "cancel_order", "save_draft", "get_order_items", "use_saved_order", "remove_saved_order"]
     },
 

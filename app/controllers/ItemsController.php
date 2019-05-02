@@ -8,6 +8,7 @@ use app\models\ItemsModel;
 use app\models\UserModel;
 use core\H;
 use app\models\OwnerModel;
+use app\models\RatingModel;
 
 class ItemsController extends Controller
 {
@@ -19,6 +20,7 @@ class ItemsController extends Controller
         $this->load_model('FoodItemModel');
         $this->load_model('TagModel');
         $this->load_model('ItemTagModel');
+        $this->load_model('RatingModel');
     }
 
 
@@ -119,7 +121,7 @@ class ItemsController extends Controller
         // H::dnd($item);
         if (!$item) {
             $response = false;
-        }else{
+        } else {
             $response = H::create_card($item);
         }
         return $this->json_response($response);
@@ -158,5 +160,37 @@ class ItemsController extends Controller
         }
         Session::add_msg('success', 'Item deleted successfully!');
         Router::redirect('items');
+    }
+
+    
+    //update rating of a item
+    public function update_rating_action($item_id, $rating)
+    {
+        if ($item = $this->itemsmodel->find_by_id($item_id)) {
+            $customer_id = UserModel::current_user()->id;
+
+            $new_rating = null;
+            $effective_rating = 0;
+            $rating_num = 0;
+
+            if ($new_rating = $this->ratingmodel->find_by_item_id_customer_id($item_id, $customer_id)) {
+                $prev_rating = $new_rating->rating;
+                $new_rating->rating = $rating;
+
+                $effective_rating = $rating - $prev_rating;
+            } else {
+                $new_rating = new RatingModel();
+                $new_rating->item_id = $item_id;
+                $new_rating->customer_id = $customer_id;
+                $new_rating->rating =  $rating;
+
+                $effective_rating = $rating;
+                $rating_num = 1;
+            }
+            $new_rating->save();
+            $item->rating = ($item->rating*$item->rating_num + $effective_rating)/($item->rating_num + $rating_num);
+            $item->rating_num += $rating_num;
+            $item->save();
+        }
     }
 }
