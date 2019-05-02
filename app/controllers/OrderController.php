@@ -15,6 +15,7 @@ class OrderController extends Controller
     {
         parent::__construct($controller, $acttion);
         $this->load_model('ItemsModel');
+        $this->load_model('RestaurantModel');
         $this->load_model('OrderModel');
         $this->load_model('SubmittedOrderModel');
     }
@@ -23,12 +24,16 @@ class OrderController extends Controller
     //view current-order -by customer
     public function order_action()
     {
-        $order = [];
+        $items = [];
+        $restaurant = null;
         if(Session::exists('items')){
             // H::dnd(Session::get('items'));
-            $order = json_decode(Session::get('items'), true)['items'];
+            $order = json_decode(Session::get('items'), true);
+            $items = $this->itemsmodel->get_order_items($order['items']);
+            $restaurant = $this->restaurantmodel->find_by_id($order['rid']);
         }
-        $this->view->items = $this->itemsmodel->get_order_items($order);
+        $this->view->items = $items;
+        $this->view->restaurant = $restaurant;
 
         $this->view->drafts = $this->ordermodel->get_drafts(UserModel::current_user()->id);
         $this->view->submitted = $this->ordermodel->get_submitted(UserModel::current_user()->id);

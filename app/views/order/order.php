@@ -12,30 +12,7 @@ use core\H;
 <?php $this->start('body'); ?>
 <div class="container">
     <?php if (isset($this->items) && !empty($this->items)) : ?>
-        <!-- <table class="table table-bordered table-striped">
-                            <thead class="bg-secondary">
-                                <th>Item</th>
-                                <th>Quatity</th>
-                                <th>Price</th>
-                                <th></th>
-                            </thead>
-                            <tbody>
-                                <?php foreach ($this->items as $item) : ?>
-                                                    <tr>
-                                                        <td><?= $item->item_name ?></td>
-                                                        <td><?= $item->quantity ?></td>
-                                                        <td><?= $item->price ?></td>
-                                                        <td><a class="btn btn-danger" href="<?= SROOT . 'order/remove_from_order/' . $item->id ?>">Remove Item</a></td>
-                                                    </tr>
-                                <?php endforeach ?>
-                            </tbody>
-                        </table>
-                        <a type="button" class="btn btn-primary" data-toggle="modal" data-target="#order_submit_form">Submit Order</a>
-                        <a type="button" class="btn btn-secondray" href="<?= SROOT ?>order/save_draft">Save and Cancel</a>
-                        <a type="button" class="btn btn-danger" href="<?= SROOT ?>order/cancel_order">Cancel Order</a> -->
-
-
-
+        <h2> Resataurant : <a href="<?=SROOT.'restaurant/details/'.$this->restaurant->id?>"> <?= $this->restaurant->restaurant_name?> </a> </h2>
         <div>
             <table id="cart" class="table table-hover table-condensed">
                 <thead>
