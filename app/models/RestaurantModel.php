@@ -62,4 +62,9 @@ class RestaurantModel extends Model
         ]);
         return ($items)? $items : [];
     }
+
+    public function filter($filter, $limit=0)
+    {
+        
+    }
 }

@@ -36,28 +36,6 @@ class FoodItemModel extends Model
         return $items[0];
     }
 
-    // public function search($field, $data, $limit=0)
-    // {
-
-    //     $sql = '
-    //         SELECT I.*, R.restaurant_name,  GROUP_CONCAT(T.tag_name) as tags
-    //         FROM items as I
-    //         INNER JOIN restaurants R ON I.restaurant_id=R.id
-    //         LEFT JOIN item_tags IT ON I.id=IT.item_id
-    //         LEFT JOIN tags T ON IT.tag_id=T.id
-    //         WHERE ' . $field . ' LIKE ?
-    //         GROUP by I.id ORDER by item_name LIMIT '.($limit*20).', 20;';
-
-    //     $items = $this->query($sql, ['%' . $data . '%'], get_class($this));
-
-    //     if ($items) {
-    //         foreach ($items as $item) {
-    //             $item->tags = ($item->tags) ? explode(',', $item->tags) : false;
-    //         }
-    //     }
-    //     // H::dnd($items);
-    //     return ($items) ? $items : [];
-    // }
 
     public function filter($filters, $limit=0)
     {
