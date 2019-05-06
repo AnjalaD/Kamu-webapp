@@ -152,9 +152,11 @@ class OrderController extends Controller
                 $this->request->csrf_check();
                 $items = json_decode(Session::get('items'), true);
 
-                $draft->order_name = !empty($this->request->get('order_name'))? $this->request->get('order_name') : 'Saved Order';
                 $draft->customer_id = UserModel::current_user()->id;
                 $draft->restaurant_id = $items['rid'];
+                $restaurant_name = $this->restaurantmodel->find_by_id($draft->restaurant_id)->restaurant_name;
+                $order_name = !empty($this->request->get('order_name'))? $this->request->get('order_name') : 'Saved Order';
+                $draft->order_name = $restaurant_name.' : '.$order_name;
                 $draft->items = json_encode($items['items']);
                 
                 if(!$draft->save())

@@ -152,7 +152,7 @@ class H
   public static function create_order_dropdown($item_list, $order_id){
     ob_start();
     foreach($item_list as $item) : ?>
-      <li><?=$item->item_name?></li>
+      <li><?=$item->item_name.'-x'.$item->quantity?></li>
     <?php endforeach ?>
     <li>
       <a class="btn btn-primary" href="<?=SROOT?>order/use_saved_order/<?=$order_id?>">Use</a>
