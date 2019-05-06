@@ -30,7 +30,7 @@
         },
         "Items": ["*"],
         "Restaurant" : ["my_restaurant","no_of_orders"],
-        "Order": ["view_orders"]
+        "Order": ["view_orders", "accept_order", "reject_order"]
     },
 
     "Admin": {

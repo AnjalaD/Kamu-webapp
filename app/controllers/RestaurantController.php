@@ -125,7 +125,7 @@ class RestaurantController extends Controller
 
         // $this->view->items = $items;
         $submittedordermodel = new SubmittedOrderModel();
-        $nooforders = sizeof($submittedordermodel->find_unaccepted_by_restaurant_id((int)$owner->restaurant_id));
+        $nooforders = sizeof($submittedordermodel->find_pending_by_restaurant_id((int)$owner->restaurant_id));
         // H::dnd($submittedordermodel->find_unaccepted_by_restaurant_id((int)$owner->restaurant_id));
         $this->view->restaurant = $restaurant;
         $this->view->nooforders = $nooforders;
@@ -135,7 +135,7 @@ class RestaurantController extends Controller
     public function no_of_orders_action(){
         $owner = UserModel::current_user();
         $submittedordermodel = new SubmittedOrderModel();
-        $nooforders = sizeof($submittedordermodel->find_unaccepted_by_restaurant_id((int)$owner->restaurant_id));
+        $nooforders = sizeof($submittedordermodel->find_pending_by_restaurant_id((int)$owner->restaurant_id));
         echo (strval($nooforders));
     }
 }

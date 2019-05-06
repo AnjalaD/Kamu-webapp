@@ -208,6 +208,7 @@ class OrderController extends Controller
     {
         $order = $this->ordermodel->find_by_id_customer_id($order_id, UserModel::current_user()->id);
         $order->delete();
+        Session::add_msg('success', 'Saved Order Deleted!');
         Router::redirect('order/order');
     }
 
@@ -215,10 +216,49 @@ class OrderController extends Controller
     //view all orders -by restaurant
     public function view_orders_action()
     {
-        $orders = $this->submittedordermodel->find_by_restaurant_id(UserModel::current_user()->restaurant_id);
-        $this->view->orders = $orders;
+        $pending_orders = $this->submittedordermodel->find_pending_by_restaurant_id(UserModel::current_user()->restaurant_id);
+        $this->view->pending_orders = $pending_orders;
         $this->view->render('order/view_orders');
         // H::dnd($orders);
+    }
+
+
+    //accept an order - by restaurant
+    public function accept_order_action($order_id)
+    {
+        $order = $this->submittedordermodel->find_by_id_restaurant_id($order_id, UserModel::current_user()->restaurant_id);
+        if($order)
+        {
+            $order->accepted = 1;
+            if($order->save())
+            {
+                Session::add_msg('success', 'Order accepted!');
+            } else {
+                Session::add_msg('danger', 'Error occured!');
+            }
+            Router::redirect('order/view_orders');
+        }
+        Router::redirect('restricted/error');
+
+    }
+
+
+    //reject an order - by restaurant
+    public function reject_order_action($order_id)
+    {
+        $order = $this->submittedordermodel->find_by_id_restaurant_id($order_id, UserModel::current_user()->restaurant_id);
+        if($order)
+        {
+            $order->rejected = 1;
+            if($order->save())
+            {
+                Session::add_msg('success', 'Order rejected!');
+            } else {
+                Session::add_msg('danger', 'Error occured!');
+            }
+            Router::redirect('order/view_orders');
+        }
+        Router::redirect('restricted/error');
     }
 
 }
