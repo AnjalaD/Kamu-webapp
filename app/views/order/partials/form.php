@@ -3,6 +3,7 @@ use core\FH;
 ?>
 
 <form method="post" action=<?=$this->post_action_form?> >
+    <?=FH::csrf_input($this->token) ?>
     <div class="form-group">
         <div class="input-group date" id="datepicker" data-target-input="nearest">
             <input type="text" class="form-control datetimepicker-input" data-target="#datepicker" />

@@ -114,6 +114,7 @@ class OrderController extends Controller
         $new_submitted_order = new SubmittedOrderModel();
         if($this->request->is_post())
         {
+            $this->request->csrf_check();
             $items = json_decode(Session::get('items'), true);
 
             $new_order->assign($this->request->get());            
@@ -136,7 +137,7 @@ class OrderController extends Controller
             $this->view->post_data = $new_order;
         }
         $this->view->post_data = $this;
-        $this->view->render('order/submit_order');
+        $this->view->render('order/order');
     }
 
 
@@ -148,6 +149,7 @@ class OrderController extends Controller
         {
             if($this->request->is_post())
             {
+                $this->request->csrf_check();
                 $items = json_decode(Session::get('items'), true);
 
                 $draft->order_name = !empty($this->request->get('order_name'))? $this->request->get('order_name') : 'Saved Order';
@@ -170,6 +172,7 @@ class OrderController extends Controller
     //get items of an saves or submitted order - by customer
     public function get_order_items_action($draft_id)
     {
+        $this->request->csrf_check();
         $draft = $this->ordermodel->find_by_id_customer_id($draft_id, UserModel::current_user()->id);
         if($draft) {
             $items = $this->itemsmodel->get_order_items(json_decode($draft->items));

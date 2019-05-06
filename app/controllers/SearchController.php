@@ -84,6 +84,7 @@ class SearchController extends Controller
     {
         $response = '';
         $filters = $this->request->get();
+        $this->request->csrf_check();
 
         if($type==1)
         {

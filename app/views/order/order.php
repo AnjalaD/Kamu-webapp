@@ -1,6 +1,8 @@
 <?php
-use core\Session;
 use core\H;
+use core\FH;
+
+$this->token = FH::generate_token();
 ?>
 
 <?php $this->set_title('items'); ?>
@@ -70,7 +72,6 @@ use core\H;
                                 <button type="button" class="close" data-dismiss="modal">&times;</button>
                             </div>
                             <div class="modal-body">
-                                <p>Some text in the modal.</p>
                                 <?php $this->partial('order', 'form'); ?>
                             </div>
                             <div class="modal-footer">
@@ -144,9 +145,9 @@ use core\H;
         $('.order').click(function() {
             var orderId = $(this).attr('id');
             var $head = $(this);
-            console.log(orderId);
             $.post(
-                `${SROOT}order/get_order_items/${orderId}`, {},
+                `${SROOT}order/get_order_items/${orderId}`,
+                {csrf_token : '<?=$this->token?>'},
                 function(resp) {
                     $head.next('.dropdown-menu').html(resp);
                 }

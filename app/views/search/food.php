@@ -1,5 +1,7 @@
 <?php
 use core\FH;
+
+$token = FH::generate_token();
 ?>
 
 <?php $this->set_title('Food'); ?>
@@ -61,6 +63,7 @@ use core\FH;
             $('input[name=search_string]').val(search);
         }
         data = {
+            'csrf_token': '<?=$token?>',
             'search': search,
             'sort_by': $('input[name=sort_by]:checked').val(),
             'price_filter': $('input[name=price_filter]').val()

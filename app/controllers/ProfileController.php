@@ -29,6 +29,7 @@ class ProfileController extends Controller
         $user = UserModel::current_user();
         if($this->request->is_post())
         {
+            $this->request->csrf_check();
             $input = $this->request->get();
             if($this->request->exists('change_pass'))
             {

@@ -1,5 +1,8 @@
 <?php
 use app\models\UserModel;
+use core\FH;
+
+$token = FH::generate_token();
 
 $this->set_title($this->user->first_name); ?>
 
@@ -124,6 +127,7 @@ $this->set_title($this->user->first_name); ?>
     $('#profile_form').submit(function(e) {
         e.preventDefault();
         var data = {
+            csrf_token: '<?=$token?>',
             first_name: $('input[name=first_name]').val(),
             last_name: $('input[name=last_name]').val()
         }
