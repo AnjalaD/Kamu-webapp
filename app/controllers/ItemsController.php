@@ -74,14 +74,13 @@ class ItemsController extends Controller
     public function edit_action($item_id)
     {
         $item = $this->fooditemmodel->find_by_item_id_restaurant_id((int)$item_id, OwnerModel::current_user()->restaurant_id);
-        H::dnd($item);
+        // H::dnd($item);
         if ($item) {
             if ($this->request->is_post()) {
                 $this->request->csrf_check();
                 $item->assign($this->request->get());
 
                 $tags = explode(',', $this->request->get('tag_array'));
-                unset($_POST['tag_arry']);
 
                 $new_item = new ItemsModel();
                 $new_item->assign($this->request->get());
