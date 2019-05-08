@@ -113,7 +113,7 @@ class ItemsController extends Controller
     }
 
 
-    //show previwe of a selected food item
+    //show preview of a selected food item
     public function details_action($item_id)
     {
         $item = $this->fooditemmodel->find_by_item_id_restaurant_id((int)$item_id, OwnerModel::current_user()->restaurant_id);
