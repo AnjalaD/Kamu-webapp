@@ -142,8 +142,7 @@ class RegisterController extends Controller
                 Router::redirect('');
             }
         }
-        Session::add_msg('danger', 'invalid url');
-        Router::redirect('');
+        Router::redirect('restricted/link_expired');
     }
 
 
@@ -186,8 +185,7 @@ class RegisterController extends Controller
             $this->view->render('register/reset_password');
             return;
         }
-        Session::add_msg('danger', 'Invalid URL or Link expaired!');
-        Router::redirect('');
+        Router::redirect('restricted/link_expired');
     }
 
 

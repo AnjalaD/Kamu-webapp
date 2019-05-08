@@ -24,6 +24,11 @@ class RestrictedController extends Controller
         $this->view->render('restricted/invalid_token');
     }
 
+    public function link_expired_action()
+    {
+        $this->view->render('restricted/link_expired');
+    }
+
     public function page_not_found_action($info)
     {
         $this->view->info = $info;

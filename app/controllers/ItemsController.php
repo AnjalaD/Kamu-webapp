@@ -108,8 +108,7 @@ class ItemsController extends Controller
             $this->view->render('items/edit');
             return;
         }
-        Session::add_msg('danger', 'Something went wrong!');
-        Router::redirect('items');
+        Router::redirect('restricted/error');
     }
 
 
