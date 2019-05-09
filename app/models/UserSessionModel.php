@@ -3,14 +3,14 @@ namespace app\models;
 use core\Model;
 use core\Session;
 use core\Cookie;
-class UserSession extends Model
+class UserSessionModel extends Model
 {
     public $user_type, $user_id, $session, $user_agent;
 
     public function __construct()
     {
         $table = 'user_sessions';
-        $model_name = 'UserSession';
+        $model_name = 'UserSessionModel';
         parent::__construct($table, $model_name);
     }
 
