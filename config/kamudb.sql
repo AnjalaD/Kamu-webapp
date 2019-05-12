@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: May 02, 2019 at 04:58 PM
+-- Generation Time: May 12, 2019 at 04:08 PM
 -- Server version: 10.1.37-MariaDB
 -- PHP Version: 7.3.1
 
@@ -100,7 +100,7 @@ CREATE TABLE `items` (
 INSERT INTO `items` (`id`, `restaurant_id`, `item_name`, `description`, `price`, `image_url`, `rating`, `rating_num`, `deleted`) VALUES
 (1, 1, 'Kottu', 'Perfect combination of cut up roti and chickenzzz', 250, '/mvc/img/items/1553572046.png', 0, 0, 0),
 (26, 1, 'Soup', 'Tantalize your taste buds with our signature recipe chicken soup', 140, '/mvc/img/items/1552849585.png', 0, 0, 0),
-(30, 2, 'Kottu', 'Enjoy the goodness of little bits of heaven', 300, '/mvc/img/items/1552914320.png', 3.5, 4, 0),
+(30, 2, 'Kottu', 'Enjoy the goodness of little bits of heaven', 300, '/mvc/img/items/1552914320.png', 0, 0, 0),
 (31, 2, 'Fried Rice', 'Enjoy the taste of china ', 250, '/mvc/img/items/1552914407.png', 0, 0, 0),
 (32, 2, 'Soup', 'Description of soup', 100, '/mvc/img/items/1552931132.png', 0, 0, 0),
 (34, 1, 'Noodles', 'description of noodles', 140, '/mvc/img/items/1553572181.png', 0, 0, 0),
@@ -133,7 +133,13 @@ INSERT INTO `item_tags` (`id`, `item_id`, `tag_id`) VALUES
 (23, 151, 83),
 (24, 151, 5),
 (25, 151, 82),
-(26, 152, 82);
+(26, 152, 82),
+(27, 26, 84),
+(28, 34, 86),
+(29, 1, 2),
+(30, 31, 88),
+(31, 32, 84),
+(32, 30, 2);
 
 -- --------------------------------------------------------
 
@@ -168,7 +174,8 @@ INSERT INTO `orders` (`id`, `order_name`, `customer_id`, `items`, `restaurant_id
 (20, 'Saved Order', 4, '{\"34\":1,\"1\":1}', 1, 1, NULL, NULL, 0, '2019-04-17 18:14:58'),
 (21, 'Saved Order', 4, '{\"34\":1,\"26\":1}', 1, 2, NULL, NULL, 0, '2019-04-17 18:17:14'),
 (22, 'Saved Order', 4, '{\"147\":1,\"30\":1}', 2, 2, NULL, NULL, 0, '2019-04-23 05:23:07'),
-(27, 'New', 1, '{\"147\":1}', 2, NULL, NULL, NULL, 0, '2019-05-01 13:27:23');
+(27, 'New', 1, '{\"147\":1}', 2, NULL, NULL, NULL, 0, '2019-05-01 13:27:23'),
+(28, 'Shop : Saved Order', 1, '{\"30\":1}', 2, NULL, NULL, NULL, 0, '2019-05-06 11:03:47');
 
 -- --------------------------------------------------------
 
@@ -281,10 +288,10 @@ CREATE TABLE `submitted_orders` (
 --
 
 INSERT INTO `submitted_orders` (`id`, `customer_id`, `items`, `restaurant_id`, `type`, `submit_time`, `order_code`, `accepted`, `rejected`, `completed`, `time_stamp`) VALUES
-(2, 1, '{\"34\":1,\"26\":1,\"1\":1}', 1, 1, NULL, NULL, 0, 0, 0, '2019-04-12 13:38:36'),
-(3, 1, '{\"34\":1,\"26\":1}', 1, 1, NULL, NULL, 0, 0, 0, '2019-04-12 13:40:44'),
-(4, 4, '{\"34\":1,\"1\":1}', 1, 1, NULL, NULL, 0, 0, 0, '2019-04-17 18:14:58'),
-(5, 4, '{\"34\":1,\"26\":1}', 1, 2, NULL, NULL, 0, 0, 0, '2019-04-17 18:17:14');
+(2, 1, '{\"34\":1,\"26\":1,\"1\":1}', 1, 1, NULL, NULL, 1, 0, 0, '2019-04-12 13:38:36'),
+(3, 1, '{\"34\":1,\"26\":1}', 1, 1, NULL, NULL, 0, 1, 0, '2019-04-12 13:40:44'),
+(4, 4, '{\"34\":1,\"1\":1}', 1, 1, NULL, NULL, 1, 0, 0, '2019-04-17 18:14:58'),
+(5, 4, '{\"34\":1,\"26\":1}', 1, 2, NULL, NULL, 1, 0, 0, '2019-04-17 18:17:14');
 
 -- --------------------------------------------------------
 
@@ -302,12 +309,15 @@ CREATE TABLE `tags` (
 --
 
 INSERT INTO `tags` (`id`, `tag_name`) VALUES
+(88, 'fried rice'),
 (9, 'hoppers'),
 (83, 'hot'),
 (2, 'kottu'),
 (5, 'new'),
+(86, 'noodles'),
 (82, 'rice'),
 (6, 'sdkfs'),
+(84, 'soup'),
 (1, 'spicy'),
 (8, 'tasty');
 
@@ -430,13 +440,13 @@ ALTER TABLE `items`
 -- AUTO_INCREMENT for table `item_tags`
 --
 ALTER TABLE `item_tags`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=27;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=33;
 
 --
 -- AUTO_INCREMENT for table `orders`
 --
 ALTER TABLE `orders`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=28;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=29;
 
 --
 -- AUTO_INCREMENT for table `owners`
@@ -448,7 +458,7 @@ ALTER TABLE `owners`
 -- AUTO_INCREMENT for table `ratings`
 --
 ALTER TABLE `ratings`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=18;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=17;
 
 --
 -- AUTO_INCREMENT for table `restaurants`
@@ -466,7 +476,7 @@ ALTER TABLE `submitted_orders`
 -- AUTO_INCREMENT for table `tags`
 --
 ALTER TABLE `tags`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=84;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=89;
 
 --
 -- AUTO_INCREMENT for table `user_sessions`
