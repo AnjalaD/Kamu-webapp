@@ -161,4 +161,26 @@ class H
     <?php
     return ob_get_clean();
   }
+
+  public static function create_pagination_tabs($page_no, $end=false)
+  {
+    ob_start(); ?>
+    <?php if($end) : ?>
+    <span>End of Results</span>
+    <?php endif ?>
+    <nav>
+    <ul class="pagination">
+      <li class="page-item"><a class="page-link" href="#" onclick="goToPage(0)">First</a></li>
+      <?php if($page_no > 0) :?>
+      <li class="page-item"><a class="page-link" href="#" onclick="goToPage(<?=$page_no-1?>)"><?=$page_no?></a></li>
+      <?php endif ?>
+      <li class="page-item active"><a class="page-link" href="#" onclick="goToPage(<?=$page_no?>)"><?=$page_no+1?></a></li>
+      <?php if(!$end) :?>
+      <li class="page-item"><a class="page-link" href="#" onclick="goToPage(<?=$page_no+1?>)"><?=$page_no+2?></a></li>
+      <?php endif ?>
+    </ul>
+    </nav>
+    <?php
+    return ob_get_clean();
+  }
 }

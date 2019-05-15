@@ -80,20 +80,20 @@ class SearchController extends Controller
 
 
     //handle filter and sort ajax requests - in search
-    public function search_action($type)
+    public function search_action($type, $page=0)
     {
-        $response = '';
+        $response = [];
         $filters = $this->request->get();
         $this->request->csrf_check();
 
         if($type==1)
         {
-            $items = $this->fooditemmodel->filter($filters);
-            $response = H::create_card_list($items);
+            $items = $this->fooditemmodel->filter($filters, $page);
+            $response = $items;
         }
         elseif($type==2)
         {
-            $restaurants = $this->restaurantmodel->filter($filters);
+            $restaurants = $this->restaurantmodel->filter($filters, $page);
         }
         
         return $this->json_response($response);

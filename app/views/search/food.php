@@ -39,46 +39,63 @@ $token = FH::generate_token();
 <?php $this->start('script') ?>
 <script src="<?= SROOT ?>js/autocomplete.js"></script>
 <script src="<?= SROOT ?>js/addtoorder.js"></script>
-<script src="<?= SROOT ?>js/search.js"></script>
 <script src="<?= SROOT ?>js/rating.js"></script>
 <script>
     $(document).ready(function() {
         sendFilters();
-
     });
 
     $('form').submit(function(e) {
         sendFilters();
         return false;
     });
-    
+
     $("body").on("click", ".tag", function(e) {
         sendFilters($(this).attr('id'));
     });
 
-    function sendFilters(search='') {
-        if(search==''){
+    function goToPage(page){
+        sendFilters(null, page);
+    }
+
+    function sendFilters(search=null, page=0) {
+        if (search == null) {
             search = $('input[name=search_string]').val();
-        }else{
+        } else {
             $('input[name=search_string]').val(search);
         }
         data = {
-            'csrf_token': '<?=$token?>',
+            'csrf_token': '<?= $token ?>',
             'search': search,
             'sort_by': $('input[name=sort_by]:checked').val(),
             'price_filter': $('input[name=price_filter]').val()
         };
-        console.log(data);
-        getItemCards(data, 'items');
-
+        viewResults(data, 'items', page);
     }
+
+    function viewResults(data, divId, pageNo){
+    console.log("ajax");
+    $.post(
+        `${SROOT}search/search/1/${pageNo}`, 
+        data,
+        function (resp) {
+            console.log(resp);
+            if(!resp){
+                if(pageNo>0) $('#' + divId).html("<p>End of Results</p>");
+                else $('#' + divId).html("<p>No items found</p>");
+            }else{
+                $('#' + divId).html(resp);
+            }
+        }
+    );
+}
 
     $('#search_string').keyup(function() {
         autoComplete($(this).val(), 'food')
     });
 
     // not completed
-    $("body").on("click", ".star", function(){
+    $("body").on("click", ".star", function() {
         var value = $(this).attr('id');
         var itemId = $(this).parent().attr('id');
         addRating(itemId, value);
