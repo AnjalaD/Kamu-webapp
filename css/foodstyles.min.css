@@ -49,7 +49,6 @@
             }
             
             .block.span3 {
-                margin: 2rem;
                 background: rgba(255, 236, 179, .95);
                 text-align: center;
                 border-bottom: 5px;
@@ -538,7 +537,7 @@
             .info,
             .product {
                 display: block;
-                position: relative
+                position: relative;
             }
             
             div.container {
