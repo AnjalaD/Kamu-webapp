@@ -9,7 +9,7 @@ class FoodItemModel extends Model
 {
     public $restaurant_id, $item_name, $description, $price, $image_url = DEFUALT_ITEM_IMAGE, $rating = 0, $tags = '', $deleted = 0;
     public $restaurant_name;
-    private $items_per_page = 3;
+    private $items_per_page = 9;
 
     public function __construct()
     {

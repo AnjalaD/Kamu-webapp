@@ -5,6 +5,8 @@ use core\H;
 
 class OwnerModel extends UserModel
 {
+    public $restaurant_id = null;
+
     public function __construct($user='')
     {
         $table = 'owners';

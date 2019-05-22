@@ -9,7 +9,7 @@ use core\H;
 
 class RestaurantModel extends Model
 {
-    public $restuarant_name, $address, $telephone, $email, $lng, $lat, $image_url=DEFUALT_RESTAURANT_IMAGE, $deleted = 0;
+    public $restuarant_name, $address, $telephone, $email, $lng, $lat, $image_url=DEFUALT_RESTAURANT_IMAGE, $verified=0, $deleted = 0;
 
     public function __construct(){
         $table = 'restaurants';
@@ -21,11 +21,39 @@ class RestaurantModel extends Model
     public function find_all($params=[])
     {
         $conditions = [
-            'conditions' => '1'
+            'conditions' => 'verified=?',
+            'bind' => [1]
         ];
         $conditions = array_merge($conditions, $params);
         return $this->find($conditions);
+    }
 
+    public function find_all_unverified()
+    {
+        $conditions = [
+            'conditions' => 'verified=?',
+            'bind' => [0]
+        ];
+        $conditions = array_merge($conditions);
+        return $this->find($conditions);
+    }
+    
+    public function find_unverified_by_id($id)
+    {
+        $conditions = [
+            'conditions' => 'id=? AND verified=?',
+            'bind' => [$id, 0]
+        ];
+        return $this->find_first($conditions);
+    }
+
+    public function find_verified_by_id($id)
+    {
+        $conditions = [
+            'conditions' => 'id=? AND verified=?',
+            'bind' => [$id, 1]
+        ];
+        return $this->find_first($conditions);
     }
 
     public function save_image($data)

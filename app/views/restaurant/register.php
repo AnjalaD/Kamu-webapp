@@ -1,4 +1,4 @@
-<?php $this->set_title('Add New Items'); ?>
+<?php $this->set_title('Register New Restaurant'); ?>
 
 <?php $this->start('head'); ?>
 <link rel="stylesheet" href="<?=SROOT?>css/croppie.css">

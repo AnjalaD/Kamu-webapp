@@ -29,7 +29,7 @@
             "Items" : ["update_rating"]
         },
         "Items": ["*"],
-        "Restaurant" : ["my_restaurant","no_of_orders"],
+        "Restaurant" : ["my_restaurant","no_of_orders", "submit_details"],
         "Order": ["view_orders", "accept_order", "reject_order"]
     },
 

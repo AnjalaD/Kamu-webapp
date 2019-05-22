@@ -11,7 +11,7 @@
     },
     "Restaurants": {
         "Restaurants": "restaurant",
-        "Add New": "restaurant/add"
+        "Unverified Restaurant": "restaurant/register"
     },
     "Add New Admin": "register/register_admin",
     "Order": "order/order",

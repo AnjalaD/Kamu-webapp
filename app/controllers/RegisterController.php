@@ -116,8 +116,8 @@ class RegisterController extends Controller
         if($this->request->is_post() && $this->request->exists('submit')) {
             $this->request->csrf_check();
             $new_user->assign($this->request->get());
-            $new_user->set_confirm($this->request->get('confirm'));
             // H::dnd($new_user);
+            $new_user->set_confirm($this->request->get('confirm'));
             if($new_user ->save()) {
                 $new_user->send_verify_email();
                 Router::redirect($redirect);

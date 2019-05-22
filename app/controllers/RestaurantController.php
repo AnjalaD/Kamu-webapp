@@ -24,7 +24,17 @@ class RestaurantController extends Controller
     //view list of restaurants
     public function index_action()
     {
-        $restaurants = $this->restaurantmodel->find();
+        $restaurants = $this->restaurantmodel->find_all();
+        if (!$restaurants) {
+            $restaurants = [];
+        }
+        $this->view->restaurants = $restaurants;
+        $this->view->render('restaurant/index');
+    }
+
+    public function unverified_restaurant_action()
+    {
+        $restaurants = $this->restaurantmodel->find_all_unverified();
         if (!$restaurants) {
             $restaurants = [];
         }
@@ -34,13 +44,14 @@ class RestaurantController extends Controller
 
 
     //add new restaurant
-    public function add_action()
+    public function register_action($restaurant_id)
     {
         $restaurant = new RestaurantModel();
         if ($this->request->is_post()) {
             $this->request->csrf_check();
 
             $restaurant->assign($this->request->get());
+            $restaurant->verified = 1;
             if (!empty($this->request->get('image'))) {
                 $restaurant->image_url = SROOT.'img/restaurant/'.time().'.png';
             }
@@ -50,12 +61,15 @@ class RestaurantController extends Controller
                 Session::add_msg('success', 'New item added successfully!');
                 Router::redirect('restaurant');
             }
+
+            $this->view->restaurant = $restaurant;
+        } else {
+            $this->view->restaurant = $this->restaurantmodel->find_unverified_by_id($restaurant_id);
         }
-        $this->view->restaurant = $restaurant;
         $this->view->display_errors = $restaurant->get_error_messages();
 
-        $this->view->post_action = SROOT . 'restaurant/add';
-        $this->view->render('restaurant/add');
+        $this->view->post_action = SROOT . 'restaurant/register';
+        $this->view->render('restaurant/register');
     }
     
 
@@ -117,9 +131,9 @@ class RestaurantController extends Controller
     public function my_restaurant_action()
     {
         $owner = UserModel::current_user();
-        $restaurant = $this->restaurantmodel->find_by_id((int)$owner->restaurant_id);
+        $restaurant = $this->restaurantmodel->find_verified_by_id((int)$owner->restaurant_id);
         if (!$restaurant) {
-            Router::redirect('error');
+            Router::redirect('restaurant/submit_details');
         }
         // $items = $this->itemsmodel->find_all_by_restaurant_id((int)$id);
 
@@ -137,5 +151,29 @@ class RestaurantController extends Controller
         $submittedordermodel = new SubmittedOrderModel();
         $nooforders = sizeof($submittedordermodel->find_pending_by_restaurant_id((int)$owner->restaurant_id));
         echo (strval($nooforders));
+    }
+
+    public function submit_details_action()
+    {
+        $restaurant = new RestaurantModel();
+        if ($this->request->is_post()) {
+            $this->request->csrf_check();
+
+            $restaurant->assign($this->request->get());
+            if (!empty($this->request->get('image'))) {
+                $restaurant->image_url = SROOT.'img/restaurant/'.time().'.png';
+            }
+            // H::dnd($restaurant);
+            if ($restaurant->save()) {
+                H::save_image($this->request->get('image'), $restaurant->image_url);
+                Session::add_msg('success', 'Details submitted successfully!');
+                Router::redirect('');
+            }
+        }
+        $this->view->restaurant = $restaurant;
+        $this->view->display_errors = $restaurant->get_error_messages();
+
+        $this->view->post_action = SROOT . 'restaurant/submit_details';
+        $this->view->render('restaurant/submit_details');
     }
 }

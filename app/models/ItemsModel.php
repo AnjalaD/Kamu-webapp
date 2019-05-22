@@ -82,6 +82,7 @@ class ItemsModel extends Model
     public function get_order_items($order)
     {
         $items = [];
+        // H::dnd($order);
         foreach($order as $key => $val) {
             $item = $this->find_by_id((int)$key);
             $item->quantity = $val;

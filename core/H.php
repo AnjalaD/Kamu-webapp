@@ -90,7 +90,7 @@ class H
     if (empty($items)) {
       return '';
     }
-    $html = '<div class="card-columns">';
+    $html = '<div class="grid">';
     foreach ($items as $item) {
       $html .= self::create_card($item);
     }
@@ -101,7 +101,7 @@ class H
   public static function create_card($item)
   {
     ob_start() ?>
-    <div class="card block span3">
+    <div class="grid-item card block span3 m-1">
       <div class="product">
         <img src=<?= $item->image_url ?>>
       </div>

@@ -164,6 +164,8 @@ class ItemsController extends Controller
     //update rating of a item
     public function update_rating_action($item_id, $rating)
     {
+        $this->request->csrf_check();
+        
         if ($item = $this->itemsmodel->find_by_id($item_id)) {
             $customer_id = UserModel::current_user()->id;
 

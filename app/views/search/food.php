@@ -37,6 +37,7 @@ $token = FH::generate_token();
 <?php $this->end(); ?>
 
 <?php $this->start('script') ?>
+<script src="<?= SROOT ?>js/masonry.pkgd.min.js"></script>
 <script src="<?= SROOT ?>js/autocomplete.js"></script>
 <script src="<?= SROOT ?>js/addtoorder.js"></script>
 <script src="<?= SROOT ?>js/rating.js"></script>
@@ -85,6 +86,11 @@ $token = FH::generate_token();
                 else $('#' + divId).html("<p>No items found</p>");
             }else{
                 $('#' + divId).html(resp);
+                $('.grid').masonry({
+                // options
+                    itemSelector: '.grid-item',
+                    columnWidth: 0
+                });
             }
         }
     );
@@ -98,7 +104,7 @@ $token = FH::generate_token();
     $("body").on("click", ".star", function() {
         var value = $(this).attr('id');
         var itemId = $(this).parent().attr('id');
-        addRating(itemId, value);
+        addRating(itemId, value, '<?=$token?>');
     });
 </script>
 <?php $this->end(); ?>
