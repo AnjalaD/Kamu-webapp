@@ -75,7 +75,6 @@ class ItemsModel extends Model
     {
         $this->_soft_del = false;
         $result = $this->delete();
-        $this->_soft_del = true;
         return $result;
     }
 

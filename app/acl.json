@@ -26,15 +26,18 @@
 
     "Owner": {
         "denied": {
-            "Items" : ["update_rating"]
+            "Items": ["update_rating"]
         },
+        "Register" : ["register_cashier"],
         "Items": ["*"],
-        "Restaurant" : ["my_restaurant","no_of_orders", "submit_details"],
+        "Restaurant": ["my_restaurant","no_of_orders", "submit_details"],
         "Order": ["view_orders", "accept_order", "reject_order"]
     },
 
     "Admin": {
-        "denied": {},
+        "denied": {
+            "Restaurant": ["my_restaurant", "submit_details"]
+        },
         "Register": ["register_admin"],
         "Restaurant": ["*"]
     }

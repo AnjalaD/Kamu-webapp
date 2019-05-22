@@ -39,14 +39,14 @@ class RestaurantController extends Controller
             $restaurants = [];
         }
         $this->view->restaurants = $restaurants;
-        $this->view->render('restaurant/index');
+        $this->view->render('restaurant/unverified_restaurants');
     }
 
 
     //add new restaurant
-    public function register_action($restaurant_id)
+    public function verify_action($restaurant_id)
     {
-        $restaurant = new RestaurantModel();
+        $restaurant = $this->restaurantmodel->find_unverified_by_id($restaurant_id);
         if ($this->request->is_post()) {
             $this->request->csrf_check();
 
@@ -55,21 +55,19 @@ class RestaurantController extends Controller
             if (!empty($this->request->get('image'))) {
                 $restaurant->image_url = SROOT.'img/restaurant/'.time().'.png';
             }
+            // H::dnd(($this->request->get('image')));
             // H::dnd($restaurant);
             if ($restaurant->save()) {
                 H::save_image($this->request->get('image'), $restaurant->image_url);
-                Session::add_msg('success', 'New item added successfully!');
+                Session::add_msg('success', 'New Restaurant Verified successfully!');
                 Router::redirect('restaurant');
             }
-
-            $this->view->restaurant = $restaurant;
-        } else {
-            $this->view->restaurant = $this->restaurantmodel->find_unverified_by_id($restaurant_id);
         }
+        $this->view->restaurant = $restaurant;
         $this->view->display_errors = $restaurant->get_error_messages();
 
-        $this->view->post_action = SROOT . 'restaurant/register';
-        $this->view->render('restaurant/register');
+        $this->view->post_action = SROOT . 'restaurant/verify/'. $restaurant->id;
+        $this->view->render('restaurant/verify');
     }
     
 
