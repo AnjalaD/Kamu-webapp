@@ -7,6 +7,7 @@ use core\Session;
 use core\Router;
 use app\models\UserModel;
 use app\models\CustomerModel;
+use app\models\SubmittedOrderModel;
 
 class OrderController extends Controller
 {
@@ -14,6 +15,7 @@ class OrderController extends Controller
     {
         parent::__construct($controller, $acttion);
         $this->load_model('ItemsModel');
+        $this->load_model('RestaurantModel');
         $this->load_model('OrderModel');
         $this->load_model('SubmittedOrderModel');
     }
@@ -22,14 +24,21 @@ class OrderController extends Controller
     //view current-order -by customer
     public function order_action()
     {
-        $order = [];
+        $items = [];
+        $restaurant = null;
         if(Session::exists('items')){
-            $order = json_decode(Session::get('items'), true)['items'];
+            // H::dnd(Session::get('items'));
+            $order = json_decode(Session::get('items'), true);
+            $items = $this->itemsmodel->get_order_items($order['items']);
+            $restaurant = $this->restaurantmodel->find_by_id($order['rid']);
         }
-        $this->view->items = $this->itemsmodel->get_order_items($order);
+        $this->view->items = $items;
+        $this->view->restaurant = $restaurant;
 
-        $this->view->drafts = $this->ordermodel->get_drafts();
-        $this->view->post_action = SROOT.'order/submit_order';
+        $this->view->drafts = $this->ordermodel->get_drafts(UserModel::current_user()->id);
+        $this->view->submitted = $this->ordermodel->get_submitted(UserModel::current_user()->id);
+        $this->view->post_action_form = SROOT.'order/submit_order';
+        $this->view->post_action_save = SROOT.'order/save_draft';
         $this->view->render('order/order');
     }
 
@@ -40,28 +49,31 @@ class OrderController extends Controller
      *          0 = prompt cancel, new order( 1.save existing in as draft   2.dismiss existing )
      *          1 = change 'add to cart' -> 'remove item' 
      */
-    public function add_to_order_action($restaurant_id, $id, $quantity=1){
-        if(!(UserModel::current_user() instanceof CustomerModel))
-        {
-            echo '-1';
-            return;
-        }
-        if(Session::exists('items'))
-        {
-            $items = json_decode(Session::get('items'), true);
-            if($items['rid'] != $restaurant_id){
-                echo '0';
+    public function add_to_order_action($restaurant_id, $id, $quantity = 1)
+    {
+        if (!(UserModel::current_user() instanceof CustomerModel)) {
+                echo '-1';
                 return;
-            }  
-        }else
-        {
-            $items['rid'] = (int)$restaurant_id;
+            }
+        if (Session::exists('items')) {
+                $items = json_decode(Session::get('items'), true);
+                if ($items['rid'] != $restaurant_id) {
+                    echo '0';
+                    return;
+                }
+            } else {
+                $items=[];
+                $items['rid'] = (int)$restaurant_id;
+                $items['items']=[];
+            }
+        if (array_key_exists($id, $items['items'])) {
+            $items['items'][$id] += 1;
+        } else {
+            $items['items'][$id] = $quantity;
         }
-        $items['items'][$id] = $quantity;
         Session::set('items', json_encode($items));
         echo '1';
         return;
-        
     }
 
 
@@ -91,7 +103,7 @@ class OrderController extends Controller
     {
         Session::delete('items');
         Session::add_msg('info', 'Your order canceled successfully!');
-        $this->view->render('order/order');
+        Router::redirect('order/order');
     }
 
 
@@ -99,17 +111,33 @@ class OrderController extends Controller
     public function submit_order_action()
     {
         $new_order = new OrderModel();
+        $new_submitted_order = new SubmittedOrderModel();
         if($this->request->is_post())
         {
-            $new_order->assign($this->request->get());
-            if($new_order->save())
+            $this->request->csrf_check();
+            $items = json_decode(Session::get('items'), true);
+
+            $new_order->assign($this->request->get());            
+            $new_order->customer_id = UserModel::current_user()->id;
+            $new_order->restaurant_id = $items['rid'];
+            $new_order->items =  json_encode($items['items'], JSON_FORCE_OBJECT);  
+            
+            $new_submitted_order->assign($this->request->get());
+            $new_submitted_order->customer_id = $new_order->customer_id;
+            $new_submitted_order->restaurant_id = $new_order->restaurant_id;
+            $new_submitted_order->items =  $new_order->items;
+            // H::dnd($new_submitted_order);
+            Session::delete('items');
+
+
+            if($new_order->save() && $new_submitted_order->save())
             {
                 Router::redirect('');
             }
             $this->view->post_data = $new_order;
         }
         $this->view->post_data = $this;
-        $this->view->render('order/submit_order');
+        $this->view->render('order/order');
     }
 
 
@@ -119,28 +147,120 @@ class OrderController extends Controller
         $draft = new OrderModel();
         if(Session::exists('items'))
         {
-            $items = json_decode(Session::get('items'), true);
-            $draft->customer_id = UserModel::current_user()->id;
-            $draft->restaurant_id = $items['rid'];
-            $draft->items = json_encode($items['items']);
-            
-            if(!$draft->save())
+            if($this->request->is_post())
             {
-                Session::add_msg('danger', 'Error in "save as draft"!');
+                $this->request->csrf_check();
+                $items = json_decode(Session::get('items'), true);
+
+                $draft->customer_id = UserModel::current_user()->id;
+                $draft->restaurant_id = $items['rid'];
+                $restaurant_name = $this->restaurantmodel->find_by_id($draft->restaurant_id)->restaurant_name;
+                $order_name = !empty($this->request->get('order_name'))? $this->request->get('order_name') : 'Saved Order';
+                $draft->order_name = $restaurant_name.' : '.$order_name;
+                $draft->items = json_encode($items['items']);
+                
+                if(!$draft->save())
+                {
+                    Session::add_msg('danger', 'Error in "save as draft"!');
+                }
+                Session::add_msg('success', 'Your order succesfully saved');
             }
-            Session::add_msg('success', 'Your order succesfully saved as a draft!');
-            Session::delete('items');
         }
         Router::redirect('order/order');
 
     }
 
 
+    //get items of an saves or submitted order - by customer
+    public function get_order_items_action($draft_id)
+    {
+        $this->request->csrf_check();
+        $draft = $this->ordermodel->find_by_id_customer_id($draft_id, UserModel::current_user()->id);
+        if($draft) {
+            $items = $this->itemsmodel->get_order_items(json_decode($draft->items));
+            $resposnse = H::create_order_dropdown($items, $draft->id);
+        } else {
+            $resposnse = '<li>Error occured</li>';
+        }
+        return $this->json_response($resposnse);
+    }
+
+
+    //use saved order as current order - by customer
+    public function use_saved_order_action($order_id)
+    {
+        $order = $this->ordermodel->find_by_id_customer_id($order_id, UserModel::current_user()->id);
+        if($order)
+        {
+            if(Session::exists('items'))
+            {
+                Session::delete('items');
+            }
+            $items['rid'] = (int)$order->restaurant_id;
+            $items['items'] = json_decode($order->items, true);
+            Session::set('items', str_replace('\\', '', json_encode($items)));
+            // H::dnd(Session::get('items'));
+        }
+        Router::redirect('order/order');
+    }
+
+
+    //remove saved or submitted order - by customer
+    public function remove_saved_order_action($order_id)
+    {
+        $order = $this->ordermodel->find_by_id_customer_id($order_id, UserModel::current_user()->id);
+        $order->delete();
+        Session::add_msg('success', 'Saved Order Deleted!');
+        Router::redirect('order/order');
+    }
+
+
     //view all orders -by restaurant
     public function view_orders_action()
     {
-        $orders = $this->submittedordermodel->find_by_restaurant_id(UserModel::current_user()->restaurant_id);
-        H::dnd($orders);
+        $pending_orders = $this->submittedordermodel->find_pending_by_restaurant_id(UserModel::current_user()->restaurant_id);
+        $this->view->pending_orders = $pending_orders;
+        $this->view->render('order/view_orders');
+        // H::dnd($orders);
+    }
+
+
+    //accept an order - by restaurant
+    public function accept_order_action($order_id)
+    {
+        $order = $this->submittedordermodel->find_by_id_restaurant_id($order_id, UserModel::current_user()->restaurant_id);
+        if($order)
+        {
+            $order->accepted = 1;
+            if($order->save())
+            {
+                Session::add_msg('success', 'Order accepted!');
+            } else {
+                Session::add_msg('danger', 'Error occured!');
+            }
+            Router::redirect('order/view_orders');
+        }
+        Router::redirect('restricted/error');
+
+    }
+
+
+    //reject an order - by restaurant
+    public function reject_order_action($order_id)
+    {
+        $order = $this->submittedordermodel->find_by_id_restaurant_id($order_id, UserModel::current_user()->restaurant_id);
+        if($order)
+        {
+            $order->rejected = 1;
+            if($order->save())
+            {
+                Session::add_msg('success', 'Order rejected!');
+            } else {
+                Session::add_msg('danger', 'Error occured!');
+            }
+            Router::redirect('order/view_orders');
+        }
+        Router::redirect('restricted/error');
     }
 
 }

@@ -16,6 +16,7 @@ class OrderModel extends Model
         $this->_soft_del = false;
     }
 
+
     public function find_by_customer_id($customer_id, $params = [])
     {
         $conditions = [
@@ -38,13 +39,27 @@ class OrderModel extends Model
 
     public function validator()
     {
+        
     }
 
-    public function get_drafts()
+
+    //get saved orders of a customer
+    public function get_drafts($customer_id)
     {
         $params = [
-            'conditions' => 'customer_id = ?',
-            'bind' => [UserModel::current_user()->id]
+            'conditions' => 'customer_id = ? AND submitted = ?',
+            'bind' => [$customer_id, 0]
+        ];
+        $drafts = $this->find($params);
+        return $drafts ? $drafts : [];
+    }
+
+    //get submitted orders of a customer
+    public function get_submitted($customer_id)
+    {
+        $params = [
+            'conditions' => 'customer_id = ? AND submitted = ?',
+            'bind' => [$customer_id, 1]
         ];
         $drafts = $this->find($params);
         return $drafts ? $drafts : [];

@@ -5,13 +5,14 @@ function addToOrder(rid, id, element) {
         function(resp) {
             console.log(resp);
             if(resp=='1'){
-                element.innerHTML = 'Remove Item';
+                element.innerHTML = 'Item Added';
+                element.setAttribute("onclick","");
             }
             else if(resp=='0'){
                 window.alert('Please select food from one restaurant');
             }
             else if(resp=='-1'){
-                window.alert('Please Login');
+                window.alert('Please Login as a customer');
             }
             if(!resp) window.alert('Please select food from one restaurant');
         }

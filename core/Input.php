@@ -49,7 +49,7 @@ class Input
 
     public function csrf_check()
     {
-        if(!FH::check_token($this->get('csrf_token'))) Router::redirect('restricted/error');
+        if(!FH::check_token($this->get('csrf_token'))) Router::redirect('restricted/invalid_token');
         return true;
     }
 }

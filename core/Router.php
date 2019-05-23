@@ -26,17 +26,19 @@ class Router
         if (!$grant_access) {
             $controller = ACCESS_RESTRICTED . 'Controller';
             $controller_name = ACCESS_RESTRICTED;
-            $action = 'index_action';
+            $action = 'no_permission_action';
         }
 
         $controller = 'app'.SP.'controllers'.SP. $controller;
         $dispatch = new $controller($controller_name, $action);
 
-        if (method_exists($controller, $action)) {
-            call_user_func_array([$dispatch, $action], $params);
-        } else {
-            die('method does not exist in controller "' . $controller_name . '"');
+        if (!method_exists($controller, $action)) {
+            // die('"' . $action_name .'" method does not exist in controller "' . $controller_name . '"');
+            $params = $controller_name . $action_name;
+            $controller = ACCESS_RESTRICTED . 'Controller';
+            $action = 'page_not_found_action';
         }
+        call_user_func_array([$dispatch, $action], $params);
     }
 
 

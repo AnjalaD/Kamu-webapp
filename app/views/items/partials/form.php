@@ -28,7 +28,7 @@ use core\FH;
 
             </div>
 
-            <input hidden id="added_tags_array" name="tag_array">
+            <input hidden id="added_tags_array" name="tag_array" value="<?=json_encode($this->item->tags, true)?>">
             <!-- change text area to something else -->
             <textarea class="form-control" type="text" name="tags" id="AddItem_TagsInput" placeholder="tag" value=""></textarea>
             <button class="btn btn-primary" type="button" id="AddItem_AddTagButton" onclick="addTag()">Add Tag</button>

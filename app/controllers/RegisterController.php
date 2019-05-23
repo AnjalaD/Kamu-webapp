@@ -4,6 +4,7 @@ use core\Controller;
 use core\Router;
 use app\models\CustomerModel;
 use app\models\OwnerModel;
+use app\models\CashierModel;
 use core\H;
 use app\models\UserModel;
 use app\models\AdminModel;
@@ -28,17 +29,17 @@ class RegisterController extends Controller
     {
         $redirect = '';
         $page='register/login';
-        if($user_type == 'owner')
-        {
+        if ($user_type == 'owner') {
             $new_user = new OwnerModel();
-            $modelname = 'ownermodel';
             $redirect = 'restaurant/my_restaurant';
-        }else
-        {
-            $new_user = new CustomerModel();
-            $modelname = 'customermodel';
         }
-        $this->login($new_user, $modelname, $page, $redirect);
+        elseif ($user_type = 'cashier') {
+            $new_user = new CashierModel();
+        }
+        else {
+            $new_user = new CustomerModel();
+        }
+        $this->login($new_user, $user_type.'model', $page, $redirect);
     }
 
     //login for admin
@@ -108,15 +109,22 @@ class RegisterController extends Controller
         $this->register(new AdminModel(), 'register/register_admin', 'home');
     }
 
+    public function register_cashier_action()
+    {
+        $this->register(new CashierModel(), 'register/register_cashier', 'home');
+    }
+
 
     //base register function
     public function register($model, $page='register/register', $redirect='register/login')
     {
         $new_user = $model;
-        if($this->request->is_post() && $this->request->exists('submit')) {
+        if ($this->request->is_post() && $this->request->exists('submit')) {
             $this->request->csrf_check();
+
             $new_user->assign($this->request->get());
             $new_user->set_confirm($this->request->get('confirm'));
+            
             // H::dnd($new_user);
             if($new_user ->save()) {
                 $new_user->send_verify_email();
@@ -142,8 +150,7 @@ class RegisterController extends Controller
                 Router::redirect('');
             }
         }
-        Session::add_msg('danger', 'invalid url');
-        Router::redirect('');
+        Router::redirect('restricted/link_expired');
     }
 
 
@@ -186,14 +193,20 @@ class RegisterController extends Controller
             $this->view->render('register/reset_password');
             return;
         }
-        Session::add_msg('danger', 'invalid url');
-        Router::redirect('');
+        Router::redirect('restricted/link_expired');
     }
 
 
-    //demo
-    public function demo_action()
+    //send verification email - in profile page
+    public function send_verify_email_action()
     {
-
+        $user = UserModel::current_user();
+        if($user->verified == 1){
+            Session::add_msg('info', 'Your account has already verified!');
+            Router::redirect('');
+        }
+        $user->send_verify_email();
+        Session::add_msg('info', 'Please follow the link send to your email!');
+        Router::redirect('');
     }
 } 
