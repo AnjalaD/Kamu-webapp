@@ -22,7 +22,7 @@ $token = FH::generate_token();
     <div class="tab-content" id="nav-tabContent">
         <div class="tab-pane fade show active" id="user" role="tabpanel" aria-labelledby="nav-home-tab">
 
-            <form method="post" id="Login_Main_LoginBox" class="LoginBox" action="<?= SROOT ?>register/login/user">
+            <form method="post" id="Login_Main_LoginBox" class="LoginBox" action="<?= SROOT ?>register/login/customer">
                 <h2 class="sr-only">User-Login Form</h2>
                 <?= FH::csrf_input($token) ?>
                 <?= FH::display_errors($this->display_errors) ?>

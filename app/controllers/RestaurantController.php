@@ -145,10 +145,13 @@ class RestaurantController extends Controller
     }
 
     public function no_of_orders_action(){
-        $owner = UserModel::current_user();
-        $submittedordermodel = new SubmittedOrderModel();
-        $nooforders = sizeof($submittedordermodel->find_pending_by_restaurant_id((int)$owner->restaurant_id));
-        echo (strval($nooforders));
+        if ($this->request->is_post() && $this->request->csrf_check()) {
+            $owner = UserModel::current_user();
+            $submittedordermodel = new SubmittedOrderModel();
+            $nooforders = sizeof($submittedordermodel->find_pending_by_restaurant_id((int)$owner->restaurant_id));
+            // echo (strval($nooforders));
+            $this->json_response($nooforders);
+        }
     }
 
     public function submit_details_action()

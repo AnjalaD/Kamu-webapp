@@ -1,3 +1,9 @@
+<?php
+use core\FH;
+
+$token = FH::generate_token();
+?>
+
 <?php $this->set_title($this->restaurant->restaurant_name); ?>
 
 <?php $this->start('head'); ?>
@@ -79,7 +85,20 @@
 <script type="text/javascript" src="https://js.api.here.com/v3/3.0/mapsjs-mapevents.js"></script>
 
 <!-- order notification -->
-<script src="<?= SROOT ?>js/ordernotification.js"></script>
+<script >
+var auto_refresh = setInterval(
+    function () {
+        $.post(
+            `${SROOT}restaurant/no_of_orders`,
+            { 'csrf_token' : '<?= $token ?>'},
+            function (resp) {
+                console.log(resp);
+                $('#nooforders').html(resp);
+
+            }
+        );
+    }, 1000); // refresh every 10000 milliseconds
+</script>
 
 <!-- adding map -->
 <script src="<?= SROOT ?>js/map.js"></script>
