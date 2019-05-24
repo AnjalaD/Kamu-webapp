@@ -35,7 +35,7 @@ $this->set_title($this->user->first_name); ?>
                             <div class="form-group">
                                 <label class="Profile_Label">Firstname </label>
                                 <div class="input-group m-0">
-                                    <input class="form-control" type="text" name="firstname" value="<?= $this->user->first_name ?>" disabled>
+                                    <input class="form-control" type="text" name="first_name" value="<?= $this->user->first_name ?>" disabled>
                                     <div class="input-group-append">
                                         <span class="input-group-text edit">
                                             <i class="fa fa-pencil-square-o" aria-hidden="true"></i>
@@ -48,7 +48,7 @@ $this->set_title($this->user->first_name); ?>
                             <div class="form-group">
                                 <label class="Profile_Label">Lastname </label>
                                 <div class="input-group m-0">
-                                    <input class="form-control" type="text" name="lastname" value="<?= $this->user->last_name ?>" disabled>
+                                    <input class="form-control" type="text" name="last_name" value="<?= $this->user->last_name ?>" disabled>
                                     <div class="input-group-append">
                                         <span class="input-group-text edit">
                                             <i class="fa fa-pencil-square-o" aria-hidden="true"></i>

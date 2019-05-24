@@ -29,7 +29,7 @@ class Router
             $action = 'no_permission_action';
         }
 
-        $controller = 'app'.SP.'controllers'.SP. $controller;
+        $controller = 'app\controllers\\'. $controller;
         $dispatch = new $controller($controller_name, $action);
 
         if (!method_exists($controller, $action)) {
