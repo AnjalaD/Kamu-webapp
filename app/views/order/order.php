@@ -33,7 +33,7 @@ $this->token = FH::generate_token();
                             <td data-th="Item"><?= $item->item_name ?></td>
                             <td data-th="Price"><?= $item->price . " LKR" ?></td>
                             <td data-th="Quantity">
-                                <input type="number" class="form-control text-center" value=<?= $item->quantity ?>>
+                                <input type="number" class="form-control text-center" id=<?=$item->id?> min=1 max=20 name="quantity" value=<?= $item->quantity ?>>
                             </td>
                             <td data-th="Subtotal" class="text-center"><?= ($item->price * $item->quantity) . " LKR" ?></td>
                             <?php $this->total += $item->price * $item->quantity ?>
@@ -51,7 +51,7 @@ $this->token = FH::generate_token();
                     <tr>
                         <td><a href="javascript:history.go(-1)" class="btn btn-warning"><i class="fa fa-angle-left"></i> Continue Shopping</a></td>
                         <td colspan="2" class="hidden-xs"></td>
-                        <td class="hidden-xs text-center"><strong>Total <?= ($this->total) . " LKR" ?></strong></td>
+                        <td class="hidden-xs text-center" id="total"><strong>Total <?= ($this->total) . " LKR" ?></strong></td>
                         <td><a data-toggle="modal" data-target="#order_submit_form" class="btn btn-success btn-block">Submit Order <i class="fa fa-angle-right"></i></a></td>
                     </tr>
 
@@ -142,6 +142,21 @@ $this->token = FH::generate_token();
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/tempusdominus-bootstrap-4/5.0.1/js/tempusdominus-bootstrap-4.min.js"></script>
     <script src="<?= SROOT ?>js/submitorder.js"></script>
     <script>
+        $('[name=quantity]').change(function() {
+            var block = $(this);
+            var val = $(this).val();
+            var id = $(this).attr('id');
+            $.post(
+                `${SROOT}order/change_item_quantity/${id}/${val}`,
+                function (data, textStatus, jqXHR) {
+                    var price = block.parent().siblings('[data-th=Price]');
+                    var priceVal = price.html().slice(0, price.html().length-4);
+                    console.log(priceVal*val);
+                    price.siblings('[data-th=Subtotal]').html(priceVal*val + ' LKR');         
+                }
+            );
+        });
+
         $('.order').click(function() {
             var orderId = $(this).attr('id');
             var $head = $(this);

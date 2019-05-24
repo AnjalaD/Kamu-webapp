@@ -97,6 +97,20 @@ class OrderController extends Controller
         // $this->view->render('order/order');
     }
 
+    public function change_item_quantity_action($item_id, $quantity)
+    {
+        if(Session::exists('items'))
+        {
+            if($quantity < 1) $quantity = 1;
+            $items = json_decode(Session::get('items'), true);
+            $items['items'][$item_id] = (int)$quantity;
+            Session::set('items', json_encode($items));
+            $this->json_response(true);
+            return;
+        }
+        $this->json_response(false);
+    }
+
 
     //cancel order -by customer
     public function cancel_order_action()
