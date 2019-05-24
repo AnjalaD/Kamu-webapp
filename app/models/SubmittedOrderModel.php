@@ -5,7 +5,7 @@ use core\H;
 
 class SubmittedOrderModel extends Model
 {
-    public $customer_id, $items=null, $restaurant_id, $type, $submit_time, $order_code, $accepted=0, $rejected=0, $completed=0, $time_stamp;
+    public $customer_id, $items=null, $restaurant_id, $type, $delivery_time, $order_code, $accepted=0, $rejected=0, $completed=0,$notes, $time_stamp;
 
     public function __construct()
     {

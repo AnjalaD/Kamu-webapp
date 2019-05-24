@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 4.8.4
+-- version 4.8.2
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: May 22, 2019 at 05:17 PM
--- Server version: 10.1.37-MariaDB
--- PHP Version: 7.3.1
+-- Generation Time: May 24, 2019 at 04:27 PM
+-- Server version: 10.1.34-MariaDB
+-- PHP Version: 7.2.7
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET AUTOCOMMIT = 0;
@@ -178,25 +178,31 @@ CREATE TABLE `orders` (
   `items` varchar(1000) COLLATE utf8_unicode_ci DEFAULT NULL,
   `restaurant_id` int(11) NOT NULL,
   `type` tinyint(1) DEFAULT NULL,
-  `submit_time` timestamp NULL DEFAULT NULL,
-  `order_code` int(11) DEFAULT NULL,
+  `delivery_time` datetime DEFAULT NULL,
+  `order_code` varchar(50) COLLATE utf8_unicode_ci DEFAULT NULL,
   `submitted` tinyint(1) NOT NULL DEFAULT '0',
-  `time_stamp` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP
+  `time_stamp` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `notes` varchar(200) COLLATE utf8_unicode_ci DEFAULT 'None...'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 --
 -- Dumping data for table `orders`
 --
 
-INSERT INTO `orders` (`id`, `order_name`, `customer_id`, `items`, `restaurant_id`, `type`, `submit_time`, `order_code`, `submitted`, `time_stamp`) VALUES
-(3, 'Saved Order', 1, '{\"1\":4,\"26\":2}', 1, 2, NULL, NULL, 0, '2019-03-29 14:27:53'),
-(6, 'Saved Order', 1, '{\"1\":1,\"34\":1,\"26\":1}', 1, 1, NULL, NULL, 0, '2019-04-01 15:32:47'),
-(11, 'Saved Order', 1, '{\"26\":1,\"1\":1}', 1, 2, NULL, NULL, 1, '2019-04-12 13:09:28'),
-(18, 'Saved Order', 1, '{\"34\":1,\"26\":1,\"1\":1}', 1, 1, NULL, NULL, 0, '2019-04-12 13:38:36'),
-(19, 'Saved Order', 1, '{\"34\":1,\"26\":1}', 1, 1, NULL, NULL, 1, '2019-04-12 13:40:44'),
-(20, 'Saved Order', 4, '{\"34\":1,\"1\":1}', 1, 1, NULL, NULL, 0, '2019-04-17 18:14:58'),
-(21, 'Saved Order', 4, '{\"34\":1,\"26\":1}', 1, 2, NULL, NULL, 0, '2019-04-17 18:17:14'),
-(22, 'Saved Order', 4, '{\"147\":1,\"30\":1}', 2, 2, NULL, NULL, 0, '2019-04-23 05:23:07');
+INSERT INTO `orders` (`id`, `order_name`, `customer_id`, `items`, `restaurant_id`, `type`, `delivery_time`, `order_code`, `submitted`, `time_stamp`, `notes`) VALUES
+(3, 'Saved Order', 1, '{\"1\":4,\"26\":2}', 1, 2, NULL, NULL, 0, '2019-03-29 14:27:53', 'None...'),
+(6, 'Saved Order', 1, '{\"1\":1,\"34\":1,\"26\":1}', 1, 1, NULL, NULL, 0, '2019-04-01 15:32:47', 'None...'),
+(11, 'Saved Order', 1, '{\"26\":1,\"1\":1}', 1, 2, NULL, NULL, 1, '2019-04-12 13:09:28', 'None...'),
+(18, 'Saved Order', 1, '{\"34\":1,\"26\":1,\"1\":1}', 1, 1, NULL, NULL, 0, '2019-04-12 13:38:36', 'None...'),
+(19, 'Saved Order', 1, '{\"34\":1,\"26\":1}', 1, 1, NULL, NULL, 1, '2019-04-12 13:40:44', 'None...'),
+(20, 'Saved Order', 4, '{\"34\":1,\"1\":1}', 1, 1, NULL, NULL, 0, '2019-04-17 18:14:58', 'None...'),
+(21, 'Saved Order', 4, '{\"34\":1,\"26\":1}', 1, 2, NULL, NULL, 0, '2019-04-17 18:17:14', 'None...'),
+(22, 'Saved Order', 4, '{\"147\":1,\"30\":1}', 2, 2, NULL, NULL, 0, '2019-04-23 05:23:07', 'None...'),
+(23, '', 1, '{\"1\":1,\"34\":1,\"26\":1}', 1, 2, NULL, NULL, 0, '2019-05-24 10:35:55', 'None...'),
+(24, '', 1, '{\"1\":4,\"26\":2}', 1, 2, '2019-05-04 18:34:00', '1558703273.0689', 0, '2019-05-24 13:07:53', NULL),
+(25, '', 1, '{\"1\":1}', 1, 2, '2019-05-31 19:10:00', '1558704689.8524', 1, '2019-05-24 13:31:29', NULL),
+(26, '', 1, '{\"34\":1}', 1, 1, '2019-05-15 19:15:00', '5ce7f58e.5536', 1, '2019-05-24 13:45:50', NULL),
+(27, '', 1, '{\"152\":1}', 1, 2, '2019-05-29 19:18:00', '5CE7F629.0844', 1, '2019-05-24 13:48:25', NULL);
 
 -- --------------------------------------------------------
 
@@ -303,23 +309,29 @@ CREATE TABLE `submitted_orders` (
   `items` varchar(1000) COLLATE utf8_unicode_ci NOT NULL,
   `restaurant_id` int(11) NOT NULL,
   `type` tinyint(1) NOT NULL,
-  `submit_time` timestamp NULL DEFAULT NULL,
-  `order_code` int(11) DEFAULT NULL,
+  `delivery_time` datetime DEFAULT NULL,
+  `order_code` varchar(50) COLLATE utf8_unicode_ci DEFAULT NULL,
   `accepted` tinyint(1) NOT NULL DEFAULT '0',
   `rejected` tinyint(1) NOT NULL DEFAULT '0',
   `completed` tinyint(1) NOT NULL DEFAULT '0',
-  `time_stamp` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP
+  `time_stamp` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `notes` varchar(200) COLLATE utf8_unicode_ci DEFAULT 'None...'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 --
 -- Dumping data for table `submitted_orders`
 --
 
-INSERT INTO `submitted_orders` (`id`, `customer_id`, `items`, `restaurant_id`, `type`, `submit_time`, `order_code`, `accepted`, `rejected`, `completed`, `time_stamp`) VALUES
-(2, 1, '{\"34\":1,\"26\":1,\"1\":1}', 1, 1, NULL, NULL, 1, 0, 0, '2019-04-12 13:38:36'),
-(3, 1, '{\"34\":1,\"26\":1}', 1, 1, NULL, NULL, 0, 1, 0, '2019-04-12 13:40:44'),
-(4, 4, '{\"34\":1,\"1\":1}', 1, 1, NULL, NULL, 1, 0, 0, '2019-04-17 18:14:58'),
-(5, 4, '{\"34\":1,\"26\":1}', 1, 2, NULL, NULL, 1, 0, 0, '2019-04-17 18:17:14');
+INSERT INTO `submitted_orders` (`id`, `customer_id`, `items`, `restaurant_id`, `type`, `delivery_time`, `order_code`, `accepted`, `rejected`, `completed`, `time_stamp`, `notes`) VALUES
+(2, 1, '{\"34\":1,\"26\":1,\"1\":1}', 1, 1, NULL, NULL, 1, 0, 0, '2019-04-12 13:38:36', 'None...'),
+(3, 1, '{\"34\":1,\"26\":1}', 1, 1, NULL, NULL, 0, 1, 0, '2019-04-12 13:40:44', 'None...'),
+(4, 4, '{\"34\":1,\"1\":1}', 1, 1, NULL, NULL, 1, 0, 0, '2019-04-17 18:14:58', 'None...'),
+(5, 4, '{\"34\":1,\"26\":1}', 1, 2, NULL, NULL, 1, 0, 0, '2019-04-17 18:17:14', 'None...'),
+(6, 1, '{\"1\":1,\"34\":1,\"26\":1}', 1, 2, NULL, NULL, 0, 0, 0, '2019-05-24 10:35:55', 'None...'),
+(7, 1, '{\"1\":4,\"26\":2}', 1, 2, '2019-05-04 18:34:00', '1558703273.0689', 0, 0, 0, '2019-05-24 13:07:53', NULL),
+(8, 1, '{\"1\":1}', 1, 2, '2019-05-31 19:10:00', '1558704689.8524', 0, 0, 0, '2019-05-24 13:31:29', NULL),
+(9, 1, '{\"34\":1}', 1, 1, '2019-05-15 19:15:00', '5ce7f58e.5536', 0, 0, 0, '2019-05-24 13:45:50', NULL),
+(10, 1, '{\"152\":1}', 1, 2, '2019-05-29 19:18:00', '5CE7F629.0844', 0, 0, 0, '2019-05-24 13:48:25', NULL);
 
 -- --------------------------------------------------------
 
@@ -486,7 +498,7 @@ ALTER TABLE `item_tags`
 -- AUTO_INCREMENT for table `orders`
 --
 ALTER TABLE `orders`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=23;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=28;
 
 --
 -- AUTO_INCREMENT for table `owners`
@@ -510,7 +522,7 @@ ALTER TABLE `restaurants`
 -- AUTO_INCREMENT for table `submitted_orders`
 --
 ALTER TABLE `submitted_orders`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
 
 --
 -- AUTO_INCREMENT for table `tags`
