@@ -15,7 +15,7 @@ use core\H;
         <thead class="bg-secondary">
             <th>Order ID</th>
             <th>Order Code</th>
-            <th>Time</th>
+            <th>Due Time</th>
             <th>Price</th>
             <th></th>
             <th></th>
@@ -25,7 +25,7 @@ use core\H;
             <tr>
                 <td><?= $order->id ?></td>
                 <td><?= $order->order_code ?></td>
-                <td><?= $order->submit_time ?></td>
+                <td><?= $order->delivery_time ?></td>
                 <td><a class="btn btn-primary" href="<?=SROOT. 'order/accept_order/'. $order->id?>">Accept Order</a></td>
                 <td><a class="btn btn-danger" href="<?=SROOT. 'order/reject_order/'. $order->id?>">Reject Order</a></td>
             </tr>

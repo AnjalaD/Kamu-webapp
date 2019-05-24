@@ -14,7 +14,7 @@ $this->token = FH::generate_token();
 <?php $this->start('body'); ?>
 <div class="container">
     <?php if (isset($this->items) && !empty($this->items)) : ?>
-        <h2> Resataurant : <a href="<?=SROOT.'restaurant/details/'.$this->restaurant->id?>"> <?= $this->restaurant->restaurant_name?> </a> </h2>
+        <h2> Resataurant : <a href="<?= SROOT . 'restaurant/details/' . $this->restaurant->id ?>"> <?= $this->restaurant->restaurant_name ?> </a> </h2>
         <div>
             <table id="cart" class="table table-hover table-condensed">
                 <thead>
@@ -33,7 +33,7 @@ $this->token = FH::generate_token();
                             <td data-th="Item"><?= $item->item_name ?></td>
                             <td data-th="Price"><?= $item->price . " LKR" ?></td>
                             <td data-th="Quantity">
-                                <input type="number" class="form-control text-center" id=<?=$item->id?> min=1 max=20 name="quantity" value=<?= $item->quantity ?>>
+                                <input type="number" class="form-control text-center" id=<?= $item->id ?> min=1 max=20 name="quantity" value=<?= $item->quantity ?>>
                             </td>
                             <td data-th="Subtotal" class="text-center"><?= ($item->price * $item->quantity) . " LKR" ?></td>
                             <?php $this->total += $item->price * $item->quantity ?>
@@ -46,8 +46,8 @@ $this->token = FH::generate_token();
                 </tbody>
                 <tfoot>
                     <!-- <tr class="visible-xs">
-                                        <td class="text-center"><strong>Total 1.99</strong></td>
-                                    </tr> -->
+                                                            <td class="text-center"><strong>Total 1.99</strong></td>
+                                                        </tr> -->
                     <tr>
                         <td><a href="javascript:history.go(-1)" class="btn btn-warning"><i class="fa fa-angle-left"></i> Continue Shopping</a></td>
                         <td colspan="2" class="hidden-xs"></td>
@@ -146,23 +146,37 @@ $this->token = FH::generate_token();
             var block = $(this);
             var val = $(this).val();
             var id = $(this).attr('id');
+            var total_block = $('#total');
             $.post(
                 `${SROOT}order/change_item_quantity/${id}/${val}`,
-                function (data, textStatus, jqXHR) {
-                    var price = block.parent().siblings('[data-th=Price]');
-                    var priceVal = price.html().slice(0, price.html().length-4);
-                    console.log(priceVal*val);
-                    price.siblings('[data-th=Subtotal]').html(priceVal*val + ' LKR');         
+                {csrf_token: '<?= $this->token ?>'},
+                function(resp) {
+                    if (resp) {
+                        console.log(resp);
+                        block.parent().siblings('[data-th=Subtotal]').html(resp + ' LKR');
+                    }
+
+                    $.post(
+                        `${SROOT}order/get_total`,
+                        {csrf_token: '<?= $this->token ?>'},
+                        function(response) {
+                            console.log(response);
+                            total_block.html('<strong>Total ' + response + ' LKR</strong>');
+                        }
+                    );
+
                 }
             );
+
         });
 
         $('.order').click(function() {
             var orderId = $(this).attr('id');
             var $head = $(this);
             $.post(
-                `${SROOT}order/get_order_items/${orderId}`,
-                {csrf_token : '<?=$this->token?>'},
+                `${SROOT}order/get_order_items/${orderId}`, {
+                    csrf_token: '<?= $this->token ?>'
+                },
                 function(resp) {
                     $head.next('.dropdown-menu').html(resp);
                 }

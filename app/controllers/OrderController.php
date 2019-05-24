@@ -25,6 +25,7 @@ class OrderController extends Controller
     //view current-order -by customer
     public function order_action()
     {
+
         $items = [];
         $restaurant = null;
         if(Session::exists('items')){
@@ -53,20 +54,41 @@ class OrderController extends Controller
     public function add_to_order_action($restaurant_id, $id, $quantity = 1)
     {
         if (!(UserModel::current_user() instanceof CustomerModel)) {
-                echo '-1';
+            echo '-1';
+            return;
+        }
+
+        $item = $this->itemsmodel->find_by_id_restaurant_id($id,$restaurant_id);
+        $item_obj = new \stdClass();
+        $item_obj->id = $item->id;
+        $item_obj->item_name = $item->item_name;
+        $item_obj->price = $item->price;
+        
+
+        if(Session::exists('item_objects')){
+            $item_objects = Session::get('item_objects');
+            if(! array_key_exists($item->id,$item_objects)){
+               $item_objects[$item->id] = serialize($item_obj);
+            }
+        }else{
+            $item_objects=[];
+            $item_objects[$item->id] = serialize($item_obj);
+        }
+        Session::set('item_objects',$item_objects);
+
+
+        if (Session::exists('items')) {
+            $items = json_decode(Session::get('items'), true);
+            if ($items['rid'] != $restaurant_id) {
+                echo '0';
                 return;
             }
-        if (Session::exists('items')) {
-                $items = json_decode(Session::get('items'), true);
-                if ($items['rid'] != $restaurant_id) {
-                    echo '0';
-                    return;
-                }
-            } else {
-                $items=[];
-                $items['rid'] = (int)$restaurant_id;
-                $items['items']=[];
-            }
+        } else {
+            $items = [];
+            $items['rid'] = (int)$restaurant_id;
+            $items['items'] = [];
+        }        
+
         if (array_key_exists($id, $items['items'])) {
             $items['items'][$id] += 1;
         } else {
@@ -94,19 +116,33 @@ class OrderController extends Controller
                 Session::delete('items');
             }
         }
+
+        if(Session::exists('item_objects')){
+            $item_objects = Session::get('item_objects');
+            unset($item_objects[$id]);
+            if(empty($item_objects)){
+                Session::delete('item_objects');
+            }else{
+            Session::set('item_objects',$item_objects);
+            }
+        }
         Router::redirect('order/order');
         // $this->view->render('order/order');
     }
 
     public function change_item_quantity_action($item_id, $quantity)
     {
-        if(Session::exists('items'))
+        $this->request->csrf_check();
+        
+        if(Session::exists('items') && Session::exists('item_objects'))
         {
             if($quantity < 1) $quantity = 1;
             $items = json_decode(Session::get('items'), true);
             $items['items'][$item_id] = (int)$quantity;
             Session::set('items', json_encode($items));
-            $this->json_response(true);
+            $item_obj = unserialize(Session::get('item_objects')[$item_id]);
+            $new_price = $item_obj->price * $quantity;
+            $this->json_response($new_price);
             return;
         }
         $this->json_response(false);
@@ -117,6 +153,7 @@ class OrderController extends Controller
     public function cancel_order_action()
     {
         Session::delete('items');
+        Session::delete('item_objects');
         Session::add_msg('info', 'Your order canceled successfully!');
         Router::redirect('order/order');
     }
@@ -150,6 +187,7 @@ class OrderController extends Controller
             
             // H::dnd($new_submitted_order);            
             Session::delete('items');
+            Session::delete('item_objects');
 
 
             if($new_order->save() && $new_submitted_order->save())
@@ -186,6 +224,8 @@ class OrderController extends Controller
                     Session::add_msg('danger', 'Error in "save as draft"!');
                 }
                 Session::add_msg('success', 'Your order succesfully saved');
+                Session::delete('items');
+                Session::delete('item_objects');
             }
         }
         Router::redirect('order/order');
@@ -207,6 +247,26 @@ class OrderController extends Controller
         return $this->json_response($resposnse);
     }
 
+    public function get_total_action(){
+        $this->request->csrf_check();
+        
+        if(Session::exists('items') && Session::exists('item_objects')){
+            $total=0;
+            $items = json_decode(Session::get('items'), true)['items'];
+            
+            $item_objects = Session::get('item_objects');
+            foreach($items as $item_id => $quantity){
+                // H::dnd(unserialize($item_objects[$item_id]));
+                $total+= ($quantity * unserialize($item_objects[$item_id])->price);
+            }
+            return $this->json_response($total);
+            
+            
+        }
+        return false;
+
+    }
+
 
     //use saved order as current order - by customer
     public function use_saved_order_action($order_id)
@@ -218,10 +278,28 @@ class OrderController extends Controller
             {
                 Session::delete('items');
             }
+            if(Session::exists('item_objects'))
+            {
+                Session::delete('item_objects');
+            }
             $items['rid'] = (int)$order->restaurant_id;
             $items['items'] = json_decode($order->items, true);
             Session::set('items', str_replace('\\', '', json_encode($items)));
-            // H::dnd(Session::get('items'));
+
+            $item_objects = [];
+            foreach($items['items'] as $item_id=> $qty){
+                
+                $item = $this->itemsmodel->find_by_id_restaurant_id($item_id,(int)$order->restaurant_id);
+                $item_obj = new \stdClass();
+                $item_obj->id = $item->id;
+                $item_obj->item_name = $item->item_name;
+                $item_obj->price = $item->price;
+                
+                $item_objects[$item_id]=serialize($item_obj);
+            }
+            Session::set('item_objects',$item_objects);
+
+
         }
         Router::redirect('order/order');
     }
