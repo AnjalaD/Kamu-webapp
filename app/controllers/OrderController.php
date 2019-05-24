@@ -8,6 +8,7 @@ use core\Router;
 use app\models\UserModel;
 use app\models\CustomerModel;
 use app\models\SubmittedOrderModel;
+use app\helpers\Help;
 
 class OrderController extends Controller
 {
@@ -114,19 +115,26 @@ class OrderController extends Controller
         $new_submitted_order = new SubmittedOrderModel();
         if($this->request->is_post())
         {
+            
             $this->request->csrf_check();
             $items = json_decode(Session::get('items'), true);
 
-            $new_order->assign($this->request->get());            
-            $new_order->customer_id = UserModel::current_user()->id;
-            $new_order->restaurant_id = $items['rid'];
-            $new_order->items =  json_encode($items['items'], JSON_FORCE_OBJECT);  
-            
+            $delivery_time = $this->request->get('date') .' '. $this->request->get('time');
+            $delivery_time = Help::getDateTime($delivery_time);
+            $order_code = Help::generateOrderCode();
+
+            $new_order->assign($this->request->get());
             $new_submitted_order->assign($this->request->get());
-            $new_submitted_order->customer_id = $new_order->customer_id;
-            $new_submitted_order->restaurant_id = $new_order->restaurant_id;
-            $new_submitted_order->items =  $new_order->items;
-            // H::dnd($new_submitted_order);
+            
+            $new_order->customer_id = $new_submitted_order->customer_id = UserModel::current_user()->id;
+            $new_order->restaurant_id = $new_submitted_order->restaurant_id = $items['rid'];
+            $new_order->items = $new_submitted_order->items = json_encode($items['items'], JSON_FORCE_OBJECT);
+            $new_order->delivery_time =$new_submitted_order->delivery_time = $delivery_time;
+            $new_order->order_code =$new_submitted_order->order_code = $order_code;  
+            
+            $new_order->submitted = 1;
+            
+            // H::dnd($new_submitted_order);            
             Session::delete('items');
 
 

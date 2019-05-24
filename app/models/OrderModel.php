@@ -6,7 +6,7 @@ use core\H;
 class OrderModel extends Model
 {
     //$tyoe -> 0=takeaway, 1=dinning
-    public $customer_id, $items=null, $restaurant_id, $type, $submit_time, $order_code, $submitted=0, $time_stamp;
+    public $customer_id, $items=null, $restaurant_id, $type, $delivery_time, $order_code, $submitted=0, $time_stamp, $notes;
 
     public function __construct()
     {
