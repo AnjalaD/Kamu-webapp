@@ -30,6 +30,7 @@ $this->set_title($this->user->first_name); ?>
                 <div class="col-md-8" id="Profile_coloumninfo">
                     <h1 id="Profile_Heading">Profile </h1>
                     <hr class="Profile_hr">
+                    <div id="errors"></div>
                     <div class="form-row">
                         <div class="col-sm-12 col-md-6 Profile" id="Profile_colFirstName">
                             <div class="form-group">
@@ -73,25 +74,25 @@ $this->set_title($this->user->first_name); ?>
                         <div class="col-sm-12 col-md-12 Profile" id="Profile_colCurntPassword">
                             <div class="form-group">
                                 <label class="Profile_Label">Current Password</label>
-                                <input class="form-control" type="password" name="current_password" autocomplete="off" required>
+                                <input class="form-control" type="password" name="current_password" autocomplete="off">
                             </div>
                         </div>
                         <div class="col-sm-12 col-md-6 Profile" id="Profile_colPassword">
                             <div class="form-group">
                                 <label class="Profile_Label">New Password </label>
-                                <input class="form-control" type="password" name="password" autocomplete="off" required>
+                                <input class="form-control" type="password" name="password" autocomplete="off">
                             </div>
                         </div>
                         <div class="col-sm-12 col-md-6 Profile" id="Profile_colCnfmPassword">
                             <div class="form-group"><label class="Profile_Label">Confirm Password</label>
-                                <input class="form-control" type="password" name="confirm" autocomplete="off" required></div>
+                                <input class="form-control" type="password" name="confirm" autocomplete="off"></div>
                         </div>
                     </div>
                     <hr class="Profile_hr">
                     <div class="form-row" id="buttons" hidden>
                         <div class="col-md-12 content-right">
                             <button class="btn btn-primary form-btn" type="submit" id="save">SAVE </button>
-                            <button class="btn btn-danger form-btn" type="reset" id="cancel" style="color: #ffffff;background-color: #dc3545;filter: blur(0px) brightness(104%) invert(0%) sepia(0%);">CANCEL </button>
+                            <button class="btn btn-danger form-btn" type="reset" id="cancel" style="color: #ffffff;background-color: #dc3545;filter: blur(0px) brightness(104%) invert(0%) sepia(0%);" onclick="location.reload()" >CANCEL </button>
                         </div>
                     </div>
                 </div>
@@ -122,16 +123,20 @@ $this->set_title($this->user->first_name); ?>
         $(this).prop('hidden', true);
         $('#reset_pass').prop('hidden', false);
         changePass = true;
+        $('#reset_pass').find('input').each(function(i, block) {
+            // console.log(block);
+            $(block).attr('required', '');
+        });
     });
 
-    $('#profile_form').submit(function(e) {
+    $('#Profile_form').submit(function(e) {
         e.preventDefault();
         var data = {
             csrf_token: '<?=$token?>',
             first_name: $('input[name=first_name]').val(),
             last_name: $('input[name=last_name]').val()
         }
-
+        
         if (changePass) {
             data.password = $('input[name=password]').val();
             data.current_password = $('input[name=current_password]').val();
@@ -141,7 +146,9 @@ $this->set_title($this->user->first_name); ?>
             `${SROOT}profile/edit`,
             data,
             function(resp) {
-                if (resp.task) {} else {
+                if (resp.task) {
+                    location.reload();
+                } else {
                     $('#errors').html(resp.errors)
                 }
             }

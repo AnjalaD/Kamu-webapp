@@ -18,6 +18,7 @@ class RestaurantController extends Controller
         $this->load_model('RestaurantModel');
         $this->load_model('ItemsModel');
         $this->load_model('SubmittedOrderModel');
+        $this->load_model('CashierModel');
     }
 
 
@@ -176,5 +177,14 @@ class RestaurantController extends Controller
 
         $this->view->post_action = SROOT . 'restaurant/submit_details';
         $this->view->render('restaurant/submit_details');
+    }
+
+
+    // show casheirs of restaurant - by owner
+    public function cashiers_action()
+    {
+        $cashiers = $this->cashiermodel->find_by_restaurant_id(UserModel::current_user()->restaurant_id);
+        $this->view->cashiers = $cashiers? $cashiers : [];
+        $this->view->render('restaurant/cashiers');
     }
 }

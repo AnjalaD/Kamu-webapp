@@ -37,4 +37,12 @@ class CashierModel extends UserModel
         return ['Cashier'];
     }
 
+    public function find_by_restaurant_id($restaurant_id)
+    {
+        $conditions = [
+            'conditions' => 'restaurant_id = ?',
+            'bind' => [$restaurant_id]
+        ];
+        return $this->find($conditions);
+    }
 } 
