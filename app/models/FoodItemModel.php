@@ -7,7 +7,7 @@ use core\H;
 
 class FoodItemModel extends Model
 {
-    public $restaurant_id, $item_name, $description, $price, $image_url = DEFUALT_ITEM_IMAGE, $rating = 0, $tags = '', $deleted = 0;
+    public $restaurant_id, $item_name, $description, $price, $image_url = DEFUALT_ITEM_IMAGE, $rating = 0, $tags = '', $deleted = 0, $hidden = 0;
     public $restaurant_name;
     private $items_per_page = 9;
 
@@ -27,10 +27,10 @@ class FoodItemModel extends Model
             FROM items as I
             LEFT JOIN item_tags IT ON I.id=IT.item_id
             LEFT JOIN tags T ON IT.tag_id=T.id
-            WHERE I.id = ? AND I.restaurant_id = ?
+            WHERE I.id = ? AND I.restaurant_id = ? AND I.deleted=? AND I.hidden=?
             GROUP by I.id ;';
 
-        $items = $this->query($sql, [$item_id, $restaurant_id], get_class($this));
+        $items = $this->query($sql, [$item_id, $restaurant_id, 0, 0], get_class($this));
         if (!empty($items[0])) {
             $items[0]->tags = ($items[0]->tags) ? explode(',', $items[0]->tags) : [];
         }
@@ -48,14 +48,15 @@ class FoodItemModel extends Model
             INNER JOIN restaurants R ON I.restaurant_id=R.id
             LEFT JOIN item_tags IT ON I.id=IT.item_id
             LEFT JOIN tags T ON IT.tag_id=T.id
-            WHERE I.id IN (SELECT item_tags.item_id FROM item_tags INNER JOIN tags ON tags.id=item_tags.tag_id WHERE tags.tag_name LIKE ?) AND I.price <= ? AND I.deleted=?
+            WHERE I.id IN (SELECT item_tags.item_id FROM item_tags INNER JOIN tags ON tags.id=item_tags.tag_id WHERE tags.tag_name LIKE ?) 
+            AND I.price <= ? AND I.deleted=? AND I.hidden=?
             GROUP by I.id ORDER BY ' . $sort_by[$filters['sort_by']] . ' 
             LIMIT ' . ($page * $this->items_per_page) . ',' . $this->items_per_page . ';';
 
 
         $items = $this->query(
             $sql,
-            ['%' . $filters['search'] . '%', $filters['price_filter'], 0],
+            ['%' . $filters['search'] . '%', $filters['price_filter'], 0, 0],
             get_class($this)
         );
 

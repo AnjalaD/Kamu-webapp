@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: May 24, 2019 at 04:27 PM
+-- Generation Time: May 25, 2019 at 02:34 PM
 -- Server version: 10.1.34-MariaDB
 -- PHP Version: 7.2.7
 
@@ -114,6 +114,7 @@ CREATE TABLE `items` (
   `image_url` varchar(200) COLLATE utf8_unicode_ci NOT NULL,
   `rating` double NOT NULL,
   `rating_num` int(11) NOT NULL DEFAULT '0',
+  `hidden` tinyint(1) NOT NULL DEFAULT '0',
   `deleted` tinyint(1) NOT NULL DEFAULT '0'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
@@ -121,16 +122,17 @@ CREATE TABLE `items` (
 -- Dumping data for table `items`
 --
 
-INSERT INTO `items` (`id`, `restaurant_id`, `item_name`, `description`, `price`, `image_url`, `rating`, `rating_num`, `deleted`) VALUES
-(1, 1, 'Kottu', 'Perfect combination of cut up roti and chickenzzz', 250, '/mvc/img/items/1553572046.png', 5, 1, 0),
-(26, 1, 'Soup', 'Tantalize your taste buds with our signature recipe chicken soup', 140, '/mvc/img/items/1552849585.png', 4, 1, 0),
-(30, 2, 'Kottu', 'Enjoy the goodness of little bits of heaven', 300, '/mvc/img/items/1552914320.png', 0, 0, 0),
-(31, 2, 'Fried Rice', 'Enjoy the taste of china ', 250, '/mvc/img/items/1552914407.png', 5, 1, 0),
-(32, 2, 'Soup', 'Description of soup', 100, '/mvc/img/items/1552931132.png', 4, 1, 0),
-(34, 1, 'Noodles', 'description of noodles', 140, '/mvc/img/items/1553572181.png', 5, 1, 0),
-(147, 2, 'Hoppers', 'asd ewo o o for kok gpd fdr gfd.', 20, '/mvc/img/items/1554563173.png', 4.25, 4, 0),
-(151, 2, 'Rice', 'asfewidn djsak uad s kdasddd sada ', 150, '/mvc/img/items/1554564091.png', 3, 4, 0),
-(152, 1, 'Rice', 'description of noodles', 149.98, '/mvc/img/items/default.png', 3.5, 4, 0);
+INSERT INTO `items` (`id`, `restaurant_id`, `item_name`, `description`, `price`, `image_url`, `rating`, `rating_num`, `hidden`, `deleted`) VALUES
+(1, 1, 'Kottu', 'Perfect combination of cut up roti and chickenzzz', 250, '/mvc/img/items/1553572046.png', 5, 1, 0, 0),
+(26, 1, 'Soup', 'Tantalize your taste buds with our signature recipe chicken soup', 140, '/mvc/img/items/1552849585.png', 4, 1, 0, 0),
+(30, 2, 'Kottu', 'Enjoy the goodness of little bits of heaven', 300, '/mvc/img/items/1552914320.png', 0, 0, 0, 0),
+(31, 2, 'Fried Rice', 'Enjoy the taste of china ', 250, '/mvc/img/items/1552914407.png', 5, 1, 0, 0),
+(32, 2, 'Soup', 'Description of soup', 100, '/mvc/img/items/1552931132.png', 4, 1, 0, 0),
+(34, 1, 'Noodles', 'description of noodles', 140, '/mvc/img/items/1553572181.png', 5, 1, 0, 0),
+(147, 2, 'Hoppers', 'asd ewo o o for kok gpd fdr gfd.', 20, '/mvc/img/items/1554563173.png', 4.25, 4, 0, 0),
+(151, 2, 'Rice', 'asfewidn djsak uad s kdasddd sada ', 150, '/mvc/img/items/1554564091.png', 3, 4, 0, 0),
+(152, 1, 'Rice', 'description of noodles', 149.98, '/mvc/img/items/default.png', 0, 0, 0, 0),
+(153, 1, 'Milk Ric', 'Description of milk rice', 60, '/Kamu/Kamu-webapp/img/items/default.png', 0, 0, 0, 0);
 
 -- --------------------------------------------------------
 
@@ -157,13 +159,16 @@ INSERT INTO `item_tags` (`id`, `item_id`, `tag_id`) VALUES
 (23, 151, 83),
 (24, 151, 5),
 (25, 151, 82),
-(26, 152, 82),
 (27, 26, 84),
 (28, 34, 86),
 (29, 1, 2),
 (30, 31, 88),
 (31, 32, 84),
-(32, 30, 2);
+(32, 30, 2),
+(33, 152, 82),
+(34, 152, 91),
+(40, 153, 96),
+(41, 153, 101);
 
 -- --------------------------------------------------------
 
@@ -353,12 +358,16 @@ INSERT INTO `tags` (`id`, `tag_name`) VALUES
 (9, 'hoppers'),
 (83, 'hot'),
 (2, 'kottu'),
+(96, 'milk'),
+(101, 'milk ric'),
+(95, 'milk rice'),
 (5, 'new'),
 (86, 'noodles'),
 (82, 'rice'),
 (6, 'sdkfs'),
 (84, 'soup'),
 (1, 'spicy'),
+(91, 'tag'),
 (8, 'tasty');
 
 -- --------------------------------------------------------
@@ -486,13 +495,13 @@ ALTER TABLE `customers`
 -- AUTO_INCREMENT for table `items`
 --
 ALTER TABLE `items`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=153;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=154;
 
 --
 -- AUTO_INCREMENT for table `item_tags`
 --
 ALTER TABLE `item_tags`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=33;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=42;
 
 --
 -- AUTO_INCREMENT for table `orders`
@@ -528,7 +537,7 @@ ALTER TABLE `submitted_orders`
 -- AUTO_INCREMENT for table `tags`
 --
 ALTER TABLE `tags`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=89;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=102;
 
 --
 -- AUTO_INCREMENT for table `user_sessions`

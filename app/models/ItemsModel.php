@@ -10,7 +10,7 @@ use core\H;
 
 class ItemsModel extends Model
 {
-    public $restaurant_id, $item_name, $description, $price, $image_url = DEFUALT_ITEM_IMAGE, $rating = 0, $rating_num = 0, $deleted = 0;
+    public $restaurant_id, $item_name, $description, $price, $image_url = DEFUALT_ITEM_IMAGE, $rating = 0, $rating_num = 0, $deleted = 0, $hidden = false;
 
     public function __construct()
     {
@@ -27,7 +27,7 @@ class ItemsModel extends Model
             'bind' => [$restaurant_id]
         ];
         $conditions = array_merge($conditions, $params);
-        return $this->find($conditions, true);
+        return $this->find($conditions);
     }
 
     public function find_by_id_restaurant_id($item_id, $restaurant_id, $params = [])
@@ -38,7 +38,7 @@ class ItemsModel extends Model
         ];
 
         $conditions = array_merge($conditions, $params);
-        return $this->find_first($conditions, true);
+        return $this->find_first($conditions);
     }
 
     public function validator()
@@ -69,13 +69,6 @@ class ItemsModel extends Model
             'bind' => ['%' . $data . '%']
         ]);
         return ($items) ? $items : [];
-    }
-
-    public function permenent_delete()
-    {
-        $this->_soft_del = false;
-        $result = $this->delete();
-        return $result;
     }
 
     public function get_order_items($order)

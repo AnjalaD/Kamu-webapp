@@ -30,7 +30,7 @@ use core\FH;
 
             <input hidden id="added_tags_array" name="tag_array" value="<?=json_encode($this->item->tags, true)?>">
             <!-- change text area to something else -->
-            <textarea class="form-control" type="text" name="tags" id="AddItem_TagsInput" placeholder="tag" value=""></textarea>
+            <textarea class="form-control" type="text" name="tags" id="AddItem_TagsInput" placeholder="tag" maxlength="20" size="20" value=""></textarea>
             <button class="btn btn-primary" type="button" id="AddItem_AddTagButton" onclick="addCustomTag()">Add Tag</button>
         </div>
         <div class="form-group" id="AddItem_Button_FormGroup">

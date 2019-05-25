@@ -5,6 +5,7 @@
 <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Aclonica">
 <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Montserrat">
 <link rel="stylesheet" href="<?=SROOT?>css/styles.min.css">
+<link rel="stylesheet" href="<?=SROOT?>css/mdb.css">
 <?php $this->end(); ?>
 
 <?php $this->start('body'); ?>

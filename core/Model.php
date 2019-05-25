@@ -85,6 +85,7 @@ class Model
     {
         if ($id == '' && $this->id == ' ') return false;
         $id = ($id == '') ? $this->id : $id;
+        
         if ($this->_soft_del) {
             return $this->update($id, ['deleted' => 1]);
         }
