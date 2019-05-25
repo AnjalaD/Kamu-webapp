@@ -1,46 +1,82 @@
 var added_tags = [];
+var previous_name_tag_value = "";
 
-function addTag(){
-    //need to restrict adding multiple tags with the same name
+function automaticallyAddNameTag() {
+    var name_tag = document.getElementById("AddItem_NameInput");
+    var name_tag_value = name_tag.value;
 
+    var previous_name_tag = document.getElementById(previous_name_tag_value.concat("_tag"));
+    if(previous_name_tag != null){
+        deleteTag(previous_name_tag);
+    }
+        
+    previous_name_tag_value = name_tag_value;
+
+    addTag(name_tag_value);
+}
+
+function addCustomTag(){
     console.log("add tag called");
 
     var tag = document.getElementById("AddItem_TagsInput");
     var tag_value = tag.value;
 
-    added_tags.push(tag_value);
-
     tag.value = "";
 
-    var tag_card = document.createElement("div");
-    tag_card.setAttribute('class', "card");
-    tag_card.setAttribute('style', "display : inline-block;");
-
-    var tag_card_name = document.createElement("div");
-    tag_card_name.setAttribute('name', "tag_card_name");
-    tag_card_name.innerHTML = tag_value;
-
-    var tag_cancel_button = document.createElement("button");
-    tag_cancel_button.setAttribute('type', "button");
-    tag_cancel_button.setAttribute('onclick', "deleteTag(this)");
-    tag_cancel_button.setAttribute('class', "btn btn-danger");
-    tag_cancel_button.innerHTML = "X";
-
-    tag_card.appendChild(tag_card_name);
-    tag_card.appendChild(tag_cancel_button);
-
-    var div_added_tags = document.getElementById("added_tags");
-
-    div_added_tags.appendChild(tag_card);
-
-    updateInput();
-
-    console.log(added_tags);
+    addTag(tag_value);
 }
 
-function deleteTag(btn){
+function addTag(tag_value){
+    //need to restrict the max length of a tag
+
+    console.log("add custom tag called");
+
+    if(tag_value != ""){
+        if(added_tags.indexOf(tag_value) == -1){
+            added_tags.push(tag_value);
+    
+            var tag_card = document.createElement("div");
+            tag_card.setAttribute('class', "card");
+            tag_card.setAttribute('style', "display : inline-block;");
+            tag_card.setAttribute('id',tag_value.concat("_tag"));
+    
+            var tag_card_name = document.createElement("div");
+            tag_card_name.setAttribute('name', "tag_card_name");
+            tag_card_name.innerHTML = tag_value;
+                
+            var tag_cancel_button = document.createElement("button");
+            tag_cancel_button.setAttribute('type', "button");
+            tag_cancel_button.setAttribute('onclick', "deleteTagByButton(this)");
+            tag_cancel_button.setAttribute('class', "btn btn-danger");
+            tag_cancel_button.innerHTML = "X";
+    
+            tag_card.appendChild(tag_card_name);
+            tag_card.appendChild(tag_cancel_button);
+    
+            var div_added_tags = document.getElementById("added_tags");
+    
+            div_added_tags.appendChild(tag_card);
+    
+            updateInput();
+    
+            console.log(added_tags);
+        } else {
+            //message to say that tag already exists
+        }
+
+    } else {
+        //message to say that empty tags cannot be added
+    }
+}
+
+function deleteTagByButton(btn){
     var tag_card = btn.parentNode;
 
+    deleteTag(tag_card);
+}
+
+function deleteTag(tag_card){
+    
     var tag_card_name = tag_card.querySelectorAll('[name=tag_card_name]')[0];
     var tag_value = tag_card_name.innerHTML;
 

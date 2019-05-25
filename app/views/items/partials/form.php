@@ -10,7 +10,7 @@ use core\FH;
             <img src="<?= SROOT ?>assets/img/150YelloLogoOnlyKamu.png" id="AddItem_Logo">
         </div>
         <div class="form-group" id="AddItem_ItemName_FormGroup">
-            <input class="form-control TextInput" name="item_name" type="text" placeholder="Item Name" id="AddItem_EmailInput" value="<?= $this->item->item_name ?>">
+            <input class="form-control TextInput" name="item_name" type="text" placeholder="Item Name" id="AddItem_NameInput" value="<?= $this->item->item_name ?>" onchange="automaticallyAddNameTag()">
         </div>
         <div class="form-group" id="AddItem_Description_FormGroup">
             <input class="form-control" type="text" name="description" id="Additem_DescriptionInput" placeholder="Brief Description" value="<?= $this->item->description ?>">
@@ -31,7 +31,7 @@ use core\FH;
             <input hidden id="added_tags_array" name="tag_array" value="<?=json_encode($this->item->tags, true)?>">
             <!-- change text area to something else -->
             <textarea class="form-control" type="text" name="tags" id="AddItem_TagsInput" placeholder="tag" value=""></textarea>
-            <button class="btn btn-primary" type="button" id="AddItem_AddTagButton" onclick="addTag()">Add Tag</button>
+            <button class="btn btn-primary" type="button" id="AddItem_AddTagButton" onclick="addCustomTag()">Add Tag</button>
         </div>
         <div class="form-group" id="AddItem_Button_FormGroup">
             <button class="btn btn-primary" type="submit" id="AddItem_Button">Save</button>
