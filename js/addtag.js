@@ -58,6 +58,11 @@ function addTag(tag_value){
             tag_cancel_button.setAttribute('onclick', "deleteTagByButton(this)");
             tag_cancel_button.setAttribute('class', "btn btn-danger");
             tag_cancel_button.innerHTML = "X";
+            if(tag_value == item_name){
+                tag_cancel_button.disabled = true;
+                tag_cancel_button.setAttribute('data-toggle', "tooltip");
+                tag_cancel_button.setAttribute('title', "Item name is required as a tag");
+            }
     
             tag_card.appendChild(tag_card_name);
             tag_card.appendChild(tag_cancel_button);
