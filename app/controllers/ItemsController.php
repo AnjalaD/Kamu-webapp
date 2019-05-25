@@ -44,7 +44,6 @@ class ItemsController extends Controller
             $this->request->csrf_check();
 
             $tags = explode(',', $this->request->get('tag_array'));
-            //unset($_POST['tag_array']);
 
             $item->assign($this->request->get());
             $item->restaurant_id = UserModel::current_user()->restaurant_id;
@@ -61,6 +60,8 @@ class ItemsController extends Controller
                 Session::add_msg('success', 'New item added successfully!');
                 Router::redirect('items');
             }
+
+            $item->tags = $tags;
         }
         $this->view->item = $item;
         $this->view->display_errors = $item->get_error_messages();
@@ -75,22 +76,25 @@ class ItemsController extends Controller
     {
         $item = $this->fooditemmodel->find_by_item_id_restaurant_id((int)$item_id, OwnerModel::current_user()->restaurant_id);
         // H::dnd($item);
+        $new_item = new ItemsModel();
         if ($item) {
             if ($this->request->is_post()) {
                 $this->request->csrf_check();
                 $item->assign($this->request->get());
 
                 $tags = explode(',', $this->request->get('tag_array'));
-
-                $new_item = new ItemsModel();
+                
                 $new_item->assign($this->request->get());
                 $new_item->id = $item->id;
                 $new_item->restaurant_id = $item->restaurant_id;
                 $new_item->image_url = $item->image_url;
+                
 
                 if (!empty($this->request->get('image'))) {
                     $new_item->image_url = SROOT . 'img/items/' . time() . '.png';
                 }
+
+                // H::dnd($new_item);
 
                 if ($new_item->save()) {
                     H::save_image($this->request->get('image'), $new_item->image_url);
@@ -100,10 +104,15 @@ class ItemsController extends Controller
                     Session::add_msg('success', 'Changes saved successfully!');
                     Router::redirect('items');
                 }
+                
+                $new_item->tags = $tags;
+                $this->view->item = $new_item;
+
+            }else{
+                $this->view->item = $item;
             }
 
-            $this->view->item = $item;
-            $this->view->display_errors = $item->get_error_messages();
+            $this->view->display_errors = $new_item->get_error_messages();
             $this->view->post_action = SROOT . 'items/edit/' . $item->id;
             $this->view->render('items/edit');
             return;
