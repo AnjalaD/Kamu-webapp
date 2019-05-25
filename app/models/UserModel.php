@@ -7,7 +7,7 @@ use core\validators\EmailValidator;
 use core\validators\UniqueValidator;
 use core\validators\MatchValidator;
 use core\validators\MinValidator;
-use app\models\UserSession;
+use app\models\UserSessionModel;
 use core\Session;
 use core\Cookie;
 use core\H;
@@ -51,7 +51,7 @@ abstract class UserModel extends Model
 
     public static function login_from_cookie()
     {
-        $user_session = UserSession::get_from_cookie();
+        $user_session = UserSessionModel::get_from_cookie();
         if($user_session && $user_session->user_id != '')
         {
             $model = 'app\models\\' . $user_session->user_type;
@@ -110,7 +110,7 @@ abstract class UserModel extends Model
 
     public function logout()
     {
-        $user_session = UserSession::get_from_cookie();
+        $user_session = UserSessionModel::get_from_cookie();
         $user_session->delete();
         Session::delete(CURRENT_USER_SESSION_ID);
         Session::delete(CURRENT_USER_SESSION_TYPE);

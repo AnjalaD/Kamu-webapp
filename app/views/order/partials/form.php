@@ -2,10 +2,11 @@
 use core\FH;
 ?>
 
-<form method="post" action=<?=$this->post_action?> >
+<form method="post" action=<?=$this->post_action_form?> >
+    <?=FH::csrf_input($this->token) ?>
     <div class="form-group">
         <div class="input-group date" id="datepicker" data-target-input="nearest">
-            <input type="text" class="form-control datetimepicker-input" data-target="#datepicker" />
+            <input type="text" class="form-control datetimepicker-input" data-target="#datepicker" name="date"/>
             <div class="input-group-append" data-target="#datepicker" data-toggle="datetimepicker">
                 <div class="input-group-text"><i class="fa fa-calendar"></i></div>
             </div>
@@ -14,7 +15,7 @@ use core\FH;
 
     <div class="form-group">
         <div class="input-group date" id="timepicker" data-target-input="nearest">
-            <input type="text" class="form-control datetimepicker-input" data-target="#timepicker" />
+            <input type="text" class="form-control datetimepicker-input" data-target="#timepicker" name="time"/>
             <div class="input-group-append" data-target="#timepicker" data-toggle="datetimepicker">
                 <div class="input-group-text"><i class="fa fa-clock-o"></i></div>
             </div>

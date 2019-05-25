@@ -8,6 +8,7 @@ use app\models\ItemsModel;
 use app\models\UserModel;
 use core\H;
 use app\models\OwnerModel;
+use app\models\RatingModel;
 
 class ItemsController extends Controller
 {
@@ -19,6 +20,7 @@ class ItemsController extends Controller
         $this->load_model('FoodItemModel');
         $this->load_model('TagModel');
         $this->load_model('ItemTagModel');
+        $this->load_model('RatingModel');
     }
 
 
@@ -72,14 +74,13 @@ class ItemsController extends Controller
     public function edit_action($item_id)
     {
         $item = $this->fooditemmodel->find_by_item_id_restaurant_id((int)$item_id, OwnerModel::current_user()->restaurant_id);
-        $item->tags = explode(',', $item->tags);
+        // H::dnd($item);
         if ($item) {
             if ($this->request->is_post()) {
                 $this->request->csrf_check();
                 $item->assign($this->request->get());
 
                 $tags = explode(',', $this->request->get('tag_array'));
-                unset($_POST['tag_arry']);
 
                 $new_item = new ItemsModel();
                 $new_item->assign($this->request->get());
@@ -94,7 +95,7 @@ class ItemsController extends Controller
                 if ($new_item->save()) {
                     H::save_image($this->request->get('image'), $new_item->image_url);
 
-                    $this->itemtagmodel->save_item_tags($item->last_inserted_id(), $this->tagmodel->save_tags($tags));
+                    $this->itemtagmodel->save_item_tags($item->id, $this->tagmodel->save_tags($tags));
 
                     Session::add_msg('success', 'Changes saved successfully!');
                     Router::redirect('items');
@@ -107,21 +108,21 @@ class ItemsController extends Controller
             $this->view->render('items/edit');
             return;
         }
-        Session::add_msg('danger', 'Something went wrong!');
-        Router::redirect('items');
+        Router::redirect('restricted/error');
     }
 
 
-    //show details of a selected food item
-    public function details_action($id)
+    //show preview of a selected food item
+    public function details_action($item_id)
     {
-        $item = $this->itemsmodel->find_by_id_restaurant_id((int)$id, OwnerModel::current_user()->restaurant_id);
+        $item = $this->fooditemmodel->find_by_item_id_restaurant_id((int)$item_id, OwnerModel::current_user()->restaurant_id);
+        // H::dnd($item);
         if (!$item) {
-            Session::add_msg('danger', 'Something went wrong!');
-            Router::redirect('items');
+            $response = false;
+        } else {
+            $response = H::create_card($item);
         }
-        $this->view->item = $item;
-        $this->view->render('items/details');
+        return $this->json_response($response);
     }
 
     //hide food item
@@ -157,5 +158,39 @@ class ItemsController extends Controller
         }
         Session::add_msg('success', 'Item deleted successfully!');
         Router::redirect('items');
+    }
+
+    
+    //update rating of a item
+    public function update_rating_action($item_id, $rating)
+    {
+        $this->request->csrf_check();
+        
+        if ($item = $this->itemsmodel->find_by_id($item_id)) {
+            $customer_id = UserModel::current_user()->id;
+
+            $new_rating = null;
+            $effective_rating = 0;
+            $rating_num = 0;
+
+            if ($new_rating = $this->ratingmodel->find_by_item_id_customer_id($item_id, $customer_id)) {
+                $prev_rating = $new_rating->rating;
+                $new_rating->rating = $rating;
+
+                $effective_rating = $rating - $prev_rating;
+            } else {
+                $new_rating = new RatingModel();
+                $new_rating->item_id = $item_id;
+                $new_rating->customer_id = $customer_id;
+                $new_rating->rating =  $rating;
+
+                $effective_rating = $rating;
+                $rating_num = 1;
+            }
+            $new_rating->save();
+            $item->rating = ($item->rating*$item->rating_num + $effective_rating)/($item->rating_num + $rating_num);
+            $item->rating_num += $rating_num;
+            $item->save();
+        }
     }
 }

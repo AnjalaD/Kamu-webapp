@@ -1,5 +1,7 @@
 <?php
 use core\FH;
+
+$token = FH::generate_token();
 ?>
 
 <?php $this->set_title('Food'); ?>
@@ -25,40 +27,84 @@ use core\FH;
         <div class="col-md-2 card bg-light m-1 p-1">
             <?php $this->partial('search', 'filters'); ?>
         </div>
-        <div class="col-md-8 card m-1 p-1" id="items">
-            <?= $this->results ?>
-        </div>
-        <div class="col-md-2 card bg-light m-1 p-1">
-        </div>
+
+        <div class="col-md-8 card m-1 p-1" id="items"></div>
+
+        <div class="col-md-2 card bg-light m-1 p-1"></div>
     </div>
 </div>
 
 <?php $this->end(); ?>
 
 <?php $this->start('script') ?>
+<script src="<?= SROOT ?>js/masonry.pkgd.min.js"></script>
 <script src="<?= SROOT ?>js/autocomplete.js"></script>
-<script src="<?=SROOT?>js/addtoorder.js"></script>
-<script src="<?=SROOT?>js/sortandfilter.js"></script>
+<script src="<?= SROOT ?>js/addtoorder.js"></script>
+<script src="<?= SROOT ?>js/rating.js"></script>
 <script>
+    $(document).ready(function() {
+        sendFilters();
+    });
 
     $('form').submit(function(e) {
         sendFilters();
         return false;
     });
 
-    function sendFilters(){
-        
-        data = {
-            'search' : $('input[name=search_string]').val(),
-            'sort_by' : $('input[name=sort_by]:checked').val(),
-            'price_filter' : $('input[name=price_filter]').val()
-        };
-        console.log(data);
-        getItemCards(data, 'items');
+    $("body").on("click", ".tag", function(e) {
+        sendFilters($(this).attr('id'));
+    });
+
+    function goToPage(page){
+        sendFilters(null, page);
     }
 
-    var search = document.getElementById('search_string');
-    search.onkeyup = function(){autoComplete(search.value, 'food')};
-    
+    function sendFilters(search=null, page=0) {
+        if (search == null) {
+            search = $('input[name=search_string]').val();
+        } else {
+            $('input[name=search_string]').val(search);
+        }
+        data = {
+            'csrf_token': '<?= $token ?>',
+            'search': search,
+            'sort_by': $('input[name=sort_by]:checked').val(),
+            'price_filter': $('input[name=price_filter]').val()
+        };
+        viewResults(data, 'items', page);
+    }
+
+    function viewResults(data, divId, pageNo){
+    console.log("ajax");
+    $.post(
+        `${SROOT}search/search/1/${pageNo}`, 
+        data,
+        function (resp) {
+            console.log(resp);
+            if(!resp){
+                if(pageNo>0) $('#' + divId).html("<p>End of Results</p>");
+                else $('#' + divId).html("<p>No items found</p>");
+            }else{
+                $('#' + divId).html(resp);
+                $('.grid').masonry({
+                // options
+                    itemSelector: '.grid-item',
+                    columnWidth: 0
+                });
+            }
+        }
+    );
+}
+
+    $('#search_string').keyup(function() {
+        autoComplete($(this).val(), 'food')
+    });
+
+    // not completed
+    $("body").on("click", ".star", function() {
+        var value = $(this).attr('id');
+        var itemId = $(this).parent().attr('id');
+        addRating(itemId, value, '<?=$token?>');
+    });
 </script>
-<?php $this->end(); ?> 
+<?php $this->end(); ?>

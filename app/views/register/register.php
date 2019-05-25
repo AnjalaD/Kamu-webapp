@@ -7,7 +7,7 @@ $token = FH::generate_token();
 <?php $this->set_title('Register'); ?>
 
 <?php $this->start('head'); ?>
-<script src="<?= SROOT ?>js/register_form_validate.js"></script>
+<!-- <script src="<?= SROOT ?>js/register_form_validate.js"></script> -->
 <link rel="stylesheet" href="<?= SROOT ?>css/styles.min.css">
 <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Aclonica">
 <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Montserrat">
@@ -49,7 +49,7 @@ $token = FH::generate_token();
                     <!-- End: #ConfirmPassword_TexInput -->
                 </div>
                 <div class="form-group" id="Button_FormGroup">
-                    <!-- Start: #RegisterButton --><button class="btn btn-primary btn-block Button" type="submit" name="submit" id="Register_Button">Register as User</button>
+                    <!-- Start: #RegisterButton --><button class="btn btn-primary btn-block Button" type="submit" name="submit" value="submit" id="Register_Button">Register as User</button>
                     <!-- End: #RegisterButton -->
                 </div>
             </form>
@@ -83,7 +83,7 @@ $token = FH::generate_token();
                     <!-- End: #ConfirmPassword_TexInput -->
                 </div>
                 <div class="form-group" id="Button_FormGroup">
-                    <!-- Start: #RegisterButton --><button class="btn btn-primary btn-block Button" type="submit" id="Register_Button">Register as Owner</button>
+                    <!-- Start: #RegisterButton --><button class="btn btn-primary btn-block Button" type="submit" name="submit" value="submit" id="Register_Button">Register as Owner</button>
                     <!-- End: #RegisterButton -->
                 </div>
             </form>

@@ -1,10 +1,12 @@
 <?php
 namespace app\models;
-use app\models\UserModel;
+
 use core\H;
 
 class OwnerModel extends UserModel
 {
+    public $restaurant_id = null;
+
     public function __construct($user='')
     {
         $table = 'owners';

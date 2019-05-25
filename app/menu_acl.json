@@ -1,5 +1,6 @@
 {
     "Home": "home",
+    "My Restaurant": "restaurant/my_restaurant",
     "Search": {
         "Food": "search/food",
         "Resturant": "search/restaurant"
@@ -10,8 +11,9 @@
     },
     "Restaurants": {
         "Restaurants": "restaurant",
-        "Add New": "restaurant/add"
+        "Unverified Restaurant": "restaurant/unverified_restaurant"
     },
+    "Add New Cashier": "register/register_cashier",
     "Add New Admin": "register/register_admin",
     "Order": "order/order",
     "View Orders": "order/view_orders",

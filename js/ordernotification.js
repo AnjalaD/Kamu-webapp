@@ -9,7 +9,4 @@ var auto_refresh = setInterval(
 
             }
         );
-
-
-
     }, 1000); // refresh every 10000 milliseconds

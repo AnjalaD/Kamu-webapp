@@ -10,7 +10,7 @@ use core\H;
 
 class ItemsModel extends Model
 {
-    public $restaurant_id, $item_name, $description, $price, $image_url = DEFUALT_ITEM_IMAGE, $rating = 0, $deleted = 0;
+    public $restaurant_id, $item_name, $description, $price, $image_url = DEFUALT_ITEM_IMAGE, $rating = 0, $rating_num = 0, $deleted = 0;
 
     public function __construct()
     {
@@ -75,13 +75,13 @@ class ItemsModel extends Model
     {
         $this->_soft_del = false;
         $result = $this->delete();
-        $this->_soft_del = true;
         return $result;
     }
 
     public function get_order_items($order)
     {
         $items = [];
+        // H::dnd($order);
         foreach($order as $key => $val) {
             $item = $this->find_by_id((int)$key);
             $item->quantity = $val;

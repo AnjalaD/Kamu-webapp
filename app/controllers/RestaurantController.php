@@ -24,7 +24,7 @@ class RestaurantController extends Controller
     //view list of restaurants
     public function index_action()
     {
-        $restaurants = $this->restaurantmodel->find();
+        $restaurants = $this->restaurantmodel->find_all();
         if (!$restaurants) {
             $restaurants = [];
         }
@@ -32,30 +32,42 @@ class RestaurantController extends Controller
         $this->view->render('restaurant/index');
     }
 
+    public function unverified_restaurant_action()
+    {
+        $restaurants = $this->restaurantmodel->find_all_unverified();
+        if (!$restaurants) {
+            $restaurants = [];
+        }
+        $this->view->restaurants = $restaurants;
+        $this->view->render('restaurant/unverified_restaurants');
+    }
+
 
     //add new restaurant
-    public function add_action()
+    public function verify_action($restaurant_id)
     {
-        $restaurant = new RestaurantModel();
+        $restaurant = $this->restaurantmodel->find_unverified_by_id($restaurant_id);
         if ($this->request->is_post()) {
             $this->request->csrf_check();
 
             $restaurant->assign($this->request->get());
+            $restaurant->verified = 1;
             if (!empty($this->request->get('image'))) {
                 $restaurant->image_url = SROOT.'img/restaurant/'.time().'.png';
             }
+            // H::dnd(($this->request->get('image')));
             // H::dnd($restaurant);
             if ($restaurant->save()) {
                 H::save_image($this->request->get('image'), $restaurant->image_url);
-                Session::add_msg('success', 'New item added successfully!');
+                Session::add_msg('success', 'New Restaurant Verified successfully!');
                 Router::redirect('restaurant');
             }
         }
         $this->view->restaurant = $restaurant;
         $this->view->display_errors = $restaurant->get_error_messages();
 
-        $this->view->post_action = SROOT . 'restaurant/add';
-        $this->view->render('restaurant/add');
+        $this->view->post_action = SROOT . 'restaurant/verify/'. $restaurant->id;
+        $this->view->render('restaurant/verify');
     }
     
 
@@ -117,15 +129,15 @@ class RestaurantController extends Controller
     public function my_restaurant_action()
     {
         $owner = UserModel::current_user();
-        $restaurant = $this->restaurantmodel->find_by_id((int)$owner->restaurant_id);
+        $restaurant = $this->restaurantmodel->find_verified_by_id((int)$owner->restaurant_id);
         if (!$restaurant) {
-            Router::redirect('error');
+            Router::redirect('restaurant/submit_details');
         }
         // $items = $this->itemsmodel->find_all_by_restaurant_id((int)$id);
 
         // $this->view->items = $items;
         $submittedordermodel = new SubmittedOrderModel();
-        $nooforders = sizeof($submittedordermodel->find_unaccepted_by_restaurant_id((int)$owner->restaurant_id));
+        $nooforders = sizeof($submittedordermodel->find_pending_by_restaurant_id((int)$owner->restaurant_id));
         // H::dnd($submittedordermodel->find_unaccepted_by_restaurant_id((int)$owner->restaurant_id));
         $this->view->restaurant = $restaurant;
         $this->view->nooforders = $nooforders;
@@ -133,9 +145,36 @@ class RestaurantController extends Controller
     }
 
     public function no_of_orders_action(){
-        $owner = UserModel::current_user();
-        $submittedordermodel = new SubmittedOrderModel();
-        $nooforders = sizeof($submittedordermodel->find_unaccepted_by_restaurant_id((int)$owner->restaurant_id));
-        echo (strval($nooforders));
+        if ($this->request->is_post() && $this->request->csrf_check()) {
+            $owner = UserModel::current_user();
+            $submittedordermodel = new SubmittedOrderModel();
+            $nooforders = sizeof($submittedordermodel->find_pending_by_restaurant_id((int)$owner->restaurant_id));
+            // echo (strval($nooforders));
+            $this->json_response($nooforders);
+        }
+    }
+
+    public function submit_details_action()
+    {
+        $restaurant = new RestaurantModel();
+        if ($this->request->is_post()) {
+            $this->request->csrf_check();
+
+            $restaurant->assign($this->request->get());
+            if (!empty($this->request->get('image'))) {
+                $restaurant->image_url = SROOT.'img/restaurant/'.time().'.png';
+            }
+            // H::dnd($restaurant);
+            if ($restaurant->save()) {
+                H::save_image($this->request->get('image'), $restaurant->image_url);
+                Session::add_msg('success', 'Details submitted successfully!');
+                Router::redirect('');
+            }
+        }
+        $this->view->restaurant = $restaurant;
+        $this->view->display_errors = $restaurant->get_error_messages();
+
+        $this->view->post_action = SROOT . 'restaurant/submit_details';
+        $this->view->render('restaurant/submit_details');
     }
 }

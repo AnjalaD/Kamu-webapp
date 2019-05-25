@@ -11,10 +11,8 @@ class TagModel extends Model
 
     public function __construct($tag_name='')
     {
-        if(!empty($tag_name))
-        {
-            $this->tag_name = $tag_name;
-        }
+        $this->tag_name = $tag_name;
+        
         $table = 'tags';
         $model_name = 'TagModel';
         parent::__construct($table, $model_name);
@@ -41,7 +39,6 @@ class TagModel extends Model
         ];
 
         return $this->find($params);
-        
     }
 
 }

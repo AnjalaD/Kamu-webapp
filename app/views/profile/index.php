@@ -1,70 +1,105 @@
 <?php
 use app\models\UserModel;
+use core\FH;
+
+$token = FH::generate_token();
 
 $this->set_title($this->user->first_name); ?>
 
 <?php $this->start('head'); ?>
 <!-- <link rel="stylesheet" href="<?= SROOT ?>/css/croppie.css"> -->
+<link rel="stylesheet" href="<?= SROOT ?>css/Profile-Edit-Form-1.css">
+<link rel="stylesheet" href="<?= SROOT ?>css/Profile.css">
 <?php $this->end(); ?>
 
 <?php $this->start('body'); ?>
-<div class="container">
-    <div class="d-flex justify-content-center">
-        <div class="card bg-light p-5">
-            <form action="<?= SROOT ?>profile/index" method="post"></form>
-            <div>
-                <span>
-                    <label for="first_name" id="first_name">First Name</label>
-                    <input type="text" name="first_name" id="first_name" value="<?= $this->user->first_name ?>" disabled>
-                    <button class="btn edit">Edit</button>
-                </span>
+<div class="Profile_body" style="background-image: url(&quot;<?=SROOT?>assets/img/profile_background.jpg&quot;);">
+    <div class="container profile profile-view" id="profile">
+        <div class="row">
+            <div class="col-md-12 alert-col relative">
+                <div class="alert alert-info absolue center" role="alert"><button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">×</span></button><span>Profile save with success</span></div>
             </div>
-            <div>
-                <span>
-                    <label for="last_name" id="last_name">Last Name</label>
-                    <input type="text" name="last_name" id="last_name" value="<?= $this->user->last_name ?>" disabled>
-                    <button class="btn edit">Edit</button>
-                </span>
-            </div>
-            <div>
-                <span>
-                    <label for="email" id="email">Email</label>
-                    <input type="text" name="email" id="email" value="<?= $this->user->email ?>" disabled>
-                    <button class="btn edit">Edit</button>
-                </span>
-            </div>
-            <div>
-                <span>
-                    <button class="btn" id="changePass">Change Password</button>
-                </span>
-            </div>
-            <div id="reset_pass" hidden>
-                <div>
-                    <span>
-                        <label for="password" id="password">Current Password</label>
-                        <input type="text" name="password" id="password">
-                    </span>
-                    <div>
-                        <span>
-                            <label for="new_password" id="new_password">New Password</label>
-                            <input type="text" name="new_password" id="new_password">
-                        </span>
+        </div>
+        <form id="Profile_form" style="background-color: rgba(255,255,255,0.39);">
+            <div class="form-row profile-row" id="Profile_row">
+                <div class="col-md-4 relative" id="Profile_coloumndp">
+                    <div class="avatar">
+                        <div class="avatar-bg center"></div>
+                    </div><input type="file" id="Profile_fileInput" class="form-control" name="avatar-file">
+                </div>
+                <div class="col-md-8" id="Profile_coloumninfo">
+                    <h1 id="Profile_Heading">Profile </h1>
+                    <hr class="Profile_hr">
+                    <div class="form-row">
+                        <div class="col-sm-12 col-md-6 Profile" id="Profile_colFirstName">
+                            <div class="form-group">
+                                <label class="Profile_Label">Firstname </label>
+                                <div class="input-group m-0">
+                                    <input class="form-control" type="text" name="first_name" value="<?= $this->user->first_name ?>" disabled>
+                                    <div class="input-group-append">
+                                        <span class="input-group-text edit">
+                                            <i class="fa fa-pencil-square-o" aria-hidden="true"></i>
+                                        </span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-sm-12 col-md-6 Profile" id="Profile_colLastName">
+                            <div class="form-group">
+                                <label class="Profile_Label">Lastname </label>
+                                <div class="input-group m-0">
+                                    <input class="form-control" type="text" name="last_name" value="<?= $this->user->last_name ?>" disabled>
+                                    <div class="input-group-append">
+                                        <span class="input-group-text edit">
+                                            <i class="fa fa-pencil-square-o" aria-hidden="true"></i>
+                                        </span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
                     </div>
+                    <div class="form-group">
+                        <label class="Profile_Label">Email </label>
+                        <input class="form-control" type="email" autocomplete="off" required name="email" value="<?= $this->user->email ?>" disabled>
+                    </div>
+
+                    <hr class="Profile_hr">
+
                     <div>
-                        <span>
-                            <label for="confirm_password" id="confirm_password">Confirm Password</label>
-                            <input type="text" name="confirm_password" id="confirm_password">
-                        </span>
+                        <button class="btn btn-primary form-btn m-0" id="changePass">Change Password</button>
+                    </div>
+                    
+                    <div class="form-row" id="reset_pass" hidden>
+                        <div class="col-sm-12 col-md-12 Profile" id="Profile_colCurntPassword">
+                            <div class="form-group">
+                                <label class="Profile_Label">Current Password</label>
+                                <input class="form-control" type="password" name="current_password" autocomplete="off" required>
+                            </div>
+                        </div>
+                        <div class="col-sm-12 col-md-6 Profile" id="Profile_colPassword">
+                            <div class="form-group">
+                                <label class="Profile_Label">New Password </label>
+                                <input class="form-control" type="password" name="password" autocomplete="off" required>
+                            </div>
+                        </div>
+                        <div class="col-sm-12 col-md-6 Profile" id="Profile_colCnfmPassword">
+                            <div class="form-group"><label class="Profile_Label">Confirm Password</label>
+                                <input class="form-control" type="password" name="confirm" autocomplete="off" required></div>
+                        </div>
+                    </div>
+                    <hr class="Profile_hr">
+                    <div class="form-row" id="buttons" hidden>
+                        <div class="col-md-12 content-right">
+                            <button class="btn btn-primary form-btn" type="submit" id="save">SAVE </button>
+                            <button class="btn btn-danger form-btn" type="reset" id="cancel" style="color: #ffffff;background-color: #dc3545;filter: blur(0px) brightness(104%) invert(0%) sepia(0%);">CANCEL </button>
+                        </div>
                     </div>
                 </div>
             </div>
-            <div>
-                <input id="save" type="submit" value="Save your changes" hidden>
-            </div>
-            <?php if(UserModel::current_user()->verified==0) :?>
-                <a href="">Send Account Verification Email</a>
-            <?php endif ?>
-        </div>
+        </form>
+        <?php if (UserModel::current_user()->verified == 0) : ?>
+            <a href="register/send_verify_email">Send Account Verification Email</a>
+        <?php endif ?>
     </div>
 </div>
 <?php $this->end(); ?>
@@ -72,20 +107,46 @@ $this->set_title($this->user->first_name); ?>
 <?php $this->start('script'); ?>
 <!-- <script src="<?= SROOT ?>js/croppie.js"></script>
 <script src="<?= SROOT ?>js/croppie-function.js"></script> -->
+<script src="<?= SROOT ?>js/Profile-Edit-Form.js"></script>
 <script>
+    var changePass = false;
+
     $('.edit').click(function() {
-        $(this).prev('input').prop('disabled', false);
-        $('#save').prop('hidden', function(i, v) {
-            if (v == true) return false;
-        })
+        $(this).parent().siblings('input').prop('disabled', false);
+        $('#buttons').prop('hidden', false);
     });
 
-    $('#changePass').click(function() {
-        $('#save').prop('hidden', function(i, v) {
-            if (v == true) return false;
-        })
+    $('#changePass').click(function(e) {
+        e.preventDefault();
+        $('#buttons').prop('hidden', false);
         $(this).prop('hidden', true);
         $('#reset_pass').prop('hidden', false);
+        changePass = true;
+    });
+
+    $('#profile_form').submit(function(e) {
+        e.preventDefault();
+        var data = {
+            csrf_token: '<?=$token?>',
+            first_name: $('input[name=first_name]').val(),
+            last_name: $('input[name=last_name]').val()
+        }
+
+        if (changePass) {
+            data.password = $('input[name=password]').val();
+            data.current_password = $('input[name=current_password]').val();
+        };
+
+        $.post(
+            `${SROOT}profile/edit`,
+            data,
+            function(resp) {
+                if (resp.task) {} else {
+                    $('#errors').html(resp.errors)
+                }
+            }
+        );
+        return;
     });
 </script>
 <?php $this->end(); ?>

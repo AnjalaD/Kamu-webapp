@@ -10,25 +10,24 @@ use core\H;
 
 <?php $this->start('body'); ?>
 <div class="container">
-    <?php if(isset($this->orders) && !empty($this->orders)): ?>
+    <?php if(isset($this->pending_orders) && !empty($this->pending_orders)): ?>
     <table class="table table-bordered table-striped">
         <thead class="bg-secondary">
             <th>Order ID</th>
             <th>Order Code</th>
-            <th>Time</th>
+            <th>Due Time</th>
             <th>Price</th>
             <th></th>
             <th></th>
         </thead>
         <tbody>
-            <?php foreach($this->orders as $order ) :?>
+            <?php foreach($this->pending_orders as $order ) :?>
             <tr>
                 <td><?= $order->id ?></td>
                 <td><?= $order->order_code ?></td>
-                <td><?= $order->submit_time ?></td>
-                <td> 000 </td>
-                <td><a class="btn btn-primary" href="<?=SROOT. 'order/accep_order/'. $order->id?>">Accept Order</a></td>
-                <td><a class="btn btn-danger" href="<?=SROOT. 'order/remove_order/'. $order->id?>">Remove Order</a></td>
+                <td><?= $order->delivery_time ?></td>
+                <td><a class="btn btn-primary" href="<?=SROOT. 'order/accept_order/'. $order->id?>">Accept Order</a></td>
+                <td><a class="btn btn-danger" href="<?=SROOT. 'order/reject_order/'. $order->id?>">Reject Order</a></td>
             </tr>
             <?php endforeach ?> 
         </tbody>
