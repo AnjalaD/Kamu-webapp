@@ -31,5 +31,13 @@ use core\FH;
         <label class="form-check-label" for="take_away">Take Away</label>
     </div>
     <br>
-    <input type="submit" class="btn btn-primary" name="" value="Submit">
+    <div class="form-group">
+      <label for="notes">Any other requirements:</label>
+      <textarea class="form-control" rows="4" id="notes" name="notes"></textarea>
+    </div>
+
+    <br>
+    <div class="text-center">
+        <input type="submit" class="btn btn-primary " name="" value="Submit">
+    </div>
 </form> 

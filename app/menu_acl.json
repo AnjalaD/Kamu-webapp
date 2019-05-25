@@ -13,9 +13,13 @@
         "Restaurants": "restaurant",
         "Unverified Restaurant": "restaurant/unverified_restaurant"
     },
-    "Add New Cashier": "register/register_cashier",
+    "Cashiers": {
+        "Cachier List": "restaurant/cashiers",
+        "Add New Cashier": "register/register_cashier"
+    },
     "Add New Admin": "register/register_admin",
     "Order": "order/order",
+    "Pending Orders": "order/pending_orders",
     "View Orders": "order/view_orders",
     "Login": "register/login",
     "Register": "register/register",

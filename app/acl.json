@@ -21,7 +21,8 @@
     "Customer": {
         "denied": {},
         "Items" : ["update_rating"],
-        "Order": ["order", "remove_from_order", "submit_order", "cancel_order", "save_draft", "get_order_items", "use_saved_order", "remove_saved_order", "change_item_quantity","get_total"]
+        "Order": ["order", "remove_from_order", "submit_order", "cancel_order", "save_draft", "get_order_items",
+            "use_saved_order", "remove_saved_order", "change_item_quantity", "get_total", "pending_orders", "cancel_pending_order"]
     },
 
     "Owner": {
@@ -30,13 +31,13 @@
         },
         "Register" : ["register_cashier"],
         "Items": ["*"],
-        "Restaurant": ["my_restaurant","no_of_orders", "submit_details"],
+        "Restaurant": ["my_restaurant","no_of_orders", "submit_details", "cashiers"],
         "Order": ["view_orders", "accept_order", "reject_order"]
     },
 
     "Admin": {
         "denied": {
-            "Restaurant": ["my_restaurant", "submit_details"]
+            "Restaurant": ["my_restaurant", "submit_details", "cashiers"]
         },
         "Register": ["register_admin"],
         "Restaurant": ["*"]

@@ -142,8 +142,11 @@ class OrderController extends Controller
             Session::set('items', json_encode($items));
             $item_obj = unserialize(Session::get('item_objects')[$item_id]);
             $new_price = $item_obj->price * $quantity;
-            $this->json_response($new_price);
-            return;
+            $new_total = $this->get_total();
+            if($new_total){
+                $this->json_response([$new_price,$new_total]);
+                return;
+            }
         }
         $this->json_response(false);
     }
@@ -156,6 +159,32 @@ class OrderController extends Controller
         Session::delete('item_objects');
         Session::add_msg('info', 'Your order canceled successfully!');
         Router::redirect('order/order');
+    }
+
+
+    public function pending_orders_action()
+    {
+        $orders = $this->submittedordermodel->find_all_pending_by_id_customer_id(CustomerModel::current_user()->id);
+        $this->view->orders = $orders? $orders : [];
+        // H::dnd($orders);
+        $this->view->render('order/pending_orders');
+    }
+
+    // cancel pending order - by customer  !!!cannot cancel accepted orders
+    public function cancel_pending_order_action($order_id)
+    {
+        $order = $this->submittedordermodel->find_by_id_customer_id($order_id, CustomerModel::current_user()->id);
+        // H::dnd($order);
+        if($order) {
+            if($order->accepted == 0) {
+                $order->delete();
+                Session::add_msg('success', 'Your order is canceled!');
+            } else {
+                Session::add_msg('dange', 'You cannot cancel aproved order!');
+            }
+        }
+        Session::add_msg('dange', 'Some thing went wrong, Please try again!');
+        Router::redirect('order/pending_orders');
     }
 
 
@@ -247,8 +276,7 @@ class OrderController extends Controller
         return $this->json_response($resposnse);
     }
 
-    public function get_total_action(){
-        $this->request->csrf_check();
+    public function get_total(){
         
         if(Session::exists('items') && Session::exists('item_objects')){
             $total=0;
@@ -259,7 +287,7 @@ class OrderController extends Controller
                 // H::dnd(unserialize($item_objects[$item_id]));
                 $total+= ($quantity * unserialize($item_objects[$item_id])->price);
             }
-            return $this->json_response($total);
+            return $total;
             
             
         }

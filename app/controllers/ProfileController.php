@@ -5,6 +5,7 @@ use core\H;
 use app\models\UserModel;
 use core\FH;
 use core\Router;
+use core\Session;
 
 class ProfileController extends Controller
 {
@@ -43,9 +44,11 @@ class ProfileController extends Controller
             $user->assign($input);
             if($user->save())
             {
+                Session::add_msg('success', 'Changes saved successfully!');
                 return $this->json_response(["task"=>true]);
             }
         }
+
         return $this->json_response(["task"=>false, "errors"=>FH::display_errors($user->get_error_messages())]);
     }
 
