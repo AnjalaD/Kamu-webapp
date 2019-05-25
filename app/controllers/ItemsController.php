@@ -44,7 +44,6 @@ class ItemsController extends Controller
             $this->request->csrf_check();
 
             $tags = explode(',', $this->request->get('tag_array'));
-            $item->tags = $tags;
 
             $item->assign($this->request->get());
             $item->restaurant_id = UserModel::current_user()->restaurant_id;
@@ -61,6 +60,8 @@ class ItemsController extends Controller
                 Session::add_msg('success', 'New item added successfully!');
                 Router::redirect('items');
             }
+
+            $item->tags = $tags;
         }
         $this->view->item = $item;
         $this->view->display_errors = $item->get_error_messages();
