@@ -159,6 +159,32 @@ class OrderController extends Controller
     }
 
 
+    public function pending_orders_action()
+    {
+        $orders = $this->submittedordermodel->find_all_pending_by_id_customer_id(CustomerModel::current_user()->id);
+        $this->view->orders = $orders? $orders : [];
+        // H::dnd($orders);
+        $this->view->render('order/pending_orders');
+    }
+
+    // cancel pending order - by customer  !!!cannot cancel accepted orders
+    public function cancel_pending_order_action($order_id)
+    {
+        $order = $this->submittedordermodel->find_by_id_customer_id($order_id, CustomerModel::current_user()->id);
+        // H::dnd($order);
+        if($order) {
+            if($order->accepted == 0) {
+                $order->delete();
+                Session::add_msg('success', 'Your order is canceled!');
+            } else {
+                Session::add_msg('dange', 'You cannot cancel aproved order!');
+            }
+        }
+        Session::add_msg('dange', 'Some thing went wrong, Please try again!');
+        Router::redirect('order/pending_orders');
+    }
+
+
     //submit order -by customer
     public function submit_order_action()
     {

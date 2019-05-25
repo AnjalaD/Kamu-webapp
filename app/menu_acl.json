@@ -19,6 +19,7 @@
     },
     "Add New Admin": "register/register_admin",
     "Order": "order/order",
+    "Pending Orders": "order/pending_orders",
     "View Orders": "order/view_orders",
     "Login": "register/login",
     "Register": "register/register",
