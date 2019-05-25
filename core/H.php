@@ -43,7 +43,7 @@ class H
   {
     if (!empty($data)) {
       $image = H::decode_image($data);
-      if ($image && file_put_contents('..' . $path, $image)) {
+      if ($image && file_put_contents('../..' . $path, $image)) {
         return $path;
       }
     }
@@ -114,7 +114,7 @@ class H
         <div id="tags">
         <?php if($item->tags) :?>
           <?php foreach($item->tags as $tag) :?>
-            <button class="tag" id="<?=$tag?>"> <?=$tag?> </button>
+            <button class="tag btn btn-sm " style="border-color:black;" id="<?=$tag?>"> <?=$tag?> </button>
           <?php endforeach ?>
         <?php endif ?>
         </div>
