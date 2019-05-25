@@ -31,6 +31,8 @@ function addTag(tag_value){
 
     console.log("add custom tag called");
 
+    tag_value = tag_value.toLowerCase();
+
     if(tag_value != ""){
         if(added_tags.indexOf(tag_value) == -1){
             added_tags.push(tag_value);
@@ -96,6 +98,15 @@ function updateInput(){
     console.log(hidden_input.value);
 }
 
+function loadPreviousTags(previous_tag_array){
+    console.log(previous_tag_array);
+
+    for(var i = 0; i < previous_tag_array.length; i++){
+        console.log("inside loop");
+        addTag(previous_tag_array[i]);
+    }
+}
+
 //returns a new array after removing all elements with the given value in the given array  
 function arrayRemove(arr, value) {
 
@@ -103,4 +114,4 @@ function arrayRemove(arr, value) {
         return ele != value;
     });
  
- }
+}

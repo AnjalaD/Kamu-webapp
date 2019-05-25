@@ -44,7 +44,7 @@ class ItemsController extends Controller
             $this->request->csrf_check();
 
             $tags = explode(',', $this->request->get('tag_array'));
-            unset($_POST['tag_arry']);
+            //unset($_POST['tag_array']);
 
             $item->assign($this->request->get());
             $item->restaurant_id = UserModel::current_user()->restaurant_id;

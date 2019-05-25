@@ -18,7 +18,7 @@ class View
             include((ROOT.SP.'app'.SP.'views'.SP.'layouts'.SP.$this->_layout.'.php'));
         }else
         {
-            die('This view \"' . $view_name . '\" does not exists.');
+            die('This view \"' . $view_name . '\" does not exist.');
         }
     }
 
