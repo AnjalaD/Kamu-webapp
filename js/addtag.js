@@ -5,7 +5,7 @@ function automaticallyAddNameTag() {
     var name_tag = document.getElementById("AddItem_NameInput");
     var name_tag_value = name_tag.value;
 
-    var previous_name_tag = document.getElementById(previous_name_tag_value.concat("_tag"));
+    var previous_name_tag = document.getElementById("item_name_tag");
     if(previous_name_tag != null){
         deleteTag(previous_name_tag);
     }
@@ -31,6 +31,8 @@ function addTag(tag_value){
 
     console.log("add custom tag called");
 
+    tag_value = tag_value.toLowerCase();
+
     if(tag_value != ""){
         if(added_tags.indexOf(tag_value) == -1){
             added_tags.push(tag_value);
@@ -38,7 +40,14 @@ function addTag(tag_value){
             var tag_card = document.createElement("div");
             tag_card.setAttribute('class', "card");
             tag_card.setAttribute('style', "display : inline-block;");
-            tag_card.setAttribute('id',tag_value.concat("_tag"));
+
+            var item_name = document.getElementById("AddItem_NameInput").value.toLowerCase();
+
+            if(tag_value == item_name){
+                tag_card.setAttribute('id',"item_name_tag");
+            } else {
+                tag_card.setAttribute('id',tag_value.concat("_tag"));
+            }
     
             var tag_card_name = document.createElement("div");
             tag_card_name.setAttribute('name', "tag_card_name");
@@ -49,6 +58,11 @@ function addTag(tag_value){
             tag_cancel_button.setAttribute('onclick', "deleteTagByButton(this)");
             tag_cancel_button.setAttribute('class', "btn btn-danger");
             tag_cancel_button.innerHTML = "X";
+            if(tag_value == item_name){
+                tag_cancel_button.disabled = true;
+                tag_cancel_button.setAttribute('data-toggle', "tooltip");
+                tag_cancel_button.setAttribute('title', "Item name is required as a tag");
+            }
     
             tag_card.appendChild(tag_card_name);
             tag_card.appendChild(tag_cancel_button);
@@ -96,6 +110,15 @@ function updateInput(){
     console.log(hidden_input.value);
 }
 
+function loadPreviousTags(previous_tag_array){
+    console.log(previous_tag_array);
+
+    for(var i = 0; i < previous_tag_array.length; i++){
+        console.log("inside loop");
+        addTag(previous_tag_array[i]);
+    }
+}
+
 //returns a new array after removing all elements with the given value in the given array  
 function arrayRemove(arr, value) {
 
@@ -103,4 +126,4 @@ function arrayRemove(arr, value) {
         return ele != value;
     });
  
- }
+}

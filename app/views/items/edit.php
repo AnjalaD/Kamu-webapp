@@ -15,4 +15,10 @@
 <script src="<?= SROOT ?>js/croppie.js"></script>
 <script src="<?= SROOT ?>js/croppie-function.js"></script>
 <script src="<?= SROOT ?>js/addtag.js"></script>
+
+<script type="text/javascript">
+    var tag_array = <?= json_encode($this->item->tags); ?>;
+    loadPreviousTags(tag_array);
+</script>
+
 <?php $this->end(); ?>
