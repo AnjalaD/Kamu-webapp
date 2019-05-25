@@ -5,7 +5,7 @@ function automaticallyAddNameTag() {
     var name_tag = document.getElementById("AddItem_NameInput");
     var name_tag_value = name_tag.value;
 
-    var previous_name_tag = document.getElementById(previous_name_tag_value.concat("_tag"));
+    var previous_name_tag = document.getElementById("item_name_tag");
     if(previous_name_tag != null){
         deleteTag(previous_name_tag);
     }
@@ -40,7 +40,14 @@ function addTag(tag_value){
             var tag_card = document.createElement("div");
             tag_card.setAttribute('class', "card");
             tag_card.setAttribute('style', "display : inline-block;");
-            tag_card.setAttribute('id',tag_value.concat("_tag"));
+
+            var item_name = document.getElementById("AddItem_NameInput").value.toLowerCase();
+
+            if(tag_value == item_name){
+                tag_card.setAttribute('id',"item_name_tag");
+            } else {
+                tag_card.setAttribute('id',tag_value.concat("_tag"));
+            }
     
             var tag_card_name = document.createElement("div");
             tag_card_name.setAttribute('name', "tag_card_name");
