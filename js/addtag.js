@@ -1,5 +1,13 @@
 var added_tags = [];
-var previous_name_tag_value = "";
+//var previous_name_tag_value = "";
+
+document.getElementById("AddItem_TagsInput")
+    .addEventListener("keyup", function(event) {
+    event.preventDefault();
+    if (event.keyCode === 13) {
+        document.getElementById("AddItem_AddTagButton").click();
+    }
+});
 
 function automaticallyAddNameTag() {
     var name_tag = document.getElementById("AddItem_NameInput");
@@ -10,7 +18,7 @@ function automaticallyAddNameTag() {
         deleteTag(previous_name_tag);
     }
         
-    previous_name_tag_value = name_tag_value;
+    //previous_name_tag_value = name_tag_value;
 
     addTag(name_tag_value);
 }
@@ -31,7 +39,7 @@ function addTag(tag_value){
 
     console.log("add custom tag called");
 
-    tag_value = tag_value.toLowerCase();
+    tag_value = tag_value.trim().toLowerCase();
 
     if(tag_value != ""){
         if(added_tags.indexOf(tag_value) == -1){

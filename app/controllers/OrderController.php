@@ -142,8 +142,11 @@ class OrderController extends Controller
             Session::set('items', json_encode($items));
             $item_obj = unserialize(Session::get('item_objects')[$item_id]);
             $new_price = $item_obj->price * $quantity;
-            $this->json_response($new_price);
-            return;
+            $new_total = $this->get_total();
+            if($new_total){
+                $this->json_response([$new_price,$new_total]);
+                return;
+            }
         }
         $this->json_response(false);
     }
@@ -273,8 +276,7 @@ class OrderController extends Controller
         return $this->json_response($resposnse);
     }
 
-    public function get_total_action(){
-        $this->request->csrf_check();
+    public function get_total(){
         
         if(Session::exists('items') && Session::exists('item_objects')){
             $total=0;
@@ -285,7 +287,7 @@ class OrderController extends Controller
                 // H::dnd(unserialize($item_objects[$item_id]));
                 $total+= ($quantity * unserialize($item_objects[$item_id])->price);
             }
-            return $this->json_response($total);
+            return $total;
             
             
         }
