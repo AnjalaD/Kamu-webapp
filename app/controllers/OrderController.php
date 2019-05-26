@@ -349,7 +349,9 @@ class OrderController extends Controller
     public function view_orders_action()
     {
         $pending_orders = $this->submittedordermodel->find_pending_by_restaurant_id(UserModel::current_user()->restaurant_id);
+        $accepted_orders = $this->submittedordermodel->find_accepted_by_restaurant_id(UserModel::current_user()->restaurant_id);
         $this->view->pending_orders = $pending_orders;
+        $this->view->accepted_orders = $accepted_orders;
         $this->view->render('order/view_orders');
         // H::dnd($orders);
     }
@@ -391,6 +393,30 @@ class OrderController extends Controller
             Router::redirect('order/view_orders');
         }
         Router::redirect('restricted/error');
+    }
+
+    public function complete_order_action($order_id){
+        $order = $this->submittedordermodel->find_by_id_restaurant_id($order_id, UserModel::current_user()->restaurant_id);
+        if($order)
+        {
+            $order->completed = 1;
+            if($order->save())
+            {
+                Session::add_msg('success', 'Order Completed!');
+            } else {
+                Session::add_msg('danger', 'Error occured!');
+            }
+            Router::redirect('order/view_orders');
+        }
+        Router::redirect('restricted/error');
+    }
+
+    public function get_all_orders_to_restaurant_html_action(){
+        $this->request->csrf_check();
+        $pending_orders = $this->submittedordermodel->find_pending_by_restaurant_id(UserModel::current_user()->restaurant_id);
+        $accepted_orders = $this->submittedordermodel->find_accepted_by_restaurant_id(UserModel::current_user()->restaurant_id);
+        $html = H::create_all_order_cards_list($pending_orders,$accepted_orders);
+        return $this->json_response($html);
     }
 
     
