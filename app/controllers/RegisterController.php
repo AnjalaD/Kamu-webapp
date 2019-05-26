@@ -25,10 +25,21 @@ class RegisterController extends Controller
     }
 
     //login for customer and owner
-    public function login_action($user_type='')
+    public function login_action()
     {
         $redirect = '';
         $page='register/login';
+        $this->login(new CustomerModel(), 'usermodel', $page, $redirect);
+    }
+
+    //login for admin
+    public function login_admin_action()
+    {
+        $this->login(new AdminModel(), 'adminmodel', 'register/login_admin');
+    }
+
+    public function login_owner_action($user_type)
+    {
         if ($user_type == 'owner') {
             $new_user = new OwnerModel();
             $redirect = 'restaurant/my_restaurant';
@@ -36,16 +47,9 @@ class RegisterController extends Controller
         elseif ($user_type == 'cashier') {
             $new_user = new CashierModel();
         }
-        else {
-            $new_user = new CustomerModel();
-        }
-        $this->login($new_user, $user_type.'model', $page, $redirect);
-    }
+        
+        $this->login($new_user, $user_type.'model', 'register/login_owner', $redirect);
 
-    //login for admin
-    public function login_admin_action()
-    {
-        $this->login(new AdminModel(), 'adminmodel', 'register/login_admin');
     }
 
 
