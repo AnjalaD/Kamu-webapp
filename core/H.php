@@ -101,38 +101,34 @@ public static function create_card_list($items)
 public static function create_card($item)
 {
   ob_start() ?>
-  <div class="grid-item card block span3 m-1">
+  <div id="food_item_display_card" class="grid-item card block span3 m-1">
     <div class="product">
-      <img src=<?= $item->image_url ?>>
+      <img id="food_item_image" src=<?= $item->image_url ?>>
     </div>
-    <div class="info">
+    <div class="info pt-0 pb-3">
       <h4><?= $item->item_name ?></h4>
       <span class="restaurant_name">
         <a class="link" href="<?= SROOT ?>restaurant/details/<?= $item->restaurant_id ?>"><?= $item->restaurant_name ?></a>
       </span>
-      <span class="description"><?= $item->description ?></span>
-      <div id="tags">
+      <div id="food_item_description" style="height:5.5rem; overflow-y:auto;" class="description"><?= $item->description ?></div>
+      <div class="m-2" id="tags" style="height:2.43rem; overflow-y:auto;">
         <?php if ($item->tags) : ?>
           <?php foreach ($item->tags as $tag) : ?>
-            <button class="tag btn btn-sm " style="border-color:black;" id="<?= $tag ?>"> <?= $tag ?> </button>
+            <button class="tag btn btn-sm m-1" style="border-color:black;" id="<?= $tag ?>"> <?= $tag ?> </button>
           <?php endforeach ?>
         <?php endif ?>
       </div>
-      <span class="price">LKR.<?= $item->price ?></span>
-      <br>
-      <i class="icon-shopping-cart icon-2x"></i>
-      <?php if (Session::exists('items')) : ?>
-        <?php if (array_key_exists($item->id, json_decode(Session::get('items'), true)['items'])) : ?>
-          <a class="btn btn-info pull-right" onClick="">Item Added</a>
+      <span class="price"><?= $item->price ?> LKR</span>
+      <div class="mt-1 mb-0">
+        <i class="icon-shopping-cart icon-2x"></i>
+        <?php if ((Session::exists('items')) && (array_key_exists($item->id, json_decode(Session::get('items'), true)['items']))) : ?>
+            <a class="btn btn-info pull-right" onClick="">Item Added</a>
         <?php else : ?>
           <a class="btn btn-info pull-right" onClick="addToOrder(<?= $item->restaurant_id ?>, <?= $item->id ?>,this)">Add to Order</a>
-
         <?php endif ?>
-      <?php else : ?>
-        <a class="btn btn-info pull-right" onClick="addToOrder(<?= $item->restaurant_id ?>, <?= $item->id ?>,this)">Add to Order</a>
-      <?php endif ?>
+      </div>
     </div>
-    <div class="details">
+    <div class="details p-0 m-0">
       <span>Rating : </span>
       <span id="rating"><?= $item->rating . '(' . $item->rating_num . ')' ?></span>
       <br>
@@ -151,14 +147,47 @@ public static function create_card($item)
 
 public static function create_order_dropdown($item_list, $order_id)
 {
-  ob_start();
-  foreach ($item_list as $item) : ?>
+  ob_start(); ?>
+
+
+  <!-- <?php foreach ($item_list as $item) : ?>
     <li><?= $item->item_name . '-x' . $item->quantity ?></li>
   <?php endforeach ?>
   <li>
     <a class="btn btn-primary" href="<?= SROOT ?>order/use_saved_order/<?= $order_id ?>">Use</a>
     <a class="btn btn-danger" href="<?= SROOT ?>order/remove_saved_order/<?= $order_id ?>">Remove</a>
-  </li>
+  </li> -->
+
+
+  <div class="dropdown-item">
+          <div class="row">
+            <table class="table text-center">
+              <thead>
+                <tr>
+                  <th> Item</th>
+                  <th> Qty</th>
+                </tr>
+              </thead>
+              <tbody>
+              <?php foreach ($item_list as $item) : ?>
+                <tr>
+                  <td><?= $item->item_name ?></td>
+                  <td><?= $item->quantity ?></td>
+                </tr>
+              <?php endforeach ?>
+              </tbody>
+            </table>
+          </div>
+          <div class="row">
+            <div class="col-md-6 text-center">
+              <a href="<?= SROOT ?>order/remove_saved_order/<?= $order_id ?>"><button class="btn btn-danger"  >Delete</button></a>
+            </div>
+            <div class="col-md-6 text-center" >
+              <a  href="<?= SROOT ?>order/use_saved_order/<?= $order_id ?>"><button class="btn btn-success">Use now</button></a>
+            </div>
+          </div>
+        </div>
+
   <?php
   return ob_get_clean();
 }
