@@ -14,7 +14,7 @@ $this->token = FH::generate_token();
 <?php $this->start('body'); ?>
 <div class="container">
     <?php if (isset($this->items) && !empty($this->items)) : ?>
-        <h2> Resataurant : <a href="<?=SROOT.'restaurant/details/'.$this->restaurant->id?>"> <?= $this->restaurant->restaurant_name?> </a> </h2>
+        <h2> Resataurant : <a href="<?= SROOT . 'restaurant/details/' . $this->restaurant->id ?>"> <?= $this->restaurant->restaurant_name ?> </a> </h2>
         <div>
             <table id="cart" class="table table-hover table-condensed">
                 <thead>
@@ -33,7 +33,7 @@ $this->token = FH::generate_token();
                             <td data-th="Item"><?= $item->item_name ?></td>
                             <td data-th="Price"><?= $item->price . " LKR" ?></td>
                             <td data-th="Quantity">
-                                <input type="number" class="form-control text-center" value=<?= $item->quantity ?>>
+                                <input type="number" class="form-control text-center" id=<?= $item->id ?> min=1 max=20 name="quantity" value=<?= $item->quantity ?>>
                             </td>
                             <td data-th="Subtotal" class="text-center"><?= ($item->price * $item->quantity) . " LKR" ?></td>
                             <?php $this->total += $item->price * $item->quantity ?>
@@ -46,12 +46,12 @@ $this->token = FH::generate_token();
                 </tbody>
                 <tfoot>
                     <!-- <tr class="visible-xs">
-                                        <td class="text-center"><strong>Total 1.99</strong></td>
-                                    </tr> -->
+                                                                <td class="text-center"><strong>Total 1.99</strong></td>
+                                                            </tr> -->
                     <tr>
                         <td><a href="javascript:history.go(-1)" class="btn btn-warning"><i class="fa fa-angle-left"></i> Continue Shopping</a></td>
                         <td colspan="2" class="hidden-xs"></td>
-                        <td class="hidden-xs text-center"><strong>Total <?= ($this->total) . " LKR" ?></strong></td>
+                        <td class="hidden-xs text-center" id="total"><strong>Total <?= ($this->total) . " LKR" ?></strong></td>
                         <td><a data-toggle="modal" data-target="#order_submit_form" class="btn btn-success btn-block">Submit Order <i class="fa fa-angle-right"></i></a></td>
                     </tr>
 
@@ -67,11 +67,81 @@ $this->token = FH::generate_token();
                     <div class="modal-dialog">
                         <!-- Modal content-->
                         <div class="modal-content">
-                            <div class="modal-header">
-                                <h4 class="modal-title bg-dark">Submit Order</h4>
+                            <div class="modal-header" style="background:#ef3030;">
+                                <h4 class="modal-title ">Submit Order<?= ' '?> </h4>
                                 <button type="button" class="close" data-dismiss="modal">&times;</button>
                             </div>
                             <div class="modal-body">
+                                <div class="container-fluid" >
+                                    <div class="row">
+                                        <div class="well col-xs-10 col-sm-10 col-md-6 col-xs-offset-1 col-sm-offset-1 col-md-offset-3" style="max-width:100%;flex-basis:100%;">
+                                            <div class="row">
+                                                <div class="col-xs-6 col-sm-6 col-md-6">
+                                                    <address>
+                                                        <strong><?= $this->restaurant->restaurant_name ?></strong>
+                                                        <br>
+                                                        <?= $this->restaurant->address ?>
+                                                        <br>
+                                                        <?= $this->restaurant->telephone ?>
+                                                    </address>
+                                                </div>
+                                                <div class="col-xs-6 col-sm-6 col-md-6 text-right">
+                                                    <p>
+                                                        <em>Date: <?= date("Y/m/d")?> </em>
+                                                    </p>
+
+                                                </div>
+                                            </div>
+                                            <div class="row">
+                                                <div class="text-center">
+                                                    <h1>Receipt</h1>
+                                                </div>
+                                                </span>
+                                                <table class="table table-hover">
+                                                    <thead>
+                                                        <tr>
+                                                            <th style="width:50%;">Item</th>
+                                                            <th style="width:10%;">Qty</th>
+                                                            <th class="text-center" style="width:30%;">Price</th>
+                                                            <th class="text-center" style="width:30%;">Total</th>
+                                                        </tr>
+                                                    </thead>
+                                                    <tbody>
+                                                        <?php $this->total = 0 ?>
+
+                                                        <?php foreach ($this->items as $item) : ?>
+                                                        <?php $this->total += ($item->quantity * $item->price) ?>
+                                                        <tr>
+                                                            <td ><em><?= $item->item_name ?></em></h4>
+                                                            </td>
+                                                            <td  style="text-align: center"> <?= $item->quantity ?> </td>
+                                                            <td class=" text-center"><?= $item->price . " LKR" ?></td>
+                                                            <td class=" text-center"><?= ($item->quantity * $item->price).' LKR'?></td>
+                                                        </tr>
+                                                        
+                                                        <?php endforeach ?>
+                                                        
+                                                        <tr>
+                                                            <td>   </td>
+                                                            <td>   </td>
+                                                            <td class="text-right">
+                                                                <h5 style="color:black"><strong>Total: </strong></h4>
+                                                            </td>
+                                                            <td class="text-center text-danger">
+                                                                <h5 style="color:red"><strong><?= $this->total.' LKR' ?></strong></h4>
+                                                            </td>
+                                                        </tr>
+                                                    </tbody>
+                                                </table>
+                                                <div class="text-center font-weight-bold">
+                                                    <h3>Your Order Code is : <b>JHGIUG.98</b></h3>
+                                                </div>
+                                                
+
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
                                 <?php $this->partial('order', 'form'); ?>
                             </div>
                             <div class="modal-footer">
@@ -142,12 +212,36 @@ $this->token = FH::generate_token();
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/tempusdominus-bootstrap-4/5.0.1/js/tempusdominus-bootstrap-4.min.js"></script>
     <script src="<?= SROOT ?>js/submitorder.js"></script>
     <script>
+        $('[name=quantity]').change(function() {
+            var block = $(this);
+            var val = $(this).val();
+            var id = $(this).attr('id');
+            var total_block = $('#total');
+            $.post(
+                `${SROOT}order/change_item_quantity/${id}/${val}`, {
+                    csrf_token: '<?= $this->token ?>'
+                },
+                function(resp) {
+                    if (resp) {
+                        console.log(resp);
+                        block.parent().siblings('[data-th=Subtotal]').html(resp[0] + ' LKR');
+                        total_block.html('<strong>Total ' + resp[1] + ' LKR</strong>');
+                    }
+
+
+
+                }
+            );
+
+        });
+
         $('.order').click(function() {
             var orderId = $(this).attr('id');
             var $head = $(this);
             $.post(
-                `${SROOT}order/get_order_items/${orderId}`,
-                {csrf_token : '<?=$this->token?>'},
+                `${SROOT}order/get_order_items/${orderId}`, {
+                    csrf_token: '<?= $this->token ?>'
+                },
                 function(resp) {
                     $head.next('.dropdown-menu').html(resp);
                 }

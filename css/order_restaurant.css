@@ -1,0 +1,19 @@
+.order-card {
+    width: 50%;
+    border-top: 2px solid #9d2525;
+    border-left: 2px solid #9d2525;
+    border-bottom: 8px solid #9d2525;
+    border-style: solid;
+    border-right: 5px solid #9d2525;
+    border-bottom-right-radius: 34px;
+    border-color: #9d2525;
+    height: auto;
+    margin: 10px;
+    padding: 5px;
+    font-family: Aclonica;
+}
+
+.dropdown-row {
+    padding-top: 5px;
+    padding-bottom: 5px;
+}

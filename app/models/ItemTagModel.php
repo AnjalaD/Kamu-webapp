@@ -29,7 +29,7 @@ class ItemTagModel extends Model
 
     public function save_item_tags($item_id, $tags)
     {
-        delete_tags($item_id);
+        $this->delete_tags($item_id);
         foreach($tags as $tag)
         {
             $new_item_tag = new ItemTagModel($item_id, $tag->id);

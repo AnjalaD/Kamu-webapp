@@ -5,7 +5,7 @@ use core\H;
 
 class SubmittedOrderModel extends Model
 {
-    public $customer_id, $items=null, $restaurant_id, $type, $submit_time, $order_code, $accepted=0, $rejected=0, $completed=0, $time_stamp;
+    public $customer_id, $items=null, $restaurant_id, $type, $delivery_time, $order_code, $accepted=0, $rejected=0, $completed=0,$notes, $time_stamp,$total_price=0.00;
 
     public function __construct()
     {
@@ -54,6 +54,16 @@ class SubmittedOrderModel extends Model
         return $this->find($conditions);
     }
 
+    public function find_all_pending_by_id_customer_id($customer_id)
+    {
+        $conditions = [
+            'conditions' => 'customer_id=? AND completed=?',
+            'bind' => [$customer_id, 0]
+        ];
+        $conditions = array_merge($conditions);
+        return $this->find($conditions);
+    }
+
 
     public function find_rejected_by_restaurant_id($restaurant_id, $params = [])
     {
@@ -66,13 +76,14 @@ class SubmittedOrderModel extends Model
     }
 
 
-    public function find_by_id_customer_id($order_id, $customer_id, $params = [])
+    public function find_by_id_customer_id($order_id, $customer_id)
     {
         $conditions = [
             'conditions' => 'id=? AND customer_id=?',
             'bind' => [$order_id, $customer_id]
         ];
-        $conditions = array_merge($conditions, $params);
+        $conditions = array_merge($conditions);
+        
         return $this->find_first($conditions);
     }
 

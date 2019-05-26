@@ -6,7 +6,7 @@ use core\FH;
     <?=FH::csrf_input($this->token) ?>
     <div class="form-group">
         <div class="input-group date" id="datepicker" data-target-input="nearest">
-            <input type="text" class="form-control datetimepicker-input" data-target="#datepicker" />
+            <input type="text" class="form-control datetimepicker-input" data-target="#datepicker" name="date"/>
             <div class="input-group-append" data-target="#datepicker" data-toggle="datetimepicker">
                 <div class="input-group-text"><i class="fa fa-calendar"></i></div>
             </div>
@@ -15,7 +15,7 @@ use core\FH;
 
     <div class="form-group">
         <div class="input-group date" id="timepicker" data-target-input="nearest">
-            <input type="text" class="form-control datetimepicker-input" data-target="#timepicker" />
+            <input type="text" class="form-control datetimepicker-input" data-target="#timepicker" name="time"/>
             <div class="input-group-append" data-target="#timepicker" data-toggle="datetimepicker">
                 <div class="input-group-text"><i class="fa fa-clock-o"></i></div>
             </div>
@@ -31,5 +31,13 @@ use core\FH;
         <label class="form-check-label" for="take_away">Take Away</label>
     </div>
     <br>
-    <input type="submit" class="btn btn-primary" name="" value="Submit">
+    <div class="form-group">
+      <label for="notes">Any other requirements:</label>
+      <textarea class="form-control" rows="4" id="notes" name="notes"></textarea>
+    </div>
+
+    <br>
+    <div class="text-center">
+        <input type="submit" class="btn btn-primary " name="" value="Submit">
+    </div>
 </form> 

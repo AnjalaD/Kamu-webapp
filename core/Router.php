@@ -29,15 +29,20 @@ class Router
             $action = 'no_permission_action';
         }
 
-        $controller = 'app'.SP.'controllers'.SP. $controller;
+        $controller = 'app\controllers\\'. $controller;
         $dispatch = new $controller($controller_name, $action);
 
         if (!method_exists($controller, $action)) {
             // die('"' . $action_name .'" method does not exist in controller "' . $controller_name . '"');
-            $params = $controller_name . $action_name;
-            $controller = ACCESS_RESTRICTED . 'Controller';
+            $params = [$controller_name .'/' . $action_name];
+            $controller = 'app\controllers\\' . ACCESS_RESTRICTED . 'Controller';
             $action = 'page_not_found_action';
+            
+            
+            $dispatch = new $controller(ACCESS_RESTRICTED, $action);
         }
+        // H::dnd([$dispatch, $action]);
+
         call_user_func_array([$dispatch, $action], $params);
     }
 

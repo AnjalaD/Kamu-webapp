@@ -33,7 +33,7 @@ class RegisterController extends Controller
             $new_user = new OwnerModel();
             $redirect = 'restaurant/my_restaurant';
         }
-        elseif ($user_type = 'cashier') {
+        elseif ($user_type == 'cashier') {
             $new_user = new CashierModel();
         }
         else {
