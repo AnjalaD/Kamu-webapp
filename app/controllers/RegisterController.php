@@ -29,7 +29,7 @@ class RegisterController extends Controller
     {
         $redirect = '';
         $page='register/login';
-        $this->login(new CustomerModel(), 'usermodel', $page, $redirect);
+        $this->login(new CustomerModel(), 'customermodel', $page, $redirect);
     }
 
     //login for admin

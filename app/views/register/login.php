@@ -20,7 +20,7 @@ $token = FH::generate_token();
     </div> -->
 
 
-            <form method="post" id="Login_Main_LoginBox" class="LoginBox" action="<?= SROOT ?>register/login/customer">
+            <form method="post" id="Login_Main_LoginBox" class="LoginBox" action="<?= SROOT ?>register/login">
                 <h2 class="sr-only">User-Login Form</h2>
                 <?= FH::csrf_input($token) ?>
                 <?= FH::display_errors($this->display_errors) ?>
@@ -38,7 +38,7 @@ $token = FH::generate_token();
                     <input type="checkbox" name="remember_me" id="remember_me" value="true">
                 </diV>
                 <div class="form-group" id="Login_Button_FormGroup">
-                    <button class="btn btn-primary btn-block Button" type="submit" name="submit" id="Login_Button">Log In as User</button>
+                    <button class="btn btn-primary btn-block Button" type="submit" name="submit" value="submit" id="Login_Button">Log In as User</button>
                 </div>
                 <a href="<?= SROOT ?>register/forgot/customer" id="Login_ForgotEmail_TextLabel" class="TextLabel">Forgot your email or password?</a>
             </form>
