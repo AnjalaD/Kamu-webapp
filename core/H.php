@@ -222,7 +222,7 @@ public static function create_order_card($order)
         </div>
       </div>
       <div class="col-md-6 text-center ">
-        <p><?= $order->total_price ?></p>
+        <p><?= $order->total_price ?> LKR</p>
       </div>
     </div>
     <div class="row" style="height: auto;">
