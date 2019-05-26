@@ -105,12 +105,12 @@ public static function create_card($item)
     <div class="product">
       <img id="food_item_image" src=<?= $item->image_url ?>>
     </div>
-    <div class="info pt-0">
+    <div class="info pt-0 pb-3">
       <h4><?= $item->item_name ?></h4>
       <span class="restaurant_name">
         <a class="link" href="<?= SROOT ?>restaurant/details/<?= $item->restaurant_id ?>"><?= $item->restaurant_name ?></a>
       </span>
-      <div id="food_item_description" style="height:4rem; overflow-y:auto;" class="description"><?= $item->description ?></div>
+      <div id="food_item_description" style="height:5.5rem; overflow-y:auto;" class="description"><?= $item->description ?></div>
       <div class="m-2" id="tags" style="height:2.43rem; overflow-y:auto;">
         <?php if ($item->tags) : ?>
           <?php foreach ($item->tags as $tag) : ?>
@@ -119,15 +119,16 @@ public static function create_card($item)
         <?php endif ?>
       </div>
       <span class="price"><?= $item->price ?> LKR</span>
-      <br>
-      <i class="icon-shopping-cart icon-2x"></i>
-      <?php if ((Session::exists('items')) && (array_key_exists($item->id, json_decode(Session::get('items'), true)['items']))) : ?>
-          <a class="btn btn-info pull-right" onClick="">Item Added</a>
-      <?php else : ?>
-        <a class="btn btn-info pull-right" onClick="addToOrder(<?= $item->restaurant_id ?>, <?= $item->id ?>,this)">Add to Order</a>
-      <?php endif ?>
+      <div class="mt-1 mb-0">
+        <i class="icon-shopping-cart icon-2x"></i>
+        <?php if ((Session::exists('items')) && (array_key_exists($item->id, json_decode(Session::get('items'), true)['items']))) : ?>
+            <a class="btn btn-info pull-right" onClick="">Item Added</a>
+        <?php else : ?>
+          <a class="btn btn-info pull-right" onClick="addToOrder(<?= $item->restaurant_id ?>, <?= $item->id ?>,this)">Add to Order</a>
+        <?php endif ?>
+      </div>
     </div>
-    <div class="details">
+    <div class="details p-0 m-0">
       <span>Rating : </span>
       <span id="rating"><?= $item->rating . '(' . $item->rating_num . ')' ?></span>
       <br>
