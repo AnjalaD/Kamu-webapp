@@ -34,12 +34,6 @@
                 Name Z-A
             </label>
         </div>
-        <div class="form-check">
-            <input class="form-check-input" type="radio" name="sort_by" id="sort_address" value="2">
-            <label class="form-check-label" for="sort_price_a">
-                Address
-            </label>
-        </div>
     </div>
 
     <input type="submit" id="save_filter" class="btn" value="save">

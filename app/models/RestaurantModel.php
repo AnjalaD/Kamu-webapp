@@ -10,6 +10,7 @@ use core\H;
 class RestaurantModel extends Model
 {
     public $restaurant_name, $address, $telephone, $email, $lng, $lat, $image_url=DEFUALT_RESTAURANT_IMAGE, $verified=0, $deleted = 0;
+    private $items_per_page = 9;
 
     public function __construct(){
         $table = 'restaurants';
@@ -91,10 +92,10 @@ class RestaurantModel extends Model
         return ($items)? $items : [];
     }
 
-    public function filter($filter, $limit=0)
+    public function filter($filter, $page=0)
     {
         // H::dnd($filter);
-        $sort_by = ['restaurant_name ASC', 'restaurant_name DES'];
+        $sort_by = ['restaurant_name ASC', 'restaurant_name DESC'];
         $search_by = ['restaurant_name LIKE ?', 'address LIKE ?'];
         $search_str = '%'.$filter['search'].'%';
 
@@ -102,11 +103,23 @@ class RestaurantModel extends Model
         $conditions = [
             'conditions' => $search_by[$filter['search_by']],
             'bind' => [$search_str], 
-            'limit' => $limit.', 10',
+            'limit' => ($page * $this->items_per_page) . ',' . $this->items_per_page,
             'order' => $sort_by[$filter['sort_by']]
         ];
        
         // H::dnd(UserModel::current_user());
-        return  $this->find($conditions);
+        $restaurants = $this->find($conditions);
+
+        $end_of_results = ($this->_db->count() < $this->items_per_page) ? true : false;
+
+        $result = $restaurants ? H::create_restaurant_card_list($restaurants) . H::create_pagination_tabs($page, $end_of_results) : null;
+        if($restaurants) {
+            $result = H::create_restaurant_card_list($restaurants) . H::create_pagination_tabs($page, $end_of_results);
+        } elseif(!$restaurants && $page > 0) {
+            $result = H::create_pagination_tabs($page, $end_of_results);
+        } else {
+            $result = null;
+        }
+        return $result;
     }
 }

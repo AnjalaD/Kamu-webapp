@@ -5,6 +5,7 @@ $token = FH::generate_token();
 ?>
 <?php $this->set_title('Restaurants'); ?>
 <?php $this->start('head'); ?>
+<link rel="stylesheet" href="<?= SROOT ?>css/restaurant.css">
 <?php $this->end(); ?>
 
 <?php $this->start('body'); ?>
@@ -87,11 +88,11 @@ $token = FH::generate_token();
                 else $('#' + divId).html("<p>No items found</p>");
             }else{
                 $('#' + divId).html(resp);
-                $('.grid').masonry({
-                // options
-                    itemSelector: '.grid-item',
-                    columnWidth: 0
-                });
+                // $('.grid').masonry({
+                // // options
+                //     itemSelector: '.grid-item',
+                //     columnWidth: 0
+                // });
             }
         }
     );

@@ -1,14 +1,12 @@
-<?php $this->set_title('Add New Items'); ?>
+<?php $this->set_title('Edit Restaurant'); ?>
 
 <?php $this->start('head'); ?>
-<link rel="stylesheet" href="<?=SROOT?>/css/croppie.css">
+<link rel="stylesheet" href="<?=SROOT?>css/styles.min.css">
+<link rel="stylesheet" href="<?=SROOT?>css/croppie.css">
 <?php $this->end(); ?>
 
 <?php $this->start('body'); ?>
-<div class="col-md-8 col-md-offset-2">
-    <h3 class="center">Add New Restaurant</h3>
-    <?php $this->partial('restaurant', 'form'); ?>
-</div>
+<?php $this->partial('restaurant', 'form'); ?>
 
 
 <?php $this->end(); ?>
