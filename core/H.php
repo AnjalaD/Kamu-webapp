@@ -147,14 +147,47 @@ public static function create_card($item)
 
 public static function create_order_dropdown($item_list, $order_id)
 {
-  ob_start();
-  foreach ($item_list as $item) : ?>
+  ob_start(); ?>
+
+
+  <!-- <?php foreach ($item_list as $item) : ?>
     <li><?= $item->item_name . '-x' . $item->quantity ?></li>
   <?php endforeach ?>
   <li>
     <a class="btn btn-primary" href="<?= SROOT ?>order/use_saved_order/<?= $order_id ?>">Use</a>
     <a class="btn btn-danger" href="<?= SROOT ?>order/remove_saved_order/<?= $order_id ?>">Remove</a>
-  </li>
+  </li> -->
+
+
+  <div class="dropdown-item">
+          <div class="row">
+            <table class="table text-center">
+              <thead>
+                <tr>
+                  <th> Item</th>
+                  <th> Qty</th>
+                </tr>
+              </thead>
+              <tbody>
+              <?php foreach ($item_list as $item) : ?>
+                <tr>
+                  <td><?= $item->item_name ?></td>
+                  <td><?= $item->quantity ?></td>
+                </tr>
+              <?php endforeach ?>
+              </tbody>
+            </table>
+          </div>
+          <div class="row">
+            <div class="col-md-6 text-center">
+              <a href="<?= SROOT ?>order/remove_saved_order/<?= $order_id ?>"><button class="btn btn-danger"  >Delete</button></a>
+            </div>
+            <div class="col-md-6 text-center" >
+              <a  href="<?= SROOT ?>order/use_saved_order/<?= $order_id ?>"><button class="btn btn-success">Use now</button></a>
+            </div>
+          </div>
+        </div>
+
   <?php
   return ob_get_clean();
 }
@@ -230,8 +263,8 @@ public static function create_pending_order_card($order)
       </div>
       <div class="col-md-3 text-center">
         <a class="btn btn-light" style="background-color: #fa0404; width: auto; height: 90%; color: #ffffff;" href="<?= SROOT . 'order/reject_order/' . $order->id ?>""><small>Reject </small></a>
-          </div>
-          <div class=" col-md-3 text-center">
+            </div>
+            <div class=" col-md-3 text-center">
           <a class="btn btn-light" style="width: auto; height: 90%; background-color: #17f607;" href="<?= SROOT . 'order/accept_order/' . $order->id ?>">Accept </a>
       </div>
     </div>
@@ -240,7 +273,8 @@ public static function create_pending_order_card($order)
   return ob_get_clean();
 }
 
-public static function create_accepted_order_card($order){
+public static function create_accepted_order_card($order)
+{
   ob_start(); ?>
 
   <div class="order-card">
@@ -286,9 +320,9 @@ public static function create_accepted_order_card($order){
           <div class="overflow-auto dropdown-item" rows="" style="width: auto;"><?= $order->notes ?></div>
         </div>
       </div>
-      
-          <div class=" col-md-6 text-center">
-          <a class="btn btn-warning" style="width: auto; height: 90%; " href="<?= SROOT . 'order/complete_order/' . $order->id ?>">Deliver Order </a>
+
+      <div class=" col-md-6 text-center">
+        <a class="btn btn-warning" style="width: auto; height: 90%; " href="<?= SROOT . 'order/complete_order/' . $order->id ?>">Deliver Order </a>
       </div>
     </div>
   </div>
@@ -296,32 +330,67 @@ public static function create_accepted_order_card($order){
   return ob_get_clean();
 }
 
-public static function create_all_order_cards_list($pending_orders,$accepted_orders){
-  $html='<div class="row"><div class="col " >';
-  if (isset($pending_orders) && !empty($pending_orders)){
-    $html.='<h3> New Orders... </h3><div style="height:30rem; overflow-y:scroll;" id="pending_orders_container">';
-    foreach ($pending_orders as $order){
-      $html.=self::create_pending_order_card($order);
+public static function create_all_order_cards_list($pending_orders, $accepted_orders)
+{
+  $html = '<div class="row"><div class="col " >';
+  if (isset($pending_orders) && !empty($pending_orders)) {
+    $html .= '<h3> New Orders... </h3><div style="height:30rem; overflow-y:scroll;" id="pending_orders_container">';
+    foreach ($pending_orders as $order) {
+      $html .= self::create_pending_order_card($order);
     }
-      $html.='</div>';
+    $html .= '</div>';
+  } else {
+    $html .= '<h5>No New Orders</h5>';
   }
-  else{
-    $html.='<h5>No New Orders</h5>';
-  }
-  $html.='</div>';
-  $html.='<div class="col" >';
-  if (isset($accepted_orders) && !empty($accepted_orders)){
-    $html.='<h3> Accepted Orders... </h3>
+  $html .= '</div>';
+  $html .= '<div class="col" >';
+  if (isset($accepted_orders) && !empty($accepted_orders)) {
+    $html .= '<h3> Accepted Orders... </h3>
     <div style="height:30rem; overflow-y:scroll;" id="accepted_orders_container">';
-    foreach ($accepted_orders as $order){
-      $html.=self::create_accepted_order_card($order);
+    foreach ($accepted_orders as $order) {
+      $html .= self::create_accepted_order_card($order);
     }
-      $html.='</div>';
-  }else{
-    $html.='<h5>No Accepted Orders</h5>';
+    $html .= '</div>';
+  } else {
+    $html .= '<h5>No Accepted Orders</h5>';
   }
-  $html.='</div></div>';
+  $html .= '</div></div>';
   return $html;
-
 }
+
+
+public static function create_restaurant_card_list($restaurants)
+{
+  if (empty($restaurants)) {
+    return '';
+  }
+  $html = '<div class="grid">';
+  foreach ($restaurants as $restaurant) {
+    $html .= self::create_restaurant_card($restaurant);
+  }
+  $html .= '</div>';
+  return $html;
+}
+
+public static function create_restaurant_card($restaurant)
+{
+  ob_start() ?>
+  <div class="grid-item card m-1" style="border-top: 2px solid; border-left: 2px solid; border-right: 15px solid #9d2525; border-style: solid; border-bottom: 10px solid #9d2525; border-bottom-right-radius: 62px; display: grid; grid-template-columns: fit-content(50%) 3fr; grid-template-rows: 55px repeat(auto-fit, minmax(180px, 210px)); grid-template-areas: 'info info' 'gallery map'; min-width: 450px;">
+    <div style="grid-area:1 / 1 / 2 / 3;" class="info">
+      <h3 class="name" style="background-image: -webkit-linear-gradient(top, rgb(208, 77, 77) 78.1429%, rgb(157, 37, 37) 94.8571%);"><?=$restaurant->restaurant_name?></h3>
+      <h3 class="number" style="background-color: #fbd367; text-align: right; font-size: 25px; font-family: Aclonica; background-image: -webkit-linear-gradient(top, rgb(251, 210, 101) 82.8571%, rgb(178, 141, 43) 96%);"><?=$restaurant->telephone?></h3>
+    </div>
+    <div style="grid-area:2 / 1 / 3 / 2;" class="gallery">
+      <img class="d-block w-100" src="<?=$restaurant->image_url ?>">
+    </div>
+    <div style="grid-area: 2 / 2 / 3 / 3; border-bottom-right-radius: 46px; border-bottom: 1px solid; border-right: 1px solid;" class="map">
+      <p class="address"><?=$restaurant->address?></p>
+      <p class="email"><?=$restaurant->email?></p>
+    </div>
+  </div>
+  <?php
+  return ob_get_clean();
+}
+
+
 }

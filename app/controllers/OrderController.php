@@ -58,7 +58,7 @@ class OrderController extends Controller
             return;
         }
 
-        $item = $this->itemsmodel->find_by_id_restaurant_id($id,$restaurant_id);
+        $item = $this->itemsmodel->find_by_id_restaurant_id($id, $restaurant_id);
         $item_obj = new \stdClass();
         $item_obj->id = $item->id;
         $item_obj->item_name = $item->item_name;

@@ -1,4 +1,7 @@
 function addToOrder(rid, id, element) {
+    $modal = $('#add_to_order');
+    $modalBody = $('.modal-body');
+
     $.post(
         `${SROOT}order/add_to_order/` + rid + '/' + id,
         {},
@@ -9,12 +12,14 @@ function addToOrder(rid, id, element) {
                 element.setAttribute("onclick","");
             }
             else if(resp=='0'){
-                window.alert('Please select food from one restaurant');
+                $modalBody.html('Please select food from one restaurant!');
+                $modal.modal();
+                
             }
             else if(resp=='-1'){
-                window.alert('Please Login as a customer');
+                $modalBody.html('Please login as customer!');
+                $modal.modal();
             }
-            if(!resp) window.alert('Please select food from one restaurant');
         }
     );
-}
+}``
