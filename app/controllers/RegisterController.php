@@ -38,7 +38,7 @@ class RegisterController extends Controller
         $this->login(new AdminModel(), 'adminmodel', 'register/login_admin');
     }
 
-    public function login_owner_action($user_type)
+    public function login_owner_action($user_type='owner')
     {
         if ($user_type == 'owner') {
             $new_user = new OwnerModel();
