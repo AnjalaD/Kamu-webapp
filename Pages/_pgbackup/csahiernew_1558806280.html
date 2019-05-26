@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en" data-toggle="dropdown">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+        <meta name="description" content="">
+        <meta name="author" content="">
+        <title>Blank Template for Bootstrap</title>
+        <!-- Bootstrap core CSS -->
+        <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" rel="stylesheet">
+        <!-- Custom styles for this template -->
+        <link href="style.css" rel="stylesheet">
+        <link href="a1.css" rel="stylesheet">
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Aclonica">
+    </head>
+    <body class="cashier_card">
+        <div style="border-style: solid; border-color: #9d1515; border-top: 2px solid #9d1515; border-bottom: 8px solid #9d1515; border-left: 2px solid #9d1515; border-right: 5px solid #9d1515; border-bottom-right-radius: 40px; width: 50%; display: grid; grid-template-columns: 1fr 1fr 1fr 1fr; grid-template-rows: 40px 60px;">
+            <h5 style="grid-area: 1 / 1 / 2 / 3; width: 100%;" class="cashier_username cashier_item">Kalyabro9</h5>
+            <h5 style="grid-area: 1 / 3 / 2 / 5; width: 100%; background-color: #facd1a;" class="cashier_item cashier_time">2019/03/27&nbsp; 12:45pm</h5>
+            <div class="dropdown"> 
+                <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">                    Dropdown button                </button>                 
+
+                <div class="dropdown-menu" aria-labelledby="dropdownMenuButton"> 
+                    <a class="dropdown-item" href="#">Action</a> 
+                    <a class="dropdown-item" href="#">Another action</a> 
+                    <a class="dropdown-item" href="#">Something else here</a> 
+                </div>                 
+            </div>
+            <button type="button" class="btn btn-light cashier_button cashier_Rejectbutton" style="background-color: #da2a2a; color: #f1e7e7; grid-area: 2 / 3 / 3 / 4; object-fit: contain;">Reject</button>
+            <button type="button" class="btn btn-light cashier_button  cashier_Acceptbutton" style="background-color: #5bdc5b; grid-area: 2 / 4 / 3 / 5; object-fit: contain;">Accept</button>
+        </div>
+        <!-- Bootstrap core JavaScript
+    ================================================== -->
+        <!-- Placed at the end of the document so the pages load faster -->
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+        <script>var coll = document.getElementsByClassName("collapsible");
+		var i;
+
+		for (i = 0; i < coll.length; i++) {
+		  coll[i].addEventListener("click", function() {
+			this.classList.toggle("active");
+			var content = this.nextElementSibling;
+			if (content.style.display === "block") {
+			  content.style.display = "none";
+			} else {
+			  content.style.display = "block";
+			}
+		  });
+		} 
+		</script>
+    </body>
+    <button type="button" class="btn btn-light collapsible">Label</button>
+</html>

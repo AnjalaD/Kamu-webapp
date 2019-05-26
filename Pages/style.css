@@ -1,0 +1,68 @@
+div.gallery > div.carousel.slide {
+    width: 100%;
+    height: 100%;
+}
+
+.card > div.gallery {
+    object-fit: contain;
+}
+
+div.info {
+    padding-left: 0px;
+    padding-top: 30px;
+}
+
+.info > h3.name {
+    font-size: 1.75rem;
+    width: 60%;
+    font-family: Aclonica;
+    float: left;
+    padding: 10px 10px 10px 20px;
+    height: 100%;
+    background-color: #d59a9a;
+}
+
+h3.number {
+    font-size: 1.75rem;
+    width: 40%;
+    font-family: Aclonica;
+    float: right;
+    padding: 10px 10px 10px 20px;
+    height: 100%;
+    background-color: #d59a9a;
+}
+
+.info > h3.number {
+    width: 40%;
+}
+
+.info > h3.number {
+}
+
+.cashier_list_time {
+    width: 100%;
+    height: 100%;
+}
+
+.cashier_item {
+    font-family: Aclonica;
+}
+
+.cashier_username {
+    background-color: #facd1a;
+}
+
+.cashier_button {
+    height: 40px;
+    margin: 5px;
+    font-family: Aclonica;
+    width: 100px;
+}
+
+.cashier_Acceptbutton {
+    background-color: #5dca06;
+    margin-right: 20px;
+}
+
+.cashier_collapsebutton {
+}

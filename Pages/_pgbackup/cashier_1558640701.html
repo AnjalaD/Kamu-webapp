@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+        <meta name="description" content="">
+        <meta name="author" content="">
+        <title>Blank Template for Bootstrap</title>
+        <!-- Bootstrap core CSS -->
+        <link href="bootstrap/css/bootstrap.css" rel="stylesheet">
+        <!-- Custom styles for this template -->
+        <link href="style.css" rel="stylesheet">
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Aclonica">
+    </head>
+    <body>
+        <!-- Bootstrap core JavaScript
+    ================================================== -->
+        <!-- Placed at the end of the document so the pages load faster -->
+        <div class="card">              
+
+            <div class="card-body" style="border-style: solid; border-color: #ab2626; border-top: 5px solid #ab2626; border-bottom: 15px solid #ab2626; border-left: 5px solid #ab2626; border-right: 10px solid #ab2626; border-bottom-right-radius: 68px; font-family: Aclonica; background-color: #fcddc1; width: 90%; margin: 15px; display: grid; grid-template-columns: 3fr 1fr 1fr; grid-template-rows: auto auto 100px; grid-template-areas: 'Username Username Time' 'Window Window Window' 'Notes Reject Accept'; background-image: linear-gradient(90deg, rgb(238, 174, 73) 16.2921%, rgb(252, 232, 104) 74.7191%);">
+                <div class="cashier_itemWindow" style="height: 150px; max-width: 99%; overflow: auto;
+ grid-area :2/1/3/4">
+                    <ul class="list-group"> 
+                        <li class="cashier_listItem list-group-item" style="display:grid;grid-template-columns:3fr 1fr 1fr 1fr;grid-template-rows:auto;">
+                            <h6 class="cashier_listItem_name">Burger</h6>
+                            <h6 class="cashier_listItem_unitPrice">250.00</h6>
+                            <h6 class="cashier_listItem_quantity">x3</h6>
+                            <h6 class="cashier_listItem_price">750.00</h6>
+                        </li>
+                        <li class="list-group-item" style="display:grid;grid-template-columns:3fr 1fr 1fr 1fr;grid-template-rows:auto;">
+                            <h6>Coke</h6>
+                            <h6>100.00</h6>
+                            <h6>x2</h6>
+                            <h6>200.00</h6>
+                        </li>
+                        <li class="list-group-item" style="display:grid;grid-template-columns:3fr 1fr 1fr 1fr;grid-template-rows:auto;">
+                            <h6>Chicken bucket</h6>
+                            <h6>650.00</h6>
+                            <h6>x1</h6>
+                            <h6>650.00</h6>
+                        </li>
+                        <li class="list-group-item" style="display:grid;grid-template-columns:3fr 1fr 1fr 1fr;grid-template-rows:auto;">
+                            <h6>VBurger</h6>
+                            <h6>250.00</h6>
+                            <h6>x3</h6>
+                            <h6>750.00</h6>
+                        </li>                         
+                        <li class="list-group-item cashier_listTotal" style="display: grid; grid-template-columns: 5fr 1fr; grid-template-rows: auto; border-top: 3px solid;">
+                            <h6>Total</h6>
+                            <h6 class="cashier_listTotal_price">2350.00</h6>
+                        </li>                         
+                    </ul>
+                </div>                 
+
+                <h4 class="card-time" style="width: 350px; margin-top: 0px; grid-area: 1/2/2/4;">2019/03/20 12.30 pm</h4>
+                <h4 class="card-user">Buddhima@medawatta</h4>
+                <a href="#" class="btn btn-primary" id="button_Accept" style="margin: 20px 10px 10px; background-color: #179337; font-family: Aclonica; border: 0px; grid-area: 3/2/4/3; height: 40px;">Accept Order</a>
+                <a href="#" class="btn btn-primary" id="button_Reject" style="margin: 20px 10px 10px; background-color: #c84f38; font-family: Aclonica; border: 0px; grid-area: 3/3/4/4; height: 40px;">Reject Order</a>
+                <p class="cashier_notes">Add more sugar and salt</p>
+            </div>             
+        </div>
+    </body>
+</html>

@@ -1,0 +1,23 @@
+.gallery > img {
+    object-fit: cover;
+    width: 100%;
+    height: 100%;
+}
+
+.topImage > img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.Info > h2.Heading {
+    color: #ffffff;
+    font-family: Lemon;
+    text-align: center;
+}
+
+.Info > p.information {
+    font-size: 18px;
+    font-family: Lemon;
+    padding-left: 10px;
+}

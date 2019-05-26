@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="description" content="">
+        <meta name="author" content="">
+        <title>New page</title>
+        <link href="css/style.css" rel="stylesheet">
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lemon">
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Aclonica">
+    </head>
+    <body style="   display:grid;grid-template-columns:1fr 1fr;grid-template-rows:300px auto 100px;grid-template-areas:'Image Image' 'Content Content' 'Footer Footer';">
+        <div class="topImage" style="grid-area:1 / 1 / 2 / 3;">
+            <img src="https://images.unsplash.com/photo-1504754524776-8f4f37790ca0?ixlib=rb-1.2.1&q=80&fm=jpg&crop=entropy&cs=tinysrgb&w=1080&fit=max&ixid=eyJhcHBfaWQiOjIwOTIyfQ"/>
+        </div>
+        <div class="mainContent" style="grid-area:2 / 1 / 3 / 3;display:grid;grid-template-columns:1fr 2fr;grid-template-rows:auto;">
+            <div class="Info" style="background-color: #c44141;">
+                <h2 class="Heading">Restaurent Name</h2>
+                <p class="information">Address:<br/><br/><br/>Company:<br/><br/><br/>Telephone No:</p>
+                <div class="gallery" style="    top: 0px; padding: 10px; background-position: center center;display:grid;grid-template-columns:repeat(auto-fit, minmax(130px, 1fr));grid-template-rows:auto;grid-gap:10px;">
+                    <img src="https://images.unsplash.com/photo-1523145149804-5d8e0c044753?ixlib=rb-1.2.1&q=80&fm=jpg&crop=entropy&cs=tinysrgb&w=200&fit=max&ixid=eyJhcHBfaWQiOjIwOTIyfQ">
+                    <img src="https://images.unsplash.com/photo-1523145149804-5d8e0c044753?ixlib=rb-1.2.1&q=80&fm=jpg&crop=entropy&cs=tinysrgb&w=200&fit=max&ixid=eyJhcHBfaWQiOjIwOTIyfQ">
+                    <img src="https://images.unsplash.com/photo-1523145149804-5d8e0c044753?ixlib=rb-1.2.1&q=80&fm=jpg&crop=entropy&cs=tinysrgb&w=200&fit=max&ixid=eyJhcHBfaWQiOjIwOTIyfQ">
+                    <img src="https://images.unsplash.com/photo-1523145149804-5d8e0c044753?ixlib=rb-1.2.1&q=80&fm=jpg&crop=entropy&cs=tinysrgb&w=200&fit=max&ixid=eyJhcHBfaWQiOjIwOTIyfQ">
+                    <img src="https://images.unsplash.com/photo-1523145149804-5d8e0c044753?ixlib=rb-1.2.1&q=80&fm=jpg&crop=entropy&cs=tinysrgb&w=200&fit=max&ixid=eyJhcHBfaWQiOjIwOTIyfQ">
+                    <img src="https://images.unsplash.com/photo-1480796927426-f609979314bd?ixlib=rb-1.2.1&q=80&fm=jpg&crop=entropy&cs=tinysrgb&w=200&fit=max&ixid=eyJhcHBfaWQiOjIwOTIyfQ">
+                    <img src="https://images.unsplash.com/photo-1480796927426-f609979314bd?ixlib=rb-1.2.1&q=80&fm=jpg&crop=entropy&cs=tinysrgb&w=200&fit=max&ixid=eyJhcHBfaWQiOjIwOTIyfQ">
+                </div>
+                <div class="map"></div>
+            </div>
+            <div class="ResCards">
+                <div class="search">
+                    <input class="search" type="text">
+                    <button class="search" type="submit">Search</button>
+                </div>
+                <div class="cards"></div>
+            </div>
+        </div>
+        <footer class="pg-empty-placeholder" style="grid-area:3 / 1 / 4 / 5;"></footer>
+    </body>
+</html>
