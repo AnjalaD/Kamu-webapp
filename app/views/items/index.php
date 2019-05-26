@@ -19,18 +19,18 @@ use core\H;
             <div></div>
         </div>
         <div class="px-4">
-            <div class="table-wrapper">
+            <div class="table-wrapper" >
                 <table class="table table-hover table-small mb-0" style="table-layout:fixed;">
                     <thead>
                         <tr>
                             <th class="font-weight-bold" style="width:20%; font-size:1.25rem;">Food Item</th>
                             <th class="font-weight-bold" style="width:220px; font-size:1.25rem;">Image</th>
-                            <th class="font-weight-bold" style="width:45%; font-size:1.25rem;">Description</th>
-                            <th class="font-weight-bold" style="width:10%; font-size:1.25rem;">Price</th>
+                            <th class="font-weight-bold" style="width:43%; font-size:1.25rem;">Description</th>
+                            <th class="font-weight-bold" style="width:12%; font-size:1.25rem;">Price</th>
                             <th style="width:25%;"></th>
                         </tr>
                     </thead>
-                    <tbody>
+                    <tbody style=" height:30rem; overflow-y:scroll;">
                         <?php foreach ($this->items as $item) : ?>
                             <tr>
                                 <td><button  class="btn btn-primary item "  data-toggle="modal" data-target="#item_preview" id="<?= $item->id ?>"><?= $item->item_name ?></button></td>
@@ -76,6 +76,8 @@ use core\H;
                     food_item_display_card.classList.remove("grid-item");
                     var food_item_image = document.getElementById("food_item_image");
                     food_item_image.setAttribute('style',"max-height:250px; object-fit:contain;");
+                    var food_item_description = document.getElementById("food_item_description");
+                    food_item_description.setAttribute('style',"height:6rem;")
 
                 }
             }
