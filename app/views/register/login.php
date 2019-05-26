@@ -34,11 +34,11 @@ $token = FH::generate_token();
                     <input class="form-control TextInput" type="password" name="password" placeholder="Password" id="Login_Password_TextInput">
                 </div>
                 <div>
-                    <label for="remember_me">Remember Me</label>
+                    <label for="remember_me" style="color:black">Remember Me</label>
                     <input type="checkbox" name="remember_me" id="remember_me" value="true">
                 </diV>
                 <div class="form-group" id="Login_Button_FormGroup">
-                    <button class="btn btn-primary btn-block Button" type="submit" name="submit" value="submit" id="Login_Button">Log In as User</button>
+                    <button class="btn btn-primary btn-block Button" type="submit" name="submit" value="submit" id="Login_Button">Customer Login</button>
                 </div>
                 <a href="<?= SROOT ?>register/forgot/customer" id="Login_ForgotEmail_TextLabel" class="TextLabel">Forgot your email or password?</a>
             </form>
