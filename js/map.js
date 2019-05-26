@@ -333,7 +333,7 @@ class HMap {
 
         //center to the marker
         map.setCenter({ lat: position.latitude, lng: position.longitude });
-        map.setZoom(17);
+        map.setZoom(7);
 
         this.configureMapToDragMarker(map,behavior,latId,lngId);
 

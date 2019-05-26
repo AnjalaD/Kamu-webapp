@@ -210,7 +210,9 @@ class OrderController extends Controller
             $new_order->restaurant_id = $new_submitted_order->restaurant_id = $items['rid'];
             $new_order->items = $new_submitted_order->items = json_encode($items['items'], JSON_FORCE_OBJECT);
             $new_order->delivery_time =$new_submitted_order->delivery_time = $delivery_time;
-            $new_order->order_code =$new_submitted_order->order_code = $order_code;  
+            $new_order->order_code =$new_submitted_order->order_code = $order_code;
+            
+            $new_submitted_order->total_price = $this->get_total();
             
             $new_order->submitted = 1;
             
@@ -390,5 +392,7 @@ class OrderController extends Controller
         }
         Router::redirect('restricted/error');
     }
+
+    
 
 }
