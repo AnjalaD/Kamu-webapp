@@ -183,4 +183,15 @@ class H
     <?php
     return ob_get_clean();
   }
+
+  public static function create_restaurant_card($restaurant)
+  {
+    # code...
+  }
+
+
+  public static function create_restaurant_card_list($restaurant)
+  {
+    # code...
+  }
 }

@@ -93,6 +93,20 @@ class RestaurantModel extends Model
 
     public function filter($filter, $limit=0)
     {
-        
+        // H::dnd($filter);
+        $sort_by = ['restaurant_name ASC', 'restaurant_name DES'];
+        $search_by = ['restaurant_name LIKE ?', 'address LIKE ?'];
+        $search_str = '%'.$filter['search'].'%';
+
+
+        $conditions = [
+            'conditions' => $search_by[$filter['search_by']],
+            'bind' => [$search_str], 
+            'limit' => $limit.', 10',
+            'order' => $sort_by[$filter['sort_by']]
+        ];
+       
+        // H::dnd(UserModel::current_user());
+        return  $this->find($conditions);
     }
 }

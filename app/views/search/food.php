@@ -23,14 +23,36 @@ $token = FH::generate_token();
         <datalist id="food"></datalist>
     </form>
 
-    <div class="row p-2">
-        <div class="col-md-2 card bg-light m-1 p-1">
-            <?php $this->partial('search', 'filters'); ?>
+    <div class="row p-1">
+        <div class="col-md-2">
+            <div class="card bg-light p-1">
+                <?php $this->partial('search', 'food_filters'); ?>
+            </div>
         </div>
 
-        <div class="col-md-8 card m-1 p-1" id="items"></div>
+        <div class="col-md-8">
+            <div class="card bg-light p-1" id="items"></div>
+        </div>
 
-        <div class="col-md-2 card bg-light m-1 p-1"></div>
+        <div class="col-md-2">
+            <div class="card bg-light p-1"></div>
+        </div>
+    </div>
+</div>
+
+<div id="add_to_order" class="modal fade" role="dialog">
+    <div class="modal-dialog">
+        <!-- Modal content-->
+        <div class="modal-content">
+            <div class="modal-header" style="background:#ef3030;">
+                <h4 class="modal-title">Info</h4>
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+            </div>
+            <div class="modal-body"></div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+            </div>
+        </div>
     </div>
 </div>
 
@@ -55,11 +77,11 @@ $token = FH::generate_token();
         sendFilters($(this).attr('id'));
     });
 
-    function goToPage(page){
+    function goToPage(page) {
         sendFilters(null, page);
     }
 
-    function sendFilters(search=null, page=0) {
+    function sendFilters(search = null, page = 0) {
         if (search == null) {
             search = $('input[name=search_string]').val();
         } else {
@@ -74,37 +96,41 @@ $token = FH::generate_token();
         viewResults(data, 'items', page);
     }
 
-    function viewResults(data, divId, pageNo){
-    console.log("ajax");
-    $.post(
-        `${SROOT}search/search/1/${pageNo}`, 
-        data,
-        function (resp) {
-            console.log(resp);
-            if(!resp){
-                if(pageNo>0) $('#' + divId).html("<p>End of Results</p>");
-                else $('#' + divId).html("<p>No items found</p>");
-            }else{
-                $('#' + divId).html(resp);
-                $('.grid').masonry({
-                // options
-                    itemSelector: '.grid-item',
-                    columnWidth: 0
-                });
+    function viewResults(data, divId, pageNo) {
+        console.log("ajax");
+        $.post(
+            `${SROOT}search/search/1/${pageNo}`,
+            data,
+            function(resp) {
+                console.log(resp);
+                if (!resp) {
+                    if (pageNo > 0) $('#' + divId).html("<p>End of Results</p>");
+                    else $('#' + divId).html("<p>No items found</p>");
+                } else {
+                    $('#' + divId).html(resp);
+                    $('.grid').masonry({
+                        // options
+                        itemSelector: '.grid-item',
+                        columnWidth: 0
+                    });
+                }
             }
-        }
-    );
-}
+        );
+    }
 
     $('#search_string').keyup(function() {
-        autoComplete($(this).val(), 'food')
+        autoComplete($(this).val(), 1)
     });
+</script>
 
+
+<script>
     // not completed
     $("body").on("click", ".star", function() {
         var value = $(this).attr('id');
         var itemId = $(this).parent().attr('id');
-        addRating(itemId, value, '<?=$token?>');
+        addRating(itemId, value, '<?= $token ?>');
     });
 </script>
+
 <?php $this->end(); ?>

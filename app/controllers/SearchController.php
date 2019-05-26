@@ -55,10 +55,10 @@ class SearchController extends Controller
             if(!$type)
             {
                 $result = array_merge($this->itemsmodel->auto_complete('item_name',$data), $this->restaurantmodel->auto_complete('restaurant_name',$data));
-            }elseif($type == 'food')
+            }elseif($type == 1)
             {
                 $result = $this->itemsmodel->auto_complete('item_name',$data);
-            }elseif($type == 'restaurant')
+            }elseif($type == 2)
             {
                 $result = $this->restaurantmodel->auto_complete('restaurant_name',$data);
             }
@@ -94,6 +94,7 @@ class SearchController extends Controller
         elseif($type==2)
         {
             $restaurants = $this->restaurantmodel->filter($filters, $page);
+            $response = $restaurants;
         }
         
         return $this->json_response($response);
