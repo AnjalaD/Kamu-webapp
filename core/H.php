@@ -185,7 +185,7 @@ public static function create_pagination_tabs($page_no, $end = false)
   return ob_get_clean();
 }
 
-public static function create_order_card($order)
+public static function create_pending_order_card($order)
 {
   ob_start(); ?>
 
@@ -210,9 +210,9 @@ public static function create_order_card($order)
               </tr>
             </thead>
             <tbody>
-              <?php $items=json_decode($order->items,true) ?>
-              
-              <?php foreach($items as $item_id=>$qty) ?>
+              <?php $items = json_decode($order->items, true) ?>
+
+              <?php foreach ($items as $item_id => $qty) ?>
               <tr>
                 <td><?= $item_id ?></td>
                 <td><?= $qty ?></td>
@@ -233,18 +233,99 @@ public static function create_order_card($order)
         </div>
       </div>
       <div class="col-md-3 text-center">
-        <a  class="btn btn-light" style="background-color: #fa0404; width: auto; height: 90%; color: #ffffff;" href="<?=SROOT. 'order/reject_order/'. $order->id?>""><small>Reject </small></a>
-      </div>
-      <div class="col-md-3 text-center">
-        <a  class="btn btn-light" style="width: auto; height: 90%; background-color: #17f607;" href="<?=SROOT. 'order/accept_order/'. $order->id?>">Accept </a>
+        <a class="btn btn-light" style="background-color: #fa0404; width: auto; height: 90%; color: #ffffff;" href="<?= SROOT . 'order/reject_order/' . $order->id ?>""><small>Reject </small></a>
+          </div>
+          <div class=" col-md-3 text-center">
+          <a class="btn btn-light" style="width: auto; height: 90%; background-color: #17f607;" href="<?= SROOT . 'order/accept_order/' . $order->id ?>">Accept </a>
       </div>
     </div>
   </div>
-
-
-
-
   <?php
   return ob_get_clean();
+}
+
+public static function create_accepted_order_card($order){
+  ob_start(); ?>
+
+  <div class="order-card">
+    <div class="row">
+      <div class="col-md-6" style="padding-right: 0;">
+        <h5 style="background-color: #9d2525; color: #FFFFFF; padding: 5px;"><?= $order->order_code ?></h5>
+      </div>
+      <div class="col-md-6" style="padding-left: 0;">
+        <h5 style="padding: 5px; background-color: rgba(234, 167, 15, 0.73);"><?= $order->delivery_time ?></h5>
+      </div>
+    </div>
+    <div class="row dropdown-row">
+      <div class="dropdown col-md-6 text-center">
+        <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> View Items </button>
+        <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+          <table class="table dropdown-item">
+            <thead>
+              <tr class="thead-dark">
+                <th>Item</th>
+                <th>Qty</th>
+              </tr>
+            </thead>
+            <tbody>
+              <?php $items = json_decode($order->items, true) ?>
+
+              <?php foreach ($items as $item_id => $qty) ?>
+              <tr>
+                <td><?= $item_id ?></td>
+                <td><?= $qty ?></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+      <div class="col-md-6 text-center ">
+        <p><?= $order->total_price ?> LKR</p>
+      </div>
+    </div>
+    <div class="row" style="height: auto;">
+      <div class="col-md-6 text-center">
+        <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" style="height: 80%; width: auto;"> View Notes </button>
+        <div class="dropdown-menu" aria-labelledby="dropdownMenuButton2">
+          <div class="overflow-auto dropdown-item" rows="" style="width: auto;"><?= $order->notes ?></div>
+        </div>
+      </div>
+      
+          <div class=" col-md-6 text-center">
+          <a class="btn btn-warning" style="width: auto; height: 90%; " href="<?= SROOT . 'order/complete_order/' . $order->id ?>">Deliver Order </a>
+      </div>
+    </div>
+  </div>
+  <?php
+  return ob_get_clean();
+}
+
+public static function create_all_order_cards_list($pending_orders,$accepted_orders){
+  $html='<div class="row"><div class="col " >';
+  if (isset($pending_orders) && !empty($pending_orders)){
+    $html.='<h3> New Orders... </h3><div style="height:30rem; overflow-y:scroll;" id="pending_orders_container">';
+    foreach ($pending_orders as $order){
+      $html.=self::create_pending_order_card($order);
+    }
+      $html.='</div>';
+  }
+  else{
+    $html.='<h5>No New Orders</h5>';
+  }
+  $html.='</div>';
+  $html.='<div class="col" >';
+  if (isset($accepted_orders) && !empty($accepted_orders)){
+    $html.='<h3> Accepted Orders... </h3>
+    <div style="height:30rem; overflow-y:scroll;" id="accepted_orders_container">';
+    foreach ($accepted_orders as $order){
+      $html.=self::create_accepted_order_card($order);
+    }
+      $html.='</div>';
+  }else{
+    $html.='<h5>No Accepted Orders</h5>';
+  }
+  $html.='</div></div>';
+  return $html;
+
 }
 }
