@@ -101,11 +101,11 @@ public static function create_card_list($items)
 public static function create_card($item)
 {
   ob_start() ?>
-  <div class="grid-item card block span3 m-1">
+  <div id="food_item_display_card" class="grid-item card block span3 m-1">
     <div class="product">
-      <img src=<?= $item->image_url ?>>
+      <img id="food_item_image" src=<?= $item->image_url ?>>
     </div>
-    <div class="info">
+    <div class="info" style="padding: 10px;">
       <h4><?= $item->item_name ?></h4>
       <span class="restaurant_name">
         <a class="link" href="<?= SROOT ?>restaurant/details/<?= $item->restaurant_id ?>"><?= $item->restaurant_name ?></a>
