@@ -46,6 +46,7 @@ class RegisterController extends Controller
         }
         elseif ($user_type == 'cashier') {
             $new_user = new CashierModel();
+            $redirect = 'register/login_owner';
         }
         
         $this->login($new_user, $user_type.'model', 'register/login_owner', $redirect);
@@ -85,11 +86,15 @@ class RegisterController extends Controller
     //logout
     public function logout_action()
     {
+        $redirect = 'register/login';
         if(UserModel::current_user())
         {
+            if(UserModel::current_user() instanceof OwnerModel || UserModel::current_user() instanceof CashierModel){
+                $redirect = "register/login_owner";
+            }
             UserModel::current_user()->logout();
         }
-        Router::redirect('register/login');
+        Router::redirect($redirect);
     }
 
 

@@ -224,7 +224,7 @@
 
 .login-dark {
     height: 1000px;
-    background: url(../../assets/img/php4CVHex.jpg) #475d62;
+    background: url(../assets/img/php4CVHex.jpg) #475d62;
     background-size: cover;
     position: relative;
 }
@@ -323,7 +323,7 @@
 
 #Login_LoginDark_Background,
 #Register_LoginDark_Background {
-    background-image: url(../../assets/img/Sauce-8.jpg);
+    background-image: url(../assets/img/Sauce-8.jpg);
     height: 750px;
 }
 
@@ -401,4 +401,11 @@
 }
 .form-control TextInput {
     color: #000
+}
+
+.login-restaurant-dark {
+    height: 1000px;
+    background: url(../assets/img/restaurant_table_interior.jpg) #475d62;
+    background-size: cover;
+    position: relative;
 }

@@ -1,6 +1,7 @@
 <?php $this->set_title('Submit Restautant Details'); ?>
 
 <?php $this->start('head'); ?>
+<link rel="stylesheet" href="<?=SROOT?>css/styles.min.css">
 <link rel="stylesheet" href="<?= SROOT ?>css/croppie.css">
 <?php $this->end(); ?>
 

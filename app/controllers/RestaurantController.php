@@ -111,12 +111,14 @@ class RestaurantController extends Controller
                 if (!empty($this->request->get('image'))) {
                     $restaurant->image_url = SROOT.'img/restaurant/'.time().'.png';
                 }
+                // H::dnd($restaurant->save());
 
                 if ($restaurant->save()) {
                     H::save_image($this->request->get('image'), $restaurant->image_url);
                     Router::redirect('restaurant');
                 }
             }
+            
             $this->view->restaurant = $restaurant;
             $this->view->display_errors = $restaurant->get_error_messages();
             $this->view->post_action = SROOT . 'restaurant/edit/' . $restaurant->id;

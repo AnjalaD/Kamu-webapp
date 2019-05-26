@@ -359,4 +359,38 @@ public static function create_all_order_cards_list($pending_orders, $accepted_or
 }
 
 
+public static function create_restaurant_card_list($restaurants)
+{
+  if (empty($restaurants)) {
+    return '';
+  }
+  $html = '<div class="grid">';
+  foreach ($restaurants as $restaurant) {
+    $html .= self::create_restaurant_card($restaurant);
+  }
+  $html .= '</div>';
+  return $html;
+}
+
+public static function create_restaurant_card($restaurant)
+{
+  ob_start() ?>
+  <div class="grid-item card m-1" style="border-top: 2px solid; border-left: 2px solid; border-right: 15px solid #9d2525; border-style: solid; border-bottom: 10px solid #9d2525; border-bottom-right-radius: 62px; display: grid; grid-template-columns: fit-content(50%) 3fr; grid-template-rows: 55px repeat(auto-fit, minmax(180px, 210px)); grid-template-areas: 'info info' 'gallery map'; min-width: 450px;">
+    <div style="grid-area:1 / 1 / 2 / 3;" class="info">
+      <h3 class="name" style="background-image: -webkit-linear-gradient(top, rgb(208, 77, 77) 78.1429%, rgb(157, 37, 37) 94.8571%);"><?=$restaurant->restaurant_name?></h3>
+      <h3 class="number" style="background-color: #fbd367; text-align: right; font-size: 25px; font-family: Aclonica; background-image: -webkit-linear-gradient(top, rgb(251, 210, 101) 82.8571%, rgb(178, 141, 43) 96%);"><?=$restaurant->telephone?></h3>
+    </div>
+    <div style="grid-area:2 / 1 / 3 / 2;" class="gallery">
+      <img class="d-block w-100" src="<?=$restaurant->image_url ?>">
+    </div>
+    <div style="grid-area: 2 / 2 / 3 / 3; border-bottom-right-radius: 46px; border-bottom: 1px solid; border-right: 1px solid;" class="map">
+      <p class="address"><?=$restaurant->address?></p>
+      <p class="email"><?=$restaurant->email?></p>
+    </div>
+  </div>
+  <?php
+  return ob_get_clean();
+}
+
+
 }
