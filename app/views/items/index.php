@@ -7,7 +7,6 @@ use core\H;
 <?php $this->start('head'); ?>
 <link rel="stylesheet" href="<?= SROOT ?>css/foodstyles.min.css">
 <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Aclonica">
-<!-- <link rel="stylesheet" href="<?=SROOT?>css/mdb.css"> -->
 <?php $this->end(); ?>
 
 <?php $this->start('body'); ?>
