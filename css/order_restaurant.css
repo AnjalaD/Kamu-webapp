@@ -1,5 +1,5 @@
 .order-card {
-    width: 50%;
+    width: 100%;
     border-top: 2px solid #9d2525;
     border-left: 2px solid #9d2525;
     border-bottom: 8px solid #9d2525;
@@ -9,6 +9,7 @@
     border-color: #9d2525;
     height: auto;
     margin: 10px;
+    margin-bottom: 30px;
     padding: 5px;
     font-family: Aclonica;
 }

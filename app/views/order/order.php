@@ -87,7 +87,7 @@ $this->token = FH::generate_token();
                                                 </div>
                                                 <div class="col-xs-6 col-sm-6 col-md-6 text-right">
                                                     <p>
-                                                        <em>Date: <?= date("Y/m/d")?> </em>
+                                                        <em id="receipt-date">Date: <?= date("Y/m/d")?> </em>
                                                     </p>
 
                                                 </div>
@@ -116,7 +116,7 @@ $this->token = FH::generate_token();
                                                             </td>
                                                             <td  style="text-align: center"> <?= $item->quantity ?> </td>
                                                             <td class=" text-center"><?= $item->price . " LKR" ?></td>
-                                                            <td class=" text-center"><?= ($item->quantity * $item->price).' LKR'?></td>
+                                                            <td class=" text-center" id="receipt-subtotal-<?=$item->id ?>"><?= ($item->quantity * $item->price).' LKR'?></td>
                                                         </tr>
                                                         
                                                         <?php endforeach ?>
@@ -128,7 +128,7 @@ $this->token = FH::generate_token();
                                                                 <h5 style="color:black"><strong>Total: </strong></h4>
                                                             </td>
                                                             <td class="text-center text-danger">
-                                                                <h5 style="color:red"><strong><?= $this->total.' LKR' ?></strong></h4>
+                                                                <h5 style="color:red"><strong id="receipt-total"><?= $this->total.' LKR' ?></strong></h4>
                                                             </td>
                                                         </tr>
                                                     </tbody>
@@ -226,6 +226,10 @@ $this->token = FH::generate_token();
                         console.log(resp);
                         block.parent().siblings('[data-th=Subtotal]').html(resp[0] + ' LKR');
                         total_block.html('<strong>Total ' + resp[1] + ' LKR</strong>');
+                        $("#receipt-date").html('<?= date("Y/m/d")?>');
+                        $(`#receipt-subtotal-${id}`).html(resp[0] + ' LKR');
+                        $("#receipt-total").html(resp[1] + ' LKR');
+
                     }
 
 
