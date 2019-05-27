@@ -149,16 +149,6 @@ public static function create_order_dropdown($item_list, $order_id)
 {
   ob_start(); ?>
 
-
-  <!-- <?php foreach ($item_list as $item) : ?>
-    <li><?= $item->item_name . '-x' . $item->quantity ?></li>
-  <?php endforeach ?>
-  <li>
-    <a class="btn btn-primary" href="<?= SROOT ?>order/use_saved_order/<?= $order_id ?>">Use</a>
-    <a class="btn btn-danger" href="<?= SROOT ?>order/remove_saved_order/<?= $order_id ?>">Remove</a>
-  </li> -->
-
-
   <div class="dropdown-item">
           <div class="row">
             <table class="table text-center">
@@ -171,8 +161,12 @@ public static function create_order_dropdown($item_list, $order_id)
               <tbody>
               <?php foreach ($item_list as $item) : ?>
                 <tr>
+                  <?php if($item->deleted == 1) :?>
+                  <td>This item no longer exsits</td>
+                  <?php else :?>
                   <td><?= $item->item_name ?></td>
                   <td><?= $item->quantity ?></td>
+                  <?php endif ?>
                 </tr>
               <?php endforeach ?>
               </tbody>
