@@ -175,7 +175,9 @@ $this->token = FH::generate_token();
             </div>
 
         <?php else : ?>
-            <h2 style="font-family:Aclonica; margin-bottom:4rem;">No items selected for current order</h2>
+            <h2 style="font-family:Aclonica; margin-bottom:2rem; color:#999999">No items selected for current order</h2>
+            <a href="<?= SROOT ?>search/restaurant"><button style="margin:10px; margin-bottom:2rem; padding:10px; background-color:#ea0; font-family:Aclonica; border:0px; color:white; border-bottom-right-radius:10px;"> Choose New Restaurant </button></a>
+            <a href="<?= SROOT ?>search/food"><button style="margin:10px; margin-bottom:2rem; padding:10px; background-color:#d95d36; font-family:Aclonica; border:0px; color:white; border-bottom-right-radius:10px;"> Discover New Tastes </button></a>
         <?php endif ?>
 
 
@@ -197,7 +199,7 @@ $this->token = FH::generate_token();
                         <?php endforeach ?>
                     </div>
                 <?php else : ?>
-                    <p> No saved drafts </p>
+                    <p style="color:#999999;"> No saved drafts </p>
                 <?php endif ?>
             </div>
             <div class="col" style="border-width:2px 5px 5px 2px; border-color:#9d2525; border-style:solid; border-bottom-right-radius:20px;margin-left:2rem;">
@@ -216,7 +218,8 @@ $this->token = FH::generate_token();
                         <?php endforeach ?>
                     </div>
                 <?php else : ?>
-                    <p> No Orders </p>
+                    <p style="color:#999999;"> No Orders </p>
+                    
                 <?php endif ?>
             </div>
         </div>
