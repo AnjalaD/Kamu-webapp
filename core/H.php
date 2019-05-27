@@ -122,9 +122,9 @@ public static function create_card($item)
       <div class="mt-1 mb-0">
         <i class="icon-shopping-cart icon-2x"></i>
         <?php if ((Session::exists('items')) && (array_key_exists($item->id, json_decode(Session::get('items'), true)['items']))) : ?>
-            <a class="btn btn-info pull-right" onClick="">Item Added</a>
+            <button class="btn btn-danger pull-right" onClick="removeFromOrder(<?= $item->restaurant_id ?>, <?= $item->id ?>,this)">Remove Item</button>
         <?php else : ?>
-          <a class="btn btn-info pull-right" onClick="addToOrder(<?= $item->restaurant_id ?>, <?= $item->id ?>,this)">Add to Order</a>
+          <button class="btn btn-info pull-right" onClick="addToOrder(<?= $item->restaurant_id ?>, <?= $item->id ?>,this)">Add to Order</button>
         <?php endif ?>
       </div>
     </div>
