@@ -14,7 +14,7 @@
         <div id="uploaded_image"></div>
     </div>
     <div class="col-md-4">
-        <div class="static-map" style="width:auto; height:20rem; width:70%;" id='map-input-container'></div>
+        <div class="static-map" style="width:auto; height:20rem; " id='map-input-container'></div>
     </div>
 </div>
 <?php $this->end(); ?>

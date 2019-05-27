@@ -226,6 +226,7 @@ class OrderController extends Controller
 
             if($new_order->save() && $new_submitted_order->save())
             {
+                Session::add_msg('success', 'Order Submitted!!!');
                 Router::redirect('');
             }
             $this->view->post_data = $new_order;

@@ -19,6 +19,7 @@ class RestaurantController extends Controller
         $this->load_model('ItemsModel');
         $this->load_model('SubmittedOrderModel');
         $this->load_model('CashierModel');
+        $this->load_model('OwnerModel');
     }
 
 
@@ -51,16 +52,25 @@ class RestaurantController extends Controller
         if ($this->request->is_post()) {
             $this->request->csrf_check();
 
+            // H::dnd($restaurant);
             $restaurant->assign($this->request->get());
+
+            $owner = $this->ownermodel->find_by_id($restaurant->owner_id);
+            $owner->restaurant_id = $restaurant->id;
+
             $restaurant->verified = 1;
+
             if (!empty($this->request->get('image'))) {
                 $restaurant->image_url = SROOT.'img/restaurant/'.time().'.png';
             }
             // H::dnd(($this->request->get('image')));
-            // H::dnd($restaurant);
+            
             if ($restaurant->save()) {
                 H::save_image($this->request->get('image'), $restaurant->image_url);
                 Session::add_msg('success', 'New Restaurant Verified successfully!');
+                if(!$owner->save()) {
+                    Session::add_msg('danger', 'Cannot bind the owner!!');
+                }
                 Router::redirect('restaurant');
             }
         }

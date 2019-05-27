@@ -11,7 +11,7 @@
 
     "Logged_in": {
         "denied": {
-            "Register": ["login", "register", "forgot", "reset_password"]
+            "Register": ["login", "register", "forgot", "reset_password", "login_admin", "login_owner"]
         },
         "Home": ["*"],
         "Register": ["logout"],
@@ -32,6 +32,15 @@
         "Register" : ["register_cashier"],
         "Items": ["*"],
         "Restaurant": ["my_restaurant","no_of_orders", "submit_details", "cashiers"],
+        "Order": ["view_orders", "accept_order", "reject_order","get_all_orders_to_restaurant_html"]
+    },
+
+    "Cashier" : {
+        "denied": {
+            "Items": ["update_rating"]
+        },
+        "Items": ["*"],
+        "Restaurant": ["no_of_orders"],
         "Order": ["view_orders", "accept_order", "reject_order","get_all_orders_to_restaurant_html"]
     },
 

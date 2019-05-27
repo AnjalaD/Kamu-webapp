@@ -1,6 +1,7 @@
 <?php
 namespace core;
 use core\H;
+use core\DBWrapper;
 
 class Model
 {
@@ -9,7 +10,8 @@ class Model
 
     public function __construct($table, $model_name)
     {
-        $this->_db = DB::get_instance();
+        $this->_db = SQL_DB::get_instance();
+        
         $this->_table = $table;
         $this->_model_name = $model_name;
     }

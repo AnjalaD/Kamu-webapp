@@ -15,6 +15,7 @@ $token = FH::generate_token();
 <?php $this->start('body'); ?>
 
 <div id="Login_LoginDark_Background" class="login-dark">
+<div id="Login_Main_LoginBox" class="LoginBox">
 
 
     <!-- <form id="Login_Main_LoginBox" class="LoginBox" method="post" action="<?= SROOT ?>register/login_owner">
