@@ -79,6 +79,7 @@ $token = FH::generate_token();
 <?php $this->start('script'); ?>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.0.0/js/bootstrap.bundle.min.js"></script>
 <script src="<?= SROOT ?>temp/restaurant_details_assets/js/Contact-Form-v2-Modal--Full-with-Google-Map.js"></script>
+
 <script src="https://js.api.here.com/v3/3.0/mapsjs-core.js" type="text/javascript" charset="utf-8"></script>
 <script src="https://js.api.here.com/v3/3.0/mapsjs-service.js" type="text/javascript" charset="utf-8"></script>
 <script type="text/javascript" src="https://js.api.here.com/v3/3.0/mapsjs-ui.js"></script>
