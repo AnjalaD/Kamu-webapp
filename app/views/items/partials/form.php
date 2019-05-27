@@ -19,7 +19,7 @@ use core\FH;
             <input class="form-control Number Input" type="number" name="price" id="AddItem_PriceInput" placeholder="Price (Rs.)" step="1.00" min="1.00" value="<?= $this->item->price ?>">
         </div>
         <div class="form-group" id="AddItem_Image_FormGroup">
-            <input type="file" name="upload_image" id="upload_image" class="FileInput">
+            <input type="file" name="upload_image" id="upload_image">
             <small class="form-text text-muted" id="AddItem_ImageInput_Help">Choose an image for the Item (300x200 pixels)</small>
         </div>
         <input class="form-control" type="text" name="image" id="image" hidden>
