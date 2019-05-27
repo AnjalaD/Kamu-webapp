@@ -30,8 +30,8 @@ use core\H;
     <?php if(isset($this->item->tags)) :?>
     tag_array = <?=json_encode($this->item->tags)?>;
     <?php endif ?>
-    console.log("view rendered");
-    console.log(tag_array);
+    // console.log("view rendered");
+    // console.log(tag_array);
     loadPreviousTags(tag_array);
 </script>
 

@@ -9,9 +9,15 @@ $this->token = FH::generate_token();
 
 <?php $this->start('head'); ?>
 <link rel="stylesheet" href="<?= SROOT ?>css/order.css" />
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Aclonica">
 <?php $this->end(); ?>
 
 <?php $this->start('body'); ?>
+<div class="card-header py-2 mx-4 mb-3 d-flex justify-content-between align-items-center" style="background:#9d2525; color:white; font-family:Aclonica;">
+            <div></div>    
+            <h3>My Current Order</h3>
+            <div></div>
+</div>
 <div class="container">
     <?php if (isset($this->items) && !empty($this->items)) : ?>
         <h2> Resataurant : <a href="<?= SROOT . 'restaurant/details/' . $this->restaurant->id ?>"> <?= $this->restaurant->restaurant_name ?> </a> </h2>
