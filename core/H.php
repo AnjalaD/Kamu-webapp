@@ -162,7 +162,7 @@ public static function create_order_dropdown($item_list, $order_id)
               <?php foreach ($item_list as $item) : ?>
                 <tr>
                   <?php if($item->deleted == 1) :?>
-                  <td>This item no longer exsits</td>
+                  <td>This item is no longer available</td>
                   <?php else :?>
                   <td><?= $item->item_name ?></td>
                   <td><?= $item->quantity ?></td>
