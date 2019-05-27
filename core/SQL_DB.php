@@ -3,12 +3,12 @@ namespace core;
 use \PDO;
 use \PDOException;
 
-class DB
+class SQL_DB implements DBWrapper
 {
     private static $_instance = null;
     private $_pdo, $_query, $_error = false, $_result, $_count = 0, $_last_insert_id = null;
 
-    public function __construct()
+    private function __construct()
     {
         try {
             $this->_pdo = new PDO('mysql:host=' . DB_HOST . ';dbname=' . DB_NAME, DB_USER, DB_PASSWORD, []);

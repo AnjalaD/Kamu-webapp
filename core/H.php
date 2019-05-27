@@ -235,11 +235,12 @@ public static function create_pending_order_card($order)
             <tbody>
               <?php $items = json_decode($order->items, true) ?>
 
-              <?php foreach ($items as $item_id => $qty) ?>
+              <?php foreach ($items as $item_id => $qty): ?>
               <tr>
                 <td><?= $item_id ?></td>
                 <td><?= $qty ?></td>
               </tr>
+              <?php endforeach ?>
             </tbody>
           </table>
         </div>
@@ -294,11 +295,12 @@ public static function create_accepted_order_card($order)
             <tbody>
               <?php $items = json_decode($order->items, true) ?>
 
-              <?php foreach ($items as $item_id => $qty) ?>
+              <?php foreach ($items as $item_id => $qty) :?>
               <tr>
                 <td><?= $item_id ?></td>
                 <td><?= $qty ?></td>
               </tr>
+              <?php endforeach ?>
             </tbody>
           </table>
         </div>
