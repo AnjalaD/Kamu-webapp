@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 4.8.2
+-- version 4.8.4
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: May 25, 2019 at 02:34 PM
--- Server version: 10.1.34-MariaDB
--- PHP Version: 7.2.7
+-- Generation Time: May 27, 2019 at 02:29 PM
+-- Server version: 10.1.37-MariaDB
+-- PHP Version: 7.3.1
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET AUTOCOMMIT = 0;
@@ -123,13 +123,13 @@ CREATE TABLE `items` (
 --
 
 INSERT INTO `items` (`id`, `restaurant_id`, `item_name`, `description`, `price`, `image_url`, `rating`, `rating_num`, `hidden`, `deleted`) VALUES
-(1, 1, 'Kottu', 'Perfect combination of cut up roti and chickenzzz', 250, '/mvc/img/items/1553572046.png', 5, 1, 0, 0),
+(1, 1, 'Kottu', 'Perfect combination of cut up roti and chickenzzz', 250, '/Kamu_1.0/exported/img/items/1558789100.png', 0, 0, 0, 0),
 (26, 1, 'Soup', 'Tantalize your taste buds with our signature recipe chicken soup', 140, '/mvc/img/items/1552849585.png', 4, 1, 0, 0),
 (30, 2, 'Kottu', 'Enjoy the goodness of little bits of heaven', 300, '/mvc/img/items/1552914320.png', 0, 0, 0, 0),
-(31, 2, 'Fried Rice', 'Enjoy the taste of china ', 250, '/mvc/img/items/1552914407.png', 5, 1, 0, 0),
+(31, 2, 'Fried Rice', 'Enjoy the taste of china ', 250, '/mvc/img/items/1552914407.png', 4, 1, 0, 0),
 (32, 2, 'Soup', 'Description of soup', 100, '/mvc/img/items/1552931132.png', 4, 1, 0, 0),
-(34, 1, 'Noodles', 'description of noodles', 140, '/mvc/img/items/1553572181.png', 5, 1, 0, 0),
-(147, 2, 'Hoppers', 'asd ewo o o for kok gpd fdr gfd.', 20, '/mvc/img/items/1554563173.png', 4.25, 4, 0, 0),
+(34, 1, 'Noodles', 'description of noodles', 140, '/Kamu_1.0/exported/img/items/1558789530.png', 0, 0, 0, 0),
+(147, 2, 'Hoppers', 'asd ewo o o for kok gpd fdr gfd.', 20, '/mvc/img/items/1554563173.png', 4, 4, 0, 0),
 (151, 2, 'Rice', 'asfewidn djsak uad s kdasddd sada ', 150, '/mvc/img/items/1554564091.png', 3, 4, 0, 0),
 (152, 1, 'Rice', 'description of noodles', 149.98, '/mvc/img/items/default.png', 0, 0, 0, 0),
 (153, 1, 'Milk Ric', 'Description of milk rice', 60, '/Kamu/Kamu-webapp/img/items/default.png', 0, 0, 0, 0);
@@ -160,15 +160,16 @@ INSERT INTO `item_tags` (`id`, `item_id`, `tag_id`) VALUES
 (24, 151, 5),
 (25, 151, 82),
 (27, 26, 84),
-(28, 34, 86),
-(29, 1, 2),
 (30, 31, 88),
 (31, 32, 84),
 (32, 30, 2),
 (33, 152, 82),
 (34, 152, 91),
 (40, 153, 96),
-(41, 153, 101);
+(41, 153, 101),
+(48, 1, 2),
+(49, 1, 1),
+(50, 34, 86);
 
 -- --------------------------------------------------------
 
@@ -207,7 +208,17 @@ INSERT INTO `orders` (`id`, `order_name`, `customer_id`, `items`, `restaurant_id
 (24, '', 1, '{\"1\":4,\"26\":2}', 1, 2, '2019-05-04 18:34:00', '1558703273.0689', 0, '2019-05-24 13:07:53', NULL),
 (25, '', 1, '{\"1\":1}', 1, 2, '2019-05-31 19:10:00', '1558704689.8524', 1, '2019-05-24 13:31:29', NULL),
 (26, '', 1, '{\"34\":1}', 1, 1, '2019-05-15 19:15:00', '5ce7f58e.5536', 1, '2019-05-24 13:45:50', NULL),
-(27, '', 1, '{\"152\":1}', 1, 2, '2019-05-29 19:18:00', '5CE7F629.0844', 1, '2019-05-24 13:48:25', NULL);
+(27, '', 1, '{\"152\":1}', 1, 2, '2019-05-29 19:18:00', '5CE7F629.0844', 1, '2019-05-24 13:48:25', NULL),
+(28, '', 1, '{\"34\":1,\"26\":1,\"1\":9}', 1, 2, '2019-05-15 18:31:00', '5CE93CCD.792', 1, '2019-05-25 13:02:05', 'None......'),
+(29, '', 1, '{\"34\":1,\"26\":1,\"1\":7}', 1, 2, '2019-05-31 19:50:00', '5CE94F39.4681', 1, '2019-05-25 14:20:41', ''),
+(30, '', 1, '{\"1\":11,\"26\":2}', 1, 2, '2019-05-11 03:01:00', '5CE9B456.8691', 1, '2019-05-25 21:32:06', 'nothing'),
+(31, '', 1, '{\"1\":4,\"26\":10}', 1, 2, '2019-05-11 17:34:00', '5CEA80D2.8821', 1, '2019-05-26 12:04:34', 'None.....'),
+(32, '', 1, '{\"34\":1,\"26\":1,\"1\":1}', 1, 2, '2019-05-26 18:23:00', '5CEA8C40.9142', 1, '2019-05-26 12:53:20', 'Spicy'),
+(33, '', 1, '{\"1\":4,\"26\":14}', 1, 2, '2019-05-26 18:58:00', '5CEA947A.031', 1, '2019-05-26 13:28:26', ''),
+(34, '', 1, '{\"1\":1,\"34\":1,\"26\":1}', 1, 2, '2019-05-26 18:59:00', '5CEA94B1.6756', 1, '2019-05-26 13:29:21', 'notes....'),
+(35, '', 1, '{\"34\":1,\"26\":1,\"1\":1}', 1, 2, '2019-05-26 18:59:00', '5CEA94CC.445', 1, '2019-05-26 13:29:48', ''),
+(36, '', 1, '{\"1\":4,\"26\":2}', 1, 2, '2019-05-27 12:12:00', '5CEADE1D.0149', 1, '2019-05-26 18:42:37', ''),
+(37, '', 1, '{\"1\":4,\"26\":2}', 1, 2, '2019-05-27 12:16:00', '5CEADEED.8741', 1, '2019-05-26 18:46:05', '');
 
 -- --------------------------------------------------------
 
@@ -254,7 +265,7 @@ CREATE TABLE `ratings` (
 --
 
 INSERT INTO `ratings` (`id`, `item_id`, `customer_id`, `rating`) VALUES
-(2, 147, 1, 3),
+(2, 147, 1, 2),
 (3, 147, 4, 5),
 (4, 151, 4, 3),
 (5, 30, 4, 4),
@@ -273,7 +284,7 @@ INSERT INTO `ratings` (`id`, `item_id`, `customer_id`, `rating`) VALUES
 (18, 32, 1, 4),
 (19, 34, 1, 5),
 (20, 26, 1, 4),
-(21, 31, 1, 5);
+(21, 31, 1, 4);
 
 -- --------------------------------------------------------
 
@@ -283,6 +294,7 @@ INSERT INTO `ratings` (`id`, `item_id`, `customer_id`, `rating`) VALUES
 
 CREATE TABLE `restaurants` (
   `id` int(11) NOT NULL,
+  `owner_id` int(11) NOT NULL,
   `restaurant_name` varchar(150) COLLATE utf8_unicode_ci NOT NULL,
   `address` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
   `image_url` varchar(200) COLLATE utf8_unicode_ci NOT NULL,
@@ -298,9 +310,9 @@ CREATE TABLE `restaurants` (
 -- Dumping data for table `restaurants`
 --
 
-INSERT INTO `restaurants` (`id`, `restaurant_name`, `address`, `image_url`, `telephone`, `email`, `lng`, `lat`, `verified`, `deleted`) VALUES
-(1, 'Kama Kade', '190 tpl', '/mvc/img/restaurant/1558533839.png', '12482042', 'kkadilhara@gmail.com', 80, 7, 1, 0),
-(2, 'Shop', '3421 rd', '/mvc/img/restaurant/1558533870.png', '12482123', 'sda@gmail.com', 81, 8, 1, 0);
+INSERT INTO `restaurants` (`id`, `owner_id`, `restaurant_name`, `address`, `image_url`, `telephone`, `email`, `lng`, `lat`, `verified`, `deleted`) VALUES
+(1, 1, 'Kama Kade', '190 tpl', '/Kamu_1.0/exported/img/restaurant/1558533839.png', '12482042', 'kkadilhara@gmail.com', 80, 7, 1, 0),
+(2, 2, 'Shop', '3421 rd', '/Kamu_1.0/exported/img/restaurant/1558533870.png', '12482123', 'sda@gmail.com', 81, 8, 1, 0);
 
 -- --------------------------------------------------------
 
@@ -320,23 +332,32 @@ CREATE TABLE `submitted_orders` (
   `rejected` tinyint(1) NOT NULL DEFAULT '0',
   `completed` tinyint(1) NOT NULL DEFAULT '0',
   `time_stamp` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
-  `notes` varchar(200) COLLATE utf8_unicode_ci DEFAULT 'None...'
+  `notes` varchar(200) COLLATE utf8_unicode_ci DEFAULT 'None...',
+  `total_price` double NOT NULL DEFAULT '0'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 --
 -- Dumping data for table `submitted_orders`
 --
 
-INSERT INTO `submitted_orders` (`id`, `customer_id`, `items`, `restaurant_id`, `type`, `delivery_time`, `order_code`, `accepted`, `rejected`, `completed`, `time_stamp`, `notes`) VALUES
-(2, 1, '{\"34\":1,\"26\":1,\"1\":1}', 1, 1, NULL, NULL, 1, 0, 0, '2019-04-12 13:38:36', 'None...'),
-(3, 1, '{\"34\":1,\"26\":1}', 1, 1, NULL, NULL, 0, 1, 0, '2019-04-12 13:40:44', 'None...'),
-(4, 4, '{\"34\":1,\"1\":1}', 1, 1, NULL, NULL, 1, 0, 0, '2019-04-17 18:14:58', 'None...'),
-(5, 4, '{\"34\":1,\"26\":1}', 1, 2, NULL, NULL, 1, 0, 0, '2019-04-17 18:17:14', 'None...'),
-(6, 1, '{\"1\":1,\"34\":1,\"26\":1}', 1, 2, NULL, NULL, 0, 0, 0, '2019-05-24 10:35:55', 'None...'),
-(7, 1, '{\"1\":4,\"26\":2}', 1, 2, '2019-05-04 18:34:00', '1558703273.0689', 0, 0, 0, '2019-05-24 13:07:53', NULL),
-(8, 1, '{\"1\":1}', 1, 2, '2019-05-31 19:10:00', '1558704689.8524', 0, 0, 0, '2019-05-24 13:31:29', NULL),
-(9, 1, '{\"34\":1}', 1, 1, '2019-05-15 19:15:00', '5ce7f58e.5536', 0, 0, 0, '2019-05-24 13:45:50', NULL),
-(10, 1, '{\"152\":1}', 1, 2, '2019-05-29 19:18:00', '5CE7F629.0844', 0, 0, 0, '2019-05-24 13:48:25', NULL);
+INSERT INTO `submitted_orders` (`id`, `customer_id`, `items`, `restaurant_id`, `type`, `delivery_time`, `order_code`, `accepted`, `rejected`, `completed`, `time_stamp`, `notes`, `total_price`) VALUES
+(2, 1, '{\"34\":1,\"26\":1,\"1\":1}', 1, 1, NULL, NULL, 1, 0, 0, '2019-04-12 13:38:36', 'None...', 0),
+(4, 4, '{\"34\":1,\"1\":1}', 1, 1, NULL, NULL, 1, 0, 0, '2019-04-17 18:14:58', 'None...', 0),
+(5, 4, '{\"34\":1,\"26\":1}', 1, 2, NULL, NULL, 1, 0, 0, '2019-04-17 18:17:14', 'None...', 0),
+(6, 1, '{\"1\":1,\"34\":1,\"26\":1}', 1, 2, NULL, NULL, 1, 0, 0, '2019-05-24 10:35:55', 'None...', 0),
+(7, 1, '{\"1\":4,\"26\":2}', 1, 2, '2019-05-04 18:34:00', '1558703273.0689', 1, 0, 0, '2019-05-24 13:07:53', NULL, 0),
+(9, 1, '{\"34\":1}', 1, 1, '2019-05-15 19:15:00', '5ce7f58e.5536', 0, 0, 0, '2019-05-24 13:45:50', NULL, 0),
+(10, 1, '{\"152\":1}', 1, 2, '2019-05-29 19:18:00', '5CE7F629.0844', 0, 0, 0, '2019-05-24 13:48:25', NULL, 0),
+(11, 1, '{\"34\":1,\"26\":1,\"1\":9}', 1, 2, '2019-05-15 18:31:00', '5CE93CCD.792', 0, 0, 0, '2019-05-25 13:02:05', 'None......', 0),
+(12, 1, '{\"34\":1,\"26\":1,\"1\":7}', 1, 2, '2019-05-31 19:50:00', '5CE94F39.4681', 1, 0, 0, '2019-05-25 14:20:41', '', 2030),
+(13, 1, '{\"1\":11,\"26\":2}', 1, 2, '2019-05-11 03:01:00', '5CE9B456.8691', 1, 0, 0, '2019-05-25 21:32:06', 'nothing', 3030),
+(14, 1, '{\"1\":4,\"26\":10}', 1, 2, '2019-05-11 17:34:00', '5CEA80D2.8821', 1, 0, 0, '2019-05-26 12:04:34', 'None.....', 2400),
+(15, 1, '{\"34\":1,\"26\":1,\"1\":1}', 1, 2, '2019-05-26 18:23:00', '5CEA8C40.9142', 0, 0, 0, '2019-05-26 12:53:20', 'Spicy', 530),
+(16, 1, '{\"1\":4,\"26\":14}', 1, 2, '2019-05-26 18:58:00', '5CEA947A.031', 1, 0, 0, '2019-05-26 13:28:26', '', 2960),
+(17, 1, '{\"1\":1,\"34\":1,\"26\":1}', 1, 2, '2019-05-26 18:59:00', '5CEA94B1.6756', 0, 0, 0, '2019-05-26 13:29:21', 'notes....', 530),
+(18, 1, '{\"34\":1,\"26\":1,\"1\":1}', 1, 2, '2019-05-26 18:59:00', '5CEA94CC.445', 0, 0, 0, '2019-05-26 13:29:48', '', 530),
+(19, 1, '{\"1\":4,\"26\":2}', 1, 2, '2019-05-26 19:00:00', '5CEA94FD.3943', 1, 0, 0, '2019-05-26 13:30:37', '', 1280),
+(21, 1, '{\"1\":4,\"26\":2}', 1, 2, '2019-05-27 12:16:00', '5CEADEED.8741', 0, 0, 0, '2019-05-26 18:46:05', '', 1280);
 
 -- --------------------------------------------------------
 
@@ -501,13 +522,13 @@ ALTER TABLE `items`
 -- AUTO_INCREMENT for table `item_tags`
 --
 ALTER TABLE `item_tags`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=42;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=51;
 
 --
 -- AUTO_INCREMENT for table `orders`
 --
 ALTER TABLE `orders`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=28;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=38;
 
 --
 -- AUTO_INCREMENT for table `owners`
@@ -525,13 +546,13 @@ ALTER TABLE `ratings`
 -- AUTO_INCREMENT for table `restaurants`
 --
 ALTER TABLE `restaurants`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT for table `submitted_orders`
 --
 ALTER TABLE `submitted_orders`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=22;
 
 --
 -- AUTO_INCREMENT for table `tags`

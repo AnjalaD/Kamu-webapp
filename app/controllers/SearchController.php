@@ -5,12 +5,15 @@ use core\H;
 
 class SearchController extends Controller
 {
+    private $_search_model;
+
     public function __construct($controller, $action){
         parent::__construct($controller, $action);
         $this->load_model('FoodItemModel');
         $this->load_model('ItemsModel');
         $this->load_model('RestaurantModel');
         $this->view->set_layout('default');
+        $this->_search_model = $this->fooditemmodel;
     }
 
     public function index_action()
@@ -18,28 +21,27 @@ class SearchController extends Controller
         // H::dnd($this->request->get());
         if($this->request->is_post())
         {
+            $data = $this->request->exists('search_string')? $this->request->get('search_string') : '';
+
             if($this->request->exists('food'))
             {
-                $this->food_action();
+                $this->food_action($data);
             }elseif($this->request->exists('restaurant'))
             {
-                $this->restaurant_action();
+                $this->restaurant_action($data);
             }
         }
     }
 
-    public function food_action()
+    public function food_action($data='')
     {   
-        $data = $this->request->exists('search_string')? $this->request->get('search_string') : '';
-        // H::dnd($results);
         $this->view->post_data = $data;
         $this->view->render('search/food');
     }
     
 
-    public function restaurant_action()
+    public function restaurant_action($data='')
     {
-        $data = $this->request->exists('search_string')? $this->request->get('search_string') : '';
         $this->view->post_data = $data;
         $this->view->render('search/restaurant');
     }
@@ -48,23 +50,21 @@ class SearchController extends Controller
     //handle auto complete ajax request - in search
     public function auto_complete_action($data=[])
     {
-        $result =[];
+        $results =[];
         if(!empty($data))
         {
             $type = $this->request->get('type');
-            if(!$type)
-            {
-                $result = array_merge($this->itemsmodel->auto_complete('item_name',$data), $this->restaurantmodel->auto_complete('restaurant_name',$data));
-            }elseif($type == 1)
-            {
-                $result = $this->itemsmodel->auto_complete('item_name',$data);
-            }elseif($type == 2)
-            {
-                $result = $this->restaurantmodel->auto_complete('restaurant_name',$data);
+            if($type == 1) {
+                $this->_search_model = $this->itemsmodel;
+            } elseif($type == 2) {
+                $this->_search_model = $this->restaurantmodel;
+            } else {
+                $this->_search_model = $this->itemsmodel;
             }
         }
+        $results = $this->_search_model->auto_complete($data);
         // H::dnd($result);
-        return $this->json_response($result);
+        return $this->json_response($results);
     }
 
 
@@ -86,16 +86,13 @@ class SearchController extends Controller
         $filters = $this->request->get();
         $this->request->csrf_check();
 
-        if($type==1)
-        {
-            $items = $this->fooditemmodel->filter($filters, $page);
-            $response = $items;
+        if($type==1) {
+            $this->_search_model = $this->fooditemmodel;
+        } elseif($type==2) {
+            $this->_search_model = $this->restaurantmodel;
         }
-        elseif($type==2)
-        {
-            $restaurants = $this->restaurantmodel->filter($filters, $page);
-            $response = $restaurants;
-        }
+
+        $response = $this->_search_model->filter($filters, $page);
         
         return $this->json_response($response);
     }

@@ -41,6 +41,7 @@
             </div>
         </div>
     </div>
-
-    <input type="submit" id="save_filter" class="btn" value="save">
+    <div class="text-center">
+        <input type="submit" id="save_filter" class="btn btn-primary my-3" value="Apply Filters">
+    </div>
 </form>

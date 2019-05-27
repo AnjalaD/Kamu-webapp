@@ -122,9 +122,9 @@ public static function create_card($item)
       <div class="mt-1 mb-0">
         <i class="icon-shopping-cart icon-2x"></i>
         <?php if ((Session::exists('items')) && (array_key_exists($item->id, json_decode(Session::get('items'), true)['items']))) : ?>
-            <a class="btn btn-info pull-right" onClick="">Item Added</a>
+            <button class="btn btn-danger pull-right" onClick="removeFromOrder(<?= $item->restaurant_id ?>, <?= $item->id ?>,this)">Remove Item</button>
         <?php else : ?>
-          <a class="btn btn-info pull-right" onClick="addToOrder(<?= $item->restaurant_id ?>, <?= $item->id ?>,this)">Add to Order</a>
+          <button class="btn btn-info pull-right" onClick="addToOrder(<?= $item->restaurant_id ?>, <?= $item->id ?>,this)">Add to Order</button>
         <?php endif ?>
       </div>
     </div>
@@ -150,37 +150,37 @@ public static function create_order_dropdown($item_list, $order_id)
   ob_start(); ?>
 
   <div class="dropdown-item">
-          <div class="row">
-            <table class="table text-center">
-              <thead>
-                <tr>
-                  <th> Item</th>
-                  <th> Qty</th>
-                </tr>
-              </thead>
-              <tbody>
-              <?php foreach ($item_list as $item) : ?>
-                <tr>
-                  <?php if($item->deleted == 1) :?>
-                  <td>This item no longer exsits</td>
-                  <?php else :?>
-                  <td><?= $item->item_name ?></td>
-                  <td><?= $item->quantity ?></td>
-                  <?php endif ?>
-                </tr>
-              <?php endforeach ?>
-              </tbody>
-            </table>
-          </div>
-          <div class="row">
-            <div class="col-md-6 text-center">
-              <a href="<?= SROOT ?>order/remove_saved_order/<?= $order_id ?>"><button class="btn btn-danger"  >Delete</button></a>
-            </div>
-            <div class="col-md-6 text-center" >
-              <a  href="<?= SROOT ?>order/use_saved_order/<?= $order_id ?>"><button class="btn btn-success">Use now</button></a>
-            </div>
-          </div>
-        </div>
+    <div class="row">
+      <table class="table text-center">
+        <thead>
+          <tr>
+            <th> Item</th>
+            <th> Qty</th>
+          </tr>
+        </thead>
+        <tbody>
+          <?php foreach ($item_list as $item) : ?>
+            <tr>
+              <?php if ($item->deleted == 1) : ?>
+                <td>This item is no longer available</td>
+              <?php else : ?>
+                <td><?= $item->item_name ?></td>
+                <td><?= $item->quantity ?></td>
+              <?php endif ?>
+            </tr>
+          <?php endforeach ?>
+        </tbody>
+      </table>
+    </div>
+    <div class="row">
+      <div class="col-md-6 text-center">
+        <a href="<?= SROOT ?>order/remove_saved_order/<?= $order_id ?>"><button class="btn btn-danger">Delete</button></a>
+      </div>
+      <div class="col-md-6 text-center">
+        <a href="<?= SROOT ?>order/use_saved_order/<?= $order_id ?>"><button class="btn btn-success">Use now</button></a>
+      </div>
+    </div>
+  </div>
 
   <?php
   return ob_get_clean();
@@ -258,8 +258,8 @@ public static function create_pending_order_card($order)
       </div>
       <div class="col-md-3 text-center">
         <a class="btn btn-light" style="background-color: #fa0404; width: auto; height: 90%; color: #ffffff;" href="<?= SROOT . 'order/reject_order/' . $order->id ?>""><small>Reject </small></a>
-            </div>
-            <div class=" col-md-3 text-center">
+              </div>
+              <div class=" col-md-3 text-center">
           <a class="btn btn-light" style="width: auto; height: 90%; background-color: #17f607;" href="<?= SROOT . 'order/accept_order/' . $order->id ?>">Accept </a>
       </div>
     </div>
@@ -358,76 +358,45 @@ public static function create_pending_order_card_for_customer($order)
 {
   ob_start(); ?>
 
-  <div class="order-card p-5">
-    <div class="row">
-      <div class="col-md-6" style="padding-right: 0;">
-        <h5 style="background-color: #9d2525; color: #FFFFFF; padding: 5px;"><?= $order->order_code ?></h5>
+  <div class="order-card px-3">
+    <div class="pt-3 p-1 m-1" style="background-color: #9d2525; color: #FFFFFF;">
+      <h6>Order code</h6>
+      <h5><?= $order->order_code ?></h5>
+    </div>
+    <div class="pt-3 p-1 m-1" style="background-color: rgba(234, 167, 15, 0.73);">
+      <h6>Delivery time</h6>
+      <h5><?= $order->delivery_time ?></h5>
+    </div>
+
+    <div class="text-center p-2 pt-4 pb-0">
+      <p>Restaurant: <?= $order->restaurant_name ?></p>
+    </div>
+
+    <div class="text-center p-2 pb-0">
+      <p>Total: <?= $order->total_price ?> LKR</p>
+    </div>
+
+    <div class="row mb-5">
+      <div class="col-md-12 text-center">
+        <?php if ($order->accepted == 0 && $order->rejected == 0) : ?>
+          <label class="btn" style="background-color:black; color:white;">Pending <i class="fa fa-circle-o-notch fa-spin"></i></label>
+        <?php elseif ($order->accepted == 1) : ?>
+          <label class="btn btn-success" style="background-color:green; color:white;">Accepted <i class="fa fa-check"></i></label>
+        <?php elseif ($order->rejected == 1) : ?>
+          <label class="btn" style="background-color:red; color:white;">Rejected <i class="fa fa-ban"></i></label>
+        <?php endif ?>
       </div>
-      <div class="col-md-6" style="padding-left: 0;">
-        <h5 style="padding: 5px; background-color: rgba(234, 167, 15, 0.73);"><?= $order->delivery_time ?></h5>
+    </div>
+    <div class="row mb-2">
+      <div class="col-md-6 text-left">
+        <button class="btn btn-info">View info</button>
+      </div>
+      <div class="col-md-6 text-right">
+        <a class="btn btn-danger" href="<?= SROOT ?>order/cancel_pending_order/<?= $order->id ?>">Cancel</a>
       </div>
     </div>
 
-    <div class="row">
 
-      <div class="col-md-4 text-center">
-        <!-- <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> View Items </button> -->
-        <!-- <div class="dropdown-menu" aria-labelledby="dropdownMenuButton"> -->
-          <table class="table">
-            <thead>
-              <tr class="thead-dark text-left">
-                <th class="col-md-10">Item</th>
-                <th class="col-md-2">Qty</th>
-              </tr>
-            </thead>
-            <tbody>
-              <?php $items = json_decode($order->items, true) ?>
-
-              <?php foreach ($items as $item_id => $qty) :?>
-              <tr>
-                <td class="text-left"><?= $item_id ?></td>
-                <td><?= $qty ?></td>
-              </tr>
-              <?php endforeach ?>
-            </tbody>
-          </table>
-        </div>
-      
-
-      <div class="col-md-4 text-center">
-        <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" style="height: 80%; width: auto;"> View Notes </button>
-        <div class="dropdown-menu" aria-labelledby="dropdownMenuButton2">
-          <div class="overflow-auto dropdown-item" rows="" style="width: auto;"><?= $order->notes ?></div>
-        </div>
-      </div>
-
-      <div class="col-md-4 text-center ">
-          <p><?= $order->total_price ?> LKR</p>
-      </div>
-    </div>
-
-    <div class="row" style="display:inline">
-      <div class="text-right">
-        <a class="btn btn-danger" href="<?=SROOT?>order/cancel_pending_order/<?=$order->id?>">Cancel</a> 
-      </div>       
-    </div> 
-
-    
-
-    <!-- <div class="row" style="height: auto;"> -->
-      <!-- <div class="col-md-6 text-center">
-        <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" style="height: 80%; width: auto;"> View Notes </button>
-        <div class="dropdown-menu" aria-labelledby="dropdownMenuButton2">
-          <div class="overflow-auto dropdown-item" rows="" style="width: auto;"><?= $order->notes ?></div>
-        </div>
-      </div> -->
-      <!-- <div class="col-md-3 text-center">
-        <a class="btn btn-light" style="background-color: #fa0404; width: auto; height: 90%; color: #ffffff;" href="<?= SROOT . 'order/reject_order/' . $order->id ?>""><small>Reject </small></a>
-              </div>
-              <div class=" col-md-3 text-center">
-          <a class="btn btn-light" style="width: auto; height: 90%; background-color: #17f607;" href="<?= SROOT . 'order/accept_order/' . $order->id ?>">Accept </a>
-      </div> -->
-    <!-- </div> -->
   </div>
   <?php
   return ob_get_clean();
@@ -530,6 +499,4 @@ public static function create_restaurant_card($restaurant)
   <?php
   return ob_get_clean();
 }
-
-
 }
