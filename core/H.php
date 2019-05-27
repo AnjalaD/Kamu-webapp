@@ -450,19 +450,83 @@ public static function create_restaurant_card_list($restaurants)
 public static function create_restaurant_card($restaurant)
 {
   ob_start() ?>
-  <div class="grid-item card m-1" style="border-top: 2px solid; border-left: 2px solid; border-right: 15px solid #9d2525; border-style: solid; border-bottom: 10px solid #9d2525; border-bottom-right-radius: 62px; display: grid; grid-template-columns: fit-content(50%) 3fr; grid-template-rows: 55px repeat(auto-fit, minmax(180px, 210px)); grid-template-areas: 'info info' 'gallery map'; min-width: 450px;">
-    <div style="grid-area:1 / 1 / 2 / 3;" class="info">
-      <h3 class="name" style="background-image: -webkit-linear-gradient(top, rgb(208, 77, 77) 78.1429%, rgb(157, 37, 37) 94.8571%);"><?=$restaurant->restaurant_name?></h3>
-      <h3 class="number" style="background-color: #fbd367; text-align: right; font-size: 25px; font-family: Aclonica; background-image: -webkit-linear-gradient(top, rgb(251, 210, 101) 82.8571%, rgb(178, 141, 43) 96%);"><?=$restaurant->telephone?></h3>
-    </div>
-    <div style="grid-area:2 / 1 / 3 / 2;" class="gallery">
-      <img class="d-block w-100" src="<?=$restaurant->image_url ?>">
-    </div>
-    <div style="grid-area: 2 / 2 / 3 / 3; border-bottom-right-radius: 46px; border-bottom: 1px solid; border-right: 1px solid;" class="map">
-      <p class="address"><?=$restaurant->address?></p>
-      <p class="email"><?=$restaurant->email?></p>
-    </div>
-  </div>
+  <div class="restaurant-card">
+            <div class="row">
+                <div class="col-md-6">
+                    <h4 style="background-color: #9d2525; color: #FFFFFF; padding: 5px;"><?=$restaurant->restaurant_name ?></h4> 
+                </div>
+                <div class="col-md-6">
+                    <h4 style="padding: 5px; background-color: rgba(234, 167, 15, 0.73);"><?=$restaurant->telephone ?></h4> 
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-6">
+                    <div>
+                        <div id="carousel<?= $restaurant->id ?>" class="carousel slide" data-ride="carousel"> 
+                            <ol class="carousel-indicators"> 
+                                <li data-target="#carousel1" data-slide-to="0" class="active"></li>                                 
+                                <li data-target="#carousel1" data-slide-to="1"></li>                                 
+                                <li data-target="#carousel1" data-slide-to="2"></li>                                 
+                            </ol>                             
+                            <div class="carousel-inner" style="height: 15rem;"> 
+                                <div class="carousel-item active"> 
+                                    <img class="d-block w-100" src="<?= $restaurant->image_url ?>" alt="First slide"> 
+                                </div>                                 
+                                <div class="carousel-item"> 
+                                    <img class="d-block w-100" src="http://pinegrow.com/placeholders/img15.jpg" alt="Second slide"> 
+                                </div>                                 
+                                <div class="carousel-item"> 
+                                    <img class="d-block w-100" src="http://pinegrow.com/placeholders/img16.jpg" alt="Third slide"> 
+                                </div>                                 
+                            </div>                             
+                            <a class="carousel-control-prev" href="#carousel<?= $restaurant->id ?>" role="button" data-slide="prev"> <span class="carousel-control-prev-icon" aria-hidden="true"></span> <span class="sr-only">Previous</span> </a> 
+                            <a class="carousel-control-next" href="#carousel<?= $restaurant->id ?>" role="button" data-slide="next"> <span class="carousel-control-next-icon" aria-hidden="true"></span> <span class="sr-only">Next</span> </a> 
+                        </div>
+                    </div>                     
+                </div>
+                <div class="col-md-6" style="padding: 0px 52px 0 33px;">
+                    <div class="row" style="padding-left: 16px;">
+                        <address><strong><?=$restaurant->restaurant_name ?>,</strong><br><?=$restaurant->address ?> <br><a href=""><?=$restaurant->email ?></a></address>
+                    </div>
+                    <div class="row" style="margin-top: -10px;">
+                        <div class="col-md-10">
+                            <div class="card-group"> 
+                                <div class="card"> 
+                                    <div class="card-body"> 
+                                        <h6 class="card-title">Card title</h6> 
+                                        <p class="card-text">Price</p> 
+                                    </div>                                     
+                                    <div class="card-footer"> 
+                                        <small class="text-muted">Rating</small> 
+                                    </div>                                     
+                                </div>                                 
+                                <div class="card"> 
+                                    <div class="card-body"> 
+                                        <h6 class="card-title">Card title</h6> 
+                                        <p class="card-text">Price</p> 
+                                    </div>                                     
+                                    <div class="card-footer"> 
+                                        <small class="text-muted">Rating</small> 
+                                    </div>                                     
+                                </div>                                 
+                                <div class="card"> 
+                                    <div class="card-body"> 
+                                        <h6 class="card-title">Card title</h6> 
+                                        <p class="card-text">Price</p> 
+                                    </div>                                     
+                                    <div class="card-footer"> 
+                                        <small class="text-muted">Rating</small> 
+                                    </div>                                     
+                                </div>                                 
+                            </div>                             
+                        </div>
+                        <div class="col-md-2"> 
+                            <a style="font-size: 70px;" href=""><span aria-hidden="true">&raquo;</span></a>
+                        </div>
+                    </div>                                          
+                </div>
+            </div>
+        </div>
   <?php
   return ob_get_clean();
 }
