@@ -5,9 +5,9 @@ use core\validators\MaxValidator;
 use core\validators\RequiredValidator;
 use core\validators\NumericValidator;
 use core\H;
+use app\interfaces\SearchAlgo;
 
-
-class RestaurantModel extends Model
+class RestaurantModel extends Model implements SearchAlgo
 {
     public $restaurant_name, $address, $telephone, $email, $lng, $lat, $image_url=DEFUALT_RESTAURANT_IMAGE, $verified=0, $deleted = 0;
     private $items_per_page = 9;
@@ -70,10 +70,10 @@ class RestaurantModel extends Model
         return false;
     }
 
-    public function auto_complete($field, $data)
+    public function auto_complete($data)
     {
         $results = [];
-        if($items = $this->search($field, $data))
+        if($items = $this->search('restaurant_name', $data))
         {
             foreach($items as $item)
             {

@@ -6,9 +6,9 @@ use core\validators\MaxValidator;
 use core\validators\RequiredValidator;
 use core\validators\NumericValidator;
 use core\H;
+use app\interfaces\SearchAlgo;
 
-
-class ItemsModel extends Model
+class ItemsModel extends Model implements SearchAlgo
 {
     public $restaurant_id, $item_name, $description, $price, $image_url = DEFUALT_ITEM_IMAGE, $rating = 0, $rating_num = 0, $deleted = 0, $hidden = false;
 
@@ -51,10 +51,10 @@ class ItemsModel extends Model
         $this->run_validation(new NumericValidator($this, ['field' => 'price', 'rule' => true, 'msg' => 'Price should be numeric!']));
     }
 
-    public function auto_complete($field, $data)
+    public function auto_complete($data)
     {
         $results = [];
-        if ($items = $this->search($field, $data)) {
+        if ($items = $this->search('item_name', $data)) {
             foreach ($items as $item) {
                 $results[] = $item->item_name;
             }
@@ -81,6 +81,11 @@ class ItemsModel extends Model
             $items[] = $item;
         }
         return $items;
+    }
+
+    public function filter($filters, $page)
+    {
+        return '';
     }
     
 }
