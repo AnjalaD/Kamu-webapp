@@ -456,7 +456,7 @@ public static function create_restaurant_card($restaurant)
                     <h4 style="background-color: #9d2525; color: #FFFFFF; padding: 5px;"><?=$restaurant->restaurant_name ?></h4> 
                 </div>
                 <div class="col-md-6">
-                    <h4 style="padding: 5px; background-color: rgba(234, 167, 15, 0.73);"><?=$restaurant->telephone ?></h4> 
+                    <h4 style="padding: 5px; background-color: rgba(234, 167, 15, 0.73);"><i class="fa fa-phone" style="color:#9D2525"></i> <?=$restaurant->telephone ?></h4> 
                 </div>
             </div>
             <div class="row">
@@ -521,7 +521,7 @@ public static function create_restaurant_card($restaurant)
                             </div>                             
                         </div>
                         <div class="col-md-2"> 
-                            <a style="font-size: 70px;" href=""><span aria-hidden="true">&raquo;</span></a>
+                            <a style="font-size: 70px;" href="<?= SROOT.'restaurant/details/'.$restaurant->id ?>"><span aria-hidden="true">&raquo;</span></a>
                         </div>
                     </div>                                          
                 </div>
