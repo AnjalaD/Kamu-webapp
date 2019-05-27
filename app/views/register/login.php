@@ -43,11 +43,12 @@ $token = FH::generate_token();
         <a href="<?= SROOT ?>register/forgot/customer" id="Login_ForgotEmail_TextLabel" class="TextLabel">Forgot your email or password?</a>
     </form>
 
-    <button style=" position: fixed; bottom: 20px; right: 30px; font-family:Aclonica;
+    <a href="<?= SROOT ?>register/login_owner" style="color: white;">
+        <button style=" position: fixed; bottom: 20px; right: 30px; font-family:Aclonica;
             border-width:3px; border-color:#FFFFCC outline: none; background-color: #9d2525;
-             cursor: pointer; padding: 10px; border-radius: 10px; font-size: 15px;">
-        <a href="<?= SROOT ?>register/login_owner" style="color: white;">Login as Other User</a>
-    </button>
+             cursor: pointer; padding: 10px; border-radius: 10px; font-size: 15px; color: white;">
+            Login as Other User</button>
+    </a>
 
 </div>
 
