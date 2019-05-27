@@ -71,12 +71,12 @@ class ItemsModel extends Model
         return ($items) ? $items : [];
     }
 
-    public function get_order_items($order)
+    public function get_order_items($order, $get_deleted=false)
     {
         $items = [];
         // H::dnd($order);
         foreach($order as $key => $val) {
-            $item = $this->find_by_id((int)$key);
+            $item = $this->find_by_id((int)$key, $get_deleted);
             $item->quantity = $val;
             $items[] = $item;
         }

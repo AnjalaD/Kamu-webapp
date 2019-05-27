@@ -123,7 +123,7 @@ class OrderController extends Controller
             if(empty($item_objects)){
                 Session::delete('item_objects');
             }else{
-            Session::set('item_objects',$item_objects);
+            Session::set('item_objects', $item_objects);
             }
         }
         Router::redirect('order/order');
@@ -264,13 +264,14 @@ class OrderController extends Controller
     }
 
 
-    //get items of an saves or submitted order - by customer
+    //get items of an saved or submitted order - by customer
     public function get_order_items_action($draft_id)
     {
         $this->request->csrf_check();
         $draft = $this->ordermodel->find_by_id_customer_id($draft_id, UserModel::current_user()->id);
         if($draft) {
-            $items = $this->itemsmodel->get_order_items(json_decode($draft->items));
+            $items = $this->itemsmodel->get_order_items(json_decode($draft->items), true);
+            // H::dnd($items);  
             $resposnse = H::create_order_dropdown($items, $draft->id);
         } else {
             $resposnse = '<li>Error occured</li>';
