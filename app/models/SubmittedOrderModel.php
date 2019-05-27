@@ -54,13 +54,13 @@ class SubmittedOrderModel extends Model
         return $this->find($conditions);
     }
 
-    public function find_all_pending_by_id_customer_id($customer_id)
+    public function find_all_pending_by_id_customer_id($customer_id,$params=[])
     {
         $conditions = [
             'conditions' => 'customer_id=? AND completed=?',
             'bind' => [$customer_id, 0]
         ];
-        $conditions = array_merge($conditions);
+        $conditions = array_merge($conditions,$params);
         return $this->find($conditions);
     }
 

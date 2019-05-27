@@ -164,7 +164,7 @@ class OrderController extends Controller
 
     public function pending_orders_action()
     {
-        $orders = $this->submittedordermodel->find_all_pending_by_id_customer_id(CustomerModel::current_user()->id);
+        $orders = $this->submittedordermodel->find_all_pending_by_id_customer_id(CustomerModel::current_user()->id,["order"=>"time_stamp DESC"]);
         foreach($orders as $order){
             $order->restaurant_name = $this->restaurantmodel->find_by_id($order->restaurant_id)->restaurant_name;
         }
