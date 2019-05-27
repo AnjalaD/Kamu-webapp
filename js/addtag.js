@@ -17,15 +17,11 @@ function automaticallyAddNameTag() {
     if(previous_name_tag != null){
         deleteTag(previous_name_tag);
     }
-        
-    //previous_name_tag_value = name_tag_value;
 
     addTag(name_tag_value);
 }
 
 function addCustomTag(){
-    console.log("add tag called");
-
     var tag = document.getElementById("AddItem_TagsInput");
     var tag_value = tag.value;
 
@@ -35,10 +31,6 @@ function addCustomTag(){
 }
 
 function addTag(tag_value){
-    //need to restrict the max length of a tag
-
-    console.log("add custom tag called");
-
     tag_value = tag_value.trim().toLowerCase();
 
     if(tag_value != ""){
@@ -90,14 +82,12 @@ function addTag(tag_value){
             div_added_tags.appendChild(tag_card);
     
             updateInput();
-    
-            console.log(added_tags);
         } else {
-            //message to say that tag already exists
+            //tag already exists
         }
 
     } else {
-        //message to say that empty tags cannot be added
+        //empty tags cannot be added
     }
 }
 
@@ -117,22 +107,15 @@ function deleteTag(tag_card){
     tag_card.parentNode.removeChild(tag_card);
 
     updateInput();
-
-    console.log(added_tags);
 }
 
 function updateInput(){
     var hidden_input = document.getElementById("added_tags_array");
     hidden_input.value = added_tags.join(',');
-
-    console.log(hidden_input.value);
 }
 
 function loadPreviousTags(previous_tag_array){
-    console.log(previous_tag_array);
-
-    for(var i = 0; i < previous_tag_array.length; i++){
-        console.log("inside loop");
+     for(var i = 0; i < previous_tag_array.length; i++){
         addTag(previous_tag_array[i]);
     }
 }

@@ -352,6 +352,85 @@ public static function create_all_order_cards_list($pending_orders, $accepted_or
   return $html;
 }
 
+public static function create_pending_order_card_for_customer($order)
+{
+  ob_start(); ?>
+
+  <div class="order-card p-5">
+    <div class="row">
+      <div class="col-md-6" style="padding-right: 0;">
+        <h5 style="background-color: #9d2525; color: #FFFFFF; padding: 5px;"><?= $order->order_code ?></h5>
+      </div>
+      <div class="col-md-6" style="padding-left: 0;">
+        <h5 style="padding: 5px; background-color: rgba(234, 167, 15, 0.73);"><?= $order->delivery_time ?></h5>
+      </div>
+    </div>
+
+    <div class="row">
+
+      <div class="col-md-4 text-center">
+        <!-- <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> View Items </button> -->
+        <!-- <div class="dropdown-menu" aria-labelledby="dropdownMenuButton"> -->
+          <table class="table">
+            <thead>
+              <tr class="thead-dark text-left">
+                <th class="col-md-10">Item</th>
+                <th class="col-md-2">Qty</th>
+              </tr>
+            </thead>
+            <tbody>
+              <?php $items = json_decode($order->items, true) ?>
+
+              <?php foreach ($items as $item_id => $qty) :?>
+              <tr>
+                <td class="text-left"><?= $item_id ?></td>
+                <td><?= $qty ?></td>
+              </tr>
+              <?php endforeach ?>
+            </tbody>
+          </table>
+        </div>
+      
+
+      <div class="col-md-4 text-center">
+        <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" style="height: 80%; width: auto;"> View Notes </button>
+        <div class="dropdown-menu" aria-labelledby="dropdownMenuButton2">
+          <div class="overflow-auto dropdown-item" rows="" style="width: auto;"><?= $order->notes ?></div>
+        </div>
+      </div>
+
+      <div class="col-md-4 text-center ">
+          <p><?= $order->total_price ?> LKR</p>
+      </div>
+    </div>
+
+    <div class="row" style="display:inline">
+      <div class="text-right">
+        <a class="btn btn-danger" href="<?=SROOT?>order/cancel_pending_order/<?=$order->id?>">Cancel</a> 
+      </div>       
+    </div> 
+
+    
+
+    <!-- <div class="row" style="height: auto;"> -->
+      <!-- <div class="col-md-6 text-center">
+        <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" style="height: 80%; width: auto;"> View Notes </button>
+        <div class="dropdown-menu" aria-labelledby="dropdownMenuButton2">
+          <div class="overflow-auto dropdown-item" rows="" style="width: auto;"><?= $order->notes ?></div>
+        </div>
+      </div> -->
+      <!-- <div class="col-md-3 text-center">
+        <a class="btn btn-light" style="background-color: #fa0404; width: auto; height: 90%; color: #ffffff;" href="<?= SROOT . 'order/reject_order/' . $order->id ?>""><small>Reject </small></a>
+              </div>
+              <div class=" col-md-3 text-center">
+          <a class="btn btn-light" style="width: auto; height: 90%; background-color: #17f607;" href="<?= SROOT . 'order/accept_order/' . $order->id ?>">Accept </a>
+      </div> -->
+    <!-- </div> -->
+  </div>
+  <?php
+  return ob_get_clean();
+}
+
 
 public static function create_restaurant_card_list($restaurants)
 {
