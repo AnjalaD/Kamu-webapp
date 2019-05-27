@@ -13,10 +13,10 @@ $this->token = FH::generate_token();
 <?php $this->end(); ?>
 
 <?php $this->start('body'); ?>
-<div class="card-header py-2 mx-4 mb-3 d-flex justify-content-between align-items-center" style="background:#9d2525; color:white; font-family:Aclonica;">
-            <div></div>    
-            <h3>My Current Order</h3>
-            <div></div>
+<div class="card-header py-2 mx-4 mb-3 d-flex justify-content-between align-items-center" style="background:#9d2525; color:white; font-family:Aclonica;margin-top:2rem;">
+    <div></div>
+    <h3>My Current Order</h3>
+    <div></div>
 </div>
 <div class="container">
     <?php if (isset($this->items) && !empty($this->items)) : ?>
@@ -52,8 +52,8 @@ $this->token = FH::generate_token();
                 </tbody>
                 <tfoot>
                     <!-- <tr class="visible-xs">
-                                                                    <td class="text-center"><strong>Total 1.99</strong></td>
-                                                                </tr> -->
+                                                                        <td class="text-center"><strong>Total 1.99</strong></td>
+                                                                    </tr> -->
                     <tr>
                         <td><a href="javascript:history.go(-1)" class="btn btn-warning"><i class="fa fa-angle-left"></i> Continue Shopping</a></td>
                         <td colspan="2" class="hidden-xs"></td>
@@ -177,43 +177,46 @@ $this->token = FH::generate_token();
             </div>
 
         <?php else : ?>
-            <h2>No items selected for current order</h2>
+            <h2 style="font-family:Aclonica; margin-bottom:4rem;">No items selected for current order</h2>
         <?php endif ?>
-        <div class="row" style="margin:2%;">
-            <div class="col">
+
+
+
+        <div class="row" style="margin:2%;font-family:Aclonica">
+            <div class="col" style="border-width:2px 5px 5px 2px; border-color:#9d2525; border-style:solid; border-bottom-right-radius:20px;margin-right:2rem;">
                 <h3>Saved Orders</h3>
                 <?php if (isset($this->drafts) && !empty($this->drafts)) : ?>
-                    <div style="height:20rem; overflow-y:auto; overflow-x:hidden;">
-                    <?php foreach ($this->drafts as $order) : ?>
-                        <div class="row">
-                            <div class="dropdown" style="width:80%; margin:2%;">
-                                <button class="btn btn-secondary dropdown-toggle order" type="button" id="<?= $order->id ?>" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" style="width: 100%;"> <?= $order->order_name ?> </button>
-                                <div class="dropdown-menu" aria-labelledby="<?= $order->id ?>" role="menu">
-                                    <img src="" alt="loading...">
+                    <div style="height:20rem; overflow-y:auto; overflow-x:hidden; ">
+                        <?php foreach ($this->drafts as $order) : ?>
+                            <div class="row">
+                                <div class="dropdown" style="width:80%; margin:2%;">
+                                    <button class="btn btn-secondary dropdown-toggle order" type="button" id="<?= $order->id ?>" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" style="width: 100%;"> <?= $order->order_name ?> </button>
+                                    <div class="dropdown-menu" aria-labelledby="<?= $order->id ?>" role="menu">
+                                        <img src="" alt="loading...">
+                                    </div>
                                 </div>
                             </div>
-                        </div>
-                    <?php endforeach ?>
+                        <?php endforeach ?>
                     </div>
                 <?php else : ?>
                     <p> No saved drafts </p>
                 <?php endif ?>
             </div>
-            <div class="col">
+            <div class="col" style="border-width:2px 5px 5px 2px; border-color:#9d2525; border-style:solid; border-bottom-right-radius:20px;margin-left:2rem;">
                 <h3>Submitted Orders</h3>
                 <?php if (isset($this->submitted) && !empty($this->submitted)) : ?>
-                <div style="height:20rem; overflow-y:auto;overflow-x:hidden;">
-                    <?php foreach ($this->submitted as $order) : ?>
-                        <div class="row" >
-                            <div class="dropdown" style="width:80%; margin:2%;">
-                                <button class="btn btn-secondary dropdown-toggle order" type="button" id="<?= $order->id ?>" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" style="width: 100%;"> <?= $order->time_stamp ?> </button>
-                                <div class="dropdown-menu" aria-labelledby="<?= $order->id ?>" role="menu">
-                                    <img src="" alt="loading...">
+                    <div style="height:20rem; overflow-y:auto;overflow-x:hidden;">
+                        <?php foreach ($this->submitted as $order) : ?>
+                            <div class="row">
+                                <div class="dropdown" style="width:80%; margin:2%;">
+                                    <button class="btn btn-secondary dropdown-toggle order" type="button" id="<?= $order->id ?>" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" style="width: 100%;"> <?= $order->time_stamp ?> </button>
+                                    <div class="dropdown-menu" aria-labelledby="<?= $order->id ?>" role="menu">
+                                        <img src="" alt="loading...">
+                                    </div>
                                 </div>
                             </div>
-                        </div>
-                    <?php endforeach ?>
-                </div>
+                        <?php endforeach ?>
+                    </div>
                 <?php else : ?>
                     <p> No Orders </p>
                 <?php endif ?>

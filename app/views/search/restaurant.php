@@ -5,7 +5,7 @@ $token = FH::generate_token();
 ?>
 <?php $this->set_title('Restaurants'); ?>
 <?php $this->start('head'); ?>
-<link rel="stylesheet" href="<?= SROOT ?>css/restaurant.css">
+<link rel="stylesheet" href="<?= SROOT ?>css/restaurant-card.css">
 <?php $this->end(); ?>
 
 <?php $this->start('body'); ?>

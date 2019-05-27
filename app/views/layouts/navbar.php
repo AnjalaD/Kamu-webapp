@@ -6,6 +6,7 @@ use app\models\UserModel;
 $menu = Router::get_menu('menu_acl');
 ?>
 <link rel="stylesheet" href="<?=SROOT?>css/homestyles.min.css">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Aclonica">
 <nav class="navbar navbar-light navbar-expand-md navigation-clean-button" id="NavigationBar">
     <div class="container">
         <a class="navbar-brand" href="<?= SROOT ?>"><img src="<?= SROOT ?>assets/img/blacklogokamu200.png" alt="<?= BRAND_NAME ?>" id="Home_NavBar_Logo" class="NavBarLogo"></a>
@@ -21,9 +22,11 @@ $menu = Router::get_menu('menu_acl');
 
             <span class="navbar-item text-right">
                 <?php if (UserModel::current_user()) : ?>
-                <a href="<?=SROOT?>profile/index">Hello
+                <button style="background-color:white; font-family:Aclonica; font-size:1.4rem; padding:15px; border-style:solid; border-width: 4px 2px 2px 2px; border-color: #9d2525; border-radius: 0px 0px 10px 10px; ">
+                <a href="<?=SROOT?>profile/index" style="color: #9d2525;">Hello
                     <?= UserModel::current_user()->first_name ?></a>
                 <?php endif ?>
+                </button>
             </span>
         </div>
     </div>
