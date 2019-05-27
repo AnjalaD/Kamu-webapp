@@ -10,7 +10,7 @@
 <?php $this->start('body'); ?>
 
 
-<div style="background-image:url('<?= SROOT ?>assets/img/54-Verbazingwekkend-Restaurant-Nederlandse-Keuken.jpg'); width:100%;height:1000px;">
+<div style="background-image:url('<?= SROOT ?>assets/img/Vienna_House_Easy_Bad_Oeyenhausen-423.jpg'); background-repeat:no-repeat; width:100%;height:1000px;">
     <div style="padding-top:100px;" class="text-center">
     <?php $this->partial('restaurant', 'form'); ?>
     </div>
