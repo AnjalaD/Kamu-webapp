@@ -428,7 +428,7 @@ class OrderController extends Controller
 
 
     //ajax request handling - send order receipt
-    public function get_order_receipt($order_id)
+    public function get_order_receipt_action($order_id)
     {
         $this->request->csrf_check();
         $order = $this->submittedordermodel->find_pending_by_id_customer_id($order_id, UserModel::current_user()->id);

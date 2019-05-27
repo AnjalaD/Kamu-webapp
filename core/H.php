@@ -389,7 +389,7 @@ public static function create_pending_order_card_for_customer($order)
     </div>
     <div class="row mb-2">
       <div class="col-md-6 text-left">
-        <button class="btn btn-info">View info</button>
+        <button onclick="viewOrderReceipt(<?=$order->id?>)" class="btn btn-info">View info</button>
       </div>
       <div class="col-md-6 text-right">
         <a class="btn btn-danger" href="<?= SROOT ?>order/cancel_pending_order/<?= $order->id ?>">Cancel</a>
@@ -562,7 +562,8 @@ public static function create_receipt($order)
       </tbody>
     </table>
     <div class="text-center font-weight-bold">
-      <h3>Your Order Code is : <b>$order->order_code</b></h3>
+      <h3>Your Order Code is : <b><?=$order->order_code?></b></h3>
+      <h3>Delivery Time : <b><?=$order->delivery_time?></b></h3>
     </div>
 
 
