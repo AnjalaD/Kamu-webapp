@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 4.8.2
+-- version 4.8.4
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: May 27, 2019 at 02:21 PM
--- Server version: 10.1.34-MariaDB
--- PHP Version: 7.2.7
+-- Generation Time: May 27, 2019 at 02:29 PM
+-- Server version: 10.1.37-MariaDB
+-- PHP Version: 7.3.1
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET AUTOCOMMIT = 0;
@@ -294,6 +294,7 @@ INSERT INTO `ratings` (`id`, `item_id`, `customer_id`, `rating`) VALUES
 
 CREATE TABLE `restaurants` (
   `id` int(11) NOT NULL,
+  `owner_id` int(11) NOT NULL,
   `restaurant_name` varchar(150) COLLATE utf8_unicode_ci NOT NULL,
   `address` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
   `image_url` varchar(200) COLLATE utf8_unicode_ci NOT NULL,
@@ -309,9 +310,9 @@ CREATE TABLE `restaurants` (
 -- Dumping data for table `restaurants`
 --
 
-INSERT INTO `restaurants` (`id`, `restaurant_name`, `address`, `image_url`, `telephone`, `email`, `lng`, `lat`, `verified`, `deleted`) VALUES
-(1, 'Kama Kade', '190 tpl', '/Kamu_1.0/exported/img/restaurant/1558533839.png', '12482042', 'kkadilhara@gmail.com', 80, 7, 1, 0),
-(2, 'Shop', '3421 rd', '/Kamu_1.0/exported/img/restaurant/1558533870.png', '12482123', 'sda@gmail.com', 81, 8, 1, 0);
+INSERT INTO `restaurants` (`id`, `owner_id`, `restaurant_name`, `address`, `image_url`, `telephone`, `email`, `lng`, `lat`, `verified`, `deleted`) VALUES
+(1, 1, 'Kama Kade', '190 tpl', '/Kamu_1.0/exported/img/restaurant/1558533839.png', '12482042', 'kkadilhara@gmail.com', 80, 7, 1, 0),
+(2, 2, 'Shop', '3421 rd', '/Kamu_1.0/exported/img/restaurant/1558533870.png', '12482123', 'sda@gmail.com', 81, 8, 1, 0);
 
 -- --------------------------------------------------------
 

@@ -58,35 +58,20 @@
         <footer>
             <div class="container">
                 <div class="row justify-content-center">
-                    <!-- Start: Services -->
-                    <div class="col-sm-4 col-md-3 item" id="item1">
-                        <h3 id="Heading1" class="Heading">Services</h3>
-                        <ul id="footerText1" class="footerText">
-                            <li><a href="#">Web design</a></li>
-                            <li><a href="#">Development</a></li>
-                            <li><a href="#">Hosting</a></li>
-                        </ul>
-                    </div>
-                    <!-- End: Services -->
-                    <!-- Start: About -->
-                    <div class="col-sm-4 col-md-3 item">
-                        <h3 id="Heading2" class="Heading">About</h3>
-                        <ul id="footerText2" class="footerText">
-                            <li><a href="#">Company</a></li>
-                            <li><a href="#">Team</a></li>
-                            <li><a href="#">Legacy</a></li>
-                        </ul>
-                    </div>
-                    <!-- End: About -->
+                    
+                    <!-- End: Developed By -->
                     <!-- Start: Careers -->
-                    <div class="col-sm-4 col-md-3 item">
-                        <h3 id="Heading3" class="Heading">Careers</h3>
+                    <div class="col-sm-7 col-md-3 item">
+                        <h3 id="Heading3" class="Heading">Developed By</h3>
                         <ul id="footerText3" class="footerText">
-                            <li><a href="#">Job openings</a></li>
-                            <li><a href="#">Employee success</a></li>
-                            <li><a href="#">Benefits</a></li>
+                            <li><a href="#">Anjala Dilhara</a></li>
+                            <li><a href="#">Budvin Chathura</a></li>
+                            <li><a href="#">Thumula Perera</a></li>
+                            <li><a href="#">Chamika Nandasiri</a></li>
+
                         </ul>
                     </div>
+                    <div class="col-sm-4 col-md-3 item"></div>
                     <!-- End: Careers -->
                     <!-- Start: Social Icons -->
                     <div class="col-lg-3 item social"><a href="#"><i class="icon ion-social-facebook"></i></a><a href="#"><i class="icon ion-social-twitter"></i></a><a href="#"><i class="icon ion-social-snapchat"></i></a><a href="#"><i class="icon ion-social-instagram"></i></a>

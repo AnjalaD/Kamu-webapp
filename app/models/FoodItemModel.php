@@ -3,9 +3,9 @@ namespace app\models;
 
 use core\Model;
 use core\H;
+use app\interfaces\SearchAlgo;
 
-
-class FoodItemModel extends Model
+class FoodItemModel extends Model implements SearchAlgo
 {
     public $restaurant_id, $item_name, $description, $price, $image_url = DEFUALT_ITEM_IMAGE, $rating = 0, $tags = '', $deleted = 0, $hidden = 0;
     public $restaurant_name;
@@ -76,6 +76,11 @@ class FoodItemModel extends Model
             $result = null;
         }
         return $result;
+    }
+
+    public function auto_complete($data)
+    {
+        return [];
     }
 
 

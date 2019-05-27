@@ -165,6 +165,9 @@ class OrderController extends Controller
     public function pending_orders_action()
     {
         $orders = $this->submittedordermodel->find_all_pending_by_id_customer_id(CustomerModel::current_user()->id);
+        foreach($orders as $order){
+            $order->restaurant_name = $this->restaurantmodel->find_by_id($order->restaurant_id)->restaurant_name;
+        }
         $this->view->orders = $orders? $orders : [];
         // H::dnd($orders);
         $this->view->render('order/pending_orders');
@@ -397,6 +400,8 @@ class OrderController extends Controller
         Router::redirect('restricted/error');
     }
 
+
+    //
     public function complete_order_action($order_id){
         $order = $this->submittedordermodel->find_by_id_restaurant_id($order_id, UserModel::current_user()->restaurant_id);
         if($order)
@@ -421,6 +426,14 @@ class OrderController extends Controller
         return $this->json_response($html);
     }
 
-    
 
+    //ajax request handling - send order receipt
+    public function get_order_receipt_action($order_id)
+    {
+        $this->request->csrf_check();
+        $order = $this->submittedordermodel->find_pending_by_id_customer_id($order_id, UserModel::current_user()->id);
+        $order->restaurant = $this->restaurantmodel->find_by_id($order->restaurant_id);
+        $order->items = $this->itemsmodel->get_order_items(json_decode($order->items));
+        return $this->json_response(H::create_receipt($order));
+    }
 }
