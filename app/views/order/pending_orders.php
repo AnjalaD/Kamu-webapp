@@ -18,7 +18,13 @@ use core\H;
 <?php if(empty($this->orders)) :?>
     <h3>No pending orders</h3>
 <?php else :?>
-    <div class="table-wrapper">
+    <div style="height:30rem; overflow-y:scroll;" id="accepted_orders_container">
+        <?php foreach ($this->orders as $order) : ?>
+            <?= H::create_pending_order_card_for_customer($order) ?>
+        <?php endforeach ?>
+    </div>
+    
+    <!-- <div class="table-wrapper">
         <table class="table-hover table-small mb-0" style="table-layout:fixed;">
             <thead>
                 <th>Order Code</th>
@@ -35,7 +41,10 @@ use core\H;
             <?php endforeach ?>
             </tbody>
         </table>
-    </div>
+    </div> -->
+
+</div>
+</div>
 <?php endif ?>
 <?php $this->end(); ?>
 
