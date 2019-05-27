@@ -35,12 +35,12 @@ class Model
         return $results_query;
     }
 
-    public function find_by_id($id)
+    public function find_by_id($id, $get_deleted=false)
     {
         return $this->find_first([
             'conditions' => "id = ?",
             'bind' => [$id]
-            ]);
+        ], $get_deleted);
     }
 
     public function save()
