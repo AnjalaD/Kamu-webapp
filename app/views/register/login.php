@@ -20,32 +20,38 @@ $token = FH::generate_token();
     </div> -->
 
 
-            <form method="post" id="Login_Main_LoginBox" class="LoginBox" action="<?= SROOT ?>register/login">
-                <h2 class="sr-only">User-Login Form</h2>
-                <?= FH::csrf_input($token) ?>
-                <?= FH::display_errors($this->display_errors) ?>
-                <div id="Logo_Illustration" class="illustration">
-                    <img src="<?= SROOT ?>assets/img/150monoLogoOnlyKamu.png">
-                </div>
-                <div class="form-group" id="Login_Email_FormGroup">
-                    <input class="form-control TextInput" type="email" name="email" placeholder="Email" id="Login_Email_TextInput">
-                </div>
-                <div class="form-group" id="Login_Password_FormGroup">
-                    <input class="form-control TextInput" type="password" name="password" placeholder="Password" id="Login_Password_TextInput">
-                </div>
-                <div>
-                    <label for="remember_me" style="color:black">Remember Me</label>
-                    <input type="checkbox" name="remember_me" id="remember_me" value="true">
-                </diV>
-                <div class="form-group" id="Login_Button_FormGroup">
-                    <button class="btn btn-primary btn-block Button" type="submit" name="submit" value="submit" id="Login_Button">Customer Login</button>
-                </div>
-                <a href="<?= SROOT ?>register/forgot/customer" id="Login_ForgotEmail_TextLabel" class="TextLabel">Forgot your email or password?</a>
-            </form>
-
+    <form method="post" id="Login_Main_LoginBox" class="LoginBox" action="<?= SROOT ?>register/login">
+        <h2 class="sr-only">User-Login Form</h2>
+        <?= FH::csrf_input($token) ?>
+        <?= FH::display_errors($this->display_errors) ?>
+        <div id="Logo_Illustration" class="illustration">
+            <img src="<?= SROOT ?>assets/img/150monoLogoOnlyKamu.png">
         </div>
-        
-    </div>
+        <div class="form-group" id="Login_Email_FormGroup">
+            <input class="form-control TextInput" type="email" name="email" placeholder="Email" id="Login_Email_TextInput">
+        </div>
+        <div class="form-group" id="Login_Password_FormGroup">
+            <input class="form-control TextInput" type="password" name="password" placeholder="Password" id="Login_Password_TextInput">
+        </div>
+        <div>
+            <label for="remember_me" style="color:black">Remember Me</label>
+            <input type="checkbox" name="remember_me" id="remember_me" value="true">
+        </diV>
+        <div class="form-group" id="Login_Button_FormGroup">
+            <button class="btn btn-primary btn-block Button" type="submit" name="submit" value="submit" id="Login_Button">Customer Login</button>
+        </div>
+        <a href="<?= SROOT ?>register/forgot/customer" id="Login_ForgotEmail_TextLabel" class="TextLabel">Forgot your email or password?</a>
+    </form>
+
+    <button style=" position: fixed; bottom: 20px; right: 30px; font-family:Aclonica;
+            border-width:3px; border-color:#FFFFCC outline: none; background-color: #9d2525;
+             cursor: pointer; padding: 10px; border-radius: 10px; font-size: 15px;">
+        <a href="<?= SROOT ?>register/login_owner" style="color: white;">Login as Other User</a>
+    </button>
+
+</div>
+
+</div>
 </div>
 
 <?php $this->end(); ?>
