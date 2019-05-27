@@ -22,7 +22,7 @@
         "denied": {},
         "Items" : ["update_rating"],
         "Order": ["order", "remove_from_order", "submit_order", "cancel_order", "save_draft", "get_order_items",
-            "use_saved_order", "remove_saved_order", "change_item_quantity", "get_total", "pending_orders", "cancel_pending_order"]
+            "use_saved_order", "remove_saved_order", "change_item_quantity", "get_total", "pending_orders", "cancel_pending_order", "get_order_receipt"]
     },
 
     "Owner": {

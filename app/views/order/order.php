@@ -52,8 +52,8 @@ $this->token = FH::generate_token();
                 </tbody>
                 <tfoot>
                     <!-- <tr class="visible-xs">
-                                                                        <td class="text-center"><strong>Total 1.99</strong></td>
-                                                                    </tr> -->
+                                                                            <td class="text-center"><strong>Total 1.99</strong></td>
+                                                                        </tr> -->
                     <tr>
                         <td><a href="javascript:history.go(-1)" class="btn btn-warning"><i class="fa fa-angle-left"></i> Continue Shopping</a></td>
                         <td colspan="2" class="hidden-xs"></td>
@@ -80,7 +80,7 @@ $this->token = FH::generate_token();
                             <div class="modal-body">
                                 <div class="container-fluid">
                                     <div class="row">
-                                        <div class="well col-xs-10 col-sm-10 col-md-6 col-xs-offset-1 col-sm-offset-1 col-md-offset-3" style="max-width:100%;flex-basis:100%;">
+                                        <div class="col-xs-10 col-sm-10 col-md-6 col-xs-offset-1 col-sm-offset-1 col-md-offset-3" style="max-width:100%;flex-basis:100%;">
                                             <div class="row">
                                                 <div class="col-xs-6 col-sm-6 col-md-6">
                                                     <address>
@@ -150,9 +150,7 @@ $this->token = FH::generate_token();
                                 </div>
                                 <?php $this->partial('order', 'form'); ?>
                             </div>
-                            <div class="modal-footer">
-                                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                            </div>
+                            <div class="modal-footer"></div>
                         </div>
                     </div>
                 </div>

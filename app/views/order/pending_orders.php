@@ -1,5 +1,8 @@
 <?php
 use core\H;
+use core\FH;
+
+$token = FH::generate_token();
 ?>
 
 <?php $this->set_title('Pending Orders'); ?>
@@ -47,89 +50,24 @@ use core\H;
     </div>
 </div>
 
-<div id="order_submit_form" class="modal fade" role="dialog">
+<div id="order-receipt" class="modal fade" role="dialog">
     <div class="modal-dialog">
         <!-- Modal content-->
         <div class="modal-content">
             <div class="modal-header" style="background:#ef3030;">
-                <h4 class="modal-title ">Submit Order<?= ' ' ?> </h4>
+                <h4 class="modal-title ">Order Receipt<?= ' ' ?> </h4>
                 <button type="button" class="close" data-dismiss="modal">&times;</button>
             </div>
             <div class="modal-body">
                 <div class="container-fluid">
                     <div class="row">
-                        <div class="well col-xs-10 col-sm-10 col-md-6 col-xs-offset-1 col-sm-offset-1 col-md-offset-3" style="max-width:100%;flex-basis:100%;">
-                            <div class="row">
-                                <div class="col-xs-6 col-sm-6 col-md-6">
-                                    <address>
-                                        <strong><?= $this->restaurant->restaurant_name ?></strong>
-                                        <br>
-                                        <?= $this->restaurant->address ?>
-                                        <br>
-                                        <?= $this->restaurant->telephone ?>
-                                    </address>
-                                </div>
-                                <div class="col-xs-6 col-sm-6 col-md-6 text-right">
-                                    <p>
-                                        <em id="receipt-date">Date: <?= date("Y/m/d") ?> </em>
-                                    </p>
-
-                                </div>
-                            </div>
-                            <div class="row">
-                                <div class="text-center">
-                                    <h1>Receipt</h1>
-                                </div>
-                                </span>
-                                <table class="table table-hover">
-                                    <thead>
-                                        <tr>
-                                            <th style="width:50%;">Item</th>
-                                            <th style="width:10%;">Qty</th>
-                                            <th class="text-center" style="width:30%;">Price</th>
-                                            <th class="text-center" style="width:30%;">Total</th>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                        <?php $this->total = 0 ?>
-
-                                        <?php foreach ($this->items as $item) : ?>
-                                            <?php $this->total += ($item->quantity * $item->price) ?>
-                                            <tr>
-                                                <td><em><?= $item->item_name ?></em></h4>
-                                                </td>
-                                                <td style="text-align: center"> <?= $item->quantity ?> </td>
-                                                <td class=" text-center"><?= $item->price . " LKR" ?></td>
-                                                <td class=" text-center" id="receipt-subtotal-<?= $item->id ?>"><?= ($item->quantity * $item->price) . ' LKR' ?></td>
-                                            </tr>
-
-                                        <?php endforeach ?>
-
-                                        <tr>
-                                            <td>   </td>
-                                            <td>   </td>
-                                            <td class="text-right">
-                                                <h5 style="color:black"><strong>Total: </strong></h4>
-                                            </td>
-                                            <td class="text-center text-danger">
-                                                <h5 style="color:red"><strong id="receipt-total"><?= $this->total . ' LKR' ?></strong></h4>
-                                            </td>
-                                        </tr>
-                                    </tbody>
-                                </table>
-                                <div class="text-center font-weight-bold">
-                                    <h3>Your Order Code is : <b>JHGIUG.98</b></h3>
-                                </div>
-
-
-                            </div>
+                        <div id="modal-body" class="well col-xs-10 col-sm-10 col-md-6 col-xs-offset-1 col-sm-offset-1 col-md-offset-3" style="max-width:100%;flex-basis:100%;">
                         </div>
                     </div>
                 </div>
-                <?php $this->partial('order', 'form'); ?>
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
             </div>
         </div>
     </div>
@@ -138,4 +76,17 @@ use core\H;
 <?php $this->end(); ?>
 
 <?php $this->start('script'); ?>
+<script>
+    function viewOrderReceipt(orderId){
+
+        $('.modal').modal();
+        $.post(
+            `${SROOT}/order/get_order_receipt/${orderId}`
+            , {'csrf_token': '<?=$token?>'},
+            function (data) {
+                $('#modal-body').html(data);
+            }
+        );
+    };
+</script>
 <?php $this->end(); ?>
