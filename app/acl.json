@@ -3,7 +3,7 @@
         "denied": {},
         "Home": ["*"],
         "Register": ["login", "register", "login_admin", "login_owner", "verify", "forgot", "reset_password"],
-        "Restaurant": ["details", "restaurant"],
+        "Restaurant": ["details", "restaurant", "search"],
         "Search": ["*"],
         "Restricted": ["*"],
         "Order": ["add_to_order"]
