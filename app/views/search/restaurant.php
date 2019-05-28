@@ -6,18 +6,19 @@ $token = FH::generate_token();
 <?php $this->set_title('Restaurants'); ?>
 <?php $this->start('head'); ?>
 <link rel="stylesheet" href="<?= SROOT ?>css/restaurant-card.css">
+<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css" integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf" crossorigin="anonymous">
 <?php $this->end(); ?>
 
 <?php $this->start('body'); ?>
 
-<div style="background-image:url(<?= SROOT ?>assets/img/profile_background.jpg); background-position: horizontal-center; background-repeat: repeat-y; background-size: contain; font-family:Aclonica; min-width:1395px;">
+<div style="background-image:url(<?= SROOT ?>assets/img/profile_background.jpg); background-attachment:fixed; background-repeat: repeat-y; background-size: cover; background-position: horizontal-center; font-family:Aclonica; min-width:1395px;">
     <div class="container-fluid pb-5">
     <div class="p-3">
         <form method="POST" id="search">
             <div class="input-group">
                 <input type="text" autocomplete="off" class="form-control" list="food" name="search_string" id="search_string" value="<?= $this->post_data ?>" placeholder="Search for restaurants...">
                 <div class="input-group-append">
-                <button type="submit" class="btn btn-secondary" value="Search" name="food" id="search">Search <i class="fa fa-search" aria-hidden="true"></i></button>
+                <button type="submit" class="btn btn-secondary" value="Search" name="food" id="search"> Search <i class="fa fa-search" aria-hidden="true"></i></button>
                 </div>
             </div>
             <datalist id="food"></datalist>

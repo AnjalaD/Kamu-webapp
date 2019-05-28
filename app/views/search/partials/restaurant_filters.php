@@ -1,4 +1,3 @@
-<h3 class="text-center text-white">Filters</h3>
 
 <form id="filters" method="post">
 
@@ -7,13 +6,13 @@
         <div class="form-check">
             <input class="form-check-input" type="radio" name="search_by" id="search_name" value="0" checked>
             <label class="form-check-label" for="search_name">
-                Restaurant Name
+            <i class="fas fa-utensils" style="color:#9d2525;"></i>  - Restaurant Name
             </label>
         </div>
         <div class="form-check">
             <input class="form-check-input" type="radio" name="search_by" id="search_address" value="1">
             <label class="form-check-label" for="search_address">
-                Address
+            <i class="fas fa-map-marker-alt" style="color:#9d2525;"></i>  - Address
             </label>
         </div>
     </div>
@@ -25,18 +24,18 @@
         <div class="form-check">
             <input class="form-check-input" type="radio" name="sort_by" id="sort_name_a" value="0" checked>
             <label class="form-check-label" for="sort_name_a">
-                Name A-Z
+            <i class="fas fa-sort-alpha-down" style="color:#9d2525;"></i>   - Name A-Z
             </label>
         </div>
         <div class="form-check">
             <input class="form-check-input" type="radio" name="sort_by" id="sort_name_d" value="1">
             <label class="form-check-label" for="sort_name_d">
-                Name Z-A
+            <i class="fas fa-sort-alpha-up" style="color:#9d2525;"></i>   - Name Z-A
             </label>
         </div>
     </div>
 
     <div class="text-center">
-        <input type="submit" id="save_filter" class="btn btn-warning my-3" value="Apply Filters">
+        <input type="submit" id="save_filter" class="btn btn-warning my-3" value="Sort & Filter !">
     </div>
 </form>

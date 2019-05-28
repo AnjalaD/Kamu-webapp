@@ -1,0 +1,11 @@
+.contact-information-row {
+    margin-top: 15px;
+    margin-bottom: 20px;
+    font-family: Aclonica;
+    font-size: 1rem;
+}
+
+.contact-info-icon-col {
+    border-right: 4px solid #f9a825;
+    color: #9d2525;
+}

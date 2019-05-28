@@ -220,14 +220,17 @@ class OrderController extends Controller
             $new_order->submitted = 1;
             
             // H::dnd($new_submitted_order);            
-            Session::delete('items');
-            Session::delete('item_objects');
+            
 
 
             if($new_order->save() && $new_submitted_order->save())
             {
+                Session::delete('items');
+                Session::delete('item_objects');
                 Session::add_msg('success', 'Order Submitted!!!');
                 Router::redirect('');
+            }else{
+                Session::add_msg('danger','Error! Could not submit order');
             }
             $this->view->post_data = $new_order;
         }

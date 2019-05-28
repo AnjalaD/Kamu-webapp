@@ -34,7 +34,11 @@ class CashierModel extends UserModel
 
     public function acls()
     {
-        return ['Cashier'];
+        if ($this->disabled == 0) {
+            return ['Cashier'];
+        } else {
+            return ['Disabled_Cashier'];
+        }
     }
 
     public function find_all_by_restaurant_id($restaurant_id)
@@ -57,6 +61,7 @@ class CashierModel extends UserModel
 
     public function toggle_disable()
     {
+        $this->set_password_changed(false);
         $this->disabled = !($this->disabled);
         // H::dnd($this);
         return $this->save();

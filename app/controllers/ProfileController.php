@@ -31,17 +31,21 @@ class ProfileController extends Controller
         if($this->request->is_post())
         {
             $this->request->csrf_check();
-            $input = $this->request->get();
-            if($this->request->exists('change_pass'))
+            // H::dnd($this->request->get());
+            if($this->request->get('change_pass')=="true")
             {
-                if(!password_verify($input->current_password, $user->password))
+                $user->set_confirm($this->request->get('confirm'));
+                if(!password_verify($this->request->get('current_password'), $user->password))
                 {
-                    $user->add_error_message('Current password does not match!');
+                    $user->add_error_message('','Current password does not match!');
                     return $this->json_response(["task"=>false, "errors"=>FH::display_errors($user->get_error_messages())]);
                 }
+
+            } else {
+                $user->set_password_changed(false);
             }
             
-            $user->assign($input);
+            $user->assign($this->request->get());
             if($user->save())
             {
                 Session::add_msg('success', 'Changes saved successfully!');

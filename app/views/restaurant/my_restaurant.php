@@ -8,68 +8,103 @@ $token = FH::generate_token();
 
 <?php $this->start('head'); ?>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Quicksand">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Aclonica">
+
 <!-- styles for map -->
 <link rel="stylesheet" type="text/css" href="https://js.api.here.com/v3/3.0/mapsjs-ui.css?dp-version=1542186754" />
 <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css" integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf" crossorigin="anonymous">
 
 
-<link rel="stylesheet" href="<?= SROOT ?>temp/restaurant_details_assets/css/Contact-Form-v2-Modal--Full-with-Google-Map.css">
-<link rel="stylesheet" href="<?= SROOT ?>temp/restaurant_details_assets/css/dh-row-text-image-right-responsive.css">
-<link rel="stylesheet" href="<?= SROOT ?>temp/restaurant_details_assets/css/OcOrato---Contact-Information-bar-line-with-e-mail-link-1.css">
-<link rel="stylesheet" href="<?= SROOT ?>temp/restaurant_details_assets/css/styles.css">
+<link rel="stylesheet" href="<?= SROOT ?>css/restaurant-view.css">
+
 <?php $this->end(); ?>
 
 <?php $this->start('body'); ?>
-<div class="text-right">
-    <a href="<?=SROOT.'order/view_orders' ?>">
-    <button type="button" class="btn btn-primary ">
-        Orders <span class="badge badge-light" id="nooforders"><?= $this->nooforders ?></span>
-    </button>
+<div class="row pull-right" style="margin-top:10px;padding:15px;margin-right:20px;">
+    <a href="<?= SROOT . 'order/view_orders' ?>" >
+        <button type="button" class="btn btn-danger">
+           <strong> New Orders</strong> <span class="badge badge-light" id="nooforders"><?= $this->nooforders ?></span>
+        </button>
     </a>
 </div>
 
-<div>
-    <div class="container-fluid">
-        <hr>
-        <div id="contactForm">
-            <div class="form-row">
-                <div class="col-12 col-md-6">
-                    <h2 class="h4"><i class="fa fa-location-arrow"></i> Locate Us</h2>
-                    <div class="form-row">
-                        <div class="col-12">
-                            <div class="static-map" id="restaurant_map_container" style="height:20rem; ">
+<div class="row" style="width:100%;margin-top:30px;">
+    <div class="col-md-2">
+        <div class="card p-2" style="width:90%;margin-left:auto;margin-right:auto; background-color:rgb(157,37,37,.93);  font-family:Aclonica">
+            <?php $this->partial('search', 'food_filters'); ?>
+        </div>
+    </div>
+    <div class="col-md-7" >
+
+        <div class="row" style="width: 100%; height: auto; background-color: #f0efe3; border-bottom: 6px solid #9d2525;padding:10px; padding-bottom: 0px;">
+            <div class="row" style="padding-right: 0px; padding-bottom: 0; margin-bottom: 0;">
+                <div class="col-md-6" >
+                    <div id="carousel1" class="carousel slide" data-ride="carousel" >
+                        <ol class="carousel-indicators">
+                            <li data-target="#carousel1" data-slide-to="0" class="active"></li>
+                            <li data-target="#carousel1" data-slide-to="1"></li>
+                            <li data-target="#carousel1" data-slide-to="2"></li>
+                        </ol>
+                        <div class="carousel-inner" style="height:14rem;">
+                            <div class="carousel-item active">
+                                <img class="d-block w-100" src="http://pinegrow.com/placeholders/img11.jpg" alt="First slide">
+
+                            </div>
+                            <div class="carousel-item">
+                                <img class="d-block w-100" src="http://pinegrow.com/placeholders/img18.jpg" alt="Second slide">
+
+                            </div>
+                            <div class="carousel-item">
+                                <img class="d-block w-100" src="http://pinegrow.com/placeholders/img16.jpg" alt="Third slide">
 
                             </div>
                         </div>
-                        <div class="col-sm-6 col-md-12 col-lg-6">
-                            <h2 class="h4"><i class="fa fa-user"></i> Our Info</h2>
-                            <div><span id="restaurant_name"><strong><?= $this->restaurant->restaurant_name ?></strong></span></div>
-                            <div><span id="email"><?= $this->restaurant->email ?></span></div>
-                            <div><span id="url">www.awebsite.com</span></div>
-                            <hr class="d-sm-none d-md-block d-lg-none">
+                        <a class="carousel-control-prev" href="#carousel1" role="button" data-slide="prev"> <span class="carousel-control-prev-icon" aria-hidden="true"></span> <span class="sr-only">Previous</span> </a>
+                        <a class="carousel-control-next" href="#carousel1" role="button" data-slide="next"> <span class="carousel-control-next-icon" aria-hidden="true"></span> <span class="sr-only">Next</span> </a>
+                    </div>
+                </div>
+                <div class="col-md-6 contact-information-row" style="padding-right: 0;">
+                    <div class="row contact-information-row">
+                        <div class="contact-info-icon-col text-center col-md-3">
+                            <i class="fas fa-utensils"></i>
                         </div>
-                        <div class="col-sm-6 col-md-12 col-lg-6">
-                            <h2 class="h4"><i class="fa fa-location-arrow"></i> Our Address</h2>
-                            <div><span id="address"><?= $this->restaurant->address ?></span></div>
-                            <div><i class="fa fa-phone"></i><span id="telephone"><?= $this->restaurant->telephone ?></span></div>
-                            <hr class="d-sm-none">
+                        <div class="col-md-8"> <?= $this->restaurant->restaurant_name ?>
+                        </div>
+                    </div>
+                    <div class="row contact-information-row">
+                        <div class="contact-info-icon-col text-center col-md-3">
+                            <i class="fas fa-map-marker-alt"></i>
+                        </div>
+                        <div class="col-md-8"> <?= $this->restaurant->address ?>
+                        </div>
+                    </div>
+                    <div class="row contact-information-row">
+                        <div class="contact-info-icon-col text-center col-md-3">
+                            <i class="fas fa-phone"></i>
+                        </div>
+                        <div class="col-md-8"> <?= $this->restaurant->telephone ?>
+                        </div>
+                    </div>
+                    <div class="row contact-information-row">
+                        <div class="contact-info-icon-col text-center col-md-3">
+                            <i class="fas fa-at"></i>
+                        </div>
+                        <div class="col-md-8"> <?= $this->restaurant->email ?>
                         </div>
                     </div>
                 </div>
-                <div class="col">
-
-                    <section>
-                        <div class="jumbotron" style="margin:0px;padding:0px;">
-                            <p class="text-center" style="margin:0px;font-size:39px;font-family:Quicksand, sans-serif;color:rgb(228,21,21);">Call now: <strong><?= $this->restaurant->telephone ?></strong> or <a href="#">leave a reply</a></p>
-                        </div>
-                    </section>
-                </div>
             </div>
         </div>
+        <div class="row">
+            <h1>Item cards here</h1>
+        </div>
+
+    </div>
+    <div class="col-md-3">
+        <div id="restaurant-location-map" style="width:100%;height:16rem;"></div>
     </div>
 </div>
 
-<div><small class="form-text text-muted" style="color:rgb(241,206,19);font-size:22px;">Item cards here</small></div>
 
 
 
@@ -86,19 +121,20 @@ $token = FH::generate_token();
 <script type="text/javascript" src="https://js.api.here.com/v3/3.0/mapsjs-mapevents.js"></script>
 
 <!-- order notification -->
-<script >
-var auto_refresh = setInterval(
-    function () {
-        $.post(
-            `${SROOT}restaurant/no_of_orders`,
-            { 'csrf_token' : '<?= $token ?>'},
-            function (resp) {
-                console.log(resp);
-                $('#nooforders').html(resp);
+<script>
+    var auto_refresh = setInterval(
+        function() {
+            $.post(
+                `${SROOT}restaurant/no_of_orders`, {
+                    'csrf_token': '<?= $token ?>'
+                },
+                function(resp) {
+                    console.log(resp);
+                    $('#nooforders').html(resp);
 
-            }
-        );
-    }, 1000); // refresh every 10000 milliseconds
+                }
+            );
+        }, 1000); // refresh every 10000 milliseconds
 </script>
 
 <!-- adding map -->
@@ -108,7 +144,7 @@ var auto_refresh = setInterval(
     mymap.showPointAndCenter({
         latitude: JSON.parse(<?php echo json_encode($this->restaurant->lat) ?>),
         longitude: JSON.parse(<?php echo json_encode($this->restaurant->lng) ?>)
-    }, 'restaurant_map_container', JSON.stringify(<?php echo json_encode($this->restaurant->restaurant_name) ?>));
+    }, 'restaurant-location-map', JSON.stringify(<?php echo json_encode($this->restaurant->restaurant_name) ?>));
 </script>
 
 
