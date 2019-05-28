@@ -10,13 +10,13 @@ use core\FH;
             <img src="<?= SROOT ?>assets/img/150YelloLogoOnlyKamu.png" id="AddItem_Logo">
         </div>
         <div class="form-group" id="AddItem_ItemName_FormGroup">
-            <input class="form-control TextInput" name="item_name" type="text" placeholder="Item Name" id="AddItem_NameInput" value="<?= $this->item->item_name ?>" onchange="automaticallyAddNameTag()">
+            <input class="form-control TextInput" name="item_name" type="text" placeholder="Item Name" id="AddItem_NameInput" value="<?= $this->item->item_name ?>" onchange="automaticallyAddNameTag()" pattern="^[a-zA-Z0-9 ]*$" title="Item Name can only include letters numbers and spaces" maxlength="50" required>
         </div>
         <div class="form-group" id="AddItem_Description_FormGroup">
-            <input class="form-control" type="text" name="description" id="Additem_DescriptionInput" placeholder="Brief Description" value="<?= $this->item->description ?>">
+            <textarea class="form-control" type="text" name="description" id="Additem_DescriptionInput" placeholder="Brief Description" maxlength="255" required><?= $this->item->description ?></textarea>
         </div>
         <div class="form-group" id="AddItem_Price_FormGroup">
-            <input class="form-control Number Input" type="number" name="price" id="AddItem_PriceInput" placeholder="Price (Rs.)" step="1.00" min="1.00" value="<?= $this->item->price ?>">
+            <input class="form-control Number Input" type="number" name="price" id="AddItem_PriceInput" placeholder="Price (Rs.)" step="1.00" min="1" max="10000" value="<?= $this->item->price ?>" required>
         </div>
         <div class="form-group" id="AddItem_Image_FormGroup">
             <input type="file" name="upload_image" id="upload_image">
@@ -25,12 +25,9 @@ use core\FH;
         <input class="form-control" type="text" name="image" id="image" hidden>
         <div class="form-group" id="tags">
             <div id="added_tags">
-
             </div>
-
-            <input hidden id="added_tags_array" name="tag_array" value="<?=json_encode($this->item->tags, true)?>">
-            <!-- change text area to something else -->
-            <textarea class="form-control" type="text" name="tags" id="AddItem_TagsInput" placeholder="tag" maxlength="20" size="20" value=""></textarea>
+            <input hidden id="added_tags_array" name="tag_array">
+            <textarea class="form-control" type="text" name="tags" id="AddItem_TagsInput" placeholder="tag" rows="1" pattern="^[a-zA-Z0-9 ]*$" maxlength="20" size="20" value=""></textarea>
             <button class="btn btn-primary" type="button" id="AddItem_AddTagButton" onclick="addCustomTag()">Add Tag</button>
         </div>
         <div class="form-group" id="AddItem_Button_FormGroup">
