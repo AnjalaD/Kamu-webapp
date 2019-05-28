@@ -9,7 +9,7 @@ use app\interfaces\SearchAlgo;
 
 class RestaurantModel extends Model implements SearchAlgo
 {
-    public $restaurant_name, $address, $telephone, $email, $lng, $lat, $image_url=DEFUALT_RESTAURANT_IMAGE, $verified=0, $deleted = 0;
+    public $restaurant_name, $owner_id, $address, $telephone, $email, $lng, $lat, $image_url=DEFUALT_RESTAURANT_IMAGE, $verified=0, $deleted = 0;
     private $items_per_page = 9;
 
     public function __construct(){
@@ -57,6 +57,15 @@ class RestaurantModel extends Model implements SearchAlgo
         return $this->find_first($conditions);
     }
 
+    public function find_by_owner_id($owner_id)
+    {
+        $conditions = [
+            'conditions' => 'owner_id=?',
+            'bind' => [$owner_id]
+        ];
+
+        return $this->find_first($conditions);
+    }
     public function save_image($data)
     {
         $image = H::decode_image($data);
@@ -141,7 +150,6 @@ class RestaurantModel extends Model implements SearchAlgo
         $this->run_validation(new RequiredValidator($this, ['field'=>'email', 'rule'=>true, 'msg'=>'Email is required!']));
         $this->run_validation(new RequiredValidator($this, ['field'=>'lng', 'rule'=>true, 'msg'=>'Location Latitude is not set!']));
         $this->run_validation(new RequiredValidator($this, ['field'=>'lat', 'rule'=>true, 'msg'=>'Location Longitude is not set!']));
-        $this->run_validation(new RequiredValidator($this, ['field'=>'image', 'rule'=>true, 'msg'=>'Cover Photo is not set!']));
 
 
         $this->run_validation(new MaxValidator($this, ['field'=>'restaurant_name', 'rule'=>50, 'msg'=>'Restaurant Name must be maximum of 50 characters']));
