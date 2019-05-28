@@ -17,7 +17,7 @@ $token = FH::generate_token();
 <div id="Register_LoginDark_Background" class="login-dark">
     <div class="nav nav-tabs" id="nav-tab" role="tablist">
         <a class="nav-item nav-link active" id="nav-home-tab" data-toggle="tab" href="#user" role="tab" aria-controls="nav-home" aria-selected="true">Register as User</a>
-        <a class="nav-item nav-link" id="nav-profile-tab" data-toggle="tab" href="#owner" role="tab" aria-controls="nav-profile" aria-selected="false">Resgister as Owner</a>
+        <a class="nav-item nav-link" id="nav-profile-tab" data-toggle="tab" href="#owner" role="tab" aria-controls="nav-profile" aria-selected="false">Register as Owner</a>
     </div>
 
     <div class="tab-content" id="nav-tabContent">
