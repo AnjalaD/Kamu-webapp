@@ -37,8 +37,8 @@ class SubmittedOrderModel extends Model
     public function find_accepted_by_restaurant_id($restaurant_id, $params = [])
     {
         $conditions = [
-            'conditions' => 'restaurant_id=? AND accepted=?',
-            'bind' => [$restaurant_id, 1]
+            'conditions' => 'restaurant_id=? AND completed=? AND accepted=?',
+            'bind' => [$restaurant_id, 0, 1]
         ];
         $conditions = array_merge($conditions, $params);
         return $this->find($conditions);
@@ -78,8 +78,8 @@ class SubmittedOrderModel extends Model
     public function find_rejected_by_restaurant_id($restaurant_id, $params = [])
     {
         $conditions = [
-            'conditions' => 'restaurant_id=? AND rejected=?',
-            'bind' => [$restaurant_id, 1]
+            'conditions' => 'restaurant_id=? AND completed=? AND rejected=?',
+            'bind' => [$restaurant_id, 0, 1]
         ];
         $conditions = array_merge($conditions, $params);
         return $this->find($conditions);

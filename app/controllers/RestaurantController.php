@@ -195,8 +195,28 @@ class RestaurantController extends Controller
     // show casheirs of restaurant - by owner
     public function cashiers_action()
     {
-        $cashiers = $this->cashiermodel->find_by_restaurant_id(UserModel::current_user()->restaurant_id);
+        $cashiers = $this->cashiermodel->find_all_by_restaurant_id(UserModel::current_user()->restaurant_id);
         $this->view->cashiers = $cashiers? $cashiers : [];
         $this->view->render('restaurant/cashiers');
     }
+
+
+    //toggle cashier status -> disable-enable - by owner
+    public function cashier_status_toggle_action($cashier_id)
+    {
+        $cashier = $this->cashiermodel->find_by_id_restaurant_id($cashier_id, UserModel::current_user()->restaurant_id);
+        if(!$cashier->toggle_disable()) {
+            Session::add_msg('danger', 'Cannot change the Cashier status!');
+        }
+        Router::redirect('restaurant/cashiers');
+    }
+
+    //remove cashier - by owner
+    public function remove_cashier_action($cashier_id)
+    {
+        $cashier = $this->cashiermodel->find_by_id_restaurant_id($cashier_id, UserModel::current_user()->restaurant_id);
+        $cashier->delete();
+        Router::redirect('restaurant/cashiers');
+    }
+
 }

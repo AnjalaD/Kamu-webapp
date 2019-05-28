@@ -47,7 +47,7 @@ class RegisterController extends Controller
         }
         elseif ($user_type == 'cashier') {
             $new_user = new CashierModel();
-            $redirect = 'register/login_owner';
+            $redirect = 'order/view_orders';
         }
         
         $this->login($new_user, $user_type.'model', 'register/login_owner', $redirect);

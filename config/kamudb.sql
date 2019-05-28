@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: May 27, 2019 at 02:29 PM
+-- Generation Time: May 27, 2019 at 07:17 PM
 -- Server version: 10.1.37-MariaDB
 -- PHP Version: 7.3.1
 
@@ -61,6 +61,7 @@ CREATE TABLE `cashiers` (
   `email` varchar(100) COLLATE utf8_unicode_ci NOT NULL,
   `password` varchar(100) COLLATE utf8_unicode_ci NOT NULL,
   `hash` varchar(32) COLLATE utf8_unicode_ci NOT NULL,
+  `disabled` tinyint(1) NOT NULL DEFAULT '0',
   `verified` tinyint(1) NOT NULL DEFAULT '0',
   `deleted` tinyint(1) NOT NULL DEFAULT '0'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
@@ -69,8 +70,8 @@ CREATE TABLE `cashiers` (
 -- Dumping data for table `cashiers`
 --
 
-INSERT INTO `cashiers` (`id`, `restaurant_id`, `first_name`, `last_name`, `email`, `password`, `hash`, `verified`, `deleted`) VALUES
-(1, 1, 'dasdsdsds', 'ad@ad.com', 'ad@ad.com', '$2y$10$oQ5qJnaJ26Y.EUWNDj4eluTEwRdQjyCQb0gPyE07ncltGb76HblGa', 'c7e1249ffc03eb9ded908c236bd1996d', 0, 0);
+INSERT INTO `cashiers` (`id`, `restaurant_id`, `first_name`, `last_name`, `email`, `password`, `hash`, `disabled`, `verified`, `deleted`) VALUES
+(1, 1, 'dasdsdsds', 'ad@ad.com', 'ad@ad.com', '$2y$10$vxKEL6IKVyvZJsytqgZC8On1M7Abx29bSEEovhYQYnxp4juwXDIdO', '072b030ba126b2f4b2374f342be9ed44', 0, 0, 0);
 
 -- --------------------------------------------------------
 
@@ -346,13 +347,12 @@ INSERT INTO `submitted_orders` (`id`, `customer_id`, `items`, `restaurant_id`, `
 (5, 4, '{\"34\":1,\"26\":1}', 1, 2, NULL, NULL, 1, 0, 0, '2019-04-17 18:17:14', 'None...', 0),
 (6, 1, '{\"1\":1,\"34\":1,\"26\":1}', 1, 2, NULL, NULL, 1, 0, 0, '2019-05-24 10:35:55', 'None...', 0),
 (7, 1, '{\"1\":4,\"26\":2}', 1, 2, '2019-05-04 18:34:00', '1558703273.0689', 1, 0, 0, '2019-05-24 13:07:53', NULL, 0),
-(9, 1, '{\"34\":1}', 1, 1, '2019-05-15 19:15:00', '5ce7f58e.5536', 0, 0, 0, '2019-05-24 13:45:50', NULL, 0),
+(9, 1, '{\"34\":1}', 2, 1, '2019-05-15 19:15:00', '5ce7f58e.5536', 0, 0, 0, '2019-05-24 13:45:50', NULL, 0),
 (10, 1, '{\"152\":1}', 1, 2, '2019-05-29 19:18:00', '5CE7F629.0844', 0, 0, 0, '2019-05-24 13:48:25', NULL, 0),
 (11, 1, '{\"34\":1,\"26\":1,\"1\":9}', 1, 2, '2019-05-15 18:31:00', '5CE93CCD.792', 0, 0, 0, '2019-05-25 13:02:05', 'None......', 0),
 (12, 1, '{\"34\":1,\"26\":1,\"1\":7}', 1, 2, '2019-05-31 19:50:00', '5CE94F39.4681', 1, 0, 0, '2019-05-25 14:20:41', '', 2030),
 (13, 1, '{\"1\":11,\"26\":2}', 1, 2, '2019-05-11 03:01:00', '5CE9B456.8691', 1, 0, 0, '2019-05-25 21:32:06', 'nothing', 3030),
 (14, 1, '{\"1\":4,\"26\":10}', 1, 2, '2019-05-11 17:34:00', '5CEA80D2.8821', 1, 0, 0, '2019-05-26 12:04:34', 'None.....', 2400),
-(15, 1, '{\"34\":1,\"26\":1,\"1\":1}', 1, 2, '2019-05-26 18:23:00', '5CEA8C40.9142', 0, 0, 0, '2019-05-26 12:53:20', 'Spicy', 530),
 (16, 1, '{\"1\":4,\"26\":14}', 1, 2, '2019-05-26 18:58:00', '5CEA947A.031', 1, 0, 0, '2019-05-26 13:28:26', '', 2960),
 (17, 1, '{\"1\":1,\"34\":1,\"26\":1}', 1, 2, '2019-05-26 18:59:00', '5CEA94B1.6756', 0, 0, 0, '2019-05-26 13:29:21', 'notes....', 530),
 (18, 1, '{\"34\":1,\"26\":1,\"1\":1}', 1, 2, '2019-05-26 18:59:00', '5CEA94CC.445', 0, 0, 0, '2019-05-26 13:29:48', '', 530),
