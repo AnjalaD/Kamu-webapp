@@ -33,7 +33,7 @@ $token = FH::generate_token();
             </div>
 
             <div class="col-md-8" style="background-color:rgba(255,255,255,0);">
-                <div class="card p-2 pr-4" id="restaurants" style="background-color:rgba(255,255,255,0);"></div>
+                <div class="card p-2 pr-4" id="restaurants" style="background-color:rgba(255,255,255,0); border:none;"></div>
             </div>
 
             <div class="col-md-2">

@@ -464,11 +464,11 @@ public static function create_restaurant_card($restaurant)
               <?php foreach ($restaurant->items as $item) :?>
               <div class="card">
                 <div class="card-body">
-                  <h6 class="card-title"><?=$item->item_name?></h6>
-                  <p class="card-text"><?=$item->price?> LKR</p>
+                  <h6 class="card-title" style="font-size:0.75rem;"><?=$item->item_name?></h6>
+                  <p class="card-text"style="font-size:0.75rem;"><?=$item->price?> LKR</p>
                 </div>
                 <div class="card-footer">
-                  <small class="text-muted"><?=$item->rating?></small>
+                  <small class="text-muted"><i class="fas fa-star" style="color:#f9a825;">  </i>  <?=$item->rating?></small>
                 </div>
               </div>
               <?php endforeach ?>
