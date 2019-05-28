@@ -27,6 +27,12 @@
                 Price \/
             </label>
         </div>
+        <div class="form-check">
+            <input class="form-check-input" type="radio" name="sort_by" id="sort_rating_d" value="4">
+            <label class="form-check-label" for="sort_rating_d">
+                Rating
+            </label>
+        </div>
     </div>
 
     <br/>
