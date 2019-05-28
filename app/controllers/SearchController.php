@@ -30,6 +30,8 @@ class SearchController extends Controller
             {
                 $this->restaurant_action($data);
             }
+        }else{
+            $this->food_action("");
         }
     }
 

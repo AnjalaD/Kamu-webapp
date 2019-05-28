@@ -25,7 +25,7 @@ $token = FH::generate_token();
 
 <div class="row" style="width:100%;margin-top:30px;">
     <div class="col-md-2 ">
-        <div class="card bg-light p-1" style="width:90%;margin-left:auto;margin-right:auto;">
+        <div class="card p-2" style="width:90%;margin-left:auto;margin-right:auto;background-color: rgb(157,37,37,.93);">
             <?php $this->partial('search', 'food_filters'); ?>
         </div>
     </div>
