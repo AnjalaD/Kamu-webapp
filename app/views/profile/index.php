@@ -10,6 +10,7 @@ $this->set_title($this->user->first_name); ?>
 <!-- <link rel="stylesheet" href="<?= SROOT ?>/css/croppie.css"> -->
 <link rel="stylesheet" href="<?= SROOT ?>css/Profile-Edit-Form-1.css">
 <link rel="stylesheet" href="<?= SROOT ?>css/Profile.css">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Aclonica">
 <?php $this->end(); ?>
 
 <?php $this->start('body'); ?>
