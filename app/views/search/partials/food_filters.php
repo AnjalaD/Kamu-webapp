@@ -1,7 +1,8 @@
-<h4 class="text-center text-dark">Sort by</h4>
+<h3 class="text-center text-white">Filters</h3>
 
 <form id="filters" method="post">
-    <div class="card m-1 p-2">
+    <div class="card m-1 p-2" style="background-color: rgba(255, 255, 255, 0.93);">
+    <h4 class="text-center text-dark">Sort by</h4>
         <div class="form-check">
             <input class="form-check-input" type="radio" name="sort_by" id="sort_name_a" value="0" checked>
             <label class="form-check-label" for="sort_name_a">
@@ -30,8 +31,9 @@
 
     <br/>
 
+    
+    <div class="card m-1 p-2" style="background-color: rgba(255, 255, 255, 0.93);">
     <h4 class="text-center text-dark">Filter by</h4>
-    <div class="card m-1 p-2">
         <div>
             <label for="price_filter">Price</label>
             <div>
@@ -41,7 +43,8 @@
             </div>
         </div>
     </div>
+
     <div class="text-center">
-        <input type="submit" id="save_filter" class="btn btn-primary my-3" value="Apply Filters">
+    <input type="submit" id="save_filter" class="btn btn-warning my-3" value="Apply Filters">
     </div>
 </form>
