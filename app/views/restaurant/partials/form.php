@@ -43,7 +43,7 @@ use core\FH;
                         </div>                         
                         <div class="form-group"> 
                             <label for="exampleInputFile">Upload Cover Photo</label>                             
-                            <input type="file" class="btn btn-default" name="upload_image" id="upload_image" style="color:white;" required>                              
+                            <input type="file" class="btn btn-default" name="upload_image" id="upload_image" style="color:white;">                              
 							<?= FH::input_block('text', 'image', 'image', '', [], ['hidden' => 'true']); ?>
 						</div>                                                  
                     </form>                     

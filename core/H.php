@@ -130,7 +130,7 @@ public static function create_card($item)
     </div>
     <div class="details p-0 m-0">
       <span>Rating : </span>
-      <span id="rating"><?= $item->rating . '(' . $item->rating_num . ')' ?></span>
+      <span id="rating"><?= $item->rating . ' (' . $item->rating_num . ' reviews)' ?></span>
       <br>
       <span class="rating" id="<?= $item->id ?>">
         <span class="star" id="5"></span>

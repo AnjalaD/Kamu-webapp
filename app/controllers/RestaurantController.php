@@ -57,6 +57,7 @@ class RestaurantController extends Controller
             $restaurant->assign($this->request->get());
 
             $owner = $this->ownermodel->find_by_id($restaurant->owner_id);
+            $owner->set_password_changed(false);
             $owner->restaurant_id = $restaurant->id;
 
             $restaurant->verified = 1;
