@@ -1,6 +1,7 @@
 <?php
 use core\H;
 use core\FH;
+use app\helpers\Help;
 
 $this->token = FH::generate_token();
 ?>
@@ -139,8 +140,9 @@ $this->token = FH::generate_token();
                                                         </tr>
                                                     </tbody>
                                                 </table>
+                                                <?php $this->new_order_code = Help::generateOrderCode() ?>
                                                 <div class="text-center font-weight-bold">
-                                                    <h3>Your Order Code is : <b>JHGIUG.98</b></h3>
+                                                    <h3>Your Order Code is : <b><?= $this->new_order_code ?></b></h3>
                                                 </div>
 
 

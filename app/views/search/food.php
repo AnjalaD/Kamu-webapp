@@ -11,7 +11,7 @@ $token = FH::generate_token();
 <?php $this->end(); ?>
 
 <?php $this->start('body'); ?>
-<div style="background-image:url(<?= SROOT ?>assets/img/profile_background.jpg); background-position: horizontal-center; background-repeat: repeat-y; background-size: contain; font-family:Aclonica; min-width:1395px;">
+<div style="background-image:url(<?= SROOT ?>assets/img/profile_background.jpg); background-position: horizontal-center; background-repeat: repeat-y; background-size: contain; font-family:Aclonica; min-width:800px;">
     <div class="container-fluid pb-5">
         <div class="p-3">
             <form method="POST" id="search">
