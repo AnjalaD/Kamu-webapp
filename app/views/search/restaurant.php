@@ -10,19 +10,19 @@ $token = FH::generate_token();
 
 <?php $this->start('body'); ?>
 
-<div style="background-image: url(&quot;<?= SROOT ?>assets/img/profile_background.jpg&quot;); background-position: center; background-repeat: no-repeat; background-size: cover; height: 100%; font-family:Aclonica; min-width:1395px;">
-    <div class="container-fluid">
-        <div class="p-3">
-            <form method="POST" id="search">
-                <div class="input-group">
-                    <input class="input-group" type="text" autocomplete="off" class="form-control" list="food" name="search_string" id="search_string" value="<?= $this->post_data ?>" placeholder="Enter what you want">
-                    <div class="input-group-append">
-                        <button type="submit" class="btn btn-secondary" value="Search" name="food" id="search">Search <i class="fa fa-search" aria-hidden="true"></i></button>
-                    </div>
+<div style="background-image:url(<?= SROOT ?>assets/img/profile_background.jpg); background-position: horizontal-center; background-repeat: repeat-y; background-size: contain; font-family:Aclonica; min-width:1395px;">
+    <div class="container-fluid pb-5">
+    <div class="p-3">
+        <form method="POST" id="search">
+            <div class="input-group">
+                <input type="text" autocomplete="off" class="form-control" list="food" name="search_string" id="search_string" value="<?= $this->post_data ?>" placeholder="Search for restaurants...">
+                <div class="input-group-append">
+                <button type="submit" class="btn btn-secondary" value="Search" name="food" id="search">Search <i class="fa fa-search" aria-hidden="true"></i></button>
                 </div>
-                <datalist id="food"></datalist>
-            </form>
-        </div>
+            </div>
+            <datalist id="food"></datalist>
+        </form>
+    </div>
 
         <div class="row p-1 my-3">
             <div class="col-md-2">
@@ -112,5 +112,9 @@ $token = FH::generate_token();
         addRating(itemId, value, '<?= $token ?>');
     });
 </script>
+
+<!-- <script>
+    document.body.setAttribute('style',"background-image:url(<?= SROOT ?>assets/img/profile_background.jpg); background-position: center; background-repeat: no-repeat; background-size: cover; font-family:Aclonica; min-width:1395px;");
+</script> -->
 
 <?php $this->end(); ?>

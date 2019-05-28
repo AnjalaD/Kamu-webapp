@@ -1,1 +1,1 @@
-const SROOT = '/Kamu/Kamu-webapp/'
+const SROOT = '/Kamu/Kamu-webapp/';

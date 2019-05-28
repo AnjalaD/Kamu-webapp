@@ -2,7 +2,7 @@
 
 <form id="filters" method="post">
 
-    <div class="card m-1 p-2" style="background-color: rgba(234, 167, 15, 0.93);">
+    <div class="card m-1 p-2" style="background-color: rgba(255, 255, 255, 0.93);">
         <h4 class="text-center text-dark">Search By</h4>
         <div class="form-check">
             <input class="form-check-input" type="radio" name="search_by" id="search_name" value="0" checked>
@@ -20,7 +20,7 @@
 
     <br />
 
-    <div class="card m-1 p-2" style="background-color: rgba(234, 167, 15, 0.93);">
+    <div class="card m-1 p-2" style="background-color: rgba(255, 255, 255, 0.93);">
         <h4 class="text-center text-dark">Sort By</h4>
         <div class="form-check">
             <input class="form-check-input" type="radio" name="sort_by" id="sort_name_a" value="0" checked>
@@ -37,6 +37,6 @@
     </div>
 
     <div class="text-center">
-        <input type="submit" id="save_filter" class="btn btn-secondary my-3" value="Apply Filters">
+        <input type="submit" id="save_filter" class="btn btn-warning my-3" value="Apply Filters">
     </div>
 </form>
