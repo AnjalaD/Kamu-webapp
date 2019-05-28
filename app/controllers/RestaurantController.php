@@ -20,6 +20,7 @@ class RestaurantController extends Controller
         $this->load_model('SubmittedOrderModel');
         $this->load_model('CashierModel');
         $this->load_model('OwnerModel');
+        $this->load_model('FoodItemModel');
     }
 
 
@@ -223,6 +224,19 @@ class RestaurantController extends Controller
             Session::add_msg('danger', 'Cashier deleted');
         }
         Router::redirect('restaurant/cashiers');
+    }
+
+
+    //ajax search for restaurant items
+    public function search_action($restaurant_id, $page=0)
+    {
+        $filters = $this->request->get();
+        $this->request->csrf_check();
+
+
+        $response = $this->fooditemmodel->filter_by_restaurant($restaurant_id, $filters, $page);
+        
+        return $this->json_response($response);
     }
 
 }

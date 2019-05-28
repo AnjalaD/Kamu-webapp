@@ -24,8 +24,7 @@
 }
 
 .form-row > .col, .form-row > [class*=col-] {
-  background-color: rgb(255,255,255);
-  opacity: 0.8;
+  background-color: rgba(255,255,255,0.8);
 }
 
 #Profile_coloumndp {
@@ -46,10 +45,12 @@
 
 #Profile_colFirstName {
   border-radius: 0px 0px 30px 0px;
+  background-color: rgba(255,255,255,0);
 }
 
 #Profile_colLastName {
   border-radius: 0px 0px 30px 0px;
+  background-color: rgba(255,255,255,0);
 }
 
 #Profile_colPassword {
