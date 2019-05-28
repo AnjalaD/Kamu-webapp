@@ -170,18 +170,25 @@ class RestaurantController extends Controller
 
     public function submit_details_action()
     {
+        $restaurant = $this->restaurantmodel->find_by_owner_id(UserModel::current_user()->id);
+        if($restaurant) {
+            Session::add_msg('danger', 'Your have previously submitted a restaurant!!');
+            Router::redirect('');
+        }
         $restaurant = new RestaurantModel();
         if ($this->request->is_post()) {
             $this->request->csrf_check();
+            // H::dnd($this->request->get());
 
             $restaurant->assign($this->request->get());
             if (!empty($this->request->get('image'))) {
                 $restaurant->image_url = SROOT.'img/restaurant/'.time().'.png';
             }
+            $restaurant->owner_id = UserModel::current_user()->id;
             // H::dnd($restaurant);
             if ($restaurant->save()) {
                 H::save_image($this->request->get('image'), $restaurant->image_url);
-                Session::add_msg('success', 'Details submitted successfully!');
+                Session::add_msg('success', 'Details submitted successfully! Your restaurant will be registered soon...');
                 Router::redirect('');
             }
         }

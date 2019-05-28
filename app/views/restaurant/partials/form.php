@@ -21,7 +21,7 @@ use core\FH;
                             <input type="text" class="form-control rest_reg_form_input"  name='address' placeholder="Address" value="<?= $this->restaurant->address ?>" required> 
                         </div>
                         <div class="form-group rest_reg_form_input"> 
-                            <input type="text" class="form-control rest_reg_form_input"  name="telephone" placeholder="telephone" value="<?= $this->restaurant->telephone ?>" required> 
+                            <input type="text" pattern="[0-9]{10}"" class="form-control rest_reg_form_input"  name="telephone" placeholder="telephone" value="<?= $this->restaurant->telephone ?>" required> 
                         </div>
                         <div class="form-group rest_reg_form_input"> 
                             <input type="email" class="form-control rest_reg_form_input"  name="email" placeholder="Email" value="<?= $this->restaurant->email ?>" required> 
@@ -30,20 +30,20 @@ use core\FH;
                             <div class="col-md-4">
                                 <div class="form-group rest_reg_form_input">                                      
 
-                                    <input type="text" class="form-control rest_reg_form_input"  name='lat' id="lat" placeholder="Lat." value="<?= $this->restaurant->lat ?>" disabled=true style="color:black;" required> 
+                                    <input type="text" class="form-control rest_reg_form_input"  name='lat' id="lat" placeholder="Lat." value="<?= $this->restaurant->lat ?>" style="color:black;" readonly> 
 									
 								</div>                                                                  
                             </div>
                             <div class="col-md-4">
                                 <div class="form-group rest_reg_form_input">                                      
 
-                                    <input type="text" class="form-control rest_reg_form_input"  name='lng' id="lng" placeholder="Lng." value="<?= $this->restaurant->lng ?>" disabled=true style="color:black;"required> 
+                                    <input type="text" class="form-control rest_reg_form_input"  name='lng' id="lng" placeholder="Lng." value="<?= $this->restaurant->lng ?>" style="color:black;" readonly> 
                                 </div>                                                                  
                             </div>
                         </div>                         
                         <div class="form-group"> 
                             <label for="exampleInputFile">Upload Cover Photo</label>                             
-                            <input type="file" class="btn btn-default" name="upload_image" id="upload_image" style="color:white;">                              
+                            <input type="file" class="btn btn-default" name="upload_image" id="upload_image" style="color:white;" required>                              
 							<?= FH::input_block('text', 'image', 'image', '', [], ['hidden' => 'true']); ?>
 						</div>                                                  
                     </form>                     

@@ -12,7 +12,7 @@ $token = FH::generate_token();
 <?php $this->end(); ?>
 
 <?php $this->start('body'); ?>
-<div style="background-image:url(<?= SROOT ?>assets/img/profile_background.jpg); background-attachment:fixed; background-repeat: repeat-y; background-size: 1400px 800px; font-family:Aclonica; min-width:1395px;">
+<div style="background-image:url(<?= SROOT ?>assets/img/profile_background.jpg); background-attachment:fixed; background-repeat: repeat-y; background-size: cover; font-family:Aclonica; min-width:1395px;">
     <div class="container-fluid pb-5">
         <div class="p-3">
             <form method="POST" id="search">
@@ -34,7 +34,7 @@ $token = FH::generate_token();
             </div>
 
             <div class="col-md-8">
-                <div class="card bg-light pr-0 p-3" id="items"></div>
+                <div class="card pr-0 p-3" id="items" style="background-color:rgba(255,255,255,0); border:none;" ></div>
             </div>
 
             <div class="col-md-2">

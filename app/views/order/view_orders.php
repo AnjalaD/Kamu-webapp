@@ -10,16 +10,18 @@ $token = FH::generate_token();
 
 <?php $this->start('head'); ?>
 <link rel="stylesheet" href="<?= SROOT ?>css/order_restaurant.css" />
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Aclonica">
+
 <?php $this->end(); ?>
 
 <?php $this->start('body'); ?>
 <div class="container" id='all_orders_container'>
     <div class="row">
-        <div class="col" >
+        <div class="col-md-7" style="font-family:Aclonica;">
             <?php if (isset($this->pending_orders) && !empty($this->pending_orders)) : ?>
                 <h3> New Orders... </h3>
 
-                <div style="height:30rem; overflow-y:scroll;" id="pending_orders_container">
+                <div style="height:30rem; overflow-y:auto; " id="pending_orders_container">
                     <?php foreach ($this->pending_orders as $order) : ?>
                         <?= H::create_pending_order_card($order) ?>
                     <?php endforeach ?>
@@ -33,7 +35,7 @@ $token = FH::generate_token();
         <div class="col" >
             <?php if (isset($this->accepted_orders) && !empty($this->accepted_orders)) : ?>
                 <h3> Accepted Orders... </h3>
-                <div style="height:30rem; overflow-y:scroll;" id="accepted_orders_container">
+                <div style="height:30rem; overflow-y:auto; " id="accepted_orders_container">
                     <?php foreach ($this->accepted_orders as $order) : ?>
                         <?= H::create_accepted_order_card($order) ?>
                     <?php endforeach ?>
