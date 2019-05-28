@@ -66,10 +66,11 @@ class RegisterController extends Controller
             if($new_user->validation_passed())
             {
                 $user = $this->{$modelname}->find_by_email($this->request->get('email'));
-                // H::dnd($user);
+                
                 if($user && password_verify($this->request->get('password'), $user->password))
                 {
                     $remember = (isset($_POST['remember_me']) && $this->request->get('remember_me')) ? true :false;
+                    
                     $user->login($remember);
                     Router::redirect($redirect);
                 }else

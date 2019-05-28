@@ -37,11 +37,15 @@
 
     "Cashier" : {
         "denied": {
-            "Items": ["update_rating"]
         },
-        "Items": ["*"],
+        
         "Restaurant": ["no_of_orders"],
         "Order": ["view_orders", "accept_order", "reject_order","complete_order", "get_all_orders_to_restaurant_html"]
+    },
+
+    "Disabled_Cashier" : {
+        "denied": {
+        }  
     },
 
     "Admin": {
