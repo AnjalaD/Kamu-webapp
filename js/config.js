@@ -1,1 +1,1 @@
-const SROOT = '/KamuWebApp/'
+const SROOT = '/Kamu_1.0/exported/'

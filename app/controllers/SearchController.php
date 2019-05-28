@@ -82,6 +82,7 @@ class SearchController extends Controller
 
 
     //handle filter and sort ajax requests - in search
+    //strategy implementation
     public function search_action($type, $page=0)
     {
         $response = [];

@@ -1,6 +1,7 @@
 <?php
 namespace core\validators;
 use core\validators\Validator;
+use core\H;
 
 class MaxValidator extends Validator
 {

@@ -46,6 +46,7 @@ class ProfileController extends Controller
             }
             
             $user->assign($this->request->get());
+            // H::dnd($user);
             if($user->save())
             {
                 Session::add_msg('success', 'Changes saved successfully!');

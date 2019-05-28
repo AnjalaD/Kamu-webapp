@@ -3,7 +3,7 @@
 <?php $this->end(); ?>
 
 <?php $this->start('body'); ?>
-<form id="search-form-SearchBar" class="search-form" method="post" action="<?=SROOT?>search">
+<form id="search-form-SearchBar" class="search-form" method="post" action="<?=SROOT?>search" maxlength="50">
         <div class="input-group">
             <div class="input-group-prepend"><span class="input-group-text" id="inputGTSearch"><i class="fa fa-search" id="searchIcon"></i></span></div>
             <input class="form-control Home_SearchBar" autocomplete="off" type="text" placeholder="I am looking for.." name="search_string" id="Home_SearchBar">
