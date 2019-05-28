@@ -1,1 +1,1 @@
-const SROOT = '/mvc/'
+const SROOT = '/KamuWebApp/'

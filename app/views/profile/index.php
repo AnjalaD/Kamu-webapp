@@ -66,7 +66,7 @@ $this->set_title($this->user->first_name); ?>
                     <hr class="Profile_hr">
 
                     <div>
-                        <button class="btn btn-primary form-btn m-0" id="changePass" font-family:Aclonica;>Change Password</button>
+                        <button class="btn btn-primary form-btn m-0" id="changePass" style="font-family:Aclonica;">Change Password</button>
                     </div>
                     
                     <div class="form-row" id="reset_pass" hidden>

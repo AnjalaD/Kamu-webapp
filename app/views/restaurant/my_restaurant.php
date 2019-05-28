@@ -20,6 +20,7 @@ $token = FH::generate_token();
 <?php $this->end(); ?>
 
 <?php $this->start('body'); ?>
+<div style="background-image:url(<?= SROOT ?>assets/img/Vienna_House_Easy_Bad_Oeyenhausen-423.jpg); background-attachment:fixed; background-size: cover;">
 <div class="row pull-right" style="margin-top:10px;padding:15px;margin-right:20px;">
     <a href="<?= SROOT . 'order/view_orders' ?>">
         <button type="button" class="btn btn-danger">
@@ -36,7 +37,7 @@ $token = FH::generate_token();
     </div>
     <div class="col-md-7">
 
-        <div class="row" style="width: 100%; height: auto; background-color: #f0efe3; border-bottom: 6px solid #9d2525;padding:10px; padding-bottom: 0px;">
+        <div class="row" style="width: 100%; height: auto; background-color: #f0efe3;font-size:0.5rem; border-bottom: 6px solid #9d2525;padding:10px; padding-bottom: 0px;">
             <div class="row" style="padding-right: 0px; padding-bottom: 0; margin-bottom: 0;">
                 <div class="col-md-6">
                     <div id="carousel1" class="carousel slide" data-ride="carousel">
@@ -63,44 +64,44 @@ $token = FH::generate_token();
                         <a class="carousel-control-next" href="#carousel1" role="button" data-slide="next"> <span class="carousel-control-next-icon" aria-hidden="true"></span> <span class="sr-only">Next</span> </a>
                     </div>
                 </div>
-                <div class="col-md-6 contact-information-row" style="padding-right: 0;">
+                <div class="col-md-6 contact-information-row" style="padding-right: 0; ">
                     <div class="row contact-information-row">
-                        <div class="contact-info-icon-col text-center col-md-3">
+                        <div class="contact-info-icon-col text-center col-md-3" style="padding-left:0px;">
                             <i class="fas fa-utensils"></i>
                         </div>
-                        <div class="col-md-8"> <?= $this->restaurant->restaurant_name ?>
+                        <div class="col-md-8" style="font-size:1rem;"> <?= $this->restaurant->restaurant_name ?>
                         </div>
                     </div>
                     <div class="row contact-information-row">
-                        <div class="contact-info-icon-col text-center col-md-3">
+                        <div class="contact-info-icon-col text-center col-md-3" style="padding-left:0px;">
                             <i class="fas fa-map-marker-alt"></i>
                         </div>
-                        <div class="col-md-8"> <?= $this->restaurant->address ?>
+                        <div class="col-md-8" style="font-size:0.6rem;"> <?= $this->restaurant->address ?>
                         </div>
                     </div>
                     <div class="row contact-information-row">
-                        <div class="contact-info-icon-col text-center col-md-3">
+                        <div class="contact-info-icon-col text-center col-md-3" style="padding-left:0px;">
                             <i class="fas fa-phone"></i>
                         </div>
-                        <div class="col-md-8"> <?= $this->restaurant->telephone ?>
+                        <div class="col-md-8" style="font-size:0.8rem;"> <?= $this->restaurant->telephone ?>
                         </div>
                     </div>
                     <div class="row contact-information-row">
-                        <div class="contact-info-icon-col text-center col-md-3">
+                        <div class="contact-info-icon-col text-center col-md-3" style="padding-left:0px;">
                             <i class="fas fa-at"></i>
                         </div>
-                        <div class="col-md-8"> <?= $this->restaurant->email ?>
+                        <div class="col-md-8" style="font-size:0.8rem;"> <?= $this->restaurant->email ?>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
 
-        <div class="grid" id="items" style="width: 100%;"></div>
+        <div class="grid" id="items" style="width: 100%; margin-top:30px;"></div>
         
     </div>
     <div class="col-md-3">
-        <div id="restaurant-location-map" style="width:100%;height:16rem;"></div>
+        <div id="restaurant-location-map" style="width:100%;height:16rem; border:3px solid black;"></div>
     </div>
 </div>
 
@@ -118,6 +119,7 @@ $token = FH::generate_token();
             </div>
         </div>
     </div>
+</div>
 </div>
 
 

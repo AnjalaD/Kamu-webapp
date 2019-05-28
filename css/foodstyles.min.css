@@ -61,7 +61,7 @@
 }
 
 .block.span3 {
-    background: rgba(255, 236, 179, .95);
+    background: rgb(255, 236, 179);
     text-align: center;
     border-bottom: 5px;
     border-right: 12px;
