@@ -1,0 +1,32 @@
+.restaurant_register_box {
+    border-bottom: 5px ridge #faa825;
+    border-right: 12px ridge #f9a825;
+    border-bottom-right-radius: 50px;
+    background-color: rgba(50, 50, 50, 0.85);
+    color: #f9a825;
+    padding: 45px;
+}
+
+.form-control {
+    background-color: rgba(0, 0, 0, 0);
+    color: #f9a825;
+}
+
+.form-control :hover {
+    background-color: rgba(0, 0, 0, 0);
+    color: #f9a825;
+}
+
+.form-control :focus {
+    background-color: rgba(0, 0, 0, 0);
+    color: #f9a825;
+}
+
+.rest_reg_form_input {
+    background-color: rgba(0, 0, 0, 0);
+    border-top-style: none;
+    border-left-style: none;
+    border-right-style: none;
+    border-bottom: 1px solid #434a52;
+    color: #f9a825;
+}

@@ -2,7 +2,7 @@
 use core\FH;
 ?>
 
-<div id="AddItem_LoginDark_Background" class="login-restaurant-dark">
+<!-- <div id="AddItem_LoginDark_Background" class="login-restaurant-dark">
 	<form method="post" id="AddItem_Main_LoginBox" class="LoginBox" action=<?= $this->post_action ?>>
 		<?= FH::csrf_input() ?>
 		<?= FH::display_errors($this->display_errors) ?>
@@ -25,7 +25,7 @@ use core\FH;
 				</div>
 			</div>
 			<div class="col-md-6 AddRes_coloumn Column_Map">
-				<div class="pg-empty-placeholder AddRes_Map"></div>
+				<div class="pg-empty-placeholder AddRes_Map" id="map-input"></div>
 				<label class="AddRess_direction Latitude" name="lat"><?= $this->restaurant->lat ?></label>
 				<label class="AddRess_direction Longiitude" name="lng"><?= $this->restaurant->lng ?></label>
 			</div>
@@ -43,10 +43,70 @@ use core\FH;
 		</div>
 		<?= FH::input_block('text', 'image', 'image', '', [], ['hidden' => 'true']); ?>
 		<div class="form-group" id="AddItem_Button_FormGroup">
-			<button class="btn btn-primary AddRes_Button" type="submit" id="AddRes_Button">Submit</button>
+			<button class="btn btn-primary AddRes_Button" type="submit" id="AddRes_Button">Register My Restaurant</button>
 		</div>
 	</form>
-</div>
+</div> -->
+
+
+
+<div class="restaurant_register_box" style="width:80%;margin-left:auto;margin-right:auto;">
+			<div class="row" style="margin-bottom: 50px;">
+			<div class="col">
+				<img src="<?= SROOT.'/assets/img/150YelloLogoOnlyKamu.png' ?>"/>
+				</div>
+            </div>
+            <div class="row" style="margin-top: 10px; margin-bottom: 20px;">
+				<div class="col-md-6" style="border-right: 3px solid #f9a825;">
+				
+                    <form id="restaurant_register_form" method="post" action=<?= $this->post_action ?>> 
+					<?= FH::csrf_input() ?>
+					<?= FH::display_errors($this->display_errors) ?>
+                        <div class="form-group rest_reg_form_input"> 
+                            <input type="text" class="form-control rest_reg_form_input"  name="restaurant_name" placeholder="Restaurant name" value="<?= $this->restaurant->restaurant_name ?>" required> 
+                        </div>
+                        <div class="form-group rest_reg_form_input"> 
+                            <input type="text" class="form-control rest_reg_form_input"  name='address' placeholder="Address" value="<?= $this->restaurant->address ?>" required> 
+                        </div>
+                        <div class="form-group rest_reg_form_input"> 
+                            <input type="text" class="form-control rest_reg_form_input"  name="telephone" placeholder="telephone" value="<?= $this->restaurant->telephone ?>" required> 
+                        </div>
+                        <div class="form-group rest_reg_form_input"> 
+                            <input type="email" class="form-control rest_reg_form_input"  name="email" placeholder="Email" value="<?= $this->restaurant->email ?>" required> 
+                        </div>
+                        <div class="row">
+                            <div class="col-md-4">
+                                <div class="form-group rest_reg_form_input">                                      
+
+                                    <input type="text" class="form-control rest_reg_form_input"  name='lat' id="lat" placeholder="Lat." value="<?= $this->restaurant->lat ?>" disabled=true style="color:black;" required> 
+									
+								</div>                                                                  
+                            </div>
+                            <div class="col-md-4">
+                                <div class="form-group rest_reg_form_input">                                      
+
+                                    <input type="text" class="form-control rest_reg_form_input"  name='lng' id="lng" placeholder="Lng." value="<?= $this->restaurant->lng ?>" disabled=true style="color:black;"required> 
+                                </div>                                                                  
+                            </div>
+                        </div>                         
+                        <div class="form-group"> 
+                            <label for="exampleInputFile">Upload Cover Photo</label>                             
+                            <input type="file" class="btn btn-default" name="upload_image" id="upload_image" style="color:white;">                              
+							<?= FH::input_block('text', 'image', 'image', '', [], ['hidden' => 'true']); ?>
+						</div>                                                  
+                    </form>                     
+                </div>
+                <div class="col-md-6">
+                    <div class="pg-empty-placeholder" style="height: 300px;" id="map-input"></div>                     
+                </div>
+			</div>
+			
+            <div class="row text-center" style="margin-bottom: 30px;">
+                <div class="col-md-12">
+                    <button type="submit" form="restaurant_register_form" class="btn btn-primary" style="width: auto;font-family:Aclonica;background-color:#f9a825;border:none;">Register My Restaurant</button>                                          
+                </div>
+            </div>
+        </div>
 
 
 <div id="uploadimageModal" class="modal" role="dialog">

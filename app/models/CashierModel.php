@@ -5,7 +5,7 @@ use core\H;
 
 class CashierModel extends UserModel
 {
-    public $restaurant_id = null;
+    public $restaurant_id=null, $disabled=0;
 
     public function __construct($user='')
     {
@@ -37,12 +37,28 @@ class CashierModel extends UserModel
         return ['Cashier'];
     }
 
-    public function find_by_restaurant_id($restaurant_id)
+    public function find_all_by_restaurant_id($restaurant_id)
     {
         $conditions = [
             'conditions' => 'restaurant_id = ?',
             'bind' => [$restaurant_id]
         ];
         return $this->find($conditions);
+    }
+
+    public function find_by_id_restaurant_id($cashier_id, $restaurant_id)
+    {
+        $conditions = [
+            'conditions' => 'id=? AND restaurant_id = ?',
+            'bind' => [$cashier_id, $restaurant_id]
+        ];
+        return $this->find_first($conditions);
+    }
+
+    public function toggle_disable()
+    {
+        $this->disabled = !($this->disabled);
+        // H::dnd($this);
+        return $this->save();
     }
 } 

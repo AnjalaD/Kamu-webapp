@@ -17,6 +17,7 @@ class RegisterController extends Controller
         $this->load_model('CustomerModel');
         $this->load_model('OwnerModel');
         $this->load_model('AdminModel');
+        $this->load_model('CashierModel');
         $this->view->set_layout('default');
     }
 
@@ -46,7 +47,7 @@ class RegisterController extends Controller
         }
         elseif ($user_type == 'cashier') {
             $new_user = new CashierModel();
-            $redirect = 'register/login_owner';
+            $redirect = 'order/view_orders';
         }
         
         $this->login($new_user, $user_type.'model', 'register/login_owner', $redirect);
@@ -135,9 +136,13 @@ class RegisterController extends Controller
             $new_user->set_confirm($this->request->get('confirm'));
             
             // H::dnd($new_user);
+            // H::dnd($new_user);
             if($new_user ->save()) {
                 $new_user->send_verify_email();
+                Session::add_msg('success', 'Resgistration successful');
                 Router::redirect($redirect);
+            }else{
+                Session::add_msg('danger', 'Error! Could not register');
             }
         }
         $this->view->new_user = $new_user;
