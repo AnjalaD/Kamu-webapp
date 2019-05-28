@@ -535,10 +535,7 @@ public static function create_receipt($order)
         </tr>
       </thead>
       <tbody>
-        <!-- <?php $order->total = 0 ?> -->
-
         <?php foreach ($order->items as $item) : ?>
-          <?php $order->total += ($item->quantity * $item->price) ?>
           <tr>
             <td><em><?= $item->item_name ?></em></h4>
             </td>
@@ -556,7 +553,7 @@ public static function create_receipt($order)
             <h5 style="color:black"><strong>Total: </strong></h4>
           </td>
           <td class="text-center text-danger">
-            <h5 style="color:red"><strong id="receipt-total"><?= $order->total . ' LKR' ?></strong></h4>
+            <h5 style="color:red"><strong id="receipt-total"><?= $order->total_price . ' LKR' ?></strong></h4>
           </td>
         </tr>
       </tbody>

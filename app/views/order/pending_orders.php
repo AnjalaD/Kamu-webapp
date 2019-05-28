@@ -13,7 +13,7 @@ $token = FH::generate_token();
 <?php $this->end(); ?>
 
 <?php $this->start('body'); ?>
-<div class="Profile_body" style="background-image: url(&quot;<?= SROOT ?>assets/img/profile_background.jpg&quot;); background-position: center; background-repeat: no-repeat; background-size: cover; height: 100%; font-family:Aclonica;">
+
     <div class="card card-cascade narrower mt-0 mb-5 mx-3" style="background:rgb(255,255,255,.7);">
         <div class="card-header py-2 mx-4 mb-3 d-flex justify-content-between align-items-center" style="background:#9d2525; color:white;">
             <div></div>
@@ -71,7 +71,6 @@ $token = FH::generate_token();
             </div>
         </div>
     </div>
-</div>
 
 <?php $this->end(); ?>
 
@@ -89,4 +88,14 @@ $token = FH::generate_token();
         );
     };
 </script>
+<script>
+$('body').on('touchmove', function (event) {
+    event.preventDefault();
+});
+</script>
+
+<script>
+    document.body.setAttribute('style',"background-image:url(<?= SROOT ?>assets/img/profile_background.jpg); background-position: center; background-repeat: no-repeat; background-size: cover; font-family:Aclonica; min-width:1395px;");
+</script>
+
 <?php $this->end(); ?>

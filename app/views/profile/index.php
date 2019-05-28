@@ -13,7 +13,7 @@ $this->set_title($this->user->first_name); ?>
 <?php $this->end(); ?>
 
 <?php $this->start('body'); ?>
-<div class="Profile_body" style="background-image: url(&quot;<?=SROOT?>assets/img/profile_background.jpg&quot;);">
+<div class="Profile_body" style="background-image: url(&quot;<?=SROOT?>assets/img/profile_background.jpg&quot;);background-size:1500px 1500px; background-repeat:no-repeat; padding-bottom:2rem;">
     <div class="container profile profile-view" id="profile">
         <div class="row">
             <div class="col-md-12 alert-col relative">
@@ -26,6 +26,9 @@ $this->set_title($this->user->first_name); ?>
                     <div class="avatar">
                         <div class="avatar-bg center"></div>
                     </div><input type="file" id="Profile_fileInput" class="form-control" name="avatar-file">
+                    <?php if (UserModel::current_user()->verified == 0) : ?>
+            <a href="register/send_verify_email" style="position:relative; bottom:-100px; left:0.5rem;"><button style="color:#9d2525; background-color:rgba(0,0,0,0); border:none; font-family:Aclonica"> Account Verification E Email</button></a>
+        <?php endif ?>
                 </div>
                 <div class="col-md-8" id="Profile_coloumninfo">
                     <h1 id="Profile_Heading">Profile </h1>
@@ -95,12 +98,13 @@ $this->set_title($this->user->first_name); ?>
                             <button class="btn btn-danger form-btn" type="reset" id="cancel" style="color: #ffffff;background-color: #dc3545;filter: blur(0px) brightness(104%) invert(0%) sepia(0%);" onclick="location.reload()" >CANCEL </button>
                         </div>
                     </div>
+                   
                 </div>
+                
             </div>
+            
         </form>
-        <?php if (UserModel::current_user()->verified == 0) : ?>
-            <a href="register/send_verify_email">Send Account Verification Email</a>
-        <?php endif ?>
+        
     </div>
 </div>
 <?php $this->end(); ?>
