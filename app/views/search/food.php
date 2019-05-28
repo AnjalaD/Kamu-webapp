@@ -128,7 +128,6 @@ $token = FH::generate_token();
 
 
 <script>
-    // not completed
     $("body").on("click", ".star", function() {
         var value = $(this).attr('id');
         var itemId = $(this).parent().attr('id');

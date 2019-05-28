@@ -122,7 +122,7 @@ class RegisterController extends Controller
 
     public function register_cashier_action()
     {
-        $this->register(new CashierModel(), 'register/register_cashier', 'home');
+        $this->register_cashier(new CashierModel(), 'register/register_cashier', 'restaurant/cashiers');
     }
 
 
@@ -137,7 +137,32 @@ class RegisterController extends Controller
             $new_user->set_confirm($this->request->get('confirm'));
             
             // H::dnd($new_user);
+            if($new_user ->save()) {
+                $new_user->send_verify_email();
+                Session::add_msg('success', 'Resgistration successful');
+                Router::redirect($redirect);
+            }else{
+                Session::add_msg('danger', 'Error! Could not register');
+            }
+        }
+        $this->view->new_user = $new_user;
+        $this->view->display_errors = $new_user->get_error_messages();
+        $this->view->render($page);
+    }
+    
+
+    //register function for cashier - by owner
+    public function register_cashier($model, $page='register/register', $redirect='register/login')
+    {
+        $new_user = $model;
+        if ($this->request->is_post() && $this->request->exists('submit')) {
+            $this->request->csrf_check();
+
+            $new_user->assign($this->request->get());
+            $new_user->set_confirm($this->request->get('confirm'));
+            
             // H::dnd($new_user);
+            $new_user->restaurant_id = UserModel::current_user()->restaurant_id;
             if($new_user ->save()) {
                 $new_user->send_verify_email();
                 Session::add_msg('success', 'Resgistration successful');
