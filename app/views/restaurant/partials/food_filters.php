@@ -1,29 +1,31 @@
-<h4 class="text-center text-dark">Sort by</h4>
+<h4 class="text-center text-white">Sort by</h4>
 
 <form id="filters" method="post">
-    <div class="card m-1 p-2">
+    <div class="card m-1 p-2" style="background-color: rgba(255, 255, 255, 0.93); font-family:Aclonica;">
         <div class="form-check">
             <input class="form-check-input" type="radio" name="sort_by" id="sort_name_a" value="0" checked>
             <label class="form-check-label" for="sort_name_a">
-                Name A-Z
+            <i class="fas fa-font" style="color:#9d2525"></i>   - Name A-Z
+            </label>
             </label>
         </div>
         <div class="form-check">
             <input class="form-check-input" type="radio" name="sort_by" id="sort_name_d" value="1">
             <label class="form-check-label" for="sort_name_d">
-                Name Z-A
+            <i class="fas fa-font" style="color:#9d2525"></i>   - Name Z-A
+            </label>
             </label>
         </div>
         <div class="form-check">
             <input class="form-check-input" type="radio" name="sort_by" id="sort_price_a" value="2">
             <label class="form-check-label" for="sort_price_a">
-                Price /\
+            <i class="fas fa-dollar-sign" style="color:#9d2525"></i>   - Price <i class="fas fa-arrow-up"></i></i>
             </label>
         </div>
         <div class="form-check">
             <input class="form-check-input" type="radio" name="sort_by" id="sort_price_d" value="3">
             <label class="form-check-label" for="sort_price_d">
-                Price \/
+            <i class="fas fa-dollar-sign" style="color:#9d2525"></i>   - Price <i class="fas fa-arrow-down"></i></i>
             </label>
         </div>
     </div>

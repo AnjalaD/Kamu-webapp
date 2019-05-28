@@ -8,6 +8,8 @@ $token = FH::generate_token();
 
 <?php $this->start('head'); ?>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Quicksand">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Aclonica">
+
 <!-- styles for map -->
 <link rel="stylesheet" type="text/css" href="https://js.api.here.com/v3/3.0/mapsjs-ui.css?dp-version=1542186754" />
 <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css" integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf" crossorigin="anonymous">
@@ -27,8 +29,8 @@ $token = FH::generate_token();
 </div>
 
 <div class="row" style="width:100%;margin-top:30px;">
-    <div class="col-md-2 ">
-        <div class="card bg-light p-1" style="width:90%;margin-left:auto;margin-right:auto;">
+    <div class="col-md-2">
+        <div class="card bg-light p-1" style="width:90%;margin-left:auto;margin-right:auto; background-color:#9d2525; color:white; font-family:Aclonica">
             <?php $this->partial('search', 'food_filters'); ?>
         </div>
     </div>

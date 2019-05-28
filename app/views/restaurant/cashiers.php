@@ -5,7 +5,8 @@
 <?php $this->end(); ?>
 
 <?php $this->start('body'); ?>
-<div class="col-md-6 " style="margin-right:auto; margin-left:auto; padding:30px; font-family:Aclonica">
+
+<div class="col-md-6" style=" margin-right:auto; margin-left:auto; padding:30px; font-family:Aclonica";>
     <table class="table text-center" style="padding:15px;">
         <thead style="margin-bottom:5px; background-color:#9d2525; color:white;">
             <th>Cashier Name</th>
@@ -30,7 +31,7 @@
             <?php endif ?>
         </tbody>
     </table>
-
+</div>
 </div>
 
 
