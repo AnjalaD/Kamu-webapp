@@ -25,13 +25,13 @@
         <div class="form-check">
             <input class="form-check-input" type="radio" name="sort_by" id="sort_name_a" value="0" checked>
             <label class="form-check-label" for="sort_name_a">
-            <i class="fas fa-font" style="color:#9d2525;"></i>   - Name A-Z
+            <i class="fas fa-sort-alpha-down" style="color:#9d2525;"></i>   - Name A-Z
             </label>
         </div>
         <div class="form-check">
             <input class="form-check-input" type="radio" name="sort_by" id="sort_name_d" value="1">
             <label class="form-check-label" for="sort_name_d">
-            <i class="fas fa-font" style="color:#9d2525;"></i>   - Name Z-A
+            <i class="fas fa-sort-alpha-up" style="color:#9d2525;"></i>   - Name Z-A
             </label>
         </div>
     </div>
