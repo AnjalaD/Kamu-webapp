@@ -24,7 +24,7 @@ class ItemsController extends Controller
     }
 
 
-    //show food items belongs to logged in owner
+    //show food items that belong to the currently logged in owner
     public function index_action()
     {
         $items = $this->itemsmodel->find_all_by_restaurant_id(UserModel::current_user()->restaurant_id, ['order' => 'item_name']);
@@ -35,7 +35,6 @@ class ItemsController extends Controller
         $this->view->render('items/index');
     }
 
-
     //add new food item
     public function add_action()
     {
@@ -44,12 +43,13 @@ class ItemsController extends Controller
             $this->request->csrf_check();
 
             $tags = explode(',', $this->request->get('tag_array'));
-
+            
             $item->assign($this->request->get());
             $item->restaurant_id = UserModel::current_user()->restaurant_id;
 
             if (!empty($this->request->get('image'))) {
-                $item->image_url = SROOT . 'img/items/' . time() . '.png';
+                $string = substr(str_replace(['+', '/', '='], '', base64_encode(random_bytes(10))), 0, 10); // 10 chars, without /=+
+                $item->image_url = SROOT . 'img/items/' . time() . $string . '.png';
             }
 
             if ($item->save()) {
@@ -91,7 +91,8 @@ class ItemsController extends Controller
                 
 
                 if (!empty($this->request->get('image'))) {
-                    $new_item->image_url = SROOT . 'img/items/' . time() . '.png';
+                    $string = substr(str_replace(['+', '/', '='], '', base64_encode(random_bytes(10))), 0, 10); // 10 chars, without /=+
+                    $new_item->image_url = SROOT . 'img/items/' . time() . $string . '.png';
                 }
 
                 // H::dnd($new_item);
@@ -142,6 +143,8 @@ class ItemsController extends Controller
             $item->hidden = !($item->hidden);
             if (!$item->save()) {
                 Session::add_msg('danger', 'Something went wrong!');
+            } else {
+                Session::add_msg('success', 'Item visibility changed successfully!');
             }
         }
         Router::redirect('items');
@@ -151,11 +154,11 @@ class ItemsController extends Controller
     public function delete_action($item_id)
     {
         $item = $this->itemsmodel->find_by_id_restaurant_id((int)$item_id, OwnerModel::current_user()->restaurant_id);
-        if ($item) {
-            $item->delete();
+        if ($item && $item->delete()) {
             Session::add_msg('success', 'Item deleted successfully!');
+        } else {
+            Session::add_msg('danger', 'Something went wrong!');
         }
-        
         Router::redirect('items');
     }
 

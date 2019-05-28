@@ -107,7 +107,6 @@ $this->set_title($this->user->first_name); ?>
 <?php $this->start('script'); ?>
 <!-- <script src="<?= SROOT ?>js/croppie.js"></script>
 <script src="<?= SROOT ?>js/croppie-function.js"></script> -->
-<script src="<?= SROOT ?>js/Profile-Edit-Form.js"></script>
 <script>
     var changePass = false;
 
@@ -133,11 +132,13 @@ $this->set_title($this->user->first_name); ?>
         var data = {
             csrf_token: '<?=$token?>',
             first_name: $('input[name=first_name]').val(),
-            last_name: $('input[name=last_name]').val()
+            last_name: $('input[name=last_name]').val(),
+            change_pass: changePass
         }
         
         if (changePass) {
             data.password = $('input[name=password]').val();
+            data.confirm = $('input[name=confirm]').val();
             data.current_password = $('input[name=current_password]').val();
         };
 

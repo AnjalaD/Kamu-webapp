@@ -18,6 +18,7 @@ abstract class UserModel extends Model
     public static $current_logged_user = null;
     public $first_name, $last_name, $email, $password, $hash;
     public $verified='0', $deleted='0';
+    private $_password_changed = true;
 
     public function __construct($table,$user_model)
     {
@@ -145,7 +146,7 @@ abstract class UserModel extends Model
 
         $this->run_validation(new UniqueValidator($this, ['field'=>'email', 'rule'=>true, 'msg'=>'Email already used!']));
     
-        if($this->is_new())
+        if($this->_password_changed)
         {
             $this->run_validation(new MatchValidator($this, ['field'=>'password', 'rule'=>$this->_confirm, 'msg'=>'Password and Confirm Password should match!']));
 
@@ -162,8 +163,10 @@ abstract class UserModel extends Model
 
     public function before_save()
     {
-        $this->hash = hash('md5', rand(0,100));
-        $this->password = password_hash($this->password, PASSWORD_DEFAULT);
+        if($this->_password_changed) {
+            $this->hash = hash('md5', rand(0,100));
+            $this->password = password_hash($this->password, PASSWORD_DEFAULT);
+        }
     }
 
     public function set_confirm($value){
@@ -172,6 +175,11 @@ abstract class UserModel extends Model
 
     public function get_confirm(){
         return $this->_confirm;
+    }
+
+    public function set_password_changed($bool)
+    {
+        $this->_password_changed = $bool;
     }
 
 } 

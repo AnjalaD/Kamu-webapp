@@ -1,16 +1,19 @@
 <?php
 namespace core;
 use core\H;
-use core\DBWrapper;
+use core\SQL_DBWrapper;
 
 class Model
 {
     protected $_db, $_table, $_model_name, $_soft_del = false, $_validates=true, $_validation_errors=[];
+    private $_DB_wrapper;
     public $id;
 
     public function __construct($table, $model_name)
     {
-        $this->_db = SQL_DB::get_instance();
+        $this->_DB_wrapper = new SQL_DBWrapper;
+
+        $this->_db = $this->_DB_wrapper->get_instance();
         
         $this->_table = $table;
         $this->_model_name = $model_name;

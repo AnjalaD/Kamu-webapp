@@ -48,15 +48,15 @@ class FoodItemModel extends Model implements SearchAlgo
             INNER JOIN restaurants R ON I.restaurant_id=R.id
             LEFT JOIN item_tags IT ON I.id=IT.item_id
             LEFT JOIN tags T ON IT.tag_id=T.id
-            WHERE I.id IN (SELECT item_tags.item_id FROM item_tags INNER JOIN tags ON tags.id=item_tags.tag_id WHERE tags.tag_name LIKE ?) 
-            AND I.price <= ? AND I.deleted=? AND I.hidden=?
+            WHERE I.price <= ? AND I.deleted=? AND I.hidden=?
+            AND I.id IN (SELECT item_tags.item_id FROM item_tags INNER JOIN tags ON tags.id=item_tags.tag_id WHERE tags.tag_name LIKE ?)
             GROUP by I.id ORDER BY ' . $sort_by[$filters['sort_by']] . ' 
             LIMIT ' . ($page * $this->items_per_page) . ',' . $this->items_per_page . ';';
 
 
         $items = $this->query(
             $sql,
-            ['%' . $filters['search'] . '%', $filters['price_filter'], 0, 0],
+            [$filters['price_filter'], 0, 0, '%' . $filters['search'] . '%'],
             get_class($this)
         );
 
@@ -84,25 +84,45 @@ class FoodItemModel extends Model implements SearchAlgo
     }
 
 
-    // public function search_by_tag($tag, $page = 0)
-    // {
-    //     $sql = '
-    //         SELECT I.*, R.restaurant_name, GROUP_CONCAT(T.tag_name) as tags
-    //         FROM items as I
-    //         INNER JOIN restaurants R ON I.restaurant_id=R.id
-    //         LEFT JOIN item_tags IT ON I.id=IT.item_id
-    //         LEFT JOIN tags T ON IT.tag_id=T.id
-    //         WHERE I.id IN (SELECT item_tags.item_id FROM item_tags INNER JOIN tags ON tags.id=item_tags.tag_id WHERE tags.tag_name =  ?)
-    //         GROUP by I.id ORDER by item_name LIMIT ' . ($page * 20) . ', 20;';
+    public function filter_by_restaurant($restaurant_id, $filters, $page = 0)
+    {
+        $sort_by = ['item_name ASC', 'item_name DESC', 'price ASC', 'price DESC', 'rating DESC'];
 
-    //     $items = $this->query($sql, [$tag], get_class($this));
+        $sql = '
+            SELECT I.*, R.restaurant_name, GROUP_CONCAT(T.tag_name) as tags
+            FROM items as I
+            INNER JOIN restaurants R ON I.restaurant_id=R.id
+            LEFT JOIN item_tags IT ON I.id=IT.item_id
+            LEFT JOIN tags T ON IT.tag_id=T.id
+            WHERE I.restaurant_id=? AND I.price <= ? AND I.deleted=? AND I.hidden=? 
+            AND I.id IN (SELECT item_tags.item_id FROM item_tags INNER JOIN tags ON tags.id=item_tags.tag_id WHERE tags.tag_name LIKE ?) 
+            GROUP by I.id ORDER BY ' . $sort_by[$filters['sort_by']] . ' 
+            LIMIT ' . ($page * $this->items_per_page) . ',' . $this->items_per_page . ';';
 
-    //     if ($items) {
-    //         foreach ($items as $item) {
-    //             $item->tags = ($item->tags) ? explode(',', $item->tags) : false;
-    //         }
-    //     }
-    //     // H::dnd($items);
-    //     return ($items) ? $items : [];
-    // }
+
+        $items = $this->query(
+            $sql,
+            [$restaurant_id, $filters['price_filter'], 0, 0, '%' . $filters['search'] . '%'],
+            get_class($this)
+        );
+
+        if ($items) {
+            foreach ($items as $item) {
+                $item->tags = ($item->tags) ? explode(',', $item->tags) : false;
+            }
+        }
+        $end_of_results = ($this->_db->count() < $this->items_per_page) ? true : false;
+
+        $result = $items ? H::create_card_list($items) . H::create_pagination_tabs($page, $end_of_results) : null;
+        if($items) {
+            $result = H::create_card_list($items) . H::create_pagination_tabs($page, $end_of_results);
+        } elseif(!$items && $page > 0) {
+            $result = H::create_pagination_tabs($page, $end_of_results);
+        } else {
+            $result = null;
+        }
+        return $result;
+    }
+
+
 }

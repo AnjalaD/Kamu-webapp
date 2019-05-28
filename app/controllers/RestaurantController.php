@@ -20,6 +20,7 @@ class RestaurantController extends Controller
         $this->load_model('SubmittedOrderModel');
         $this->load_model('CashierModel');
         $this->load_model('OwnerModel');
+        $this->load_model('FoodItemModel');
     }
 
 
@@ -207,6 +208,8 @@ class RestaurantController extends Controller
         $cashier = $this->cashiermodel->find_by_id_restaurant_id($cashier_id, UserModel::current_user()->restaurant_id);
         if(!$cashier->toggle_disable()) {
             Session::add_msg('danger', 'Cannot change the Cashier status!');
+        }else{
+            Session::add_msg('success', 'Cashier status changed');
         }
         Router::redirect('restaurant/cashiers');
     }
@@ -215,8 +218,25 @@ class RestaurantController extends Controller
     public function remove_cashier_action($cashier_id)
     {
         $cashier = $this->cashiermodel->find_by_id_restaurant_id($cashier_id, UserModel::current_user()->restaurant_id);
-        $cashier->delete();
+        if(! $cashier->delete()){
+            Session::add_msg('danger', 'Cannot delete cashier!');
+        }else{
+            Session::add_msg('danger', 'Cashier deleted');
+        }
         Router::redirect('restaurant/cashiers');
+    }
+
+
+    //ajax search for restaurant items
+    public function search_action($restaurant_id, $page=0)
+    {
+        $filters = $this->request->get();
+        $this->request->csrf_check();
+
+
+        $response = $this->fooditemmodel->filter_by_restaurant($restaurant_id, $filters, $page);
+        
+        return $this->json_response($response);
     }
 
 }

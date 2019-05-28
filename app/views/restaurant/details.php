@@ -1,7 +1,14 @@
+<?php
+use core\FH;
+
+$token = FH::generate_token();
+?>
 <?php $this->set_title($this->restaurant->restaurant_name); ?>
 
 <?php $this->start('head'); ?>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Quicksand">
+<link rel="stylesheet" href="<?= SROOT ?>css/foodstyles.min.css">
+
 <!-- styles for map -->
 <link rel="stylesheet" type="text/css" href="https://js.api.here.com/v3/3.0/mapsjs-ui.css?dp-version=1542186754" />
 <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css" integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf" crossorigin="anonymous">
@@ -18,7 +25,7 @@
 
 <div class="row" style="width:100%;margin-top:30px;">
     <div class="col-md-2 ">
-        <div class="card bg-light p-1" style="width:90%;margin-left:auto;margin-right:auto;">
+        <div class="card p-2" style="width:90%;margin-left:auto;margin-right:auto;background-color: rgb(157,37,37,.93);">
             <?php $this->partial('search', 'food_filters'); ?>
         </div>
     </div>
@@ -83,9 +90,8 @@
                 </div>
             </div>
         </div>
-        <div class="row">
-            <h1>Item cards here</h1>
-        </div>
+
+        <div class="grid" id="items" style="width: 100%;"></div>
 
     </div>
     <div class="col-md-3">
@@ -93,7 +99,21 @@
     </div>
 </div>
 
-
+<div id="add_to_order" class="modal fade" role="dialog">
+    <div class="modal-dialog">
+        <!-- Modal content-->
+        <div class="modal-content">
+            <div class="modal-header" style="background:#ef3030;">
+                <h4 class="modal-title">Info</h4>
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+            </div>
+            <div class="modal-body"></div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+            </div>
+        </div>
+    </div>
+</div>
 
 
 <?php $this->end(); ?>
@@ -107,8 +127,13 @@
 <script type="text/javascript" src="https://js.api.here.com/v3/3.0/mapsjs-ui.js"></script>
 <script type="text/javascript" src="https://js.api.here.com/v3/3.0/mapsjs-mapevents.js"></script>
 
+<script src="<?= SROOT ?>js/masonry.pkgd.min.js"></script>
+<script src="<?= SROOT ?>js/addtoorder.js"></script>
+<script src="<?= SROOT ?>js/rating.js"></script>
+
 <!-- adding map -->
 <script src="<?= SROOT ?>js/map.js"></script>
+
 <script>
     mymap = HMap.getInstance();
     mymap.showPointAndCenter({
@@ -117,5 +142,69 @@
     }, 'restaurant-location-map', JSON.stringify(<?php echo json_encode($this->restaurant->restaurant_name) ?>));
 </script>
 
+<script>
+    $(document).ready(function() {
+        sendFiltersRestaurant();
+    });
+
+    $('form').submit(function(e) {
+        sendFiltersRestaurant();
+        return false;
+    });
+
+    $("body").on("click", ".tag", function(e) {
+        sendFiltersRestaurant($(this).attr('id'));
+    });
+
+    function goToPage(page) {
+        sendFiltersRestaurant(null, page);
+    }
+
+    function sendFiltersRestaurant(search=null, page = 0) {
+        data = {
+            search: search,
+            csrf_token: '<?= $token ?>',
+            sort_by: $('input[name=sort_by]:checked').val(),
+            price_filter: $('input[name=price_filter]').val()
+        };
+        viewResults(data, 'items', page);
+    }
+    
+
+    function viewResults(data, divId, pageNo) {
+        console.log("ajax");
+        $.post(
+            `${SROOT}/restaurant/search/<?= $this->restaurant->id ?>/${pageNo}`,
+            data,
+            function(resp) {
+                // console.log(resp);
+                if (!resp) {
+                    if (pageNo > 0) $('#' + divId).html("<p>End of Results</p>");
+                    else $('#' + divId).html("<p>No items found</p>");
+                } else {
+                    $('#' + divId).html(resp);
+                    $('.grid').masonry({
+                        // options
+                        itemSelector: '.grid-item',
+                        columnWidth: 0
+                    });
+                }
+            }
+        );
+    }
+
+    $('#search_string').keyup(function() {
+        autoComplete($(this).val(), 1)
+    });
+</script>
+
+
+<script>
+    $("body").on("click", ".star", function() {
+        var value = $(this).attr('id');
+        var itemId = $(this).parent().attr('id');
+        addRating(itemId, value, '<?= $token ?>');
+    });
+</script>
 
 <?php $this->end(); ?>

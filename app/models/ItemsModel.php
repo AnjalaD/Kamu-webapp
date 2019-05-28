@@ -5,6 +5,9 @@ use core\Model;
 use core\validators\MaxValidator;
 use core\validators\RequiredValidator;
 use core\validators\NumericValidator;
+use core\validators\MaxValueValidator;
+use core\validators\MinValueValidator;
+use core\validators\RegexPatternValidator;
 use core\H;
 use app\interfaces\SearchAlgo;
 
@@ -43,13 +46,20 @@ class ItemsModel extends Model implements SearchAlgo
 
     public function validator()
     {
-        $this->run_validation(new RequiredValidator($this, ['field' => 'item_name', 'rule' => true, 'msg' => 'Name is required!']));
+        $this->run_validation(new RequiredValidator($this, ['field' => 'item_name', 'rule' => true, 'msg' => 'Item Name is required!']));
         $this->run_validation(new RequiredValidator($this, ['field' => 'description', 'rule' => true, 'msg' => 'Descripton is required!']));
         $this->run_validation(new RequiredValidator($this, ['field' => 'price', 'rule' => true, 'msg' => 'Price is required!']));
 
+        $this->run_validation(new MaxValidator($this, ['field' => 'item_name', 'rule' => 50, 'msg' => 'Item Name should be maximum of 50 characters!']));
+        $this->run_validation(new RegexPatternValidator($this, ['field' => 'item_name', 'rule' =>"/^[a-zA-Z0-9 ]*$/", 'msg' => 'Item Name should only consist of letters numbers and spaces']));
         $this->run_validation(new MaxValidator($this, ['field' => 'description', 'rule' => 255, 'msg' => 'Description should be maximum of 255 characters!']));
         $this->run_validation(new NumericValidator($this, ['field' => 'price', 'rule' => true, 'msg' => 'Price should be numeric!']));
+        $this->run_validation(new MaxValueValidator($this, ['field' => 'price', 'rule' => 10000, 'msg' => 'Price should be less than Rs.10,000.00']));
+        $this->run_validation(new MinValueValidator($this, ['field' => 'price', 'rule' => 1, 'msg' => 'Price should be at least Rs.1.00']));
     }
+
+
+    //for search
 
     public function auto_complete($data)
     {

@@ -3,7 +3,7 @@
         "denied": {},
         "Home": ["*"],
         "Register": ["login", "register", "login_admin", "login_owner", "verify", "forgot", "reset_password"],
-        "Restaurant": ["details", "restaurant"],
+        "Restaurant": ["details", "restaurant", "search"],
         "Search": ["*"],
         "Restricted": ["*"],
         "Order": ["add_to_order"]
@@ -37,11 +37,15 @@
 
     "Cashier" : {
         "denied": {
-            "Items": ["update_rating"]
         },
-        "Items": ["*"],
+        
         "Restaurant": ["no_of_orders"],
         "Order": ["view_orders", "accept_order", "reject_order","complete_order", "get_all_orders_to_restaurant_html"]
+    },
+
+    "Disabled_Cashier" : {
+        "denied": {
+        }  
     },
 
     "Admin": {
