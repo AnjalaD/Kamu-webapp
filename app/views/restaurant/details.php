@@ -17,34 +17,34 @@
 
 
 <div class="row" style="width:100%;margin-top:30px;">
-    <div class="col-md-2 " >
+    <div class="col-md-2 ">
         <div class="card bg-light p-1" style="width:90%;margin-left:auto;margin-right:auto;">
             <?php $this->partial('search', 'food_filters'); ?>
         </div>
     </div>
-    <div class="col-md-7">
+    <div class="col-md-7" >
 
-        <div style="width: 900px; height: 260px; background-color: #f0efe3; border-bottom: 6px solid #9d2525; padding-bottom: 0px;">
+        <div class="row" style="width: 100%; height: auto; background-color: #f0efe3; border-bottom: 6px solid #9d2525;padding:10px; padding-bottom: 0px;">
             <div class="row" style="padding-right: 0px; padding-bottom: 0; margin-bottom: 0;">
-                <div class="col-md-6">
-                    <div id="carousel1" class="carousel slide" data-ride="carousel">
+                <div class="col-md-6" >
+                    <div id="carousel1" class="carousel slide" data-ride="carousel" >
                         <ol class="carousel-indicators">
                             <li data-target="#carousel1" data-slide-to="0" class="active"></li>
                             <li data-target="#carousel1" data-slide-to="1"></li>
                             <li data-target="#carousel1" data-slide-to="2"></li>
                         </ol>
-                        <div class="carousel-inner">
+                        <div class="carousel-inner" style="height:14rem;">
                             <div class="carousel-item active">
                                 <img class="d-block w-100" src="http://pinegrow.com/placeholders/img11.jpg" alt="First slide">
-                                
+
                             </div>
                             <div class="carousel-item">
                                 <img class="d-block w-100" src="http://pinegrow.com/placeholders/img18.jpg" alt="Second slide">
-                                
+
                             </div>
                             <div class="carousel-item">
                                 <img class="d-block w-100" src="http://pinegrow.com/placeholders/img16.jpg" alt="Third slide">
-                                
+
                             </div>
                         </div>
                         <a class="carousel-control-prev" href="#carousel1" role="button" data-slide="prev"> <span class="carousel-control-prev-icon" aria-hidden="true"></span> <span class="sr-only">Previous</span> </a>
@@ -83,10 +83,13 @@
                 </div>
             </div>
         </div>
+        <div class="row">
+            <h1>Item cards here</h1>
+        </div>
 
     </div>
     <div class="col-md-3">
-        <div id="restaurant-location-map" style="width:100%;height:260px;"></div>
+        <div id="restaurant-location-map" style="width:100%;height:16rem;"></div>
     </div>
 </div>
 
