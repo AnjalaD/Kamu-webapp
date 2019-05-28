@@ -418,6 +418,7 @@ public static function create_restaurant_card_list($restaurants)
 
 public static function create_restaurant_card($restaurant)
 {
+  // self::dnd($restaurant->items);
   ob_start() ?>
   <div class="restaurant-card">
     <div class="row">
@@ -460,33 +461,17 @@ public static function create_restaurant_card($restaurant)
         <div class="row" style="margin-top: -10px;">
           <div class="col-md-10">
             <div class="card-group">
+              <?php foreach ($restaurant->items as $item) :?>
               <div class="card">
                 <div class="card-body">
-                  <h6 class="card-title">Card title</h6>
-                  <p class="card-text">Price</p>
+                  <h6 class="card-title"><?=$item->item_name?></h6>
+                  <p class="card-text"><?=$item->price?> LKR</p>
                 </div>
                 <div class="card-footer">
-                  <small class="text-muted">Rating</small>
+                  <small class="text-muted"><?=$item->rating?></small>
                 </div>
               </div>
-              <div class="card">
-                <div class="card-body">
-                  <h6 class="card-title">Card title</h6>
-                  <p class="card-text">Price</p>
-                </div>
-                <div class="card-footer">
-                  <small class="text-muted">Rating</small>
-                </div>
-              </div>
-              <div class="card">
-                <div class="card-body">
-                  <h6 class="card-title">Card title</h6>
-                  <p class="card-text">Price</p>
-                </div>
-                <div class="card-footer">
-                  <small class="text-muted">Rating</small>
-                </div>
-              </div>
+              <?php endforeach ?>
             </div>
           </div>
           <div class="col-md-2">

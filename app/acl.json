@@ -25,14 +25,21 @@
             "use_saved_order", "remove_saved_order", "change_item_quantity", "get_total", "pending_orders", "cancel_pending_order", "get_order_receipt"]
     },
 
-    "Owner": {
+    "Registered_Owner": {
         "denied": {
             "Items": ["update_rating"]
         },
         "Register" : ["register_cashier"],
         "Items": ["*"],
-        "Restaurant": ["my_restaurant","no_of_orders", "submit_details", "cashiers", "cashier_status_toggle", "remove_cashier"],
+        "Restaurant": ["my_restaurant","no_of_orders", "cashiers", "cashier_status_toggle", "remove_cashier"],
         "Order": ["view_orders", "accept_order", "reject_order","get_all_orders_to_restaurant_html"]
+    },
+
+    "Owner": {
+        "denied": {
+            "Items": ["update_rating"]
+        },
+        "Restaurant": ["my_restaurant","no_of_orders", "submit_details"]
     },
 
     "Cashier" : {
