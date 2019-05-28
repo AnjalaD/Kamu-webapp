@@ -11,46 +11,49 @@ $token = FH::generate_token();
 <?php $this->end(); ?>
 
 <?php $this->start('body'); ?>
+<div style="background-image:url(<?= SROOT ?>assets/img/profile_background.jpg); background-position: horizontal-center; background-repeat: repeat-y; background-size: contain; font-family:Aclonica; min-width:1395px;">
+    <div class="container-fluid pb-5">
+        <div class="p-3">
+            <form method="POST" id="search">
+                <div class="input-group">
+                    <input type="text" autocomplete="off" class="form-control" list="food" name="search_string" id="search_string" value="<?= $this->post_data ?>" placeholder="Search for food...">
+                    <div class="input-group-append">
+                        <button type="submit" class="btn btn-secondary" value="Search" name="food" id="search">Search <i class="fa fa-search" aria-hidden="true"></i></button>
+                    </div>
+                </div>
+                <datalist id="food"></datalist>
+            </form>
+        </div>
 
-<div class="container-fluid">
-    <form method="POST" id="search">
-        <div class="input-group">
-            <input type="text" autocomplete="off" class="form-control" list="food" name="search_string" id="search_string" value="<?= $this->post_data ?>" placeholder="Enter what you want">
-            <div class="input-group-append">
-                <input type="submit" class="btn btn-outline-secondary" value="Search" name="food" id="search">
+        <div class="row">
+            <div class="col-md-2">
+                <div class="card p-2" style="background-color: rgb(157,37,37,.93);">
+                    <?php $this->partial('search', 'food_filters'); ?>
+                </div>
             </div>
-        </div>
-        <datalist id="food"></datalist>
-    </form>
 
-    <div class="row p-1">
-        <div class="col-md-2">
-            <div class="card bg-light p-1">
-                <?php $this->partial('search', 'food_filters'); ?>
+            <div class="col-md-8">
+                <div class="card bg-light pr-0 p-3" id="items"></div>
             </div>
-        </div>
 
-        <div class="col-md-8">
-            <div class="card bg-light p-1" id="items"></div>
-        </div>
-
-        <div class="col-md-2">
-            <div class="card bg-light p-1"></div>
+            <div class="col-md-2">
+                <div class="card bg-light p-1"></div>
+            </div>
         </div>
     </div>
-</div>
 
-<div id="add_to_order" class="modal fade" role="dialog">
-    <div class="modal-dialog">
-        <!-- Modal content-->
-        <div class="modal-content">
-            <div class="modal-header" style="background:#ef3030;">
-                <h4 class="modal-title">Info</h4>
-                <button type="button" class="close" data-dismiss="modal">&times;</button>
-            </div>
-            <div class="modal-body"></div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+    <div id="add_to_order" class="modal fade" role="dialog">
+        <div class="modal-dialog">
+            <!-- Modal content-->
+            <div class="modal-content">
+                <div class="modal-header" style="background:#ef3030;">
+                    <h4 class="modal-title">Info</h4>
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                </div>
+                <div class="modal-body"></div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                </div>
             </div>
         </div>
     </div>
@@ -132,5 +135,9 @@ $token = FH::generate_token();
         addRating(itemId, value, '<?= $token ?>');
     });
 </script>
+
+<!-- <script>
+    document.body.setAttribute('style', "background-image:url(<?= SROOT ?>assets/img/profile_background.jpg); background-position: horizontal-center; background-repeat: repeat-y; background-size: contain; font-family:Aclonica; min-width:1395px;");
+</script> -->
 
 <?php $this->end(); ?>
