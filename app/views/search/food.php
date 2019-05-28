@@ -8,10 +8,11 @@ $token = FH::generate_token();
 
 <?php $this->start('head'); ?>
 <link rel="stylesheet" href="<?= SROOT ?>css/foodstyles.min.css">
+<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css" integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf" crossorigin="anonymous">
 <?php $this->end(); ?>
 
 <?php $this->start('body'); ?>
-<div style="background-image:url(<?= SROOT ?>assets/img/profile_background.jpg); background-position: horizontal-center; background-repeat: repeat-y; background-size: contain; font-family:Aclonica; min-width:800px;">
+<div style="background-image:url(<?= SROOT ?>assets/img/profile_background.jpg); background-attachment:fixed; background-repeat: repeat-y; background-size: 1400px 800px; font-family:Aclonica; min-width:1395px;">
     <div class="container-fluid pb-5">
         <div class="p-3">
             <form method="POST" id="search">
