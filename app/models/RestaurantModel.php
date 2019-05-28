@@ -122,4 +122,23 @@ class RestaurantModel extends Model implements SearchAlgo
         }
         return $result;
     }
+
+    public function validator(){
+        $this->run_validation(new RequiredValidator($this, ['field'=>'restaurant_name', 'rule'=>true, 'msg'=>'Restaurant Name is required!']));
+        $this->run_validation(new RequiredValidator($this, ['field'=>'address', 'rule'=>true, 'msg'=>'Restaurant Address is required!']));
+        $this->run_validation(new RequiredValidator($this, ['field'=>'telephone', 'rule'=>true, 'msg'=>'Telephone Number is required!']));
+        $this->run_validation(new RequiredValidator($this, ['field'=>'email', 'rule'=>true, 'msg'=>'Email is required!']));
+        $this->run_validation(new RequiredValidator($this, ['field'=>'lng', 'rule'=>true, 'msg'=>'Location Latitude is not set!']));
+        $this->run_validation(new RequiredValidator($this, ['field'=>'lat', 'rule'=>true, 'msg'=>'Location Longitude is not set!']));
+        $this->run_validation(new RequiredValidator($this, ['field'=>'image', 'rule'=>true, 'msg'=>'Cover Photo is not set!']));
+
+
+        $this->run_validation(new MaxValidator($this, ['field'=>'restaurant_name', 'rule'=>50, 'msg'=>'Restaurant Name must be maximum of 50 characters']));
+        $this->run_validation(new MaxValidator($this, ['field'=>'email', 'rule'=>50, 'msg'=>'Email must be maximum of 50 characters']));
+        $this->run_validation(new MaxValidator($this, ['field'=>'telephone', 'rule'=>10, 'msg'=>'Phone number must be maximum of 10 characters']));
+        $this->run_validation(new MaxValidator($this, ['field'=>'address', 'rule'=>50, 'msg'=>'Email must be maximum of 50 characters']));
+
+
+
+    }
 }

@@ -52,7 +52,7 @@ class Session
         {
             if(self::exists($alert))
             {
-                $html .= '<div class="alert ' . $alert . ' alert-dismissible fade show" role="alert">';
+                $html .= '<div class="alert ' . $alert . ' alert-dismissible fade show" role="alert" style="width:100%;">';
                 $html .= '<button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>';
                 $html .= self::get($alert);
                 $html .= '</div>';

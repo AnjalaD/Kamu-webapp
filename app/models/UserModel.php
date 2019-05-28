@@ -137,6 +137,7 @@ abstract class UserModel extends Model
         $this->run_validation(new MaxValidator($this, ['field'=>'last_name', 'rule'=>50, 'msg'=>'Last Name must be maximum of 50 characters']));
         $this->run_validation(new MaxValidator($this, ['field'=>'email', 'rule'=>100, 'msg'=>'Email must be maximum of 100 characters']));
 
+
         $this->run_validation(new RequiredValidator($this, ['field'=>'first_name', 'rule'=>true, 'msg'=>'First Name is required!']));
         $this->run_validation(new RequiredValidator($this, ['field'=>'last_name', 'rule'=>true, 'msg'=>'Last Name is required!']));
         $this->run_validation(new RequiredValidator($this, ['field'=>'email', 'rule'=>true, 'msg'=>'Email is required!']));
@@ -149,6 +150,7 @@ abstract class UserModel extends Model
         if($this->_password_changed)
         {
             $this->run_validation(new MatchValidator($this, ['field'=>'password', 'rule'=>$this->_confirm, 'msg'=>'Password and Confirm Password should match!']));
+            $this->run_validation(new MaxValidator($this, ['field'=>'password', 'rule'=>50, 'msg'=>'Password must be maximum of 50 characters']));
 
         }
     }
