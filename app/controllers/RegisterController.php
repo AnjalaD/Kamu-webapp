@@ -181,9 +181,11 @@ class RegisterController extends Controller
     public function verify_action($type, $email, $hash)
     {
         $user = $this->{$type.'model'}->find_by_email($email);
+        
         if($user->hash == $hash)
         {
             $user->verified = 1;
+            $user->set_password_changed(false);
             if($user->save())
             {
                 Session::add_msg('success', 'Your account has successfully verified!');
