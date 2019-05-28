@@ -112,6 +112,17 @@ class RestaurantModel extends Model implements SearchAlgo
 
         $end_of_results = ($this->_db->count() < $this->items_per_page) ? true : false;
 
+        $params = [
+            'order' => 'rating DESC',
+            'limit' => '0, 3'
+        ];
+        $item_model = new ItemsModel();
+        foreach ($restaurants as $restaurant) {
+            $restaurant->items = $item_model->find_all_by_restaurant_id($restaurant->id, $params);
+        }
+
+        // H::dnd($restaurants[0]->items);
+
         $result = $restaurants ? H::create_restaurant_card_list($restaurants) . H::create_pagination_tabs($page, $end_of_results) : null;
         if($restaurants) {
             $result = H::create_restaurant_card_list($restaurants) . H::create_pagination_tabs($page, $end_of_results);

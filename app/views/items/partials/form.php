@@ -46,15 +46,10 @@ use core\FH;
                 <h4 class="modal-title">Upload & Crop Image</h4>
             </div>
             <div class="modal-body">
-                <div class="row text-center">
-                    <div class="text-center">
-                        <div id="image_demo" style="width:350px; margin-top:30px"></div>
-                    </div>
-                    
-                </div>
+                <div id="image_demo" style="margin-top:30px"></div>
             </div>
             <div class="modal-footer">
-            <button class="btn btn-success crop_image">Crop & Upload Image</button>
+                <button class="btn btn-success crop_image">Crop & Upload Image</button>
             </div>
         </div>
     </div>
