@@ -1,4 +1,3 @@
-<h3 class="text-center text-white">Filters</h3>
 
 <form id="filters" method="post">
     <div class="card m-1 p-2" style="background-color: rgba(255, 255, 255, 0.93);">
@@ -42,15 +41,15 @@
     <h4 class="text-center text-dark">Filter by</h4>
         <div>
             <label for="price_filter"><i class="fas fa-dollar-sign" style="color:#9d2525"></i>  Price</label>
-            <div>
+            <div class="text-center">
                 <span class="font-weight" style="font-size:0.8rem;">0</span>
-                <input type="range" min="0" max="1000" step="100" value="300" id="price_filter" name="price_filter" style="width:80%">
+                <input type="range" min="0" max="1000" step="100" value="300" id="price_filter" name="price_filter" style="width:50%">
                 <span class="font-weight" style="font-size:0.8rem;">1000</span>
             </div>
         </div>
     </div>
 
     <div class="text-center">
-    <input type="submit" id="save_filter" class="btn btn-warning my-3" value="Apply Filters">
+    <input type="submit" id="save_filter" class="btn btn-warning my-3" value="Sort & Filter !">
     </div>
 </form>

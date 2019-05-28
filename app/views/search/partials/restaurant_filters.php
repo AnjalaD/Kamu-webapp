@@ -1,4 +1,3 @@
-<h3 class="text-center text-white">Filters</h3>
 
 <form id="filters" method="post">
 
@@ -37,6 +36,6 @@
     </div>
 
     <div class="text-center">
-        <input type="submit" id="save_filter" class="btn btn-warning my-3" value="Apply Filters">
+        <input type="submit" id="save_filter" class="btn btn-warning my-3" value="Sort & Filter !">
     </div>
 </form>
