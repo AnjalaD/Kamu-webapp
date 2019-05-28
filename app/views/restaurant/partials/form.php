@@ -103,7 +103,7 @@ use core\FH;
 			
             <div class="row text-center" style="margin-bottom: 30px;">
                 <div class="col-md-12">
-                    <button type="submit" form="restaurant_register_form" class="btn btn-primary" style="width: 30%;font-family:Aclonica;background-color:#f9a825;border:none;">Register My Restaurant</button>                                          
+                    <button type="submit" form="restaurant_register_form" class="btn btn-primary" style="width: auto;font-family:Aclonica;background-color:#f9a825;border:none;">Register My Restaurant</button>                                          
                 </div>
             </div>
         </div>

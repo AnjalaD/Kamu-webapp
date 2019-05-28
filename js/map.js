@@ -31,7 +31,6 @@ ex:
 
 class HMap {
 
-    static instance = null;
 
     //private
     constructor() {
@@ -339,4 +338,5 @@ class HMap {
 
     }
 }
+HMap.instance = null;
 
