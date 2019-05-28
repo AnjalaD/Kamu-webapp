@@ -41,12 +41,8 @@ use app\models\UserModel;
                 <!-- Start: #ConfirmPassword_TexInput --><input type="password" name="confirm" placeholder="Confirm Password" class="form-control TextInput" id="Register_ConfirmPassword_TextInput" />
                 <!-- End: #ConfirmPassword_TexInput -->
             </div>
-            <div class="form-group" id="Register">
-                <!-- Start: #ConfirmPassword_TexInput --><input type="text" name="restaurant_id" class="form-control TextInput" value="<?=UserModel::current_user()->restaurant_id?>"" hidden />
-                <!-- End: #ConfirmPassword_TexInput -->
-            </div>
             <div class="form-group" id="Button_FormGroup">
-                <!-- Start: #RegisterButton --><button class="btn btn-primary btn-block Button" type="submit" name="submit" id="Register_Button">Register</button>
+                <!-- Start: #RegisterButton --><button class="btn btn-primary btn-block Button" type="submit" name="submit" id="Register_Button">Register New Cashier</button>
                 <!-- End: #RegisterButton -->
             </div>
         </form>
