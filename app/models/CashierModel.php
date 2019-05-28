@@ -57,6 +57,7 @@ class CashierModel extends UserModel
 
     public function toggle_disable()
     {
+        $this->set_password_changed(false);
         $this->disabled = !($this->disabled);
         // H::dnd($this);
         return $this->save();
