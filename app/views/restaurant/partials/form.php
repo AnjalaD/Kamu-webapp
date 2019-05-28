@@ -66,13 +66,13 @@ use core\FH;
                             <input type="text" class="form-control rest_reg_form_input"  name="restaurant_name" placeholder="Restaurant name" value="<?= $this->restaurant->restaurant_name ?>" required> 
                         </div>
                         <div class="form-group rest_reg_form_input"> 
-                            <input type="email" class="form-control rest_reg_form_input"  name='address' placeholder="Address" value="<?= $this->restaurant->address ?>" required> 
+                            <input type="text" class="form-control rest_reg_form_input"  name='address' placeholder="Address" value="<?= $this->restaurant->address ?>" required> 
                         </div>
                         <div class="form-group rest_reg_form_input"> 
                             <input type="text" class="form-control rest_reg_form_input"  name="telephone" placeholder="telephone" value="<?= $this->restaurant->telephone ?>" required> 
                         </div>
                         <div class="form-group rest_reg_form_input"> 
-                            <input type="text" class="form-control rest_reg_form_input"  name="email" placeholder="Email" value="<?= $this->restaurant->email ?>" required> 
+                            <input type="email" class="form-control rest_reg_form_input"  name="email" placeholder="Email" value="<?= $this->restaurant->email ?>" required> 
                         </div>
                         <div class="row">
                             <div class="col-md-4">
