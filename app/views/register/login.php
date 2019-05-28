@@ -47,7 +47,7 @@ $token = FH::generate_token();
         <button style=" position: fixed; bottom: 20px; right: 30px; font-family:Aclonica;
             border-width:3px; border-color:#FFFFCC outline: none; background-color: #9d2525;
              cursor: pointer; padding: 10px; border-radius: 10px; font-size: 15px; color: white;">
-            Login as Other User</button>
+            Login as Restaurant Admin</button>
     </a>
 
 </div>

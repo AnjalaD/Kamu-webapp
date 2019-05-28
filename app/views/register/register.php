@@ -11,13 +11,21 @@ $token = FH::generate_token();
 <link rel="stylesheet" href="<?= SROOT ?>css/styles.min.css">
 <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Aclonica">
 <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Montserrat">
+
 <?php $this->end(); ?>
 
 <?php $this->start('body'); ?>
 <div id="Register_LoginDark_Background" class="login-dark">
-    <div class="nav nav-tabs" id="nav-tab" role="tablist">
-        <a class="nav-item nav-link active" id="nav-home-tab" data-toggle="tab" href="#user" role="tab" aria-controls="nav-home" aria-selected="true">Register as User</a>
-        <a class="nav-item nav-link" id="nav-profile-tab" data-toggle="tab" href="#owner" role="tab" aria-controls="nav-profile" aria-selected="false">Resgister as Owner</a>
+    <div style="background-color:aliceblue">
+        <div class="nav nav-pills " id="nav-tab" role="tablist">
+            <style>
+                .nav-link.active {
+                    background-color: #9d2525;
+                }
+            </style>
+            <a class="nav-item nav-link active" id="nav-home-tab" data-toggle="tab" href="#user" role="tab" aria-controls="nav-home" aria-selected="true">Register as User</a>
+            <a class="nav-item nav-link" id="nav-profile-tab" data-toggle="tab" href="#owner" role="tab" aria-controls="nav-profile" aria-selected="false">Resgister as Owner</a>
+        </div>
     </div>
 
     <div class="tab-content" id="nav-tabContent">
@@ -92,4 +100,4 @@ $token = FH::generate_token();
     </div>
 </div>
 
-<?php $this->end(); ?> 
+<?php $this->end(); ?>
