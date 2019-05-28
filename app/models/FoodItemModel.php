@@ -40,7 +40,7 @@ class FoodItemModel extends Model implements SearchAlgo
 
     public function filter($filters, $page = 0)
     {
-        $sort_by = ['item_name ASC', 'item_name DESC', 'price ASC', 'price DESC'];
+        $sort_by = ['item_name ASC', 'item_name DESC', 'price ASC', 'price DESC', 'rating DESC'];
 
         $sql = '
             SELECT I.*, R.restaurant_name, GROUP_CONCAT(T.tag_name) as tags
