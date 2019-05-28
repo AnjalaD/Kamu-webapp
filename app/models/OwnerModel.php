@@ -34,6 +34,7 @@ class OwnerModel extends UserModel
 
     public function acls()
     {
+        if($this->restaurant_id!=null) return ['Registered_Owner'];
         return ['Owner'];
     }
 
