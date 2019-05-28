@@ -19,7 +19,7 @@
                         <td id="name"><?= $cashier->first_name . ' ' . $cashier->last_name ?></td>
                         <td id="email"><?= $cashier->email ?></td>
                         <td id="manage">
-                            <a style="font-size:0.8rem; margin:0px 5px 0px 5px" href="<?= SROOT ?>restaurant/cashier_status_toggle/<?= $cashier->id ?>" style="color:black;" class="btn btn-warning mt-1">
+                            <a style="font-size:0.8rem; margin:0px 5px 0px 5px" href="<?= SROOT ?>restaurant/cashier_status_toggle/<?= $cashier->id ?>" style="color:black;" class="btn btn-<?=$cashier->disabled? "primary" :  "warning" ;?> mt-1">
                             <?=$cashier->disabled? "Enable" :  "Disable" ;?>   
                             </a>
                             <a style="font-size:0.8rem; margin:0px 5px 0px 5px" href="<?= SROOT ?>restaurant/remove_cashier/<?= $cashier->id ?>" class="btn btn-danger mt-1" onclick="if(!confirm('Are you sure?')){return false;}">Delete</a>
