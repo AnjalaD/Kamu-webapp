@@ -21,6 +21,7 @@ $token = FH::generate_token();
 <?php $this->start('body'); ?>
 
 
+<div style="background-image:url(<?= SROOT ?>assets/img/Vienna_House_Easy_Bad_Oeyenhausen-423.jpg); background-attachment:fixed; background-size: cover;min-height:1080px;">
 
 
 <div class="row" style="width:100%;margin-top:30px;">
@@ -29,12 +30,12 @@ $token = FH::generate_token();
             <?php $this->partial('search', 'food_filters'); ?>
         </div>
     </div>
-    <div class="col-md-7" >
+    <div class="col-md-7">
 
         <div class="row" style="width: 100%; height: auto; background-color: #f0efe3; border-bottom: 6px solid #9d2525;padding:10px; padding-bottom: 0px;">
             <div class="row" style="padding-right: 0px; padding-bottom: 0; margin-bottom: 0;">
-                <div class="col-md-6" >
-                    <div id="carousel1" class="carousel slide" data-ride="carousel" >
+                <div class="col-md-6">
+                    <div id="carousel1" class="carousel slide" data-ride="carousel">
                         <ol class="carousel-indicators">
                             <li data-target="#carousel1" data-slide-to="0" class="active"></li>
                             <li data-target="#carousel1" data-slide-to="1"></li>
@@ -114,6 +115,7 @@ $token = FH::generate_token();
         </div>
     </div>
 </div>
+</div>
 
 
 <?php $this->end(); ?>
@@ -160,7 +162,7 @@ $token = FH::generate_token();
         sendFiltersRestaurant(null, page);
     }
 
-    function sendFiltersRestaurant(search=null, page = 0) {
+    function sendFiltersRestaurant(search = null, page = 0) {
         data = {
             search: search,
             csrf_token: '<?= $token ?>',
@@ -169,7 +171,7 @@ $token = FH::generate_token();
         };
         viewResults(data, 'items', page);
     }
-    
+
 
     function viewResults(data, divId, pageNo) {
         console.log("ajax");

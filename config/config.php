@@ -1,7 +1,7 @@
 <?php
 require_once('private-config.php');
 
-define('DEBUG', true);
+define('DEBUG', false);
 
 //database detailes
 define('DB_NAME', 'kamudb');

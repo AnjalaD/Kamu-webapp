@@ -3,6 +3,8 @@
 <?php $this->start('head'); ?>
 <link rel="stylesheet" href="<?=SROOT?>css/styles.min.css">
 <link rel="stylesheet" href="<?=SROOT?>css/croppie.css">
+<link rel="stylesheet" href="<?= SROOT ?>css/add_restaurant.css">
+
 <?php $this->end(); ?>
 
 <?php $this->start('body'); ?>
