@@ -8,6 +8,7 @@ use core\Router;
 use app\models\UserModel;
 use app\models\CustomerModel;
 use app\models\SubmittedOrderModel;
+use app\models\ItemsModel;
 use app\helpers\Help;
 
 class OrderController extends Controller
@@ -362,6 +363,7 @@ class OrderController extends Controller
         $accepted_orders = $this->submittedordermodel->find_accepted_by_restaurant_id(UserModel::current_user()->restaurant_id);
         $this->view->pending_orders = $pending_orders;
         $this->view->accepted_orders = $accepted_orders;
+        $this->view->items_model = new ItemsModel();
         $this->view->render('order/view_orders');
         // H::dnd($orders);
     }
@@ -427,7 +429,7 @@ class OrderController extends Controller
         $this->request->csrf_check();
         $pending_orders = $this->submittedordermodel->find_pending_by_restaurant_id(UserModel::current_user()->restaurant_id);
         $accepted_orders = $this->submittedordermodel->find_accepted_by_restaurant_id(UserModel::current_user()->restaurant_id);
-        $html = H::create_all_order_cards_list($pending_orders,$accepted_orders);
+        $html = H::create_all_order_cards_list($pending_orders,$accepted_orders,new ItemsModel());
         return $this->json_response($html);
     }
 
