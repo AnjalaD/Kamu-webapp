@@ -202,7 +202,9 @@ class OrderController extends Controller
             $this->request->csrf_check();
             $items = json_decode(Session::get('items'), true);
 
-            $delivery_time = $this->request->get('date') .' '. $this->request->get('time');
+            // $delivery_time = $this->request->get('date') .' '. $this->request->get('time');
+            
+            $delivery_time = $this->request->get('datetime');
             $delivery_time = Help::getDateTime($delivery_time);
             $order_code = Help::generateOrderCode();
 
