@@ -20,17 +20,21 @@ class FoodItemModel extends Model implements SearchAlgo
     }
 
 
-    public function find_by_item_id_restaurant_id($item_id, $restaurant_id)
+    public function find_by_item_id_restaurant_id($item_id, $restaurant_id, $get_hidden = false)
     {
+        $hidden_sql = !$get_hidden ? ' AND I.hidden=? ' : ' ';
+
         $sql = '
             SELECT I.*, GROUP_CONCAT(T.tag_name) as tags
             FROM items as I
             LEFT JOIN item_tags IT ON I.id=IT.item_id
             LEFT JOIN tags T ON IT.tag_id=T.id
-            WHERE I.id = ? AND I.restaurant_id = ? AND I.deleted=? AND I.hidden=?
-            GROUP by I.id ;';
+            WHERE I.id = ? AND I.restaurant_id = ? AND I.deleted=?' . $hidden_sql .
+            'GROUP by I.id ;';
 
-        $items = $this->query($sql, [$item_id, $restaurant_id, 0, 0], get_class($this));
+        $bind_args = (!$get_hidden) ? [$item_id, $restaurant_id, 0, 0] : [$item_id, $restaurant_id, 0];
+
+        $items = $this->query($sql, $bind_args, get_class($this));
         if (!empty($items[0])) {
             $items[0]->tags = ($items[0]->tags) ? explode(',', $items[0]->tags) : [];
         }

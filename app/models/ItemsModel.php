@@ -44,6 +44,17 @@ class ItemsModel extends Model implements SearchAlgo
         return $this->find_first($conditions);
     }
 
+    public function find_by_id($item_id, $params = [])
+    {
+        $conditions = [
+            'conditions' => 'id=?',
+            'bind' => [$item_id]
+        ];
+
+        $conditions = array_merge($conditions, $params);
+        return $this->find_first($conditions);
+    }
+
     public function validator()
     {
         $this->run_validation(new RequiredValidator($this, ['field' => 'item_name', 'rule' => true, 'msg' => 'Item Name is required!']));
