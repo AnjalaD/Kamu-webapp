@@ -84,7 +84,7 @@ class SQL_DB
         }
 
         if (array_key_exists('special', $params)) {
-            $special = ' '.$params['special'];
+            $special = ','.$params['special'];
         }
 
         if (array_key_exists('columns', $params)) {
@@ -111,7 +111,7 @@ class SQL_DB
             $limit = ' LIMIT ' . $params['limit'];
         }
 
-        $sql = "SELECT {$columns} FROM {$table}{$special}{$condition_string}{$order}{$limit}";
+        $sql = "SELECT {$columns}{$special} FROM {$table}{$condition_string}{$order}{$limit}";
         if ($this->query($sql, $bind, $class)) {
             if (!empty($this->_result) && !count($this->_result)) return false;
             return true;
