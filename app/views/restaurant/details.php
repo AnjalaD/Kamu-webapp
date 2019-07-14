@@ -24,7 +24,7 @@ $token = FH::generate_token();
 <div style="background-image:url(<?= SROOT ?>assets/img/Vienna_House_Easy_Bad_Oeyenhausen-423.jpg); background-attachment:fixed; background-size: cover;min-height:1080px;">
 
 
-<div class="row" style="width:100%;margin-top:30px;">
+<div class="row p-2" style="width:100%">
     <div class="col-md-2 ">
         <div class="card p-2" style="width:90%;margin-left:auto;margin-right:auto;background-color: rgb(157,37,37,.93);">
             <?php $this->partial('search', 'food_filters'); ?>
@@ -92,7 +92,7 @@ $token = FH::generate_token();
             </div>
         </div>
 
-        <div class="grid" id="items" style="width: 100%;"></div>
+        <div id="items" style="background-color:rgba(255,255,255,0); border:none;"></div>
 
     </div>
     <div class="col-md-3">
