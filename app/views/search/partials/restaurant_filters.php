@@ -22,13 +22,20 @@
     <div class="card m-1 p-2" style="background-color: rgba(255, 255, 255, 0.93);">
         <h4 class="text-center text-dark">Sort By</h4>
         <div class="form-check">
-            <input class="form-check-input" type="radio" name="sort_by" id="sort_name_a" value="0" checked>
+            <input class="form-check-input" type="radio" name="sort_by" id="sort_distance_a" value="0">
+            <label class="form-check-label" for="sort_distance_a">
+            <!-- <i class="fas fa-sort-alpha-down" style="color:#9d2525;"></i> -->
+            Nearest
+            </label>
+        </div>
+        <div class="form-check">
+            <input class="form-check-input" type="radio" name="sort_by" id="sort_name_a" value="1" checked>
             <label class="form-check-label" for="sort_name_a">
             <i class="fas fa-sort-alpha-down" style="color:#9d2525;"></i>   - Name A-Z
             </label>
         </div>
         <div class="form-check">
-            <input class="form-check-input" type="radio" name="sort_by" id="sort_name_d" value="1">
+            <input class="form-check-input" type="radio" name="sort_by" id="sort_name_d" value="2">
             <label class="form-check-label" for="sort_name_d">
             <i class="fas fa-sort-alpha-up" style="color:#9d2525;"></i>   - Name Z-A
             </label>

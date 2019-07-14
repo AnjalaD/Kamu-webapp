@@ -23,7 +23,7 @@ $token = FH::generate_token();
 
                 <div style="height:30rem; overflow-y:auto; " id="pending_orders_container">
                     <?php foreach ($this->pending_orders as $order) : ?>
-                        <?= H::create_pending_order_card($order) ?>
+                        <?= H::create_pending_order_card($order, $this->items_model) ?>
                     <?php endforeach ?>
                 </div>
 
@@ -37,7 +37,7 @@ $token = FH::generate_token();
                 <h3> Accepted Orders... </h3>
                 <div style="height:30rem; overflow-y:auto; " id="accepted_orders_container">
                     <?php foreach ($this->accepted_orders as $order) : ?>
-                        <?= H::create_accepted_order_card($order) ?>
+                        <?= H::create_accepted_order_card($order, $this->items_model) ?>
                     <?php endforeach ?>
                 </div>
 

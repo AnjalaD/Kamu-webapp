@@ -6,7 +6,6 @@ use core\H;
 
 <?php $this->start('head'); ?>
 <link rel="stylesheet" href="<?= SROOT ?>css/foodstyles.min.css">
-<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Aclonica">
 <?php $this->end(); ?>
 
 <?php $this->start('body'); ?>
@@ -66,6 +65,8 @@ use core\H;
     </div>
 </div>
 <?php $this->end(); ?>
+
+
 
 <?php $this->start('script') ?>
 <script>

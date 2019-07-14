@@ -14,7 +14,7 @@
         "Unverified Restaurant": "restaurant/unverified_restaurant"
     },
     "Cashiers": {
-        "Cachier List": "restaurant/cashiers",
+        "Cashier List": "restaurant/cashiers",
         "Add New Cashier": "register/register_cashier"
     },
     "Add New Admin": "register/register_admin",

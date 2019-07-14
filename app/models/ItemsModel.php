@@ -44,6 +44,7 @@ class ItemsModel extends Model implements SearchAlgo
         return $this->find_first($conditions);
     }
 
+
     public function validator()
     {
         $this->run_validation(new RequiredValidator($this, ['field' => 'item_name', 'rule' => true, 'msg' => 'Item Name is required!']));
