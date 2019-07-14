@@ -29,7 +29,7 @@
         <div class="form-check">
             <input class="form-check-input" type="radio" name="sort_by" id="sort_rating_d" value="4">
             <label class="form-check-label" for="sort_rating_d">
-                Rating
+            <i class="fas fa-star-half-alt" style="color:#9d2525"></i>   - Rating
             </label>
         </div>
     </div>
