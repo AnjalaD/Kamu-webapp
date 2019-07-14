@@ -1,3 +1,3 @@
 <?php
-define('SROOT','/mvc/');
-define('WEB_ADDRESS','https://localhost/mvc/');
+define('SROOT','/KamuWebApp/');
+define('WEB_ADDRESS','https://localhost/KamuWebApp/');
