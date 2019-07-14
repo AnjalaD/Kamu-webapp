@@ -12,7 +12,7 @@ $token = FH::generate_token();
 <?php $this->end(); ?>
 
 <?php $this->start('body'); ?>
-<div style="background-image:url(<?= SROOT ?>assets/img/profile_background.jpg); background-attachment:fixed; background-repeat: repeat-y; background-size: cover; font-family:Aclonica; min-width:1395px;">
+<div style="background-image:url(<?= SROOT ?>assets/img/profile_background.jpg); background-attachment:fixed; background-repeat: repeat-y; background-size: cover; font-family:Aclonica; min-width:1395px; min-height:800px;">
     <div class="container-fluid pb-5">
         <div class="p-3">
             <form method="POST" id="search">
@@ -109,7 +109,7 @@ $token = FH::generate_token();
                 console.log(resp);
                 if (!resp) {
                     if (pageNo > 0) $('#' + divId).html("<p>End of Results</p>");
-                    else $('#' + divId).html("<p>No items found</p>");
+                    else $('#' + divId).html("<p>No matches found</p>");
                 } else {
                     $('#' + divId).html(resp);
                     $('.grid').masonry({
