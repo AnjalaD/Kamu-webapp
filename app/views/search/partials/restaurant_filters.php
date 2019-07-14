@@ -12,7 +12,7 @@
         <div class="form-check">
             <input class="form-check-input" type="radio" name="search_by" id="search_address" value="1">
             <label class="form-check-label" for="search_address">
-            <i class="fas fa-map-marker-alt" style="color:#9d2525;"></i>  - Address
+            <i class="fas fa-house-damage" style="color:#9d2525;"></i>  - Address
             </label>
         </div>
     </div>
@@ -24,8 +24,7 @@
         <div class="form-check">
             <input class="form-check-input" type="radio" name="sort_by" id="sort_distance_a" value="0">
             <label class="form-check-label" for="sort_distance_a">
-            <!-- <i class="fas fa-sort-alpha-down" style="color:#9d2525;"></i> -->
-            Nearest
+            <i class="fas fa-map-marker-alt" style="color:#9d2525;"></i>   - Nearest
             </label>
         </div>
         <div class="form-check">
