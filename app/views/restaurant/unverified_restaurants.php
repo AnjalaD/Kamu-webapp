@@ -8,7 +8,7 @@ use core\H;
 <?php $this->end(); ?>
 
 <?php $this->start('body'); ?>
-<h3 class="center">Restaurant</h3>
+<h3 class="text-center">Unverified Restaurants</h3>
 <table class="table table-striped table-bordered table-hover">
     <thead>
         <th>Name</th>
