@@ -104,7 +104,7 @@ class RestaurantModel extends Model implements SearchAlgo
     public function filter($filter, $page=0)
     {
         // H::dnd($filter);
-        $sort_by = ['restaurant_name ASC', 'restaurant_name DESC'];
+        $sort_by = ['distance ASC', 'restaurant_name ASC', 'restaurant_name DESC'];
         $search_by = ['restaurant_name LIKE ?', 'address LIKE ?'];
         $search_str = '%'.$filter['search'].'%';
 
@@ -117,7 +117,18 @@ class RestaurantModel extends Model implements SearchAlgo
         ];
        
         // H::dnd(UserModel::current_user());
+        if($filter['sort_by']==0) {
+            $conditions['special'] = 'ASIN(SQRT( POWER(SIN(('.
+            $filter['location_lat'].
+            ' - lat) * pi()/180 / 2), 2) +COS('.
+            $filter['location_lat'].
+            '* pi()/180) * COS(lat * pi()/180) *POWER(SIN(('.
+            $filter['location_lng'].
+            ' -lng) * pi()/180 / 2), 2) )) as distance';
+        }
         $restaurants = $this->find($conditions);
+
+        // H::dnd($restaurants);
 
         $end_of_results = ($this->_db->count() < $this->items_per_page) ? true : false;
 
@@ -161,3 +172,17 @@ class RestaurantModel extends Model implements SearchAlgo
 
     }
 }
+
+// set @orig_lat=121.9763;
+// set @orig_lon=37.40445;
+// set @dist=10;
+
+// SELECT *,
+// 3956 * 2 * ASIN(SQRT( POWER(SIN((@orig_lat - places.lat) *
+// pi()/180 / 2), 2) +
+// COS(@orig_lat * pi()/180) * COS(places.lat * pi()/180) *
+// POWER(SIN((@orig_lon -places.lon) * pi()/180 / 2), 2) )) as
+// distance
+// FROM places
+// having distance < @dist
+// ORDER BY distance

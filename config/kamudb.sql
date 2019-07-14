@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: May 28, 2019 at 10:04 PM
+-- Generation Time: Jun 01, 2019 at 10:29 AM
 -- Server version: 10.1.37-MariaDB
 -- PHP Version: 7.3.1
 
@@ -71,9 +71,9 @@ CREATE TABLE `cashiers` (
 --
 
 INSERT INTO `cashiers` (`id`, `restaurant_id`, `first_name`, `last_name`, `email`, `password`, `hash`, `disabled`, `verified`, `deleted`) VALUES
-(1, 1, 'Daa', 'ad@ad.com', 'ad@ad.com', '$2y$10$WJSbLiho/Yxvwq7capXT3uJZhrEqBw6LWP3CZdxt4ZF5MJ5eREpiC', '70efdf2ec9b086079795c442636b55fb', 0, 0, 0),
+(1, 1, 'Daa', 'ad@ad.com', 'ad@ad.com', '$2y$10$WJSbLiho/Yxvwq7capXT3uJZhrEqBw6LWP3CZdxt4ZF5MJ5eREpiC', '70efdf2ec9b086079795c442636b55fb', 0, 0, 1),
 (2, 1, 'Anjala', 'dsd', 'anjaladilhara@gmail.com', '$2y$10$mHQVRCOh4KPU1iNp5WUxRuyfSAHPeBsTJNSeplCJRStx/ssULaX5C', '8e296a067a37563370ded05f5a3bf3ec', 0, 0, 0),
-(3, 1, 'Cashier1', 'Cashier1Last', 'cachier1@gmail.com', '$2y$10$2zwTvvlbjnrCnHE1xzBz5u8.xP91vQnhPvnb9UhYMHBx1Bk2NRFBy', '37693cfc748049e45d87b8c7d8b9aacd', 0, 0, 0),
+(3, 1, 'Cashier1', 'Cashier1Last', 'cashier1@gmail.com', '$2y$10$2zwTvvlbjnrCnHE1xzBz5u8.xP91vQnhPvnb9UhYMHBx1Bk2NRFBy', '37693cfc748049e45d87b8c7d8b9aacd', 0, 0, 0),
 (4, 2, 'cashier1', 'cachier1last', 'millanium.cashier1@gmail.com', '$2y$10$8z8Uo.v/uBBfa2AQNGETr.IqBq3xrpEtFT/bdi2aYIhdc1v24xSJm', 'd09bf41544a3365a46c9077ebb5e35c3', 0, 0, 0),
 (5, 2, 'cashier2', 'cachier2last', 'millanium.cashier2@gmail.com', '$2y$10$1fnEP84IDNDC4nVahFUiZu.dtPP6yY4xTqXR3ZyhzTqekMQ1HD2AC', 'c51ce410c124a10e0db5e4b97fc2af39', 0, 0, 0),
 (6, 2, 'cashier3', 'cachier3last', 'millanium.cashier3@gmail.com', '$2y$10$RxVciB5essaM/3SMYjUwyevdUoy4B1bMnP8VnwK9yqPAbb/k2OMFa', 'd3d9446802a44259755d38e6d163e820', 0, 0, 0),
@@ -134,45 +134,49 @@ CREATE TABLE `items` (
 --
 
 INSERT INTO `items` (`id`, `restaurant_id`, `item_name`, `description`, `price`, `image_url`, `rating`, `rating_num`, `hidden`, `deleted`) VALUES
-(1, 1, 'beef and rice', 'Indian style beef served with steamed rice', 300, '/mvc/img/items/1559064546rl9P1NlLS0.png', 0, 0, 0, 0),
+(1, 1, 'beef and rice', 'Indian style beef served with steamed rice', 300, '/mvc/img/items/1559064546rl9P1NlLS0.png', 4, 1, 0, 0),
 (26, 1, 'chicken biriyani', 'Description of chicken biriyani', 350, '/mvc/img/items/15590648939gET1ji2M3.png', 0, 0, 0, 0),
-(30, 2, 'Koththu', 'Enjoy the goodness of little bits of heaven', 300, '/mvc/img/items/1552914320.png', 0, 0, 0, 0),
-(31, 2, 'Fried Rice', 'Enjoy the taste of china ', 250, '/mvc/img/items/1552914407.png', 0, 0, 0, 0),
-(32, 2, 'Soup', 'Description of soup', 100, '/mvc/img/items/1552931132.png', 0, 0, 0, 0),
+(30, 2, 'Koththu', 'Enjoy the goodness of little bits of heaven', 300, '/mvc/img/items/1552914320.png', 4, 1, 0, 0),
+(31, 2, 'Fried Rice', 'Enjoy the taste of china ', 250, '/mvc/img/items/1552914407.png', 2, 1, 0, 0),
+(32, 2, 'Soup', 'Description of soup', 100, '/mvc/img/items/1552931132.png', 4, 1, 0, 0),
 (34, 1, 'beef steak', 'description of beef steak', 400, '/mvc/img/items/1559064734FB9g4AsbRC.png', 0, 0, 0, 0),
-(147, 2, 'Hoppers', 'description of hoppers', 20, '/mvc/img/items/1554563173.png', 0, 0, 0, 0),
-(151, 2, 'steamed rice', 'description of steamed rice', 150, '/mvc/img/items/1554564091.png', 0, 0, 0, 0),
+(147, 2, 'Hoppers', 'description of hoppers', 20, '/mvc/img/items/1554563173.png', 4, 1, 0, 0),
+(151, 2, 'steamed rice', 'description of steamed rice', 150, '/mvc/img/items/1554564091.png', 3, 1, 0, 0),
 (152, 1, 'chicken burger', 'description of chicken burger', 350, '/mvc/img/items/15590648186WHwwMRwAM.png', 0, 0, 0, 0),
 (153, 1, 'beef biriyani', 'Description of beef biriyani', 400, '/mvc/img/items/1559064639ej3jgvFTMG.png', 0, 0, 0, 0),
 (155, 1, 'chicken lasagna', 'description of chicken lasagna', 400, '/mvc/img/items/1559064989G9ixGJ8Bbr.png', 0, 0, 0, 0),
-(156, 1, 'chicken fried rice', 'description of chicken fried rice', 300, '/mvc/img/items/1559065074Bq4E6XxoGJ.png', 0, 0, 0, 0),
-(157, 1, 'egg hoppers', 'description of hoppers', 50, '/mvc/img/items/155906518633HGwQGI0w.png', 0, 0, 0, 0),
-(158, 1, 'chicken koththu', 'description of koththu', 250, '/mvc/img/items/1559065833S9Xd0fCRTg.png', 0, 0, 0, 0),
-(159, 1, 'nasi goreng', 'description of nasi goreng', 300, '/mvc/img/items/1559065709jhFPdcUf4O.png', 0, 0, 0, 0),
-(160, 1, 'noodles', 'description of noodles', 250, '/mvc/img/items/1559065642RUExd0ZpZ0.png', 0, 0, 0, 0),
-(161, 1, 'rice and curry', 'description of rice and curry', 200, '/mvc/img/items/1559065608FXXfd6oYyV.png', 0, 0, 0, 0),
-(162, 1, 'chicken submarine', 'description of chicken submarine', 300, '/mvc/img/items/15590657840P4108vJpH.png', 0, 0, 0, 0),
-(163, 1, 'thai rice', 'description of thai rice', 300, '/mvc/img/items/1559065940VgHijqx8UR.png', 0, 0, 0, 0),
+(156, 1, 'chicken fried rice', 'description of chicken fried rice', 300, '/mvc/img/items/1559065074Bq4E6XxoGJ.png', 3, 1, 0, 0),
+(157, 1, 'egg hoppers', 'description of hoppers', 50, '/mvc/img/items/155906518633HGwQGI0w.png', 5, 1, 0, 0),
+(158, 1, 'chicken koththu', 'description of koththu', 250, '/mvc/img/items/1559065833S9Xd0fCRTg.png', 4, 1, 0, 0),
+(159, 1, 'nasi goreng', 'description of nasi goreng', 300, '/mvc/img/items/1559065709jhFPdcUf4O.png', 4, 1, 0, 0),
+(160, 1, 'noodles', 'description of noodles', 250, '/mvc/img/items/1559065642RUExd0ZpZ0.png', 3, 1, 0, 0),
+(161, 1, 'rice and curry', 'description of rice and curry', 200, '/mvc/img/items/1559065608FXXfd6oYyV.png', 4, 1, 0, 0),
+(162, 1, 'chicken submarine', 'description of chicken submarine', 300, '/mvc/img/items/15590657840P4108vJpH.png', 2, 1, 0, 0),
+(163, 1, 'thai rice', 'description of thai rice', 300, '/mvc/img/items/1559065940VgHijqx8UR.png', 4, 1, 0, 0),
 (164, 1, 'chicken submarine', 'description of submarine', 300, '/mvc/img/items/1559066097sesawSjXNu.png', 0, 0, 0, 1),
 (165, 3, 'beef biriyani', 'description of beef biriyani of res2', 400, '/mvc/img/items/1559070875TFKi1u2MxH.png', 0, 0, 0, 0),
-(166, 3, 'beef burger', 'description of beef burger', 300, '/mvc/img/items/15590709772yDfSSPNwv.png', 0, 0, 0, 0),
-(167, 3, 'chicken burger', 'description of chicken burger', 300, '/mvc/img/items/1559071046PHHaOX8d1e.png', 0, 0, 0, 0),
+(166, 3, 'beef burger', 'description of beef burger', 300, '/mvc/img/items/15590709772yDfSSPNwv.png', 5, 1, 0, 0),
+(167, 3, 'chicken burger', 'description of chicken burger', 300, '/mvc/img/items/1559071046PHHaOX8d1e.png', 3, 1, 0, 0),
 (168, 3, 'chicken biriyani', 'description of chicken biriyani', 350, '/mvc/img/items/1559071112bFiHMtx29e.png', 0, 0, 0, 0),
 (169, 3, 'fish and chips', 'description of fish and chips', 400, '/mvc/img/items/1559071172VTdusYoGok.png', 0, 0, 0, 0),
-(170, 3, 'fried rice', 'description of fried rice', 300, '/mvc/img/items/1559071226jC4XWzJQ7G.png', 0, 0, 0, 0),
-(171, 3, 'egg hopper', 'description of egg hopper', 40, '/mvc/img/items/1559071294hyWkELjobw.png', 0, 0, 0, 0),
-(172, 3, 'koththu', 'description of koththu', 250, '/mvc/img/items/1559071337h9rvRt6oRs.png', 0, 0, 0, 0),
+(170, 3, 'fried rice', 'description of fried rice', 300, '/mvc/img/items/1559071226jC4XWzJQ7G.png', 3, 1, 0, 0),
+(171, 3, 'egg hopper', 'description of egg hopper', 40, '/mvc/img/items/1559071294hyWkELjobw.png', 3, 1, 0, 0),
+(172, 3, 'koththu', 'description of koththu', 250, '/mvc/img/items/1559071337h9rvRt6oRs.png', 2, 1, 0, 0),
 (173, 3, 'nasi goreng', 'description of nasi goreng', 350, '/mvc/img/items/default.png', 0, 0, 0, 0),
-(174, 3, 'noodles', 'description of noodles', 250, '/mvc/img/items/default.png', 0, 0, 0, 0),
-(175, 3, 'rice and curry', 'description of rice and curry', 150, '/mvc/img/items/1559071486pBuBb05pwv.png', 0, 0, 0, 0),
+(174, 3, 'noodles', 'description of noodles', 250, '/mvc/img/items/default.png', 4, 1, 0, 0),
+(175, 3, 'rice and curry', 'description of rice and curry', 150, '/mvc/img/items/1559071486pBuBb05pwv.png', 2, 1, 0, 0),
 (176, 3, 'chicken submarine', 'description of chicken submarine', 350, '/mvc/img/items/1559071546gSzUUIxKfj.png', 0, 0, 0, 0),
 (177, 4, 'fish and chips', 'description of fish and chips', 350, '/mvc/img/items/1559071620Of4z8XmkjL.png', 0, 0, 0, 0),
-(178, 4, 'fried rice', 'description of fried rice', 250, '/mvc/img/items/1559071672g9DFRvfJJt.png', 0, 0, 0, 0),
-(179, 4, 'koththu', 'description of koththu', 300, '/mvc/img/items/1559071715izErDKvIkk.png', 0, 0, 0, 0),
+(178, 4, 'fried rice', 'description of fried rice', 250, '/mvc/img/items/1559071672g9DFRvfJJt.png', 4, 1, 0, 0),
+(179, 4, 'koththu', 'description of koththu', 300, '/mvc/img/items/1559071715izErDKvIkk.png', 4, 1, 0, 0),
 (180, 4, 'nasi goreng', 'description of nasi goreng', 350, '/mvc/img/items/15590717751cFJv2i1iV.png', 0, 0, 0, 0),
-(181, 4, 'noodles', 'description of noodles', 250, '/mvc/img/items/1559071823Eq5Dx4d3op.png', 0, 0, 0, 0),
-(182, 4, 'rice and curry', 'description of rice and curry', 180, '/mvc/img/items/1559071890ydNfeYER8S.png', 0, 0, 0, 0),
-(183, 4, 'thai rice', 'description of thai rice', 300, '/mvc/img/items/1559071932r2RX85rWRC.png', 0, 0, 0, 0);
+(181, 4, 'noodles', 'description of noodles', 250, '/mvc/img/items/1559071823Eq5Dx4d3op.png', 4, 1, 0, 0),
+(182, 4, 'rice and curry', 'description of rice and curry', 180, '/mvc/img/items/1559071890ydNfeYER8S.png', 3, 1, 0, 0),
+(183, 4, 'thai rice', 'description of thai rice', 300, '/mvc/img/items/1559071932r2RX85rWRC.png', 4, 1, 0, 0),
+(184, 2, 'rice and curry', 'description of rice and curry', 260, '/mvc/img/items/1559110275c0sHO69yed.png', 0, 0, 0, 1),
+(185, 2, 'test', 'test', 1, '/mvc/img/items/1559111004VqEQI9sHVp.png', 0, 0, 0, 1),
+(186, 2, 'test1', 'test2', 299, '/mvc/img/items/default.png', 0, 0, 0, 1),
+(187, 1, 'test', 'test', 90, '/mvc/img/items/1559117065P0VN8LA7IS.png', 0, 0, 0, 0);
 
 -- --------------------------------------------------------
 
@@ -343,7 +347,15 @@ INSERT INTO `item_tags` (`id`, `item_id`, `tag_id`) VALUES
 (223, 183, 128),
 (224, 183, 1),
 (225, 183, 174),
-(226, 183, 173);
+(226, 183, 173),
+(231, 184, 217),
+(232, 184, 82),
+(233, 184, 155),
+(234, 184, 145),
+(235, 185, 249),
+(236, 186, 250),
+(237, 187, 82),
+(238, 187, 249);
 
 -- --------------------------------------------------------
 
@@ -392,7 +404,11 @@ INSERT INTO `orders` (`id`, `order_name`, `customer_id`, `items`, `restaurant_id
 (34, '', 1, '{\"1\":1,\"34\":1,\"26\":1}', 1, 2, '2019-05-26 18:59:00', '5CEA94B1.6756', 1, '2019-05-26 13:29:21', 'notes....'),
 (35, '', 1, '{\"34\":1,\"26\":1,\"1\":1}', 1, 2, '2019-05-26 18:59:00', '5CEA94CC.445', 1, '2019-05-26 13:29:48', ''),
 (36, '', 1, '{\"1\":4,\"26\":2}', 1, 2, '2019-05-27 12:12:00', '5CEADE1D.0149', 1, '2019-05-26 18:42:37', ''),
-(37, '', 1, '{\"1\":4,\"26\":2}', 1, 2, '2019-05-27 12:16:00', '5CEADEED.8741', 1, '2019-05-26 18:46:05', '');
+(37, '', 1, '{\"1\":4,\"26\":2}', 1, 2, '2019-05-27 12:16:00', '5CEADEED.8741', 1, '2019-05-26 18:46:05', ''),
+(38, '', 6, '{\"156\":1,\"158\":1}', 1, 1, '2019-05-29 11:20:00', '5CEE1D8F.4475', 1, '2019-05-29 05:50:07', 'None....'),
+(39, '', 6, '{\"156\":1,\"158\":11}', 1, 1, '2019-05-29 11:23:00', '5CEE1E56.6433', 1, '2019-05-29 05:53:26', ''),
+(40, 'Rainbow foods : My new order 1', 6, '{\"167\":1,\"171\":1}', 3, NULL, NULL, NULL, 0, '2019-05-29 05:54:21', NULL),
+(41, '', 6, '{\"166\":4,\"167\":1}', 3, 1, '2019-05-23 13:13:00', '5CEE3857.6295', 1, '2019-05-29 07:44:23', '');
 
 -- --------------------------------------------------------
 
@@ -447,7 +463,59 @@ INSERT INTO `ratings` (`id`, `item_id`, `customer_id`, `rating`) VALUES
 (26, 153, 1, 2),
 (27, 34, 1, 5),
 (28, 152, 1, 4),
-(29, 26, 1, 2);
+(29, 26, 1, 2),
+(30, 1, 6, 4),
+(31, 1, 6, 4),
+(32, 166, 6, 5),
+(33, 166, 6, 5),
+(34, 167, 6, 3),
+(35, 167, 6, 3),
+(36, 156, 6, 3),
+(37, 156, 6, 3),
+(38, 158, 6, 4),
+(39, 158, 6, 4),
+(40, 162, 6, 2),
+(41, 162, 6, 2),
+(42, 171, 6, 3),
+(43, 171, 6, 3),
+(44, 157, 6, 5),
+(45, 157, 6, 5),
+(46, 31, 6, 2),
+(47, 31, 6, 2),
+(48, 170, 6, 3),
+(49, 170, 6, 3),
+(50, 178, 6, 4),
+(51, 178, 6, 4),
+(52, 147, 6, 4),
+(53, 147, 6, 4),
+(54, 30, 6, 4),
+(55, 30, 6, 4),
+(56, 172, 6, 2),
+(57, 172, 6, 2),
+(58, 179, 6, 4),
+(59, 179, 6, 4),
+(60, 159, 6, 4),
+(61, 159, 6, 4),
+(62, 160, 6, 3),
+(63, 160, 6, 3),
+(64, 174, 6, 4),
+(65, 174, 6, 4),
+(66, 181, 6, 4),
+(67, 181, 6, 4),
+(68, 161, 6, 4),
+(69, 161, 6, 4),
+(70, 175, 6, 2),
+(71, 175, 6, 2),
+(72, 182, 6, 3),
+(73, 182, 6, 3),
+(74, 32, 6, 4),
+(75, 32, 6, 4),
+(76, 151, 6, 3),
+(77, 151, 6, 3),
+(78, 163, 6, 4),
+(79, 163, 6, 4),
+(80, 183, 6, 4),
+(81, 183, 6, 4);
 
 -- --------------------------------------------------------
 
@@ -463,8 +531,8 @@ CREATE TABLE `restaurants` (
   `image_url` varchar(200) COLLATE utf8_unicode_ci NOT NULL,
   `telephone` varchar(15) COLLATE utf8_unicode_ci NOT NULL,
   `email` varchar(150) COLLATE utf8_unicode_ci NOT NULL,
-  `lng` int(11) NOT NULL,
-  `lat` int(11) NOT NULL,
+  `lng` double NOT NULL,
+  `lat` double NOT NULL,
   `verified` tinyint(1) NOT NULL DEFAULT '0',
   `deleted` tinyint(1) NOT NULL DEFAULT '0'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
@@ -474,8 +542,8 @@ CREATE TABLE `restaurants` (
 --
 
 INSERT INTO `restaurants` (`id`, `owner_id`, `restaurant_name`, `address`, `image_url`, `telephone`, `email`, `lng`, `lat`, `verified`, `deleted`) VALUES
-(1, 1, 'Kama Kade', '190 tpl', '/Kamu_1.0/exported/img/restaurant/1558533839.png', '12482042', 'kkadilhara@gmail.com', 80, 7, 1, 0),
-(2, 2, 'Millanium Restaurant', '3421 rd', '/Kamu_1.0/exported/img/restaurant/1558533870.png', '12482123', 'sda@gmail.com', 81, 8, 1, 0),
+(1, 1, 'Kama Kade', '190 tpl', '/mvc/img/restaurant/1559110026.png', '1248204234', 'kkadilhara@gmail.com', 80, 7, 1, 0),
+(2, 2, 'Millanium Restaurant', '3421 rd', '/mvc/img/restaurant/1559110052.png', '1248212334', 'sda@gmail.com', 81, 8, 1, 0),
 (3, 5, 'Rainbow foods', '333/Colombo', '/mvc/img/restaurant/1559072310.png', '0112399345', 'chamika@gmail.com', 80, 7, 1, 0),
 (4, 7, 'Sakura Foods', '56/Moratuwa', '/mvc/img/restaurant/1559073102.png', '0118796045', 'anjala@gmail.com', 80, 6, 1, 0);
 
@@ -506,11 +574,11 @@ CREATE TABLE `submitted_orders` (
 --
 
 INSERT INTO `submitted_orders` (`id`, `customer_id`, `items`, `restaurant_id`, `type`, `delivery_time`, `order_code`, `accepted`, `rejected`, `completed`, `time_stamp`, `notes`, `total_price`) VALUES
-(2, 1, '{\"34\":1,\"26\":1,\"1\":1}', 1, 1, NULL, NULL, 1, 0, 0, '2019-04-12 13:38:36', 'None...', 0),
-(4, 4, '{\"34\":1,\"1\":1}', 1, 1, NULL, NULL, 1, 0, 0, '2019-04-17 18:14:58', 'None...', 0),
-(5, 4, '{\"34\":1,\"26\":1}', 1, 2, NULL, NULL, 1, 0, 0, '2019-04-17 18:17:14', 'None...', 0),
-(6, 1, '{\"1\":1,\"34\":1,\"26\":1}', 1, 2, NULL, NULL, 1, 0, 0, '2019-05-24 10:35:55', 'None...', 0),
-(7, 1, '{\"1\":4,\"26\":2}', 1, 2, '2019-05-04 18:34:00', '1558703273.0689', 1, 0, 0, '2019-05-24 13:07:53', NULL, 0),
+(2, 1, '{\"34\":1,\"26\":1,\"1\":1}', 1, 1, NULL, NULL, 1, 0, 1, '2019-04-12 13:38:36', 'None...', 0),
+(4, 4, '{\"34\":1,\"1\":1}', 1, 1, NULL, NULL, 1, 0, 1, '2019-04-17 18:14:58', 'None...', 0),
+(5, 4, '{\"34\":1,\"26\":1}', 1, 2, NULL, NULL, 1, 0, 1, '2019-04-17 18:17:14', 'None...', 0),
+(6, 1, '{\"1\":1,\"34\":1,\"26\":1}', 1, 2, NULL, NULL, 1, 0, 1, '2019-05-24 10:35:55', 'None...', 0),
+(7, 1, '{\"1\":4,\"26\":2}', 1, 2, '2019-05-04 18:34:00', '1558703273.0689', 1, 0, 1, '2019-05-24 13:07:53', NULL, 0),
 (9, 1, '{\"34\":1}', 2, 1, '2019-05-15 19:15:00', '5ce7f58e.5536', 0, 0, 0, '2019-05-24 13:45:50', NULL, 0),
 (10, 1, '{\"152\":1}', 1, 2, '2019-05-29 19:18:00', '5CE7F629.0844', 0, 1, 0, '2019-05-24 13:48:25', NULL, 0),
 (11, 1, '{\"34\":1,\"26\":1,\"1\":9}', 1, 2, '2019-05-15 18:31:00', '5CE93CCD.792', 0, 0, 0, '2019-05-25 13:02:05', 'None......', 0),
@@ -521,7 +589,10 @@ INSERT INTO `submitted_orders` (`id`, `customer_id`, `items`, `restaurant_id`, `
 (17, 1, '{\"1\":1,\"34\":1,\"26\":1}', 1, 2, '2019-05-26 18:59:00', '5CEA94B1.6756', 0, 0, 0, '2019-05-26 13:29:21', 'notes....', 530),
 (18, 1, '{\"34\":1,\"26\":1,\"1\":1}', 1, 2, '2019-05-26 18:59:00', '5CEA94CC.445', 0, 0, 0, '2019-05-26 13:29:48', '', 530),
 (19, 1, '{\"1\":4,\"26\":2}', 1, 2, '2019-05-26 19:00:00', '5CEA94FD.3943', 1, 0, 1, '2019-05-26 13:30:37', '', 1280),
-(21, 1, '{\"1\":4,\"26\":2}', 1, 2, '2019-05-27 12:16:00', '5CEADEED.8741', 1, 0, 0, '2019-05-26 18:46:05', '', 1280);
+(21, 1, '{\"1\":4,\"26\":2}', 1, 2, '2019-05-27 12:16:00', '5CEADEED.8741', 1, 0, 0, '2019-05-26 18:46:05', '', 1280),
+(22, 6, '{\"156\":1,\"158\":1}', 1, 1, '2019-05-29 11:20:00', '5CEE1D8F.4475', 1, 0, 0, '2019-05-29 05:50:07', 'None....', 550),
+(23, 6, '{\"156\":1,\"158\":11}', 1, 1, '2019-05-29 11:23:00', '5CEE1E56.6433', 0, 0, 0, '2019-05-29 05:53:26', '', 3050),
+(24, 6, '{\"166\":4,\"167\":1}', 3, 1, '2019-05-23 13:13:00', '5CEE3857.6295', 1, 0, 0, '2019-05-29 07:44:23', '', 1500);
 
 -- --------------------------------------------------------
 
@@ -590,6 +661,8 @@ INSERT INTO `tags` (`id`, `tag_name`) VALUES
 (167, 'submarine'),
 (91, 'tag'),
 (8, 'tasty'),
+(249, 'test'),
+(250, 'test1'),
 (174, 'thai'),
 (173, 'thai rice'),
 (186, 'vege'),
@@ -722,19 +795,19 @@ ALTER TABLE `customers`
 -- AUTO_INCREMENT for table `items`
 --
 ALTER TABLE `items`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=184;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=188;
 
 --
 -- AUTO_INCREMENT for table `item_tags`
 --
 ALTER TABLE `item_tags`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=227;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=239;
 
 --
 -- AUTO_INCREMENT for table `orders`
 --
 ALTER TABLE `orders`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=38;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=42;
 
 --
 -- AUTO_INCREMENT for table `owners`
@@ -746,7 +819,7 @@ ALTER TABLE `owners`
 -- AUTO_INCREMENT for table `ratings`
 --
 ALTER TABLE `ratings`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=30;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=82;
 
 --
 -- AUTO_INCREMENT for table `restaurants`
@@ -758,13 +831,13 @@ ALTER TABLE `restaurants`
 -- AUTO_INCREMENT for table `submitted_orders`
 --
 ALTER TABLE `submitted_orders`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=22;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=25;
 
 --
 -- AUTO_INCREMENT for table `tags`
 --
 ALTER TABLE `tags`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=278;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=251;
 
 --
 -- AUTO_INCREMENT for table `user_sessions`

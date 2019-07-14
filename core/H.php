@@ -4,6 +4,7 @@ namespace core;
 use core\Session;
 use app\models\UserModel;
 use app\models\CustomerModel;
+use app\models\ItemsModel;
 
 
 class H
@@ -208,7 +209,7 @@ public static function create_pagination_tabs($page_no, $end = false)
   return ob_get_clean();
 }
 
-public static function create_pending_order_card($order)
+public static function create_pending_order_card($order,$items_model)
 {
   ob_start(); ?>
 
@@ -235,9 +236,16 @@ public static function create_pending_order_card($order)
             <tbody>
               <?php $items = json_decode($order->items, true) ?>
 
+
               <?php foreach ($items as $item_id => $qty) : ?>
                 <tr>
-                  <td><?= $item_id ?></td>
+
+                  <?php 
+                    $item = $items_model->find_by_id($item_id);
+                  ?>
+
+                  
+                  <td><?= $item->item_name?></td>
                   <td><?= $qty ?></td>
                 </tr>
               <?php endforeach ?>
@@ -268,7 +276,7 @@ public static function create_pending_order_card($order)
   return ob_get_clean();
 }
 
-public static function create_accepted_order_card($order)
+public static function create_accepted_order_card($order, $items_model)
 {
   ob_start(); ?>
 
@@ -294,10 +302,14 @@ public static function create_accepted_order_card($order)
             </thead>
             <tbody>
               <?php $items = json_decode($order->items, true) ?>
-
               <?php foreach ($items as $item_id => $qty) : ?>
                 <tr>
-                  <td><?= $item_id ?></td>
+                <?php 
+                    $item = $items_model->find_by_id($item_id);
+                  ?>
+
+                  
+                  <td><?= $item->item_name?></td>
                   <td><?= $qty ?></td>
                 </tr>
               <?php endforeach ?>
@@ -326,13 +338,13 @@ public static function create_accepted_order_card($order)
   return ob_get_clean();
 }
 
-public static function create_all_order_cards_list($pending_orders, $accepted_orders)
+public static function create_all_order_cards_list($pending_orders, $accepted_orders, $items_model)
 {
   $html = '<div class="row"><div class="col " >';
   if (isset($pending_orders) && !empty($pending_orders)) {
     $html .= '<h3> New Orders... </h3><div style="height:30rem; overflow-y:scroll;" id="pending_orders_container">';
     foreach ($pending_orders as $order) {
-      $html .= self::create_pending_order_card($order);
+      $html .= self::create_pending_order_card($order, $items_model);
     }
     $html .= '</div>';
   } else {
@@ -344,7 +356,7 @@ public static function create_all_order_cards_list($pending_orders, $accepted_or
     $html .= '<h3> Accepted Orders... </h3>
     <div style="height:30rem; overflow-y:scroll;" id="accepted_orders_container">';
     foreach ($accepted_orders as $order) {
-      $html .= self::create_accepted_order_card($order);
+      $html .= self::create_accepted_order_card($order, $items_model);
     }
     $html .= '</div>';
   } else {

@@ -32,7 +32,7 @@
         "Register" : ["register_cashier"],
         "Items": ["*"],
         "Restaurant": ["my_restaurant","no_of_orders", "cashiers", "cashier_status_toggle", "remove_cashier"],
-        "Order": ["view_orders", "accept_order", "reject_order","get_all_orders_to_restaurant_html"]
+        "Order": ["view_orders", "accept_order", "reject_order","get_all_orders_to_restaurant_html","complete_order"]
     },
 
     "Owner": {

@@ -1,4 +1,5 @@
 <?php
+
 use core\FH;
 
 $token = FH::generate_token();
@@ -13,17 +14,17 @@ $token = FH::generate_token();
 
 <div style="background-image:url(<?= SROOT ?>assets/img/profile_background.jpg); background-attachment:fixed; background-repeat: repeat-y; background-size: cover; background-position: horizontal-center; font-family:Aclonica; min-width:1395px;">
     <div class="container-fluid pb-5">
-    <div class="p-3">
-        <form method="POST" id="search">
-            <div class="input-group">
-                <input type="text" autocomplete="off" class="form-control" list="food" name="search_string" id="search_string" value="<?= $this->post_data ?>" placeholder="Search for restaurants...">
-                <div class="input-group-append">
-                <button type="submit" class="btn btn-secondary" value="Search" name="food" id="search"> Search <i class="fa fa-search" aria-hidden="true"></i></button>
+        <div class="p-3">
+            <form method="POST" id="search">
+                <div class="input-group">
+                    <input type="text" autocomplete="off" class="form-control" list="food" name="search_string" id="search_string" value="<?= $this->post_data ?>" placeholder="Search for restaurants...">
+                    <div class="input-group-append">
+                        <button type="submit" class="btn btn-secondary" value="Search" name="food" id="search"> Search <i class="fa fa-search" aria-hidden="true"></i></button>
+                    </div>
                 </div>
-            </div>
-            <datalist id="food"></datalist>
-        </form>
-    </div>
+                <datalist id="food"></datalist>
+            </form>
+        </div>
 
         <div class="row p-1 my-3">
             <div class="col-md-2">
@@ -49,11 +50,14 @@ $token = FH::generate_token();
 <script src="<?= SROOT ?>js/masonry.pkgd.min.js"></script>
 <script src="<?= SROOT ?>js/autocomplete.js"></script>
 <script>
+    var data;
+
     $(document).ready(function() {
         sendFilters();
     });
 
     $('form').submit(function(e) {
+        e.preventDefault();
         sendFilters();
         return false;
     });
@@ -72,22 +76,62 @@ $token = FH::generate_token();
         } else {
             $('input[name=search_string]').val(search);
         }
+
         data = {
             'csrf_token': '<?= $token ?>',
             'search': search,
             'search_by': $('input[name=search_by]:checked').val(),
             'sort_by': $('input[name=sort_by]:checked').val()
         };
+
+        if ($('input[name=sort_by]:checked').val() == 0) {
+            data.location_lat = 0.0;
+            data.location_lng = 0.0;
+            
+            if (navigator.geolocation) {
+                navigator.geolocation.getCurrentPosition(setValues, showError);
+            } else {
+                alert("Geolocation is not supported by this browser.");
+                return;
+            }
+        }
+
         getResults(data, 'restaurants', page);
     }
 
+    function setValues(position) {
+        data.location_lat = position.coords.latitude;
+        data.location_lng = position.coords.longitude;
+    }
+
+    function showError(error) {
+        var x = "Error";
+        switch (error.code) {
+            case error.PERMISSION_DENIED:
+                x = "User denied the request for Geolocation."
+                break;
+            case error.POSITION_UNAVAILABLE:
+                x = "Location information is unavailable."
+                break;
+            case error.TIMEOUT:
+                x = "The request to get user location timed out."
+                break;
+            case error.UNKNOWN_ERROR:
+                x = "An unknown error occurred."
+                break;
+        }
+        alert(x);
+    }
+    
+
     function getResults(data, divId, pageNo) {
-        console.log($('input[name=search_by]:checked').val());
+        // console.log($('input[name=search_by]:checked').val());
+        // console.log(data);
         $.post(
             `${SROOT}search/search/2/${pageNo}`,
             data,
             function(resp) {
-                console.log(resp);
+                // console.log(resp);
                 if (!resp) {
                     if (pageNo > 0) $('#' + divId).html("<p>End of Results</p>");
                     else $('#' + divId).html("<p>No items found</p>");

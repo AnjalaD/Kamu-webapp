@@ -74,8 +74,7 @@ class ItemsController extends Controller
     //edit existing food item
     public function edit_action($item_id)
     {
-        $item = $this->fooditemmodel->find_by_item_id_restaurant_id((int)$item_id, OwnerModel::current_user()->restaurant_id);
-        // H::dnd($item);
+        $item = $this->fooditemmodel->find_by_item_id_restaurant_id((int)$item_id, OwnerModel::current_user()->restaurant_id, true);
         $new_item = new ItemsModel();
         if ($item) {
             if ($this->request->is_post()) {

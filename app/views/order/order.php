@@ -11,6 +11,8 @@ $this->token = FH::generate_token();
 <?php $this->start('head'); ?>
 <link rel="stylesheet" href="<?= SROOT ?>css/order.css" />
 <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Aclonica">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/tempusdominus-bootstrap-4/5.0.1/css/tempusdominus-bootstrap-4.min.css" />
+
 <?php $this->end(); ?>
 
 <?php $this->start('body'); ?>
@@ -274,4 +276,5 @@ $this->token = FH::generate_token();
             );
         });
     </script>
+
     <?php $this->end(); ?>
