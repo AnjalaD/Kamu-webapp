@@ -15,10 +15,10 @@
     </form>
     <!-- End: Pretty Search Form -->
     <div class="carousel slide" data-ride="carousel" id="carousel-1" data-interval="4000">
-        <div class="carousel-inner" role="listbox">
-            <div class="carousel-item"><img class="w-100 d-block" src="<?=SROOT?>assets/img/photo-1414235077428-338989a2e8c0.jpg" alt="Slide Image"></div>
-            <div class="carousel-item"><img class="w-100 d-block" src="<?=SROOT?>assets/img/photo-1517248135467-4c7edcad34c4.jpg" alt="Slide Image"></div>
-            <div class="carousel-item active"><img class="w-100 d-block" src="<?=SROOT?>assets/img/54-Verbazingwekkend-Restaurant-Nederlandse-Keuken.jpg" alt="Slide Image"></div>
+        <div class="carousel-inner" role="listbox" style="height:500px;">
+            <div class="carousel-item"><img class="w-100 d-block" src="<?=SROOT?>assets/img/home_res1.jpg" alt="Slide Image"></div>
+            <div class="carousel-item"><img class="w-100 d-block" src="<?=SROOT?>assets/img/home_res2.jpg" alt="Slide Image"></div>
+            <div class="carousel-item active"><img class="w-100 d-block" src="<?=SROOT?>assets/img/home_res3.jpg" alt="Slide Image"></div>
         </div>
         <div>
             <!-- Start: Previous --><a class="carousel-control-prev" href="#carousel-1" role="button" data-slide="prev"><span class="carousel-control-prev-icon"></span><span class="sr-only">Previous</span></a>
